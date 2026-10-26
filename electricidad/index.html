@@ -319,6 +319,40 @@ body.proj .facil{max-width:1180px}
 .toolbtn{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:8px 14px;cursor:pointer;font-size:14px;font-weight:500;color:var(--ink)}
 .toolbtn:hover{border-color:var(--accent);color:var(--accent)}
 #tools{display:flex;flex-direction:column;gap:16px}
+
+/* Prueba y temario */
+a.toolbtn{text-decoration:none;display:inline-flex;align-items:center}
+.toolbtn.tb-hi{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+a.chip{text-decoration:none;color:inherit}
+.ptools{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between}
+.ptools .tool-intro{max-width:80ch}
+.pform{max-width:900px}
+.pu{display:flex;flex-direction:column;gap:18px;margin-top:16px}
+.pact{border:1px solid var(--line);border-radius:8px;padding:16px clamp(12px,3vw,22px);background:var(--paper)}
+.pact h4{margin:2px 0 6px}
+.pcode{font-family:var(--f-mono);font-size:12px;color:var(--accent);letter-spacing:.02em}
+.preq{color:var(--muted);margin:0 0 12px;max-width:80ch}
+.pcap{caption-side:top;text-align:left;font-size:13px;color:var(--muted);padding-bottom:6px}
+tr.ptot td{font-weight:600;background:var(--bg)}
+.pitem{border-top:1px dashed var(--line);padding:12px 0 6px}
+.pitem .qt{margin:0 0 8px;font-weight:500;max-width:80ch}
+.plet{font-family:var(--f-mono);color:var(--accent);margin-right:6px}
+.vfb{display:flex;gap:8px;flex-wrap:wrap}
+.vfb .opt{min-width:120px;text-align:center}
+.prow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pin{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:6px;width:150px;background:var(--paper);color:var(--ink)}
+.pta{font:inherit;width:100%;max-width:680px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;display:block;margin-bottom:8px;background:var(--paper);color:var(--ink)}
+.pin:focus,.pta:focus{outline:2px solid var(--accent);outline-offset:1px}
+.punit{color:var(--muted);font-size:14px}
+.cta.sm{margin-top:0;padding:8px 14px;font-size:14px}
+.pfb{margin-top:10px;padding:10px 14px;border-radius:6px;background:var(--bg);border-left:4px solid var(--accent);max-width:900px}
+.pfb.ok{border-left-color:var(--ok);background:var(--ok-soft)}.pfb.bad{border-left-color:var(--bad);background:var(--bad-soft)}
+.pfb .pwhy{margin:6px 0}.pfb .chip{margin-top:8px}
+.okt{color:var(--ok)}.badt{color:var(--bad)}
+.bcri{font-family:var(--f-mono);font-size:11px;border:1px solid var(--live);color:var(--live);border-radius:999px;padding:1px 8px;margin-left:8px;white-space:nowrap;font-weight:400}
+.pscore{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);max-width:340px}
+.ptem{max-width:none}.ptem>p,.ptem>ul,.ptem>.idea{max-width:80ch}
+.ptem td .chip{display:inline-block;margin:2px 0}
 @media (prefers-reduced-motion: reduce){.bar span{transition:none}}
 </style>
 
@@ -338,7 +372,7 @@ body.proj .facil{max-width:1180px}
       <h1><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13.5 2L4.5 13.5h6l-1.5 8.5 9.5-12h-6.2z" fill="#0c2135"/></svg></span><span>Pizarra Instalador Clase D</span></h1>
       <p class="sub">10 clases en 2 semanas. Toca cualquier tema para abrir su materia completa, con ejemplos, normativa, taller y autoevaluación.</p>
       <div class="specs"><span>220 V · 50 Hz</span><span>Baja tensión</span><span>Hasta 10 kW</span><span>Pliegos RIC</span></div>
-      <div class="hero-acts"><button class="toolbtn" id="tb-calc" type="button">Calculadoras</button><button class="toolbtn" id="tb-sim" type="button">Simuladores</button><button class="toolbtn" id="tb-exam" type="button">Examen de práctica</button><button class="glosbtn" id="glosbtn" type="button">Abrir glosario</button><span class="kbd-hint">¿Una palabra que no entiendes? Búscala aquí.</span></div>
+      <div class="hero-acts"><button class="toolbtn tb-hi" id="tb-tem" type="button">Temario SEC</button><button class="toolbtn tb-hi" id="tb-pru" type="button">Prueba años anteriores</button><a class="toolbtn tb-hi" href="simulador-sec.html">Simulador 100 preguntas</a><button class="toolbtn" id="tb-calc" type="button">Calculadoras</button><button class="toolbtn" id="tb-sim" type="button">Simuladores</button><button class="toolbtn" id="tb-exam" type="button">Examen de práctica</button><button class="glosbtn" id="glosbtn" type="button">Abrir glosario</button><span class="kbd-hint">¿Una palabra que no entiendes? Búscala aquí.</span></div>
     </div>
     <div class="progress" aria-live="polite">
       <div class="row"><span class="eyebrow">Avance</span><span class="big" id="count">0/10</span></div>
@@ -2072,6 +2106,7 @@ pts:[
 <li><b>Evidencias:</b> antecedentes de experiencia, trabajos previos, referencias.</li></ul>
 <h4>Resultado</h4>
 <p>"Competente" o "aún no competente" por cada unidad de competencia. Con el certificado de competencia, solicitas la licencia en sec.cl con tu ClaveÚnica. La licencia obtenida por esta vía se renueva cada 5 años.</p>
+<div class="idea"><b>Prueba de años anteriores:</b> la evaluación en condición de simulación tuvo 5 unidades de competencia, 15 actividades clave y una parte práctica de montaje. <button class="chip act" type="button" onclick="openTool('temario')">Ver temario</button> <button class="chip act" type="button" onclick="openTool('prueba')">Practicar la prueba</button> <a class="chip act" href="simulador-sec.html">Simulador 100 preguntas</a></div>
 <div class="warn">En algunos programas tienes una sola oportunidad de rendir. Pide antes la pauta del perfil al centro evaluador y revisa punto por punto qué te van a pedir.</div>`},
 {t:"Pauta de cotejo práctica",h:`
 <p>Usa esta pauta en el simulacro. Pide a un colega que te observe y marque.</p>
@@ -2280,6 +2315,10 @@ function openTool(name,sub){
     $("tools").innerHTML=toolHead(T)+body;
     document.querySelectorAll("[data-tool]").forEach(b=>b.onclick=()=>openTool(b.dataset.tool,b.dataset.sub));
     L[i].init&&L[i].init();
+  } else if(name==="prueba"){
+    $("tools").innerHTML=toolHead(T)+pruebaHTML(sub);initPrueba(sub);
+  } else if(name==="temario"){
+    $("tools").innerHTML=toolHead(T)+`<section class="panel tool-panel" id="toolpanel"><div class="prose ptem">${temarioHTML()}</div></section>`;
   } else if(name==="exam"){
     $("tools").innerHTML=toolHead(T)+`<section class="panel tool-panel" id="toolpanel">${examStartHTML()}</section>`;
     $("exgo").onclick=startExam;
@@ -2295,7 +2334,7 @@ function examStartHTML(){const n=examBank().length;return `<h3>Examen tipo certi
   <p>El banco tiene <b>${n} preguntas</b> de las 10 clases. Cada intento saca preguntas al azar, así que puedes repetirlo muchas veces.</p>
   <div class="exopts"><label for="exn">Cantidad de preguntas</label><select id="exn"><option value="20">20 preguntas · 30 min</option><option value="30" selected>30 preguntas · 45 min</option><option value="45">45 preguntas · 65 min</option></select></div>
   <ul><li>Responde todas y presiona <b>Entregar</b>. Si se acaba el tiempo, se entrega solo.</li><li>Al final verás tu nota, las respuestas correctas y qué clases repasar.</li><li>Meta: <b>70% o más</b>.</li></ul>
-  <button class="cta" id="exgo">Comenzar examen</button>`}
+  <button class="cta" id="exgo">Comenzar examen</button><p class="norm" style="margin-top:14px">¿Quieres el formato completo? <a href="${SIMURL}">Simulador de 100 preguntas en 80 minutos</a> · <a href="#prueba" onclick="openTool('prueba');return false">Prueba de años anteriores</a></p>`}
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function startExam(){
   const n=+$("exn").value;const qs=shuffle(examBank()).slice(0,n).map(q=>{const idx=shuffle(q.o.map((_,i)=>i));return {...q,ord:idx}});
@@ -2339,6 +2378,235 @@ function guiaHTML(c){
   <li><b>Síntesis:</b> ${c.pts.map((p,i)=>esc(((EXP[c.n+"."+(i+1)]||{}).r||[""])[0])).join(" ")}</li></ol>
   <h4>Evaluación formativa</h4><ul><li>Logrado: 70% o más en la autoevaluación y ticket de salida correcto.</li><li>En desarrollo: menos de 70%; asignar repaso del recuadro "Explicado fácil" y la sección "Profundiza".</li></ul>
   <h4>Recursos</h4><ul><li>Modo proyector y flechas del teclado para avanzar.</li><li>Glosario para palabras nuevas.</li><li>Calculadoras y simuladores desde la portada.</li></ul>`;
+}
+
+/* ---------- Prueba de años anteriores, temario y simulador ---------- */
+TOOLS.prueba={t:"Prueba de años anteriores",sub:"La evaluación en condición de simulación, actividad por actividad. Responde primero y después revisa la pauta."};
+TOOLS.temario={t:"Temario de la evaluación",sub:"Qué se evalúa, con qué pliego RIC y dónde repasarlo en esta pizarra."};
+const SIMURL="simulador-sec.html";
+let PANS=null;
+const pkey=()=>KEY+"-prueba";
+function pload(){if(PANS)return;try{PANS=JSON.parse(localStorage.getItem(pkey())||"{}")||{}}catch(e){PANS={}}}
+function psave(){try{localStorage.setItem(pkey(),JSON.stringify(PANS))}catch(e){}}
+const ptab=(head,rows,cap)=>`<div class="tw"><table>${cap?`<caption class="pcap">${cap}</caption>`:""}<thead><tr>${head.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr${r[0]==="TOT"||r[0]==="Total"?' class="ptot"':""}>${r.map(c=>`<td${/^[\d.,$ \-]+$/.test(String(c))&&String(c).trim()?' class="n"':""}>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+
+/* Figuras de la prueba (redibujadas) */
+function figAlimP(conE){
+  const x0=conE?200:40;
+  return `<div class="fig"><svg viewBox="0 0 ${conE?600:440} 170" style="max-width:${conE?600:440}px;width:100%" role="img" aria-label="Esquema de los circuitos de la actividad">
+  ${conE?`<rect class="box" x="20" y="70" width="44" height="34"/><text x="42" y="92" text-anchor="middle">E</text><path class="s" d="M64 87H${x0}"/><text x="132" y="78" text-anchor="middle">Alimentador 25 m</text>`:""}
+  <rect class="box" x="${x0}" y="25" width="70" height="125"/><text x="${x0+35}" y="92" text-anchor="middle">TDAF</text>
+  <path class="s" d="M${x0+70} 55H${x0+200}"/><text x="${x0+135}" y="47" text-anchor="middle">L = 80 m</text>
+  <rect class="box" x="${x0+200}" y="35" width="190" height="40"/><text x="${x0+295}" y="59" text-anchor="middle">Clima 1.200 W</text>
+  <path class="s" d="M${x0+70} 120H${x0+200}"/><text x="${x0+135}" y="112" text-anchor="middle">L = 80 m</text>
+  <rect class="box" x="${x0+200}" y="100" width="190" height="40"/><text x="${x0+295}" y="124" text-anchor="middle">Iluminación 15 centros</text>
+  </svg></div>`;
+}
+function figUniP(){
+  return `<div class="fig"><svg viewBox="0 0 440 270" style="max-width:400px;width:100%" role="img" aria-label="Unilineal: general 1x20 A, circuito 1 con 1x10 A y circuito 2 con 1x16 A">
+  <rect class="box" x="190" y="8" width="60" height="30"/><text x="220" y="28" text-anchor="middle">E</text>
+  <path class="s" d="M220 38V62"/><rect class="box" x="205" y="62" width="30" height="26"/><text x="244" y="80">1×20 A (general)</text>
+  <path class="s" d="M220 88V112M110 112H330"/>
+  <path class="s" d="M130 112V140"/><rect class="box" x="115" y="140" width="30" height="26"/><text x="70" y="158" text-anchor="end">1×10 A</text><path class="s" d="M130 166V214"/><circle class="s" cx="130" cy="230" r="14"/><text x="130" y="235" text-anchor="middle">1</text>
+  <path class="s" d="M310 112V140"/><rect class="box" x="295" y="140" width="30" height="26"/><text x="334" y="158">1×16 A</text><path class="s" d="M310 166V214"/><circle class="s" cx="310" cy="230" r="14"/><text x="310" y="235" text-anchor="middle">2</text>
+  <text x="20" y="200">T.S.</text><text x="392" y="200">T.P.</text>
+  <text x="20" y="262">T.S.: tierra de servicio · T.P.: tierra de protección</text></svg></div>`;
+}
+function figMontajeP(){
+  return `<div class="fig"><svg viewBox="0 0 520 300" style="max-width:480px;width:100%" role="img" aria-label="Unilineal del montaje práctico">
+  <rect class="box" x="230" y="6" width="60" height="28"/><text x="260" y="25" text-anchor="middle">E</text>
+  <path class="s" d="M260 34V50"/><rect class="box" x="230" y="50" width="60" height="28"/><text x="260" y="69" text-anchor="middle">M</text>
+  <path class="s" d="M260 78V104"/><text x="270" y="96">3c × 4 mm² EVA</text>
+  <rect class="box" x="236" y="104" width="48" height="28"/><text x="296" y="122">General 2×20 A curva C 6 kA</text>
+  <path class="s" d="M260 132V150M140 150H380"/>
+  <path class="s" d="M140 150V166"/><rect class="box" x="116" y="166" width="48" height="26"/><text x="140" y="184" text-anchor="middle">ID</text><text x="20" y="184">2×25 A 30 mA</text>
+  <path class="s" d="M140 192V208"/><rect class="box" x="116" y="208" width="48" height="26"/><text x="140" y="226" text-anchor="middle">TM</text><text x="20" y="226">1×16 A C 6 kA</text>
+  <path class="s" d="M140 234V256"/><circle class="s" cx="140" cy="272" r="14"/><text x="140" y="277" text-anchor="middle">1</text>
+  <path class="s" d="M380 150V166"/><rect class="box" x="356" y="166" width="48" height="26"/><text x="380" y="184" text-anchor="middle">ID</text><text x="412" y="184">2×25 A 30 mA</text>
+  <path class="s" d="M380 192V208"/><rect class="box" x="356" y="208" width="48" height="26"/><text x="380" y="226" text-anchor="middle">TM</text><text x="412" y="226">1×16 A C 6 kA</text>
+  <path class="s" d="M380 234V256"/><circle class="s" cx="380" cy="272" r="14"/><text x="380" y="277" text-anchor="middle">2</text>
+  </svg></div>`;
+}
+const CUADRO=ptab(["Cto","Ench. 150 W","Ench. 600 W","Alumb. 100 W","Clima 1.200 W","Potencia kW","Corriente A","Disyuntor","Diferencial","Conductor","Ducto","Ubicación"],[
+ ["1","","","8","","0,8","3,64","1×10 A","No tiene","3×1,5 mm²","PVC 20 mm","Dormit./baño/estar"],
+ ["2","","","10","","1","4,55","1×10 A","No tiene","3×1,5 mm²","PVC 20 mm","Cocina/comedor"],
+ ["3","7","","","","1,05","4,77","1×10 A","2×25 A 30 mA","3×2,5 mm²","PVC 20 mm","Dormit./baño/estar"],
+ ["4","5","","","","0,75","3,41","1×10 A","2×25 A 30 mA","3×2,5 mm²","PVC 20 mm","Comedor"],
+ ["5","","2","","","1,2","5,45","1×10 A","2×25 A 30 mA","3×2,5 mm²","PVC 20 mm","Refrig./lavadora"],
+ ["6","3","","","","0,45","2,05","1×10 A","2×25 A 30 mA","3×2,5 mm²","PVC 20 mm","Mesones cocina"],
+ ["7","","","","1","1,2","5,45","1×10 A","2×25 A 30 mA","3×4 mm²","PVC 20 mm","Climatizador"],
+ ["TOT","15","2","18","1","6,45","29,32","","","","",""]],"Cuadro de cargas de la prueba (220 V, monofásico)");
+const FORMULAS=`<details class="pform"><summary>Hoja de fórmulas que entrega la prueba</summary>
+<code class="f">Ley de Ohm:   I = V / R     V = I · R     R = V / I
+Ley de Joule: P = V · I     I = P / V     V = P / I
+Sección:      S = k · ρ · L · I / Vp
+              k = 2 monofásico · k = 1 trifásico
+              ρ = 0,018 Ω·mm²/m (cobre) · Vp = 3 % de V</code>
+<p class="norm">Ojo con el k = 1 trifásico: vale cuando Vp se calcula sobre la tensión fase-neutro (3 % de 220 V = 6,6 V). Si calculas la caída sobre 380 V entre fases, el factor es √3 (1,73).</p>
+<p class="norm">Los cálculos se hacen por el reverso de las hojas: lleva calculadora.</p></details>`;
+
+/* Pauta: k: vf | num | txt · cri: respuesta por criterio técnico */
+const PRUEBA=[
+{id:"u1",code:"U-4322-7411-008",t:"Evaluar entornos de trabajo",d:"Seguridad, mediciones básicas y criterios de diseño de alumbrado y fuerza.",acts:[
+ {c:"8-1",t:"Preparar el entorno de trabajo según protocolos de prevención de riesgos eléctricos",req:"Intervenir un tablero que sigue energizado para cambiar una protección. Indica si cada afirmación es verdadera o falsa.",items:[
+  {k:"vf",s:"Un procedimiento de trabajo seguro (PTS) permite evaluar los riesgos posibles antes de intervenir.",a:true,why:"El PTS describe la tarea paso a paso, identifica los peligros y fija las medidas de control antes de empezar.",ref:"Prevención de riesgos · Ley 16.744",cl:[2,4]},
+  {k:"vf",s:"Antes de intervenir el tablero, lo importante es verificar que haya energía cero.",a:true,why:"Es la tercera de las 5 reglas de oro: cortar, bloquear y rotular, verificar ausencia de tensión, poner a tierra y en cortocircuito, señalizar. Se verifica con un instrumento probado antes y después.",ref:"5 reglas de oro",cl:[2,4]},
+  {k:"vf",s:"Un entorno de trabajo seguro se logra solo usando las herramientas existentes.",a:false,why:"Las herramientas no bastan: se necesitan herramientas aisladas certificadas, EPP dieléctrico, bloqueo y rotulado, señalización del área y un procedimiento.",ref:"5 reglas de oro · EPP",cl:[2,4]}]},
+ {c:"8-2",t:"Verificar parámetros básicos con instrumentos de medición",req:"Mismo tablero energizado donde se cambiará una protección.",items:[
+  {k:"vf",s:"La condición de la puesta a tierra provisoria se verifica midiendo con un megóhmetro.",a:false,why:"El megóhmetro mide aislación (RIC 19, 7.3). La resistencia de una puesta a tierra se mide con telurómetro; el equipo de tierra provisoria se revisa visualmente y por continuidad.",ref:"RIC 19, 7.3 · RIC 6, anexo 6.3",cl:[9,2]},
+  {k:"vf",s:"Para dejar los parámetros en cero y trabajar seguro, se recomienda conectar la fase a tierra con un cable.",a:false,why:"Unir la fase a tierra con un cable cualquiera, sin verificar antes la ausencia de tensión, provoca un cortocircuito y un arco. La puesta a tierra temporal se instala con un equipo certificado y solo después de verificar que no hay tensión.",ref:"5 reglas de oro (regla 4)",cl:[2,4]},
+  {k:"vf",s:"Para verificar la tensión antes de empezar, mido entre fase y neutro y además entre tierra y neutro.",a:true,why:"Fase-neutro debe dar cerca de 220 V y neutro-tierra cerca de 0 V. Completa con fase-tierra (cerca de 220 V) para confirmar que la tierra está bien conectada.",ref:"Mediciones antes de energizar",cl:[9,2]}]},
+ {c:"8-3",t:"Evaluar el diseño de circuitos de alumbrado según RIC 10",req:"Evaluar un tablero que alimenta alumbrado y fuerza, según RIC 10 y RIC 01.",items:[
+  {k:"vf",s:"El diseño proyecta la canalización de iluminación de centro a centro, incorporando cajas de derivación.",a:true,why:"Lo que el pliego prohíbe es el «centro a centro» SIN cajas de derivación. Con las uniones dentro de cajas es correcto.",ref:"RIC 10, 5.1.2.2",cl:[6,0]},
+  {k:"vf",s:"Los enchufes pueden ir a la altura que resulte más apropiada.",a:true,why:"El pliego no fija una altura para los enchufes: se instalan en puntos fácilmente accesibles y a la altura que pidan las necesidades de uso. Los interruptores sí tienen rango: 0,80 a 1,40 m.",ref:"RIC 10, 5.1.2.7 y 5.1.2.4",cl:[6,2]},
+  {k:"vf",s:"Las bandejas no metálicas se usan para canalizar solo cuando se trata de oficinas.",a:false,cri:true,why:"Las bandejas son un sistema de canalización regulado en general por el RIC 04; no están restringidas a oficinas.",ref:"RIC 04 (canalizaciones)",cl:[5,2]}]},
+ {c:"8-4",t:"Evaluar el diseño de fuerza y climatización según RIC 07",req:"Evaluar un tablero que alimenta alumbrado y fuerza.",items:[
+  {k:"vf",s:"Para motores de régimen permanente, los conductores se calculan con un 25 % más que la corriente a plena carga.",a:true,why:"El conductor debe soportar al menos 1,25 veces la corriente nominal del motor.",ref:"RIC 7, 5.5.2",cl:[8,1]},
+  {k:"vf",s:"Si el motor se alimenta con fase, neutro y tierra, se requiere conectar la carcasa a tierra.",a:true,why:"Toda masa metálica de un equipo se une al conductor de protección para que una falla haga operar la protección.",ref:"RIC 5 · RIC 6",cl:[5,3]},
+  {k:"vf",s:"El equipo de climatización se puede alimentar con un enchufe del circuito de enchufes.",a:false,cri:true,why:"El climatizador va en un circuito propio dimensionado para su carga, como el circuito 7 del cuadro de esta misma prueba.",ref:"RIC 7 · cuadro de cargas de la prueba",cl:[6,3]}]}
+]},
+{id:"u2",code:"U-4322-7411-009",t:"Interpretar proyectos eléctricos",d:"Verificación inicial, documentación del proyecto y declaración ante la SEC.",acts:[
+ {c:"9-1",t:"Realizar la verificación inicial de un proyecto según RIC 19",req:"Con las plantas de iluminación y enchufes y el cuadro de cargas, verifica las potencias y la protección general.",data:()=>CUADRO+`<div class="warn"><b>Ojo con el cuadro de la prueba:</b> los circuitos 1 y 2 de alumbrado no tienen diferencial, y el RIC 10 exige diferencial de 30 mA como máximo en todo circuito de alumbrado (5.1.3.5). Además, 150 W por enchufe es un dato del documento: si no conoces la carga, el RIC 10 usa 250 W (5.1.4.6).</div>`,items:[
+  {k:"num",s:"Potencia instalada de la planta de iluminación.",u:"W",a:1800,tol:1,ans:"1.800 W",why:"18 centros × 100 W = 1.800 W (circuitos 1 y 2: 8 + 10 centros).",ref:"RIC 18, cuadro de cargas",cl:[7,3]},
+  {k:"num",s:"Potencia instalada de la planta de enchufes.",u:"W",a:3450,tol:1,ans:"3.450 W",why:"15 × 150 W + 2 × 600 W = 2.250 + 1.200 = 3.450 W. El climatizador (1.200 W) va en su propia columna: con él, la instalación suma 6.450 W.",ref:"RIC 18, cuadro de cargas",cl:[7,3]},
+  {k:"num",s:"Protección general según el cuadro de cargas.",u:"A",a:32,tol:0,ans:"32 A",why:"I = 6.450 / 220 = 29,32 A. La protección normalizada inmediatamente superior es 32 A; una de 25 A quedaría bajo la corriente de diseño.",ref:"RIC 18, 6.3.16 · RIC 10",cl:[8,1]}]},
+ {c:"9-2",t:"Elaborar la documentación del proyecto según RIC 18",req:"Elaborar la documentación de un proyecto eléctrico.",data:()=>ptab(["N°","Material","Unidad","Cantidad","P.U.","Total"],[["1","Equipo de medida","Cada uno","1","$ 23.990","?"],["2","Tablero eléctrico 18 u","Cada uno","1","$ 17.990","?"],["3","Disyuntor","Cada uno","4","$ 2.130","?"],["4","Diferencial","Cada uno","3","$ 18.340","?"],["6","Conductor 1,5 mm²","Metro lineal","185","$ 250","?"],["7","Conductor 2,5 mm²","Metro lineal","110","$ 260","?"],["Total","","","","","?"]],"Cubicación de materiales (la numeración original salta del 4 al 6)"),items:[
+  {k:"num",s:"Calcula el valor total de la cubicación.",u:"$",a:180370,tol:1,ans:"$ 180.370",why:"23.990 + 17.990 + 4 × 2.130 + 3 × 18.340 + 185 × 250 + 110 × 260 = 23.990 + 17.990 + 8.520 + 55.020 + 46.250 + 28.600 = $ 180.370. Error típico: no multiplicar por la cantidad.",ref:"RIC 18, 6.2.5",cl:[7,0]},
+  {k:"txt",s:"Señala dos elementos que es obligatorio considerar en la documentación del proyecto.",ans:"Planos e informe de verificación inicial.",why:"Todo proyecto incluye memoria explicativa, planos, informe de verificación inicial e informe de imágenes. La memoria (y con ella el informe de imágenes) es obligatoria sobre 10 kW, en edificios y conjuntos habitacionales, locales de reunión de personas y con empalme en media tensión; una vivienda de 6,45 kW no la necesita.",ref:"RIC 18, 6.1.1, 6.2.1 y 6.4.1",cl:[7,0]},
+  {k:"txt",s:"Señala dos cálculos justificativos que debe incluir la memoria explicativa.",ans:"Cálculo de las corrientes y protecciones, y cálculo de secciones de conductores por caída de tensión.",why:"Otros válidos: cálculo de demanda y del alimentador, cálculo de canalizaciones y, sobre 20 kW, coordinación de protecciones, iluminación y diseño de la puesta a tierra.",ref:"RIC 18, 6.2.3.2",cl:[8,2]}]},
+ {c:"9-3",t:"Tramitar la inscripción ante la SEC (TE1) según RIC 18 y RIC 19",req:"Completar una declaración simulada (formulario TE1) con los datos del cuadro de cargas de la prueba.",data:()=>`<div class="idea">El anexo reproduce el certificado de inscripción TE1: antecedentes del instalador (nombre, RUT, clase de licencia), de la instalación (dirección, tipo, destino, potencias de alumbrado, fuerza, climatización y computación, longitud del alimentador) y del propietario, más preguntas sobre generación propia y cargadores de vehículo eléctrico.</div>`,items:[
+  {k:"num",s:"¿Qué longitud declaras para el alimentador?",u:"m",a:25,tol:0,ans:"25 m",why:"El alimentador une el equipo de medida (E) con el primer tablero: 25 m (esquema de la actividad 10-3). Los 80 m son de los circuitos.",ref:"RIC 3, 3.1",cl:[8,3]},
+  {k:"num",s:"Si la potencia instalada es la del cuadro de cargas y el empalme admite como máximo 8 kW, ¿qué potencia declaras?",u:"kW",a:6.45,tol:0.01,ans:"6,45 kW",why:"Se declara la potencia instalada real del cuadro: 6,45 kW, que no supera los 8 kW del empalme. No se declaran potencias futuras.",ref:"RIC 18, 5.6 · RIC 1, 5.3",cl:[8,3]},
+  {k:"txt",s:"Indica dos documentos que adjuntas para que la declaración sea aprobada.",ans:"Planos de la instalación (planta, unilineal y cuadro de cargas) e informe de verificación inicial.",why:"Son las partes del proyecto que siempre se exigen. La memoria explicativa y el informe de imágenes se agregan cuando la instalación supera 10 kW o cae en los otros casos del RIC 18, 6.2.1.",ref:"RIC 18, 6.1.1 · RIC 19",cl:[8,3]}]}
+]},
+{id:"u3",code:"U-4322-7411-010",t:"Instalar conductores y canalizaciones",d:"Sección de conductores por caída de tensión, ductos y alimentador.",acts:[
+ {c:"10-1",t:"Dimensionar conductores según la corriente y el RIC 04",req:"Un circuito para un climatizador de 1.200 W y uno de iluminación de 15 centros, ambos a 80 m del tablero. Usa S = 2 · 0,018 · L · I / 6,6.",data:()=>figAlimP(false)+ptab(["Sección mm²","A1 (A)","A2 (A)"],[["1,5","17","17"],["2,5","23","22"],["4","31","30"],["6","40","38"],["10","54","51"]],"RIC 04, tabla 4.4 (extracto entregado en la prueba, 30 °C)"),items:[
+  {k:"num",s:"Sección del conductor del climatizador según cálculo (comercial).",u:"mm²",a:2.5,alt:[2.38],tol:0.03,ans:"2,5 mm² (cálculo 2,38 mm²)",why:"I = 1.200 / 220 = 5,45 A. S = 2 × 0,018 × 80 × 5,45 / 6,6 = 2,38 mm² → comercial 2,5 mm², que además es el mínimo para enchufes y fuerza.",ref:"RIC 4, 5.4",cl:[8,2]},
+  {k:"num",s:"Sección del conductor de iluminación según cálculo (comercial).",u:"mm²",a:4,alt:[2.98],tol:0.03,ans:"4 mm² (cálculo 2,98 mm²)",why:"15 centros × 100 W = 1.500 W. I = 6,82 A. S = 2 × 0,018 × 80 × 6,82 / 6,6 = 2,98 mm² → comercial 4 mm². Error típico: redondear hacia abajo a 2,5 mm².",ref:"RIC 10, 5.1.4.5 · RIC 4, 5.4",cl:[8,2]},
+  {k:"txt",s:"Verifica ambas secciones con la tabla (columna A1 o A2).",ans:"2,5 mm² soporta 23 A (A1) o 22 A (A2), más que 5,45 A. 4 mm² soporta 31 A o 30 A, más que 6,82 A. Ambas cumplen.",why:"Por capacidad bastaría 1,5 mm² (17 A), pero a 80 m manda la caída de tensión. Siempre se instala la mayor entre: cálculo por caída, capacidad de la tabla y mínimo del pliego.",ref:"RIC 4, tabla 4.4",cl:[5,0]}]},
+ {c:"10-2",t:"Dimensionar canalizaciones según el RIC 04",req:"Mismos circuitos. Cada uno lleva fase, neutro y tierra.",data:()=>ptab(["Sección mm²","Ø cable","1 cond.","2 cond.","3 cond.","4 cond."],[["1,5","3","16","16","16","20"],["2,5","3,7","16","16","20","20"],["4","4,2","16","16","20","20"],["6","4,7","16","16","20","25"],["10","6,2","16","20","25","32"]],"RIC 04, tabla 4.17: diámetro nominal del ducto (mm)"),items:[
+  {k:"num",s:"Diámetro del ducto del climatizador.",u:"mm",a:20,tol:0,ans:"20 mm",why:"3 conductores de 2,5 mm² → columna 3 → 20 mm. El conductor de tierra cuenta: olvidarlo lleva a 16 mm.",ref:"RIC 4, tabla 4.17",cl:[5,2]},
+  {k:"num",s:"Diámetro del ducto de iluminación.",u:"mm",a:20,tol:0,ans:"20 mm",why:"3 conductores de 4 mm² → columna 3 → 20 mm.",ref:"RIC 4, tabla 4.17",cl:[5,2]}]},
+ {c:"10-3",t:"Dimensionar el alimentador según el RIC 03",req:"Alimentador de 25 m desde el empalme (E) al tablero, para el climatizador y la iluminación de las actividades anteriores.",data:()=>figAlimP(true),items:[
+  {k:"num",s:"Sección calculada del alimentador.",u:"mm²",a:1.67,alt:[2.5],tol:0.03,ans:"1,67 mm² (comercial 2,5 mm²)",why:"P = 1.200 + 1.500 = 2.700 W. I = 12,27 A. S = 2 × 0,018 × 25 × 12,27 / 6,6 = 1,67 mm².",ref:"RIC 3, 5.1.3",cl:[8,2]},
+  {k:"num",s:"Sección mínima del alimentador según norma.",u:"mm²",a:4,tol:0,ans:"4 mm²",why:"El pliego fija 4 mm² como mínimo para alimentadores (2,5 mm² para subalimentadores). Se instala el mayor entre cálculo y mínimo: 4 mm².",ref:"RIC 3, 5.1.2 · RIC 4, 5.4",cl:[8,1]},
+  {k:"num",s:"Diámetro del ducto del alimentador.",u:"mm",a:32,tol:0,ans:"32 mm",why:"Por la tabla 4.17, 3 × 4 mm² cabrían en 20 mm, pero el ducto entre el equipo de medida y el primer tablero debe permitir ampliar la sección en un 100 % y nunca ser menor a 32 mm.",ref:"RIC 1, 7.15",cl:[5,2]}]}
+]},
+{id:"u4",code:"U-4322-7411-011",t:"Instalar tableros y protecciones",d:"Exigencias del tablero, lectura del unilineal y montaje práctico.",acts:[
+ {c:"11-1",t:"Diseñar tableros según el RIC 02",req:"Diseñar un tablero considerando componentes, aplicación y ubicación.",items:[
+  {k:"vf",s:"En tableros para más de 10 kW, lo único que se exige es tener luces indicadoras.",a:false,why:"La luz piloto se exige en todos los tableros (salvo domiciliarios de hasta 3 circuitos), y hay muchas otras exigencias: interruptor general, rotulación, unilineal adherido, regletas desde 8 circuitos, instrumentos desde 100 A.",ref:"RIC 2, 5.3.6, 6.2.12 a 6.2.14 y 6.6.2",cl:[4,1]},
+  {k:"vf",s:"En una oficina, la sala eléctrica se puede compartir con la bodega de útiles de escritorio y aseo.",a:false,why:"Las salas eléctricas se destinan exclusivamente a equipos eléctricos y sus espacios de trabajo no se pueden usar para almacenar.",ref:"RIC 2, 5.4.7 y 5.4.9.1",cl:[4,1]},
+  {k:"vf",s:"La sala eléctrica protegida frente al fuego debe ofrecer una resistencia RF 120.",a:true,why:"El recinto de la sala eléctrica debe tener resistencia al fuego RF 120, alumbrado de emergencia de 2 horas y señalización de acceso restringido.",ref:"RIC 2, 5.4.9.2 a 5.4.11",cl:[4,1]}]},
+ {c:"11-2",t:"Diseñar e interpretar el diagrama unilineal según el RIC 18",req:"Con el tablero del unilineal, determina lo máximo que puedes instalar (circuito 1 alumbrado, circuito 2 enchufes, 220 V).",data:()=>figUniP(),items:[
+  {k:"num",s:"Máximo de enchufes que se pueden instalar (circuito 2).",u:"enchufes",a:12,tol:0,ans:"12 enchufes",why:"16 A × 220 V = 3.520 W; al 90 % = 3.168 W; con 250 W por enchufe: 12,67 → 12 (siempre hacia abajo). Si usaras los 150 W del cuadro de la prueba darían 21, pero el pliego manda 250 W cuando no conoces la carga.",ref:"RIC 10, 5.1.4.4 y 5.1.4.6",cl:[6,2]},
+  {k:"num",s:"Máximo de centros de luz que se pueden instalar (circuito 1).",u:"centros",a:19,tol:0,ans:"19 centros",why:"10 A × 220 V = 2.200 W; al 90 % = 1.980 W; con 100 W por centro: 19,8 → 19.",ref:"RIC 10, 5.1.4.4 y 5.1.4.5",cl:[6,0]},
+  {k:"num",s:"Corriente máxima que permite el tablero.",u:"A",a:20,tol:0,ans:"20 A",why:"La limita la protección general de 20 A. La suma de los circuitos (10 + 16 = 26 A) no define la capacidad del tablero.",ref:"RIC 2, 6.6.2",cl:[4,2]}]},
+ {c:"11-3",t:"Instalar componentes del tablero (actividad práctica)",req:"Montar un tablero con un circuito de iluminación y uno de enchufes según los unilineales, energizar una vez revisado y registrar dos mediciones que indique el evaluador.",data:()=>figMontajeP()+`<ul><li><b>Tablero:</b> no se exige peinado ni terminales en esta prueba.</li><li><b>Iluminación:</b> ducto PVC de 20 mm; artefactos desmontados de sus cajas para la revisión.</li><li><b>Enchufes:</b> moldura de 10 mm; artefactos desmontados para la revisión.</li><li><b>Uniones:</b> quedan sin aislar hasta que el evaluador las revise.</li></ul><div class="warn"><b>Ojo:</b> la prueba pide usar solo cable EVA de 1,5 mm². Es una condición del montaje simulado: en una instalación real los enchufes van como mínimo en 2,5 mm² (RIC 4, 5.4).</div>`,items:[
+  {k:"txt",s:"Medición 1: ¿dónde mides y qué valor esperas?",ans:"Tensión en el enchufe: fase-neutro cerca de 220 V, fase-tierra cerca de 220 V y neutro-tierra cerca de 0 V.",why:"Es la medición más común después de energizar. Antes de energizar, el evaluador también puede pedir continuidad del conductor de protección.",ref:"RIC 19",cl:[9,2]},
+  {k:"txt",s:"Medición 2: ¿dónde mides y qué valor esperas?",ans:"Aislación del circuito con megóhmetro a 500 V CC, con la instalación desenergizada: al menos 0,5 MΩ.",why:"Si hay equipos que no se pueden desconectar, se mide a 250 V CC y se exige al menos 1 MΩ. También es válido probar el diferencial con su botón de prueba.",ref:"RIC 19, 7.3 y tabla 19.1",cl:[9,2]}]}
+]},
+{id:"u5",code:"U-4322-7411-012",t:"Verificar empalmes y puesta a tierra",d:"Empalme, diseño de la puesta a tierra y medición por caída de potencial.",acts:[
+ {c:"12-1",t:"Verificar la construcción del empalme según el RIC 01",req:"Antes de ejecutar el empalme, verifica cálculos y materiales del proyecto.",items:[
+  {k:"txt",s:"¿Qué documento te exige la empresa eléctrica para construir y conectar el empalme?",ans:"La comunicación de energización (declaración TE1) inscrita ante la SEC.",why:"Solo se otorga empalme a instalaciones construidas según la normativa y con la comunicación de energización inscrita. Si la instalación no existe o está inconclusa, la distribuidora debe negarse e informar a la SEC en 24 horas.",ref:"RIC 1, 5.2 y 5.4.3",cl:[8,3]},
+  {k:"num",s:"Para una instalación de 10 kW, ¿cuál es la máxima capacidad de la protección del empalme?",u:"A",a:50,tol:0,ans:"50 A (monofásico)",why:"En la tabla de empalmes normalizados, 50 A monofásico corresponde a 10 kW. La capacidad del empalme se fija igual o inferior a la potencia declarada, nunca superior. En trifásico, 10 kW quedaría entre 16 A (9,7 kW) y 20 A (12 kW).",ref:"RIC 1, 5.3 y anexo 1.3",cl:[8,3]},
+  {k:"txt",s:"Al verificar el empalme de una casa, se indica usar cable preensamblado. ¿Qué acción tomas?",cri:true,ans:"Observarlo y consultarlo con la distribuidora: los empalmes aéreos normalizados son de tipo concéntrico (letra A del anexo 1.3).",why:"El empalme lo construye la distribuidora según sus normas; el instalador verifica que el material coincida con el tipo normalizado.",ref:"RIC 1, anexo 1.3",cl:[4,0]}]},
+ {c:"12-2",t:"Diseñar la puesta a tierra según el RIC 06",req:"Con una aplicación, prueba combinaciones de largo (1; 1,5; 3 m), diámetro (0,015; 0,020 m) y separación (1; 2; 3 m) en un terreno de 170 Ω·m, y elige la configuración más cercana al valor permitido.",data:()=>`<div class="ptcalc"><div class="cf"><label>ρ del suelo (Ω·m)<input id="ptr" type="text" inputmode="decimal" value="170"></label><label>Largo L (m)<select id="ptl"><option>1</option><option>1.5</option><option selected>3</option></select></label><label>Diámetro d (m)<select id="ptd"><option>0.015</option><option selected>0.020</option></select></label><label>Separación D (m)<select id="pts"><option>1</option><option>2</option><option selected>3</option></select></label></div><div class="cr" id="ptout"></div><p class="norm">Fórmulas de ingeniería: una barra R1 = ρ/(2πL)·(ln(8L/d) − 1); resistencia mutua Rm = ρ/(2πD); dos barras R2 = (R1 + Rm)/2; tres barras en triángulo R3 = (R1 + 2Rm)/3. La aplicación de la prueba puede dar valores algo distintos: lo que importa es el método.</p></div>`,items:[
+  {k:"num",s:"Según tu diseño, ¿qué valor obtienes para la puesta a tierra? (L = 3 m, d = 0,020 m, D = 3 m, tres barras)",u:"Ω",a:24.3,tol:0.08,ans:"Cerca de 24 Ω (R3)",why:"R1 = 170/(2π·3)·(ln(1.200) − 1) ≈ 54,9 Ω; Rm = 170/(2π·3) ≈ 9,0 Ω; R3 = (54,9 + 2 × 9,0)/3 ≈ 24,3 Ω. Con la fórmula simple del RIC 6 (tabla 6.4), una barra de 3 m da ρ/L = 56,7 Ω.",ref:"RIC 6, tabla 6.4",cl:[5,3]},
+  {k:"vf",s:"El valor obtenido cumple con lo que establece la norma.",a:false,why:"La tierra de servicio debe ser de 20 Ω como máximo (80 Ω solo en los casos del 6.2). Con 24 Ω no cumple: hay que agregar barras, aumentar la separación o mejorar el terreno. Además, el pliego exige separar las barras al menos el doble de su largo (con L = 3 m, D ≥ 6 m).",ref:"RIC 6, 6.1 y 8.3.2",cl:[5,3]},
+  {k:"txt",s:"¿Qué configuración utilizas: R1, R2 o R3?",ans:"R3, tres barras: es la más cercana al valor permitido.",why:"Cada barra en paralelo baja la resistencia, aunque no en proporción exacta por la influencia mutua entre barras cercanas.",ref:"RIC 6, 8.3.2",cl:[5,3]}]},
+ {c:"12-3",t:"Verificar la puesta a tierra según el RIC 06 (caída de potencial)",req:"Con una aplicación, mide una malla de 6 × 5 m: ubica el electrodo de corriente (C2) y el de potencial (P2), registra la curva de resistencia y responde.",data:()=>`<div class="cr"><ol class="steps"><li>Diagonal de la malla: D = √(6² + 5²) = <b>7,81 m</b>.</li><li>Electrodo de corriente C2 a 6 veces la diagonal o más: <b>46,9 m</b> (100 %).</li><li>Electrodo de potencial P2 al 62 %: <b>29,1 m</b>. Se confirma moviéndolo al 52 % (24,4 m) y al 72 % (33,8 m): si las lecturas casi no cambian, la medición es válida.</li></ol></div><div class="warn"><b>Ojo:</b> la curva de la aplicación de la prueba va de 13 a 23 m, así que parece usar una distancia menor a la del pliego. En la prueba, anota los valores que te entregue la aplicación.</div>`,items:[
+  {k:"num",s:"¿Cuál fue la distancia de medición más cercana a la malla? (punto del 52 %)",u:"m",a:24.4,tol:0.02,cri:true,ans:"24,4 m",why:"52 % de 46,9 m = 24,4 m. Es la posición más cercana de las tres lecturas de control.",ref:"RIC 6, anexo 6.3",cl:[5,3]},
+  {k:"txt",s:"¿Qué valor obtuviste para la puesta a tierra?",ans:"La lectura en el punto del 62 %, siempre que las del 52 % y 72 % sean parecidas.",why:"Si la curva no se aplana alrededor del 62 %, el electrodo de corriente está demasiado cerca y hay que alejarlo. Compara el valor con el máximo de 20 Ω.",ref:"RIC 6, anexo 6.3 y 6.1",cl:[5,3]},
+  {k:"num",s:"¿A qué distancia instalaste el electrodo de corriente?",u:"m",a:46.9,tol:0.02,ans:"46,9 m o más",why:"6 × 7,81 m = 46,9 m. Usar el lado mayor en vez de la diagonal acorta la distancia y falsea la medición.",ref:"RIC 6, anexo 6.3",cl:[5,3]}]}
+]}];
+
+const pid=(u,a,i)=>`${u}-${a}-${i}`;
+const pnum=v=>{const t=String(v||"").trim().replace(/\$|\s/g,"");const n=parseFloat((/,/.test(t)?t.replace(/\./g,"").replace(",","."):t.replace(/\.(?=\d{3}(\D|$))/g,"")));return Number.isFinite(n)?n:NaN};
+function pcheck(it,v){if(it.k==="vf")return v===(it.a?"1":"0");if(it.k==="num"){const n=pnum(v);if(!Number.isFinite(n))return null;return [it.a,...(it.alt||[])].some(a=>Math.abs(n-a)<=(it.tol>=1?it.tol:it.tol*Math.abs(a))+1e-9)}return null}
+function pfbHTML(it,ok){const ans=it.k==="vf"?(it.a?"Verdadero":"Falso"):it.ans;
+  return `${ok===true?'<b class="okt">Correcto.</b> ':ok===false?'<b class="badt">Revisa.</b> ':""}<b>Pauta:</b> ${ans}<div class="pwhy">${it.why}</div><div class="norm">${it.ref}${it.cri?" · Pauta por criterio técnico: confírmala con tu relator":""}</div>${it.cl?`<button class="chip act" data-open="${it.cl[0]}" data-tab="${it.cl[1]}">Repasar en clase ${it.cl[0]}</button>`:""}`}
+function pitemHTML(it,id,l){
+  let ctl="";
+  if(it.k==="vf")ctl=`<div class="vfb"><button class="opt" type="button" data-vf="1">Verdadero</button><button class="opt" type="button" data-vf="0">Falso</button></div>`;
+  else if(it.k==="num")ctl=`<div class="prow"><input class="pin" type="text" inputmode="decimal" aria-label="Tu resultado" placeholder="Tu resultado"><span class="punit">${it.u}</span><button class="cta sm" type="button" data-chk>Revisar</button></div>`;
+  else ctl=`<textarea class="pta" rows="2" aria-label="Tu respuesta" placeholder="Escribe tu respuesta"></textarea><button class="cta sm" type="button" data-chk>Ver pauta</button>`;
+  return `<div class="pitem" data-id="${id}"><p class="qt"><span class="plet">${l})</span>${it.s}${it.cri?'<span class="bcri">Criterio</span>':""}</p>${ctl}<div class="pfb" hidden></div></div>`;
+}
+function pruebaHTML(sub){
+  pload();const i=Math.max(0,PRUEBA.findIndex(u=>u.id===sub)),U=PRUEBA[i];
+  return `<div class="ptools"><p class="tool-intro" style="margin:0">Basada en una prueba de años anteriores (versión mayo 2026): 5 unidades de competencia, 15 actividades clave y 3 ítems por actividad. Los datos y tablas están redibujados y la pauta está fundamentada en los pliegos RIC.</p><a class="toolbtn" href="${SIMURL}">Simulador de 100 preguntas</a></div>
+  ${FORMULAS}
+  <div class="tabs" role="tablist">${PRUEBA.map((u,j)=>`<button class="tab" role="tab" aria-selected="${j===i}" data-pu="${u.id}"><span class="k">Unidad ${j+1}</span>${esc(u.t)}</button>`).join("")}</div>
+  <section class="panel tool-panel" id="toolpanel"><div class="lhead" style="align-items:center"><div><div class="pcode">${U.code}</div><h3 style="margin:2px 0 4px">${esc(U.t)}</h3><p class="tool-sub" style="margin:0">${esc(U.d)}</p></div><div class="pscore" id="pscore"></div></div>
+  <div class="pu">${U.acts.map((a,ai)=>`<article class="pact"><div class="pcode">Actividad clave ${a.c}</div><h4>${esc(a.t)}</h4><p class="preq">${a.req}</p>${a.data?a.data():""}${a.items.map((it,ii)=>pitemHTML(it,pid(U.id,ai,ii),"abc"[ii])).join("")}</article>`).join("")}</div>
+  <div class="pnav">${i>0?`<button type="button" data-pu="${PRUEBA[i-1].id}">‹ Unidad ${i}: ${esc(PRUEBA[i-1].t)}</button>`:"<span></span>"}${i<PRUEBA.length-1?`<button type="button" data-pu="${PRUEBA[i+1].id}">Unidad ${i+2}: ${esc(PRUEBA[i+1].t)} ›</button>`:`<button type="button" id="preset">Borrar mis respuestas</button>`}</div></section>`;
+}
+function pscore(U){let n=0,ok=0;U.acts.forEach((a,ai)=>a.items.forEach((it,ii)=>{if(it.k==="txt")return;const r=PANS[pid(U.id,ai,ii)];if(r&&r.ok!=null){n++;if(r.ok)ok++}}));const t=U.acts.reduce((s,a)=>s+a.items.filter(x=>x.k!=="txt").length,0);const el=$("pscore");if(el)el.textContent=`Verdadero/falso y cálculos: ${ok} correctas de ${n} respondidas (${t} en total)`}
+function initPrueba(sub){
+  const i=Math.max(0,PRUEBA.findIndex(u=>u.id===sub)),U=PRUEBA[i];
+  document.querySelectorAll("[data-pu]").forEach(b=>b.onclick=()=>openTool("prueba",b.dataset.pu));
+  const rs=$("preset");if(rs)rs.onclick=()=>{PANS={};psave();openTool("prueba",U.id)};
+  const show=(d,it,v)=>{const ok=pcheck(it,v);const fb=d.querySelector(".pfb");fb.hidden=false;fb.className="pfb"+(ok===true?" ok":ok===false?" bad":"");fb.innerHTML=pfbHTML(it,ok);if(it.k==="vf")d.querySelectorAll("[data-vf]").forEach(x=>x.classList.toggle("sel",x.dataset.vf===v));return ok};
+  U.acts.forEach((a,ai)=>a.items.forEach((it,ii)=>{
+    const id=pid(U.id,ai,ii),d=document.querySelector(`.pitem[data-id="${id}"]`);if(!d)return;
+    const rec=v=>{const ok=show(d,it,v);PANS[id]={v,ok};psave();pscore(U)};
+    if(it.k==="vf")d.querySelectorAll("[data-vf]").forEach(b=>b.onclick=()=>rec(b.dataset.vf));
+    else{const inp=d.querySelector("input,textarea");d.querySelector("[data-chk]").onclick=()=>rec(inp.value);if(it.k==="num")inp.onkeydown=e=>{if(e.key==="Enter")rec(inp.value)}}
+    const s=PANS[id];if(s){const inp=d.querySelector("input,textarea");if(inp)inp.value=s.v||"";show(d,it,s.v)}
+  }));
+  pscore(U);
+  if($("ptout")){const f=()=>{const r=num("ptr"),L=+$("ptl").value,dd=+$("ptd").value,D=+$("pts").value;
+    if(!(r>0)){$("ptout").innerHTML="Ingresa la resistividad.";return}
+    const R1=r/(2*Math.PI*L)*(Math.log(8*L/dd)-1),Rm=r/(2*Math.PI*D),R2=(R1+Rm)/2,R3=(R1+2*Rm)/3,best=[["R1",R1],["R2",R2],["R3",R3]].sort((x,y)=>x[1]-y[1])[0];
+    $("ptout").innerHTML=`<ul class="steps" style="list-style:none;padding:0"><li>Una barra <b>R1 = ${fmt(R1,1)} Ω</b> <span class="norm">(fórmula simple RIC 6: ρ/L = ${fmt(r/L,1)} Ω)</span></li><li>Dos barras <b>R2 = ${fmt(R2,1)} Ω</b></li><li>Tres barras <b>R3 = ${fmt(R3,1)} Ω</b></li></ul>
+    <p class="${best[1]<=20?"okmsg":"warnmsg"}">Más cercana al valor permitido: <b>${best[0]} = ${fmt(best[1],1)} Ω</b>. ${best[1]<=20?"Cumple los 20 Ω de tierra de servicio.":"No cumple los 20 Ω de tierra de servicio."}</p>
+    ${D<2*L?`<p class="warnmsg">La separación de ${fmt(D)} m es menor que el doble del largo (${fmt(2*L)} m) que pide el RIC 6, 8.3.2 para más de una barra.</p>`:""}`};
+    ["ptr","ptl","ptd","pts"].forEach(k=>$(k).oninput=f);f()}
+}
+
+/* Temario */
+const TEM_UCL=[
+ ["U-4322-7411-008","Evaluar entornos de trabajo","8-1 Prevención de riesgos al intervenir un tablero · 8-2 Verificar parámetros con instrumentos · 8-3 Diseño de alumbrado · 8-4 Fuerza y climatización","RIC 10, RIC 07, RIC 19","Verdadero o falso",[[2,4,"5 reglas de oro"],[9,2,"Mediciones"],[6,0,"Alumbrado"]]],
+ ["U-4322-7411-009","Interpretar proyectos eléctricos","9-1 Verificación inicial: potencias y protección general · 9-2 Documentación: cubicación, partes del proyecto, cálculos de la memoria · 9-3 Declaración TE1 simulada","RIC 18, RIC 19","Cálculo y respuesta escrita",[[7,3,"Cuadro de cargas"],[7,0,"Proyecto"],[8,3,"TE1"]]],
+ ["U-4322-7411-010","Instalar conductores y canalizaciones","10-1 Sección por caída de tensión y tabla 4.4 · 10-2 Diámetro de ductos con tabla 4.17 · 10-3 Alimentador: sección calculada, mínima y ducto","RIC 03, RIC 04, RIC 01","Cálculo con tablas",[[8,2,"Caída de tensión"],[5,0,"Conductores"],[5,2,"Canalizaciones"]]],
+ ["U-4322-7411-011","Instalar tableros y protecciones","11-1 Exigencias del tablero y la sala eléctrica · 11-2 Unilineal: máximo de enchufes, centros y corriente · 11-3 Montaje práctico de tablero, iluminación y enchufes, con dos mediciones","RIC 02, RIC 10, RIC 18","Verdadero o falso, cálculo y práctica",[[4,1,"Tablero"],[7,2,"Unilineal"],[9,0,"Armado del tablero"]]],
+ ["U-4322-7411-012","Verificar empalmes y puesta a tierra","12-1 Empalme: documento, capacidad de la protección, tipo de conductor · 12-2 Diseño de la puesta a tierra con aplicación · 12-3 Medición por caída de potencial (62 %) con aplicación","RIC 01, RIC 06","Respuesta escrita y aplicación",[[5,3,"Puesta a tierra"],[8,3,"TE1 y empalme"]]]];
+const TEM_RIC=[["RIC 01 · Empalmes",4,10,23,[4,0]],["RIC 02 · Tableros",8,16,33,[4,1]],["RIC 03 · Alimentadores y demanda",6,14,25,[8,1]],["RIC 04 · Conductores y canalizaciones",8,16,40,[5,0]],["RIC 05 · Tensiones peligrosas",5,12,13,[4,3]],["RIC 06 · Puesta a tierra",7,14,33,[5,3]],["RIC 07 · Equipos (motores)",0,3,5,[8,0]],["RIC 10 · Uso general (alumbrado y enchufes)",10,22,74,[6,0]],["RIC 18 · Presentación de proyectos",6,12,45,[7,0]],["RIC 19 · Puesta en servicio y verificación",0,12,11,[9,2]]];
+const TEM_DATOS=[
+ ["Tensión monofásica de cálculo","220 V","—"],["Caída de tensión admisible en la prueba","3 % de 220 V = 6,6 V","Hoja de fórmulas"],["Resistividad del cobre","0,018 Ω·mm²/m","Hoja de fórmulas"],
+ ["Secciones mínimas","1,5 mm² alumbrado · 2,5 mm² enchufes · 4 mm² alimentador","RIC 4, 5.4 · RIC 3, 5.1.2"],
+ ["Carga de cálculo","100 W por centro · 250 W por enchufe (si no se conoce)","RIC 10, 5.1.4.5 y 5.1.4.6"],
+ ["Carga máxima de un circuito","90 % de su capacidad (I × 220 V)","RIC 10, 5.1.4.4"],["Protección de un circuito de enchufes","Corriente + 10 %, normalizada superior","RIC 10, 5.1.4.1"],
+ ["Diferencial","30 mA máximo; no más de 3 circuitos por diferencial","RIC 10, 5.1.3.5 y 5.1.3.7"],
+ ["Circuitos mínimos de una vivienda","2 bajo 30 m²; 3 desde 30 m² (uno exclusivo cocina-lavadero ≥ 16 A)","RIC 10, 5.2.1"],
+ ["Interruptores de alumbrado","Entre 0,80 y 1,40 m","RIC 10, 5.1.2.4"],["Comandos del tablero","Entre 0,45 y 2,0 m","RIC 2, 6.1.22"],
+ ["Tablero prohibido en","Dormitorios, baños, lavaderos y clósets","RIC 10, 5.1.3.2"],
+ ["Motores","Conductor ≥ 1,25 × corriente nominal","RIC 7, 5.5.2"],
+ ["Empalme de vivienda","Protección de al menos 25 A; capacidad igual o inferior a la potencia declarada","RIC 10, 5.2.1 · RIC 1, 5.3"],
+ ["Medidor","En fachada, a menos de 15 m de la puerta de acceso","RIC 1, 7.2"],["Ducto medidor-primer tablero","32 mm como mínimo","RIC 1, 7.15"],
+ ["Tierra de servicio","20 Ω como máximo","RIC 6, 6.1"],["Varias barras","Separación ≥ 2 × largo; unión ≥ 16 mm²","RIC 6, 8.3.2"],
+ ["Medición de tierra","Electrodo de corriente a ≥ 6 diagonales; potencial al 62 %","RIC 6, anexo 6.3"],
+ ["Aislación","≥ 0,5 MΩ a 500 V CC","RIC 19, tabla 19.1"],["Memoria explicativa","Obligatoria sobre 10 kW, edificios, conjuntos y locales de reunión","RIC 18, 6.2.1"]];
+function temarioHTML(){
+  return `<h3>Temario de la evaluación Clase D</h3>
+  <p>La certificación se rinde ante un centro evaluador de competencias laborales, según el perfil Instalador Eléctrico Clase D. Con el resultado "competente" tramitas la licencia en la SEC.</p>
+  <div class="idea">Este temario se armó a partir de una <b>prueba de años anteriores</b> (evaluación en condición de simulación, versión mayo 2026) y de un <b>simulador de 100 preguntas</b> basado en los pliegos RIC. Ninguno de los dos es oficial de la SEC: úsalos como referencia de estudio.</div>
+  <h4>1. Cómo es la prueba</h4>
+  <ul><li><b>Parte escrita en condición de simulación:</b> el proyecto eléctrico de una vivienda con iluminación, enchufes y fuerza. 5 unidades, 15 actividades clave y 3 ítems por actividad (45 en total): verdadero o falso, cálculos con tablas del RIC y respuestas cortas.</li>
+  <li><b>Anexos con aplicaciones:</b> una declaración TE1 simulada, una aplicación para diseñar la puesta a tierra y otra para medirla por caída de potencial.</li>
+  <li><b>Parte práctica:</b> montar un tablero con un circuito de iluminación y uno de enchufes, energizar una vez revisado y registrar dos mediciones.</li>
+  <li><b>Se entrega una hoja de fórmulas</b> (Ohm, Joule y sección por caída de tensión). Los cálculos se hacen al reverso: lleva calculadora.</li></ul>
+  <p><button class="toolbtn" type="button" onclick="openTool('prueba')">Practicar la prueba de años anteriores</button> <a class="toolbtn" href="${SIMURL}">Simulador de 100 preguntas en 80 minutos</a></p>
+  <h4>2. Unidades de competencia evaluadas</h4>
+  <div class="tw"><table><thead><tr><th>Unidad</th><th>Actividades clave</th><th>Pliegos</th><th>Tipo de ítem</th><th>Repasar</th></tr></thead><tbody>${TEM_UCL.map(r=>`<tr><td><span class="pcode">${r[0]}</span><br><b>${r[1]}</b></td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5].map(c=>`<button class="chip act" data-open="${c[0]}" data-tab="${c[1]}">Clase ${c[0]}: ${c[2]}</button>`).join(" ")}</td></tr>`).join("")}</tbody></table></div>
+  <h4>3. Peso de cada pliego en la parte teórica</h4>
+  <p>Así reparte el simulador sus 100 preguntas por intento. Úsalo para decidir qué estudiar primero.</p>
+  <div class="tw"><table><thead><tr><th>Pliego</th><th class="n">Preguntas por intento</th><th class="n">En el banco</th><th>Repasar</th></tr></thead><tbody>${TEM_RIC.map(r=>`<tr><td>${r[0]}</td><td class="n">${r[1]} a ${r[2]}</td><td class="n">${r[3]}</td><td><button class="chip act" data-open="${r[4][0]}" data-tab="${r[4][1]}">Clase ${r[4][0]}</button></td></tr>`).join("")}</tbody></table></div>
+  <div class="idea">Lo que más pesa: <b>RIC 10</b> (alumbrado y enchufes), <b>RIC 02 y RIC 04</b> (tableros, conductores y ductos), <b>RIC 06</b> (puesta a tierra) y <b>RIC 18</b> (proyecto y cuadro de cargas).</div>
+  <h4>4. Datos que se repiten en las pruebas</h4>
+  <div class="tw"><table><thead><tr><th>Tema</th><th>Dato</th><th>Fuente</th></tr></thead><tbody>${TEM_DATOS.map(r=>`<tr><td>${r[0]}</td><td><b>${r[1]}</b></td><td class="norm">${r[2]}</td></tr>`).join("")}</tbody></table></div>
+  <h4>5. Errores típicos que restan puntos</h4>
+  <ul><li>Redondear la sección hacia abajo, o quedarse con el cálculo sin revisar el mínimo del pliego.</li><li>Olvidar el conductor de tierra al elegir el ducto.</li><li>Calcular la cantidad de enchufes sin el 90 % o con 150 W en vez de 250 W.</li><li>Confundir alimentador (medidor a primer tablero) con circuitos.</li><li>Medir la tierra con el electrodo de corriente usando el lado mayor en vez de la diagonal.</li><li>Dejar un circuito de alumbrado sin diferencial.</li></ul>`;
 }
 
 /* ---------- Estado ---------- */
@@ -2444,9 +2712,9 @@ document.addEventListener("click",e=>{
 try{if(localStorage.getItem(KEY+"-proj"))document.body.classList.add("proj")}catch(e){}
 document.addEventListener("keydown",e=>{if(!cur||e.target.closest("input,textarea,select"))return;const n=tabsOf(cur).length;if(e.key==="ArrowRight"&&curTab<n-1){showTab(curTab+1);e.preventDefault()}else if(e.key==="ArrowLeft"&&curTab>0){showTab(curTab-1);e.preventDefault()}else if(e.key==="Escape"&&document.body.classList.contains("proj")){document.body.classList.remove("proj");const b=$("projbtn");if(b)b.setAttribute("aria-pressed",false);try{localStorage.setItem(KEY+"-proj","")}catch(x){}}});
 try{$("glosbtn").onclick=openGlos}catch(e){}
-$("tb-calc").onclick=()=>openTool("calc");$("tb-sim").onclick=()=>openTool("sim");$("tb-exam").onclick=()=>openTool("exam");
+$("tb-tem").onclick=()=>openTool("temario");$("tb-pru").onclick=()=>openTool("prueba");$("tb-calc").onclick=()=>openTool("calc");$("tb-sim").onclick=()=>openTool("sim");$("tb-exam").onclick=()=>openTool("exam");
 renderBoard();
-{const h=(location.hash||"").slice(1);if(["calc","sim","exam"].includes(h))setTimeout(()=>openTool(h),0)}
+{const h=(location.hash||"").slice(1);if(["calc","sim","exam","prueba","temario"].includes(h))setTimeout(()=>openTool(h),0)}
 const m=(location.hash||"").match(/^#c(\d+)(?:-(\d+))?$/);
 if(m)openLesson(+m[1],m[2]?+m[2]-1:0);
 </script>
