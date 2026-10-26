@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Pizarra de estudio para la licencia SEC de instalador eléctrico clase D.">
+<meta name="description" content="Pizarra de estudio para instalador eléctrico SEC clase D.">
 <meta name="color-scheme" content="light">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>SEC - ELECTR. CLASE D</title>
@@ -279,6 +279,46 @@ body.proj .more{max-width:1180px}
 .start h2{font-family:var(--f-display);font-weight:600;font-size:24px;margin:0 0 8px}
 .start ol{margin:0;padding-left:22px;display:grid;gap:4px}
 body.proj .facil{max-width:1180px}
+
+/* Herramientas */
+.tool-intro{color:var(--muted);margin:0}
+.tool-panel h3{margin-bottom:4px}
+.tool-sub{color:var(--muted);margin:0 0 16px;max-width:75ch}
+.cf{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 16px;margin-bottom:14px;max-width:900px}
+.cf label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500}
+.cf input,.cf select{font:inherit;font-weight:400;padding:9px 10px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);min-width:0}
+.cf input[type=range]{padding:0}
+.cf input:focus,.cf select:focus{outline:2px solid var(--accent);outline-offset:1px}
+.row3{grid-template-columns:2fr 1fr auto;align-items:end}
+@media (max-width:560px){.row3{grid-template-columns:1fr}}
+.cr{border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:8px;padding:12px 16px;background:var(--bg);max-width:900px}
+.steps{margin:0;padding-left:22px;display:grid;gap:6px}
+.okmsg{margin:10px 0 0;padding:8px 12px;border-radius:6px;background:var(--ok-soft);color:var(--ink);border-left:4px solid var(--ok)}
+.warnmsg{margin:10px 0 0;padding:8px 12px;border-radius:6px;background:var(--bad-soft);color:var(--ink);border-left:4px solid var(--bad)}
+.cta{background:var(--accent);color:#fff;border:0;border-radius:6px;padding:10px 16px;cursor:pointer;font-size:15px;font-weight:500;margin-top:12px}
+.cta:hover{filter:brightness(1.08)}
+.simbox{border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:10px;max-width:760px;overflow-x:auto}
+.simbox svg{display:block;width:100%;height:auto;max-width:700px}
+.simbox .smt{font-family:var(--f-mono);font-size:13px;fill:var(--ink)}
+.simctl{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 10px}.simctl .cta{margin-top:0}
+.simmsg{margin:10px 0 0;max-width:760px}
+.ohmbox{display:flex;flex-wrap:wrap;gap:20px;align-items:center}
+.ohmout{font-size:18px;display:grid;gap:6px}
+.simverdict{border-radius:10px;padding:16px 18px;max-width:760px;border:2px solid var(--line)}
+.simverdict.ok{background:var(--ok-soft);border-color:var(--ok)}.simverdict.no{background:var(--bad-soft);border-color:var(--bad)}
+.big2{font-family:var(--f-display);font-size:30px;font-weight:700}
+.meds{display:grid;gap:8px;margin-bottom:12px;max-width:760px}.medr{margin:6px 0 0 14px;font-weight:500}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.extop{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin-bottom:14px}
+.extime{font-family:var(--f-mono);font-weight:500}.extime.low{color:var(--bad)}
+.qc{font-family:var(--f-mono);font-size:11px;color:var(--muted);font-weight:400;margin-left:6px}
+.exres{border-radius:10px;padding:16px 18px;margin-top:16px;border:2px solid var(--line)}
+.exres.pass{background:var(--ok-soft);border-color:var(--ok)}.exres.fail{background:var(--bad-soft);border-color:var(--bad)}
+.exopts{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 12px}.exopts select{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:6px}
+.gd-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}.gd-meta span{font-family:var(--f-mono);font-size:12px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:var(--bg)}
+.toolbtn{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:8px 14px;cursor:pointer;font-size:14px;font-weight:500;color:var(--ink)}
+.toolbtn:hover{border-color:var(--accent);color:var(--accent)}
+#tools{display:flex;flex-direction:column;gap:16px}
 @media (prefers-reduced-motion: reduce){.bar span{transition:none}}
 </style>
 
@@ -298,7 +338,7 @@ body.proj .facil{max-width:1180px}
       <h1><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13.5 2L4.5 13.5h6l-1.5 8.5 9.5-12h-6.2z" fill="#0c2135"/></svg></span><span>Pizarra Instalador Clase D</span></h1>
       <p class="sub">10 clases en 2 semanas. Toca cualquier tema para abrir su materia completa, con ejemplos, normativa, taller y autoevaluación.</p>
       <div class="specs"><span>220 V · 50 Hz</span><span>Baja tensión</span><span>Hasta 10 kW</span><span>Pliegos RIC</span></div>
-      <div class="hero-acts"><button class="glosbtn" id="glosbtn" type="button">Abrir glosario</button><span class="kbd-hint">¿Una palabra que no entiendes? Búscala aquí.</span></div>
+      <div class="hero-acts"><button class="toolbtn" id="tb-calc" type="button">Calculadoras</button><button class="toolbtn" id="tb-sim" type="button">Simuladores</button><button class="toolbtn" id="tb-exam" type="button">Examen de práctica</button><button class="glosbtn" id="glosbtn" type="button">Abrir glosario</button><span class="kbd-hint">¿Una palabra que no entiendes? Búscala aquí.</span></div>
     </div>
     <div class="progress" aria-live="polite">
       <div class="row"><span class="eyebrow">Avance</span><span class="big" id="count">0/10</span></div>
@@ -329,6 +369,8 @@ body.proj .facil{max-width:1180px}
   </main>
 
   <main id="lesson" hidden></main>
+
+  <main id="tools" hidden></main>
 </div>
 
 <script>
@@ -2084,6 +2126,221 @@ quiz:[
 {q:"Licencia por competencias laborales se renueva cada:",o:["2 años","5 años","Es indefinida"],a:1,e:"Las licencias obtenidas por competencias laborales se renuevan cada cinco años."}]}
 ];
 
+/* ---------- Herramientas de electricidad ---------- */
+const OBJ={
+1:"Explicar qué es la electricidad y reconocer la tensión, la corriente y la resistencia, con sus unidades y cómo se miden.",
+2:"Aplicar la Ley de Ohm y la Ley de Watt en cálculos simples, estimar consumos en kWh y aplicar las 5 reglas de oro para trabajar sin tensión.",
+3:"Distinguir circuitos en serie y en paralelo, identificar cortocircuito y sobrecarga, y usar el multímetro de forma segura.",
+4:"Reconocer la normativa RIC y la función de cada componente del tablero: interruptor general, automáticos y diferenciales.",
+5:"Seleccionar conductores según sección y código de colores, y explicar la función de la canalización y la puesta a tierra.",
+6:"Conectar circuitos de alumbrado (9/12, 9/15, 9/24) y enchufes, y aplicar las exigencias de circuitos mínimos y zonas húmedas.",
+7:"Interpretar y elaborar un proyecto domiciliario: planta, simbología, diagrama unilineal y cuadro de cargas.",
+8:"Dimensionar circuitos calculando corriente, protección, conductor y caída de tensión, y explicar la declaración TE1.",
+9:"Planificar el armado de un tablero, aplicar las pruebas previas a la puesta en servicio y diagnosticar fallas comunes.",
+10:"Demostrar el dominio de los contenidos en un simulacro teórico y práctico similar a la evaluación de competencias."};
+const SECC=[1.5,2.5,4,6,10],CAP={1.5:14,2.5:18,4:24,6:31};
+const CALCS=[
+{id:"corriente",t:"Corriente, automático y cable",d:"Para un circuito monofásico de 220 V. Usa la potencia de placa o la de cálculo (100 W por centro de luz, 250 W por enchufe).",
+html:`<div class="cf"><label>Potencia total del circuito (W)<input id="cp" type="number" min="0" value="2000"></label>
+<label>Tipo de circuito<select id="ct"><option value="1.5">Alumbrado</option><option value="2.5" selected>Enchufes</option><option value="2.5f">Equipo específico (horno, termo)</option></select></label></div><div class="cr" id="cr"></div>`,
+init(){const f=()=>{const P=num("#cp".slice(1)),min=parseFloat($("ct").value);if(!(P>0)){$("cr").innerHTML="<p>Ingresa una potencia mayor que cero.</p>";return}
+const I=P/220,Id=I*1.1,au=[6,10,16,20,25].find(a=>a>=Id);let s=null;if(au)s=[1.5,2.5,4,6].find(x=>x>=min&&CAP[x]>=au);
+$("cr").innerHTML=`<ol class="steps"><li>Corriente: I = P / V = ${fmt(P,0)} / 220 = <b>${fmt(I)} A</b></li><li>Más 10% (RIC N°10): ${fmt(I)} × 1,1 = <b>${fmt(Id)} A</b></li>
+<li>Automático (el inmediato superior): ${au?`<b>${au} A</b> curva C`:"<b>supera 25 A</b>: requiere un análisis con las tablas del RIC"}</li>
+<li>Conductor (capacidad ≥ automático y sección mínima del uso): ${s?`<b>${String(s).replace(".",",")} mm²</b> (admite ${CAP[s]} A en ducto embutido)`:"consulta las tablas del RIC N°04"}</li></ol>
+${au&&s?`<p class="okmsg">Resultado: automático ${au} A y cable ${String(s).replace(".",",")} mm². Verifica también la caída de tensión.</p>`:""}
+${P>3520*0.9&&$("ct").value!=="2.5f"?`<p class="warnmsg">Ojo: sobre el 90% de un circuito de 16 A. Considera dividir en dos circuitos.</p>`:""}`};
+["cp","ct"].forEach(i=>$(i).oninput=f);f()}},
+{id:"caida",t:"Caída de tensión",d:"Fórmula monofásica ΔV = 2 × ρ × L × I / S, con cobre (ρ = 0,018). Límites del RIC N°03: 3% en alimentadores y 5% total.",
+html:`<div class="cf"><label>Largo del tramo, en un sentido (m)<input id="dl" type="number" min="0" value="25"></label><label>Corriente (A)<input id="di" type="number" min="0" value="12"></label>
+<label>Sección (mm²)<select id="ds">${SECC.map(s=>`<option value="${s}" ${s===2.5?"selected":""}>${String(s).replace(".",",")} mm²</option>`).join("")}</select></label>
+<label>Tipo de tramo<select id="dt"><option value="c">Circuito</option><option value="a">Alimentador (límite 3%)</option></select></label></div><div class="cr" id="dr"></div>`,
+init(){const f=()=>{const L=num("dl"),I=num("di"),S=parseFloat($("ds").value),al=$("dt").value==="a";if(!(L>0&&I>0)){$("dr").innerHTML="<p>Ingresa largo y corriente.</p>";return}
+const dv=2*0.018*L*I/S,pc=dv/220*100,lim=al?3:5;const smin=2*0.018*L*I/(lim/100*220),sug=SECC.find(x=>x>=smin);
+$("dr").innerHTML=`<ol class="steps"><li>ΔV = 2 × 0,018 × ${fmt(L)} × ${fmt(I)} / ${String(S).replace(".",",")} = <b>${fmt(dv)} V</b></li><li>En porcentaje: ${fmt(dv)} / 220 × 100 = <b>${fmt(pc)} %</b></li>
+<li>Tensión que llega: 220 − ${fmt(dv)} = <b>${fmt(220-dv,1)} V</b></li></ol>
+${pc<=lim?`<p class="okmsg">Cumple el límite de ${lim}%.${!al?" Recuerda sumar la caída del alimentador para el total.":""}</p>`:`<p class="warnmsg">No cumple el ${lim}%. Sección mínima: ${fmt(smin)} mm² → usa ${sug?String(sug).replace(".",",")+" mm²":"más de 10 mm²"}.</p>`}`};
+["dl","di","ds","dt"].forEach(i=>$(i).oninput=f);f()}},
+{id:"ohm",t:"Ley de Ohm y potencia",d:"Escribe dos valores cualquiera (tensión, corriente o resistencia) y deja el tercero vacío.",
+html:`<div class="cf"><label>Tensión V (volt)<input id="ov" type="number" value="220"></label><label>Corriente I (ampere)<input id="oi" type="number" value=""></label><label>Resistencia R (ohm)<input id="or" type="number" value="22"></label></div><div class="cr" id="orr"></div>`,
+init(){const f=()=>{const V=num("ov"),I=num("oi"),R=num("or"),n=[V,I,R].filter(Number.isFinite).length;let h="";
+if(n<2){h="<p>Faltan datos: escribe dos de los tres valores.</p>"}else if(n===3){h="<p>Deja uno de los tres valores vacío para calcularlo.</p>"}
+else if(!Number.isFinite(I)){const i=V/R;h=`<ol class="steps"><li>I = V / R = ${fmt(V)} / ${fmt(R)} = <b>${fmt(i,3)} A</b></li><li>P = V × I = <b>${fmt(V*i)} W</b></li></ol>`}
+else if(!Number.isFinite(R)){const r=V/I;h=`<ol class="steps"><li>R = V / I = ${fmt(V)} / ${fmt(I)} = <b>${fmt(r)} Ω</b></li><li>P = V × I = <b>${fmt(V*I)} W</b></li></ol>`}
+else{const v=I*R;h=`<ol class="steps"><li>V = I × R = ${fmt(I)} × ${fmt(R)} = <b>${fmt(v)} V</b></li><li>P = V × I = <b>${fmt(v*I)} W</b></li></ol>`}
+$("orr").innerHTML=h};["ov","oi","or"].forEach(i=>$(i).oninput=f);f()}},
+{id:"recinto",t:"Enchufes y luces por recinto",d:"Mínimos del RIC N°10, punto 5.2.2.",
+html:`<div class="cf"><label>Largo (m)<input id="rl" type="number" min="0" value="4" step="0.1"></label><label>Ancho (m)<input id="ra" type="number" min="0" value="3" step="0.1"></label>
+<label>Recinto<select id="rt"><option value="g">Dormitorio, living, comedor</option><option value="c">Cocina</option><option value="l">Lavadero</option></select></label></div><div class="cr" id="rr"></div>`,
+init(){const f=()=>{const L=num("rl"),A=num("ra"),t=$("rt").value;if(!(L>0&&A>0)){$("rr").innerHTML="<p>Ingresa las medidas.</p>";return}
+const area=L*A,per=2*(L+A),luz=area<=10?1:2;let en,why;if(t==="g"){en=Math.ceil(per/8);why=`perímetro ${fmt(per,1)} m ÷ 8 = ${fmt(per/8)} → se aproxima hacia arriba`}else if(t==="c"){en=3;why="la cocina exige al menos 3 dobles o triples de 10/16 A"}else{en=1;why="el lavadero exige al menos 1 doble o triple de 10/16 A"}
+$("rr").innerHTML=`<ol class="steps"><li>Superficie: ${fmt(L,1)} × ${fmt(A,1)} = <b>${fmt(area,1)} m²</b> → centros de luz mínimos: <b>${luz}</b> (${area<=10?"hasta 10 m²":"más de 10 m²"})</li><li>Enchufes dobles o triples mínimos: <b>${en}</b> (${why})</li></ol>`};
+["rl","ra","rt"].forEach(i=>$(i).oninput=f);f()}},
+{id:"demanda",t:"Demanda máxima de la vivienda",d:"Factores de demanda del RIC N°03 para casa habitación (alumbrado): primeros 3.000 W al 100% y el resto al 35%.",
+html:`<div class="cf"><label>Potencia instalada total (W)<input id="mp" type="number" min="0" value="6000"></label></div><div class="cr" id="mr"></div>`,
+init(){const f=()=>{const P=num("mp");if(!(P>0)){$("mr").innerHTML="<p>Ingresa la potencia instalada.</p>";return}
+const a=Math.min(P,3000),b=Math.max(0,P-3000)*0.35,D=a+b,I=D/220;
+$("mr").innerHTML=`<ol class="steps"><li>Primeros 3.000 W × 1 = <b>${fmt(a,0)} W</b></li><li>Resto ${fmt(Math.max(0,P-3000),0)} W × 0,35 = <b>${fmt(b,0)} W</b></li><li>Demanda máxima = <b>${fmt(D,0)} W</b> → I = ${fmt(D,0)} / 220 = <b>${fmt(I,1)} A</b></li></ol>
+${P>10000?`<p class="warnmsg">La potencia instalada supera 10 kW: no corresponde a un instalador clase D.</p>`:`<p class="okmsg">Dentro del límite de 10 kW de la clase D.</p>`}${I>25?`<p class="warnmsg">La demanda supera 25 A: revisa la capacidad del empalme y del alimentador.</p>`:""}`};$("mp").oninput=f;f()}}
+];
+const FALLAS=[
+{s:"El diferencial del alumbrado salta apenas lo subes, aunque no hay nada encendido.",m:[["Desconectar los circuitos de ese diferencial y subirlo","Ya no salta."],["Reconectar los circuitos uno por uno","Salta al reconectar el circuito C2."],["Medir aislación entre neutro y tierra de C2","0 MΩ: neutro y tierra están unidos."]],o:["Sobrecarga en C2","Neutro unido a tierra en algún punto de C2","Automático de C2 dañado"],a:1,e:"El diferencial ve desequilibrio porque parte de la corriente vuelve por la tierra. Hay que buscar en C2 la caja donde neutro y tierra se tocan."},
+{s:"El automático de enchufes de la cocina salta después de 20 minutos con el hervidor y la estufa encendidos.",m:[["Medir con pinza la corriente del circuito","19,5 A en un circuito de 16 A."],["Revisar si hay olor a quemado o daño","No hay daño visible."],["Probar con un solo equipo","No salta."]],o:["Cortocircuito","Sobrecarga del circuito","Fuga a tierra"],a:1,e:"La parte térmica actuó por sobrecarga: 19,5 A supera los 16 A. Se recomienda separar las cargas en otro circuito."},
+{s:"Un enchufe del dormitorio no tiene tensión; los demás del mismo circuito funcionan.",m:[["Medir tensión en el enchufe","0 V entre fase y neutro."],["Medir en el enchufe anterior del circuito","220 V."],["Revisar con el circuito desenergizado la caja del enchufe anterior","El conductor de fase que sigue al siguiente enchufe está suelto."]],o:["Automático dañado","Conexión suelta en el enchufe anterior","Falla de la empresa eléctrica"],a:1,e:"Si el anterior tiene tensión y este no, el corte está entre ambos. Una conexión floja es la causa más común."},
+{s:"La luz de la escalera solo enciende desde abajo y en una sola posición del interruptor de arriba.",m:[["Revisar el conmutador de abajo","Fase en el común: correcto."],["Revisar el conmutador de arriba","Un viajero está conectado en el borne común."],["Medir continuidad de los viajeros","Ambos tienen continuidad."]],o:["Ampolleta dañada","Viajero conectado en el común del conmutador de arriba","Falta de neutro"],a:1,e:"Con un viajero en el común, el circuito solo cierra en una combinación. Hay que conectar el retorno en el común y los viajeros en los otros bornes."},
+{s:"El diferencial salta cada vez que se usa la lavadora; con otros equipos no pasa nada.",m:[["Conectar la lavadora en otro enchufe y circuito","También salta ese diferencial."],["Medir aislación de la lavadora (desenchufada)","Valor muy bajo entre fase y carcasa."],["Probar otro equipo en el enchufe original","Funciona normal."]],o:["Instalación con falla","Fuga a tierra en la lavadora","Diferencial muy sensible"],a:1,e:"La falla sigue a la lavadora. Tiene una fuga, probablemente en su resistencia. Debe repararla un técnico; el diferencial está haciendo su trabajo."}
+];
+const SIMS=[
+{id:"escalera",t:"Circuito de escalera",d:"Haz clic en cada conmutador para cambiar su posición. La luz enciende cuando ambos eligen el mismo viajero.",
+html:`<div class="simbox"><svg id="esvg" viewBox="0 0 640 260" role="img" aria-label="Simulador de circuito de escalera"></svg></div><div class="simctl"><button class="cta" id="eA">Conmutador A (abajo)</button><button class="cta" id="eB">Conmutador B (arriba)</button></div><p class="simmsg" id="emsg"></p>`,
+init(){let A=0,B=0;const draw=()=>{const on=A===B;const y=[80,150];const ph="var(--c-ro)",off="var(--line)";
+const pa=`M140 115L210 ${y[A]}`,pb=`M430 ${y[B]}L500 115`;
+$("esvg").innerHTML=`<text x="20" y="120" class="smt">FASE</text><path d="M60 115H140" stroke="${ph}" stroke-width="4" fill="none"/>
+<circle cx="140" cy="115" r="6" fill="var(--ink)"/><path d="${pa}" stroke="var(--ink)" stroke-width="5"/><circle cx="210" cy="80" r="5" fill="var(--ink)"/><circle cx="210" cy="150" r="5" fill="var(--ink)"/>
+<path d="M210 80H430" stroke="${on&&A===0?ph:off}" stroke-width="4" fill="none"/><path d="M210 150H430" stroke="${on&&A===1?ph:off}" stroke-width="4" fill="none"/>
+<text x="280" y="70" class="smt">viajero 1</text><text x="280" y="172" class="smt">viajero 2</text>
+<circle cx="430" cy="80" r="5" fill="var(--ink)"/><circle cx="430" cy="150" r="5" fill="var(--ink)"/><path d="${pb}" stroke="var(--ink)" stroke-width="5"/><circle cx="500" cy="115" r="6" fill="var(--ink)"/>
+<path d="M500 115H570V170" stroke="${on?ph:off}" stroke-width="4" fill="none"/>
+<circle cx="570" cy="195" r="24" fill="${on?"#ffd84d":"var(--paper)"}" stroke="var(--ink)" stroke-width="2" ${on?'style="filter:drop-shadow(0 0 14px #ffc53d)"':""}/>
+<path d="M553 178L587 212M587 178L553 212" stroke="var(--ink)" stroke-width="2"/>
+<text x="150" y="230" class="smt">A (abajo)</text><text x="420" y="230" class="smt">B (arriba)</text>`;
+$("emsg").innerHTML=on?"<b>Luz encendida.</b> Ambos conmutadores están en el mismo viajero: el circuito se cierra.":"<b>Luz apagada.</b> Los conmutadores están en viajeros distintos: el circuito queda abierto."};
+$("eA").onclick=()=>{A=1-A;draw()};$("eB").onclick=()=>{B=1-B;draw()};draw()}},
+{id:"ohmsim",t:"Ley de Ohm en vivo",d:"Mueve los controles y observa cómo cambian la corriente, la potencia y el brillo de la ampolleta.",
+html:`<div class="cf"><label>Tensión: <b id="svv">220</b> V<input id="sv" type="range" min="0" max="240" value="220"></label><label>Resistencia: <b id="srv">484</b> Ω<input id="sr" type="range" min="20" max="1000" value="484"></label></div>
+<div class="simbox ohmbox"><svg viewBox="0 0 200 200" width="180" height="180" aria-hidden="true"><circle id="sbulb" cx="100" cy="90" r="55" stroke="var(--ink)" stroke-width="3"/><rect x="80" y="145" width="40" height="30" rx="4" fill="var(--line)" stroke="var(--ink)"/></svg>
+<div class="ohmout"><div>Corriente: <b id="si">–</b></div><div>Potencia: <b id="sp">–</b></div><p class="simmsg" id="smsg"></p></div></div>`,
+init(){const f=()=>{const V=+$("sv").value,R=+$("sr").value,I=V/R,P=V*I;$("svv").textContent=V;$("srv").textContent=R;$("si").textContent=fmt(I,3)+" A";$("sp").textContent=fmt(P,0)+" W";
+const g=Math.min(1,P/150);$("sbulb").setAttribute("fill",`rgba(255,200,40,${0.08+g*0.9})`);$("sbulb").style.filter=g>0.2?`drop-shadow(0 0 ${Math.round(g*22)}px #ffc53d)`:"none";
+$("smsg").textContent=R<60?"Resistencia muy baja: la corriente sube mucho. Si fuera cero, sería un cortocircuito.":V===0?"Sin tensión no hay corriente.":"Más tensión o menos resistencia = más corriente."};["sv","sr"].forEach(i=>$(i).oninput=f);f()}},
+{id:"falla",t:"Encuentra la falla",d:"Lee el síntoma, haz las mediciones en orden y elige la causa. Practica el método de diagnóstico.",
+html:`<div id="fbox"></div>`,
+init(){let k=Math.floor(Math.random()*FALLAS.length);const show=()=>{const F=FALLAS[k];
+$("fbox").innerHTML=`<div class="ex ex-r"><h4>Caso ${k+1} de ${FALLAS.length}</h4><p>${esc(F.s)}</p></div><h4>Mediciones</h4><div class="meds">${F.m.map((m,i)=>`<div class="med"><button class="opt" data-m="${i}">${esc(m[0])}</button><div class="medr" hidden>→ ${esc(m[1])}</div></div>`).join("")}</div>
+<h4>¿Cuál es la causa?</h4><div class="opts">${F.o.map((o,i)=>`<button class="opt" data-c="${i}">${esc(o)}</button>`).join("")}</div><div class="exp" id="fexp" hidden></div><button class="cta" id="fnext">Otro caso</button>`;
+document.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{b.nextElementSibling.hidden=false;b.classList.add("sel")});
+document.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{const i=+b.dataset.c;document.querySelectorAll("[data-c]").forEach(x=>{const j=+x.dataset.c;x.classList.toggle("right",j===F.a);x.classList.toggle("wrong",j===i&&i!==F.a)});$("fexp").hidden=false;$("fexp").innerHTML=(i===F.a?"<b>Correcto.</b> ":"<b>No es la causa.</b> ")+esc(F.e)});
+$("fnext").onclick=()=>{k=(k+1)%FALLAS.length;show()}};show()}}
+];
+const EXTRA_Q=[
+[1,"¿Qué material se usa como conductor en los cables de una casa?",["PVC","Cobre","Goma"],1,"El cobre conduce; el PVC y la goma aíslan."],
+[1,"La tensión entre fase y neutro en una vivienda chilena es:",["110 V","220 V","380 V"],1,"220 V monofásico, 50 Hz."],
+[1,"¿Con qué instrumento se mide la corriente sin cortar el circuito?",["Voltímetro","Pinza amperimétrica","Óhmetro"],1,"La pinza abraza un conductor."],
+[1,"Entre neutro y tierra de un enchufe sano se mide cerca de:",["0 V","110 V","220 V"],0,"El neutro está unido a tierra en el origen."],
+[2,"Un equipo de 1100 W a 220 V consume:",["2 A","5 A","11 A"],1,"I = 1100 / 220 = 5 A."],
+[2,"Una estufa de 2000 W encendida 3 horas consume:",["0,6 kWh","6 kWh","600 kWh"],1,"2 kW × 3 h = 6 kWh."],
+[2,"¿Qué protege a las personas de una fuga a tierra?",["El automático","El diferencial","El medidor"],1,"El diferencial de 30 mA."],
+[2,"¿Qué se hace inmediatamente después de cortar la energía?",["Trabajar","Bloquear y señalizar","Poner a tierra"],1,"Regla 2: bloquear y señalizar el corte."],
+[3,"En un circuito en serie, si una carga se corta:",["Las demás siguen","Se apagan todas"],1,"Hay un solo camino."],
+[3,"Dos resistencias de 100 Ω en paralelo equivalen a:",["50 Ω","100 Ω","200 Ω"],0,"Dos iguales en paralelo: R/2."],
+[3,"¿En qué borne va siempre la punta negra del multímetro?",["10 A","COM","VΩ"],1,"COM."],
+[3,"Una sobrecarga hace actuar la parte:",["Magnética","Térmica"],1,"La térmica, de forma lenta."],
+[4,"¿Qué organismo fiscaliza las instalaciones eléctricas en Chile?",["SERVIU","SEC","SISS"],1,"La Superintendencia de Electricidad y Combustibles."],
+[4,"¿A qué altura deben quedar los dispositivos de accionamiento del tablero?",["Entre 0,45 y 2,0 m","Bajo 0,3 m","Sobre 2,5 m"],0,"RIC N°02, 6.1.22."],
+[4,"¿Qué porcentaje de reserva se deja en tableros nuevos?",["10%","25%","50%"],1,"RIC N°02, 6.1.16.3."],
+[4,"Un diferencial tipo A se recomienda para:",["Cargas con electrónica","Solo ampolletas incandescentes"],0,"Detecta también fugas de continua pulsante."],
+[5,"Capacidad de un conductor de 2,5 mm² en ducto embutido (70 °C):",["14 A","18 A","24 A"],1,"RIC N°04, tabla 4.4."],
+[5,"Color de la fase en una vivienda monofásica:",["Blanco","Azul","Verde"],1,"Fase 1 azul."],
+[5,"¿Puede un ducto llevar dos circuitos distintos?",["Sí","No"],1,"RIC N°04, 5.27."],
+[5,"Las uniones de conductores se hacen:",["Dentro del tubo","Dentro de cajas"],1,"Para que sean accesibles."],
+[5,"¿Qué instrumento mide la resistencia de la puesta a tierra?",["Telurómetro","Megóhmetro"],0,"El telurómetro."],
+[6,"¿Qué cable corta el interruptor?",["Neutro","Fase","Tierra"],1,"La fase."],
+[6,"Un recinto de 12 m² necesita como mínimo:",["1 centro de luz","2 centros de luz"],1,"Más de 10 m²: dos centros."],
+[6,"Una vivienda de 25 m² necesita como mínimo:",["2 circuitos","3 circuitos"],0,"Menos de 30 m²: 2 circuitos."],
+[6,"¿Cuál es la potencia de cálculo de un enchufe si no se conoce la carga?",["100 W","250 W","1000 W"],1,"RIC N°10, 5.1.4.6."],
+[6,"El conductor que va del interruptor a la luz se llama:",["Viajero","Retorno","Neutro"],1,"Retorno: una fase interrumpida."],
+[7,"¿Qué escala se usa habitualmente en plantas domiciliarias?",["1:10","1:50","1:1000"],1,"1:50."],
+[7,"El símbolo de un círculo con una X representa:",["Un enchufe","Un centro de luz","Un tablero"],1,"Centro de iluminación."],
+[7,"Los factores de demanda se aplican a:",["Los circuitos","El alimentador"],1,"RIC N°03, solo al alimentador."],
+[7,"Potencia instalada 4000 W. Demanda máxima:",["4000 W","3350 W","1400 W"],1,"3000 + 1000 × 0,35 = 3350 W."],
+[8,"Corriente de un horno de 3300 W:",["10 A","15 A","33 A"],1,"3300 / 220 = 15 A."],
+[8,"Si la corriente de diseño es 17 A, el automático es:",["16 A","20 A","25 A"],1,"El inmediato superior."],
+[8,"Para un automático de 20 A, el conductor mínimo en ducto embutido es:",["2,5 mm²","4 mm²"],1,"4 mm² admite 24 A."],
+[8,"En la fórmula de caída de tensión monofásica, el 2 representa:",["La ida y vuelta del conductor","Dos fases"],0,"Fase y neutro."],
+[9,"¿Cómo se conecta un cable flexible al borne?",["Doblado en gancho","Con terminal","Estañado"],1,"Con terminal apretado."],
+[9,"Valor mínimo de aislación en circuitos de vivienda:",["0,5 MΩ","5 Ω","50 kΩ"],0,"RIC N°19, tabla 19.1."],
+[9,"Si un ensayo falla, se:",["Ignora","Corrige y se repite con los anteriores afectados"],1,"RIC N°19, 7.1.6."],
+[10,"La licencia por competencias laborales se renueva cada:",["2 años","5 años"],1,"Cinco años."],
+[10,"En la evaluación práctica, ¿qué se observa primero?",["La velocidad","La seguridad"],1,"EPP y reglas de oro."],
+[10,"¿Qué organismo acredita a los centros que evalúan competencias?",["ChileValora","SENCE","MINEDUC"],0,"ChileValora."]
+];
+
+/* ---------- Herramientas: calculadoras, simuladores, examen ---------- */
+const fmt=(x,d=2)=>Number.isFinite(x)?x.toLocaleString("es-CL",{maximumFractionDigits:d,minimumFractionDigits:0}):"–";
+const num=id=>{const v=parseFloat(String(($(id)||{}).value||"").replace(",","."));return Number.isFinite(v)?v:NaN};
+const TOOLS={calc:{t:"Calculadoras",sub:"Ingresa tus datos y obtén el resultado con el paso a paso."},sim:{t:"Simuladores",sub:"Prueba, equivócate y observa qué pasa, sin riesgo."},exam:{t:"Examen de práctica",sub:"Preguntas al azar con tiempo, como el día de la evaluación."}};
+function openTool(name,sub){
+  cur=null;$("board").hidden=true;$("hdr").hidden=true;$("lesson").hidden=true;$("tools").hidden=false;
+  const T=TOOLS[name];
+  let body="";
+  if(name==="calc"||name==="sim"){
+    const L=name==="calc"?CALCS:SIMS;const i=Math.max(0,L.findIndex(x=>x.id===sub));
+    body=`<div class="tabs" role="tablist">${L.map((x,j)=>`<button class="tab" role="tab" aria-selected="${j===i}" data-tool="${name}" data-sub="${x.id}"><span class="k">${name==="calc"?"Calculadora":"Simulador"} ${j+1}</span>${esc(x.t)}</button>`).join("")}</div>
+      <section class="panel tool-panel" id="toolpanel"><h3>${esc(L[i].t)}</h3><p class="tool-sub">${esc(L[i].d)}</p>${L[i].html}</section>`;
+    $("tools").innerHTML=toolHead(T)+body;
+    document.querySelectorAll("[data-tool]").forEach(b=>b.onclick=()=>openTool(b.dataset.tool,b.dataset.sub));
+    L[i].init&&L[i].init();
+  } else if(name==="exam"){
+    $("tools").innerHTML=toolHead(T)+`<section class="panel tool-panel" id="toolpanel">${examStartHTML()}</section>`;
+    $("exgo").onclick=startExam;
+  }
+  $("tback").onclick=closeTool;window.scrollTo(0,0);
+}
+function toolHead(T){return `<button class="back" id="tback">‹ Volver a la pizarra</button><div class="lhead"><div><div class="eyebrow">Herramientas</div><h2>${esc(T.t)}</h2></div><div class="lacts"><button class="glosbtn" type="button" onclick="openGlos()">Glosario</button></div></div><p class="tool-intro">${esc(T.sub)}</p>`}
+function closeTool(){stopExamTimer();$("tools").hidden=true;$("board").hidden=false;$("hdr").hidden=false;renderBoard()}
+/* Examen */
+let EX=null,exTimer=null;
+function examBank(){const b=[];clases.forEach(c=>c.quiz.forEach(q=>b.push({c:c.n,q:q.q,o:q.o,a:q.a,e:q.e})));(EXTRA_Q||[]).forEach(([c,q,o,a,e])=>b.push({c,q,o,a,e}));return b}
+function examStartHTML(){const n=examBank().length;return `<h3>Examen tipo certificación</h3>
+  <p>El banco tiene <b>${n} preguntas</b> de las 10 clases. Cada intento saca preguntas al azar, así que puedes repetirlo muchas veces.</p>
+  <div class="exopts"><label for="exn">Cantidad de preguntas</label><select id="exn"><option value="20">20 preguntas · 30 min</option><option value="30" selected>30 preguntas · 45 min</option><option value="45">45 preguntas · 65 min</option></select></div>
+  <ul><li>Responde todas y presiona <b>Entregar</b>. Si se acaba el tiempo, se entrega solo.</li><li>Al final verás tu nota, las respuestas correctas y qué clases repasar.</li><li>Meta: <b>70% o más</b>.</li></ul>
+  <button class="cta" id="exgo">Comenzar examen</button>`}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function startExam(){
+  const n=+$("exn").value;const qs=shuffle(examBank()).slice(0,n).map(q=>{const idx=shuffle(q.o.map((_,i)=>i));return {...q,ord:idx}});
+  EX={qs,ans:new Array(qs.length).fill(-1),end:Date.now()+n*90*1000,done:false};
+  $("toolpanel").innerHTML=`<div class="extop"><div><b id="excount">0</b> de ${qs.length} respondidas</div><div class="extime" id="extime"></div></div>`+
+   qs.map((q,i)=>`<div class="q" data-x="${i}"><p class="qt">${i+1}. ${esc(q.q)} <span class="qc">Clase ${q.c}</span></p><div class="opts">${q.ord.map(oi=>`<button class="opt" data-o="${oi}">${esc(q.o[oi])}</button>`).join("")}</div><div class="exp" hidden></div></div>`).join("")+
+   `<button class="cta" id="exsend">Entregar examen</button><div id="exres"></div>`;
+  document.querySelectorAll(".q[data-x]").forEach(d=>d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(EX.done)return;const i=+d.dataset.x;EX.ans[i]=+b.dataset.o;d.querySelectorAll(".opt").forEach(x=>x.classList.toggle("sel",x===b));$("excount").textContent=EX.ans.filter(a=>a>=0).length}));
+  $("exsend").onclick=()=>{const left=EX.ans.filter(a=>a<0).length;if(left&&!$("exsend").dataset.ok){$("exsend").dataset.ok=1;$("exsend").textContent=`Te faltan ${left}. Presiona de nuevo para entregar igual`;return}finishExam()};
+  tickExam();exTimer=setInterval(tickExam,1000);
+}
+function stopExamTimer(){if(exTimer){clearInterval(exTimer);exTimer=null}}
+function tickExam(){if(!EX||EX.done)return;const s=Math.max(0,Math.round((EX.end-Date.now())/1000));const el=$("extime");if(!el){stopExamTimer();return}el.textContent=`Tiempo restante ${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`;el.classList.toggle("low",s<300);if(s<=0)finishExam()}
+function finishExam(){
+  if(!EX||EX.done)return;EX.done=true;stopExamTimer();
+  let ok=0;const byC={};
+  EX.qs.forEach((q,i)=>{const r=EX.ans[i]===q.a;if(r)ok++;byC[q.c]=byC[q.c]||{t:0,ok:0};byC[q.c].t++;if(r)byC[q.c].ok++;
+    const d=document.querySelector(`.q[data-x="${i}"]`);d.querySelectorAll(".opt").forEach(b=>{const o=+b.dataset.o;if(o===q.a)b.classList.add("right");else if(o===EX.ans[i])b.classList.add("wrong")});
+    const e=d.querySelector(".exp");e.hidden=false;e.innerHTML=(r?"<b>Correcta.</b> ":EX.ans[i]<0?"<b>Sin responder.</b> ":"<b>Incorrecta.</b> ")+esc(q.e)});
+  const pct=Math.round(ok/EX.qs.length*100);const nota=Math.max(1,Math.min(7,pct>=60?4+(pct-60)/40*3:1+pct/60*3)).toFixed(1);
+  const weak=Object.entries(byC).filter(([c,v])=>v.ok/v.t<0.7).map(([c])=>+c).sort((a,b)=>a-b);
+  $("exsend").hidden=true;
+  $("exres").innerHTML=`<div class="exres ${pct>=70?"pass":"fail"}"><div class="score">Resultado: ${ok} de ${EX.qs.length} (${pct}%) · nota ${nota.replace(".",",")}</div>
+   <p>${pct>=70?"¡Aprobado! Estás en el nivel esperado para la evaluación.":"Aún no llegas al 70%. Repasa las clases indicadas y vuelve a intentarlo."}</p>
+   ${weak.length?`<p><b>Clases para repasar:</b> ${weak.map(c=>`<button class="chip act" data-open="${c}" data-tab="0">Clase ${c}: ${esc(clases.find(x=>x.n===c).t)}</button>`).join(" ")}</p>`:"<p>No hay clases bajo 70%.</p>"}
+   <p class="norm">Nota referencial con exigencia de 60% para el 4,0.</p><button class="cta" id="exagain">Hacer otro intento</button></div>`;
+  $("exagain").onclick=()=>openTool("exam");$("exres").scrollIntoView({behavior:"smooth"});
+}
+/* Guía docente */
+function guiaHTML(c){
+  const k1=c.n+".1",kl=c.n+"."+c.pts.length,x1=EXP[k1]||{},xl=EXP[kl]||{};const per=Math.floor(45/c.pts.length);
+  return `<h3>Guía docente: clase ${c.n}</h3>
+  <div class="gd-meta"><span>Duración sugerida: 90 min (2 horas pedagógicas)</span><span>Modalidad: expositiva con práctica</span></div>
+  <h4>Objetivo de aprendizaje</h4><p>${esc((OBJ||{})[c.n]||"")}</p>
+  <h4>Inicio · 15 min</h4><ol><li><b>Pregunta detonante:</b> "${esc(x1.q||"")}" Deja que respondan sin corregir todavía.</li>
+  <li><b>Activa con una analogía:</b> ${esc(x1.a||"")}</li><li>Presenta el objetivo y la ruta de la clase (${c.pts.length} temas).</li></ol>
+  <h4>Desarrollo · 60 min</h4><ol>${c.pts.map((p,i)=>{const x=EXP[c.n+"."+(i+1)]||{};return `<li><b>${esc(p.t)}</b> (≈ ${per} min). Proyecta el esquema y el recuadro "Explicado fácil". ${x.e&&x.e[0]?`Advierte el error frecuente: ${esc(x.e[0])}`:""}</li>`}).join("")}
+  <li><b>Actividad práctica</b> (≈ 15 min): pestaña "Práctica" de esta clase, en parejas.</li></ol>
+  <h4>Cierre · 15 min</h4><ol><li><b>Autoevaluación</b> de la clase (pestaña "Autoevaluación"), proyectada o individual.</li>
+  <li><b>Ticket de salida:</b> "${esc(xl.q||"")}" <span class="norm">Respuesta esperada: ${esc(xl.ans||"")}</span></li>
+  <li><b>Síntesis:</b> ${c.pts.map((p,i)=>esc(((EXP[c.n+"."+(i+1)]||{}).r||[""])[0])).join(" ")}</li></ol>
+  <h4>Evaluación formativa</h4><ul><li>Logrado: 70% o más en la autoevaluación y ticket de salida correcto.</li><li>En desarrollo: menos de 70%; asignar repaso del recuadro "Explicado fácil" y la sección "Profundiza".</li></ul>
+  <h4>Recursos</h4><ul><li>Modo proyector y flechas del teclado para avanzar.</li><li>Glosario para palabras nuevas.</li><li>Calculadoras y simuladores desde la portada.</li></ul>`;
+}
+
 /* ---------- Estado ---------- */
 const KEY="pizarra-sec-d-v1";
 let done=new Set();
@@ -2094,7 +2351,7 @@ const $=id=>document.getElementById(id);
 
 function tabsOf(c){return [...c.pts.map((p,i)=>{const fg=FIGS[c.n+"."+(i+1)];const k=c.n+"."+(i+1);return {key:"Tema "+(i+1),t:p.t,html:`<h3>${esc(p.t)}</h3>`+facilHTML(k)+(fg?`<figure class="ref">${fg.s}<figcaption>${fg.c}</figcaption></figure>`:"")+realHTML(k)+`<div class="prose">${p.h}</div>`+(MORE[k]?`<section class="more prose"><span class="eyebrow">Profundiza</span>${MORE[k]}</section>`:"")+expHTML(k)}}),
   {key:"Sin materiales",t:"Práctica",extra:true,html:`<div class="prose">${c.taller}</div>`},
-  {key:"Prueba",t:"Autoevaluación",extra:true,quiz:true}]}
+  {key:"Prueba",t:"Autoevaluación",extra:true,quiz:true},{key:"Docente",t:"Guía docente",extra:true,html:`<div class="prose">${guiaHTML(c)}</div>`}]}
 
 /* ---------- Pizarra ---------- */
 function renderBoard(){
@@ -2111,7 +2368,8 @@ function renderBoard(){
         <ul class="points">${c.pts.map((p,i)=>`<li><button class="pt" data-open="${c.n}" data-tab="${i}"><span class="k">${c.n}.${i+1}</span><span class="t">${esc(p.t)}</span><span class="go" aria-hidden="true">›</span></button></li>`).join("")}</ul>
         <div class="foot"><span class="chip key">${esc(c.k)}</span>
           <button class="chip act" data-open="${c.n}" data-tab="${c.pts.length}">Práctica</button>
-          <button class="chip act" data-open="${c.n}" data-tab="${c.pts.length+1}">Autoevaluación</button></div>
+          <button class="chip act" data-open="${c.n}" data-tab="${c.pts.length+1}">Autoevaluación</button>
+          <button class="chip act" data-open="${c.n}" data-tab="${c.pts.length+2}">Guía docente</button></div>
       </div>`;
     el.querySelector("input").addEventListener("change",ev=>{ev.target.checked?done.add(c.n):done.delete(c.n);save();renderBoard()});
     $("w"+c.w).appendChild(el);
@@ -2125,8 +2383,8 @@ function renderBoard(){
 let cur=null,curTab=0;
 function openLesson(n,tab){
   const c=clases.find(x=>x.n===n);if(!c)return;
-  cur=c;curTab=Math.max(0,Math.min(tab||0,c.pts.length+1));
-  $("board").hidden=true;$("hdr").hidden=true;$("lesson").hidden=false;
+  cur=c;curTab=Math.max(0,Math.min(tab||0,c.pts.length+2));
+  stopExamTimer();$("tools").hidden=true;$("board").hidden=true;$("hdr").hidden=true;$("lesson").hidden=false;
   const tabs=tabsOf(c);
   $("lesson").innerHTML=`<button class="back" id="back">‹ Volver a la pizarra</button>
     <div class="lhead"><div><div class="eyebrow">Clase ${c.n} · ${esc(c.d)} · ${c.w===1?"Semana 1":"Semana 2"}</div><h2>${esc(c.t)}</h2></div>
@@ -2186,7 +2444,9 @@ document.addEventListener("click",e=>{
 try{if(localStorage.getItem(KEY+"-proj"))document.body.classList.add("proj")}catch(e){}
 document.addEventListener("keydown",e=>{if(!cur||e.target.closest("input,textarea,select"))return;const n=tabsOf(cur).length;if(e.key==="ArrowRight"&&curTab<n-1){showTab(curTab+1);e.preventDefault()}else if(e.key==="ArrowLeft"&&curTab>0){showTab(curTab-1);e.preventDefault()}else if(e.key==="Escape"&&document.body.classList.contains("proj")){document.body.classList.remove("proj");const b=$("projbtn");if(b)b.setAttribute("aria-pressed",false);try{localStorage.setItem(KEY+"-proj","")}catch(x){}}});
 try{$("glosbtn").onclick=openGlos}catch(e){}
+$("tb-calc").onclick=()=>openTool("calc");$("tb-sim").onclick=()=>openTool("sim");$("tb-exam").onclick=()=>openTool("exam");
 renderBoard();
+{const h=(location.hash||"").slice(1);if(["calc","sim","exam"].includes(h))setTimeout(()=>openTool(h),0)}
 const m=(location.hash||"").match(/^#c(\d+)(?:-(\d+))?$/);
 if(m)openLesson(+m[1],m[2]?+m[2]-1:0);
 </script>

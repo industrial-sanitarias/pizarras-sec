@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Pizarra de estudio para la licencia SEC de instalador de gas clase 3.">
+<meta name="description" content="Pizarra de estudio para instalador de gas SEC clase 3.">
 <meta name="color-scheme" content="light">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>SEC - GAS CLASE 3</title>
@@ -281,6 +281,46 @@ body.proj .more{max-width:1180px}
 .start h2{font-family:var(--f-display);font-weight:600;font-size:24px;margin:0 0 8px}
 .start ol{margin:0;padding-left:22px;display:grid;gap:4px}
 body.proj .facil{max-width:1180px}
+
+/* Herramientas */
+.tool-intro{color:var(--muted);margin:0}
+.tool-panel h3{margin-bottom:4px}
+.tool-sub{color:var(--muted);margin:0 0 16px;max-width:75ch}
+.cf{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 16px;margin-bottom:14px;max-width:900px}
+.cf label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500}
+.cf input,.cf select{font:inherit;font-weight:400;padding:9px 10px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);min-width:0}
+.cf input[type=range]{padding:0}
+.cf input:focus,.cf select:focus{outline:2px solid var(--accent);outline-offset:1px}
+.row3{grid-template-columns:2fr 1fr auto;align-items:end}
+@media (max-width:560px){.row3{grid-template-columns:1fr}}
+.cr{border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:8px;padding:12px 16px;background:var(--bg);max-width:900px}
+.steps{margin:0;padding-left:22px;display:grid;gap:6px}
+.okmsg{margin:10px 0 0;padding:8px 12px;border-radius:6px;background:var(--ok-soft);color:var(--ink);border-left:4px solid var(--ok)}
+.warnmsg{margin:10px 0 0;padding:8px 12px;border-radius:6px;background:var(--bad-soft);color:var(--ink);border-left:4px solid var(--bad)}
+.cta{background:var(--accent);color:#fff;border:0;border-radius:6px;padding:10px 16px;cursor:pointer;font-size:15px;font-weight:500;margin-top:12px}
+.cta:hover{filter:brightness(1.08)}
+.simbox{border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:10px;max-width:760px;overflow-x:auto}
+.simbox svg{display:block;width:100%;height:auto;max-width:700px}
+.simbox .smt{font-family:var(--f-mono);font-size:13px;fill:var(--ink)}
+.simctl{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 10px}.simctl .cta{margin-top:0}
+.simmsg{margin:10px 0 0;max-width:760px}
+.ohmbox{display:flex;flex-wrap:wrap;gap:20px;align-items:center}
+.ohmout{font-size:18px;display:grid;gap:6px}
+.simverdict{border-radius:10px;padding:16px 18px;max-width:760px;border:2px solid var(--line)}
+.simverdict.ok{background:var(--ok-soft);border-color:var(--ok)}.simverdict.no{background:var(--bad-soft);border-color:var(--bad)}
+.big2{font-family:var(--f-display);font-size:30px;font-weight:700}
+.meds{display:grid;gap:8px;margin-bottom:12px;max-width:760px}.medr{margin:6px 0 0 14px;font-weight:500}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.extop{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin-bottom:14px}
+.extime{font-family:var(--f-mono);font-weight:500}.extime.low{color:var(--bad)}
+.qc{font-family:var(--f-mono);font-size:11px;color:var(--muted);font-weight:400;margin-left:6px}
+.exres{border-radius:10px;padding:16px 18px;margin-top:16px;border:2px solid var(--line)}
+.exres.pass{background:var(--ok-soft);border-color:var(--ok)}.exres.fail{background:var(--bad-soft);border-color:var(--bad)}
+.exopts{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 12px}.exopts select{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:6px}
+.gd-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}.gd-meta span{font-family:var(--f-mono);font-size:12px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:var(--bg)}
+.toolbtn{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:8px 14px;cursor:pointer;font-size:14px;font-weight:500;color:var(--ink)}
+.toolbtn:hover{border-color:var(--accent);color:var(--accent)}
+#tools{display:flex;flex-direction:column;gap:16px}
 @media (prefers-reduced-motion: reduce){.bar span{transition:none}}
 </style>
 
@@ -299,7 +339,7 @@ body.proj .facil{max-width:1180px}
       <h1><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><defs><linearGradient id="mk" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff6a2b"/><stop offset="1" stop-color="#ffc53d"/></linearGradient></defs><path d="M12 2c1.2 4 6.5 6.4 6.5 11.5a6.5 6.5 0 0 1-13 0c0-3.2 2-5.4 3.3-7.2.2 2 1.2 3.2 2.4 3.4C11 6.8 10.6 4.3 12 2z" fill="url(#mk)"/><path d="M12 12.5c1 1.6 2.4 2.6 2.4 4.3a2.4 2.4 0 0 1-4.8 0c0-1.5 1.4-2.6 2.4-4.3z" fill="#3d8bff"/></svg></span><span>Pizarra Instalador de Gas Clase 3</span></h1>
       <p class="sub">10 clases en 2 semanas para instalaciones interiores de gas en baja presión hasta 60 kW. Toca cualquier tema para abrir su materia, esquemas, fotos referenciales, taller y autoevaluación.</p>
       <div class="specs"><span>Baja presión &lt; 5 kPa</span><span>Hasta 60 kW</span><span>DS 66</span><span>DS 191</span></div>
-      <div class="hero-acts"><button class="glosbtn" id="glosbtn" type="button">Abrir glosario</button><span class="kbd-hint">¿Una palabra que no entiendes? Búscala aquí.</span></div>
+      <div class="hero-acts"><button class="toolbtn" id="tb-calc" type="button">Calculadoras</button><button class="toolbtn" id="tb-sim" type="button">Simuladores</button><button class="toolbtn" id="tb-exam" type="button">Examen de práctica</button><button class="glosbtn" id="glosbtn" type="button">Abrir glosario</button><span class="kbd-hint">¿Una palabra que no entiendes? Búscala aquí.</span></div>
     </div>
     <div class="progress" aria-live="polite">
       <svg class="gauge" viewBox="0 0 200 118" aria-hidden="true"><defs><linearGradient id="ga" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3d8bff"/><stop offset="1" stop-color="#ff8a3d"/></linearGradient></defs>
@@ -336,6 +376,8 @@ body.proj .facil{max-width:1180px}
   </main>
 
   <main id="lesson" hidden></main>
+
+  <main id="tools" hidden></main>
 </div>
 
 <script>
@@ -1668,6 +1710,206 @@ quiz:[
 {q:"Una rejilla debe llevar el letrero:",o:["Peligro gas","Por su protección no tapar esta ventilación"],a:1,e:"Exigencia del DS 66."}]}
 ];
 
+/* ---------- Herramientas de gas ---------- */
+const OBJ={
+1:"Distinguir el gas natural del gas licuado por sus propiedades y explicar la combustión completa e incompleta y el riesgo del monóxido de carbono.",
+2:"Usar unidades de presión y potencia, calcular el consumo de un artefacto y aplicar el procedimiento seguro ante una fuga.",
+3:"Reconocer el DS 66 y el DS 191, el alcance de la licencia clase 3 y el ciclo de vida de una instalación interior.",
+4:"Seleccionar materiales, ejecutar uniones con soldadura fuerte y aplicar las reglas de tendido, distancias y llaves de paso.",
+5:"Explicar la función del medidor y el regulador, y aplicar las exigencias de ubicación y cálculo de cilindros de 45 kg.",
+6:"Clasificar artefactos en tipos A, B y C, y aplicar las reglas de conexión y las prohibiciones de ubicación.",
+7:"Calcular el volumen de un recinto y aplicar las exigencias de ventilación según el tipo de gas.",
+8:"Verificar un conducto de evacuación de calefont y realizar la prueba de tiro.",
+9:"Calcular caudales por tramo, la longitud de cálculo y seleccionar diámetros con las tablas del DS 66.",
+10:"Realizar la prueba de hermeticidad, explicar el TC6 y la inspección periódica, y rendir un simulacro de evaluación."};
+const PCG={gn:9300,glp:24000};
+const CALCS=[
+{id:"consumo",t:"Consumo de un artefacto",d:"Convierte la potencia del artefacto en caudal de gas. El poder calorífico real lo informa la distribuidora; puedes editarlo.",
+html:`<div class="cf"><label>Potencia del artefacto (kW)<input id="gk" type="number" min="0" value="20"></label><label>Gas<select id="gg"><option value="gn">Gas natural</option><option value="glp">Gas licuado (propano)</option></select></label><label>Poder calorífico (kcal/m³)<input id="gpc" type="number" min="1" value="9300"></label></div><div class="cr" id="gr"></div>`,
+init(){$("gg").onchange=()=>{$("gpc").value=PCG[$("gg").value];f()};const f=()=>{const k=num("gk"),pc=num("gpc");if(!(k>0&&pc>0)){$("gr").innerHTML="<p>Ingresa potencia y poder calorífico.</p>";return}
+const kc=k*860,q=kc/pc;$("gr").innerHTML=`<ol class="steps"><li>Potencia en kcal/h: ${fmt(k)} × 860 = <b>${fmt(kc,0)} kcal/h</b></li><li>Caudal: ${fmt(kc,0)} / ${fmt(pc,0)} = <b>${fmt(q,3)} m³/h</b></li></ol><p class="okmsg">Este caudal se usa para elegir el diámetro del tramo que alimenta al artefacto.</p>`};["gk","gpc"].forEach(i=>$(i).oninput=f);f()}},
+{id:"tipo3",t:"Suma de artefactos: ¿es tipo 3?",d:"Suma las potencias de todos los artefactos instalados. Una instalación interior en baja presión es tipo 3 si no supera 60 kW (DS 191, art. 3).",
+html:`<div id="t3rows"></div><button class="projbtn" id="t3add" type="button">+ Agregar artefacto</button><div class="cr" id="t3r"></div>`,
+init(){const rows=[["Calefont",20],["Cocina",8],["Estufa",4]];const draw=()=>{$("t3rows").innerHTML=rows.map((r,i)=>`<div class="cf row3"><label>Artefacto<input data-n="${i}" value="${esc(r[0])}"></label><label>Potencia (kW)<input data-k="${i}" type="number" min="0" value="${r[1]}"></label><button class="back" data-del="${i}" type="button" aria-label="Quitar">Quitar</button></div>`).join("");
+document.querySelectorAll("[data-n]").forEach(e=>e.oninput=()=>{rows[+e.dataset.n][0]=e.value});document.querySelectorAll("[data-k]").forEach(e=>e.oninput=()=>{rows[+e.dataset.k][1]=parseFloat(e.value)||0;calc()});
+document.querySelectorAll("[data-del]").forEach(e=>e.onclick=()=>{rows.splice(+e.dataset.del,1);draw()});calc()};
+const calc=()=>{const t=rows.reduce((a,r)=>a+(+r[1]||0),0);$("t3r").innerHTML=`<p>Potencia total instalada: <b>${fmt(t,1)} kW</b></p>${t<=60?`<p class="okmsg">Es instalación tipo 3: la puede ejecutar un instalador clase 3 (en baja presión).</p>`:`<p class="warnmsg">Supera 60 kW: es tipo 2 y requiere instalador clase 2 o 1.</p>`}`};
+$("t3add").onclick=()=>{rows.push(["Artefacto",0]);draw()};draw()}},
+{id:"volumen",t:"Volumen del recinto",d:"El volumen se calcula con una altura máxima de 2,4 m aunque el cielo sea más alto. Para estufas tipo A el mínimo es 15 m³.",
+html:`<div class="cf"><label>Largo (m)<input id="vl" type="number" min="0" step="0.1" value="3"></label><label>Ancho (m)<input id="va" type="number" min="0" step="0.1" value="2.5"></label><label>Alto real del cielo (m)<input id="vh" type="number" min="0" step="0.1" value="2.6"></label></div><div class="cr" id="vr"></div>`,
+init(){const f=()=>{const L=num("vl"),A=num("va"),H=num("vh");if(!(L>0&&A>0&&H>0)){$("vr").innerHTML="<p>Ingresa las medidas.</p>";return}
+const h=Math.min(H,2.4),V=L*A*h;$("vr").innerHTML=`<ol class="steps"><li>Altura de cálculo: ${H>2.4?`${fmt(H,2)} m → se usa <b>2,4 m</b>`:`<b>${fmt(H,2)} m</b>`}</li><li>Volumen: ${fmt(L,2)} × ${fmt(A,2)} × ${fmt(h,2)} = <b>${fmt(V,1)} m³</b></li></ol>
+${V>=15?`<p class="okmsg">Cumple el mínimo de 15 m³ para estufas tipo A. Para otros artefactos tipo A, compara con la tabla XX del DS 66.</p>`:`<p class="warnmsg">Menos de 15 m³: no admite estufas tipo A. Revisa la tabla XX para otros artefactos.</p>`}`};["vl","va","vh"].forEach(i=>$(i).oninput=f);f()}},
+{id:"cilindros",t:"Cantidad de cilindros de 45 kg",d:"Método del DS 66, art. 63. Los dos valores de las tablas XVIII y XVII los obtienes del reglamento para tu zona y tipo de consumo.",
+html:`<div class="cf"><label>Potencia total de artefactos (kW)<input id="cp" type="number" min="0" value="36"></label><label>Vaporización por cilindro, tabla XVIII (kW)<input id="cv" type="number" min="0.1" step="0.1" value="9"></label><label>Cilindros según consumo, tabla XVII<input id="cc" type="number" min="0" value="3"></label></div><div class="cr" id="cr"></div>`,
+init(){const f=()=>{const P=num("cp"),V=num("cv"),C=num("cc")||0;if(!(P>0&&V>0)){$("cr").innerHTML="<p>Ingresa potencia y vaporización.</p>";return}
+const a=Math.ceil(P/V),u=Math.max(a,C),t=u*2;$("cr").innerHTML=`<ol class="steps"><li>Por vaporización: ${fmt(P)} / ${fmt(V)} = ${fmt(P/V)} → <b>${a}</b> cilindros</li><li>Por consumo: <b>${C}</b> cilindros</li><li>Se usa el mayor: <b>${u}</b> en uso</li><li>Con reposición (× 2): <b>${t} cilindros</b></li></ol>
+${t>12?`<p class="warnmsg">Supera 12 cilindros, el máximo por equipo (art. 62.2). Evalúa otro sistema de suministro.</p>`:`<p class="okmsg">Dentro del rango de 2 a 12 cilindros.${t>4?" Con más de 4 cilindros el gabinete es obligatorio.":""}</p>`}<p class="norm">Los valores precargados son de ejemplo.</p>`};["cp","cv","cc"].forEach(i=>$(i).oninput=f);f()}},
+{id:"calefont",t:"Potencia de un calefont",d:"Calcula la potencia necesaria según los litros por minuto y cuánto se quiere subir la temperatura del agua.",
+html:`<div class="cf"><label>Caudal de agua (L/min)<input id="kl" type="number" min="0" value="10"></label><label>Aumento de temperatura (°C)<input id="kt" type="number" min="0" value="25"></label><label>Rendimiento (%)<input id="kr" type="number" min="1" max="100" value="85"></label></div><div class="cr" id="kres"></div>`,
+init(){const f=()=>{const L=num("kl"),T=num("kt"),R=num("kr");if(!(L>0&&T>0&&R>0)){$("kres").innerHTML="<p>Ingresa los datos.</p>";return}
+const u=L*T*4.186/60,n=u/(R/100),q=n*860/9300;$("kres").innerHTML=`<ol class="steps"><li>Potencia útil: ${fmt(L)} L/min × ${fmt(T)} °C × 4,186 / 60 = <b>${fmt(u,1)} kW</b></li><li>Potencia nominal: ${fmt(u,1)} / ${fmt(R/100,2)} = <b>${fmt(n,1)} kW</b></li><li>Consumo con gas natural: ≈ <b>${fmt(q,2)} m³/h</b></li></ol>`};["kl","kt","kr"].forEach(i=>$(i).oninput=f);f()}},
+{id:"conducto",t:"Tramo vertical del conducto",d:"El conducto de un artefacto tipo B de tiro natural necesita un tramo recto vertical de al menos dos veces su diámetro (DS 66, art. 81.4.1).",
+html:`<div class="cf"><label>Diámetro interior del conducto (cm)<input id="dd" type="number" min="0" step="0.5" value="11"></label></div><div class="cr" id="ddr"></div>`,
+init(){const f=()=>{const D=num("dd");if(!(D>0)){$("ddr").innerHTML="<p>Ingresa el diámetro.</p>";return}$("ddr").innerHTML=`<ol class="steps"><li>Tramo vertical mínimo: 2 × ${fmt(D,1)} = <b>${fmt(2*D,1)} cm</b>, desde el collarín hasta la primera curva.</li><li>Sección del conducto: π × (${fmt(D,1)}/2)² = <b>${fmt(Math.PI*(D/2)**2,0)} cm²</b></li></ol><p class="norm">Usa el diámetro que indica el fabricante; en conductos verticales la sección libre mínima es 126 cm² salvo indicación menor del fabricante.</p>`};$("dd").oninput=f;f()}}
+];
+const RULES=(a,r,g)=>{
+ if(r==="sub"&&g==="glp")return[false,"El gas licuado no se puede instalar bajo el nivel del terreno: al ser más pesado que el aire, se acumularía."];
+ if((r==="dorm"||r==="bano")&&a!=="cc")return[false,"En dormitorios y baños solo se permiten artefactos tipo C (estancos). Un tipo A o B consume el aire del recinto y puede producir intoxicación por CO."];
+ if(a==="cb")return[true,"Permitido si tiene conducto de evacuación al exterior, ventilación superior e inferior, y no queda sobre otros artefactos ni sobre artefactos sanitarios."];
+ if(a==="cc")return[true,"Permitido: el tipo C toma aire y bota los gases al exterior. Se instala según el fabricante, con su conducto concéntrico o doble."];
+ if(a==="est")return[true,"Permitido con sensor de atmósfera, volumen de al menos 15 m³ y ventilación permanente. Nunca en dormitorios."];
+ return[true,"Permitido con ventilación permanente y el volumen exigido por la tabla XX del DS 66, con válvula de paso visible y flexible de máximo 1 m."]};
+const SIMS=[
+{id:"ubicacion",t:"¿Dónde puedo instalar este artefacto?",d:"Elige el artefacto, el recinto y el gas. El simulador te dice si está permitido y por qué.",
+html:`<div class="cf"><label>Artefacto<select id="ua"><option value="coc">Cocina (tipo A)</option><option value="est">Estufa (tipo A)</option><option value="cb">Calefont de tiro natural (tipo B)</option><option value="cc">Calefont estanco (tipo C)</option></select></label>
+<label>Recinto<select id="ur"><option value="coc">Cocina ventilada</option><option value="log">Logia</option><option value="liv">Living</option><option value="bano">Baño</option><option value="dorm">Dormitorio</option><option value="sub">Subterráneo</option></select></label>
+<label>Gas<select id="ug"><option value="gn">Gas natural</option><option value="glp">Gas licuado</option></select></label></div><div class="simverdict" id="uv"></div>`,
+init(){const f=()=>{const [ok,why]=RULES($("ua").value,$("ur").value,$("ug").value);$("uv").className="simverdict "+(ok?"ok":"no");$("uv").innerHTML=`<div class="big2">${ok?"Permitido":"No permitido"}</div><p>${esc(why)}</p>`};["ua","ur","ug"].forEach(i=>$(i).oninput=f);f()}},
+{id:"rejilla",t:"Rejilla inferior y fuga de gas",d:"Mueve la altura de la rejilla inferior y cambia el gas. Observa si la fuga puede salir del recinto.",
+html:`<div class="cf"><label>Gas<select id="rg"><option value="glp">Gas licuado</option><option value="gn">Gas natural</option></select></label><label>Altura del borde superior de la rejilla inferior: <b id="rhv">10</b> cm<input id="rh" type="range" min="5" max="50" value="10"></label></div>
+<div class="simbox"><svg id="rsvg" viewBox="0 0 600 260" role="img" aria-label="Simulador de rejilla"></svg></div><p class="simmsg" id="rmsg"></p>`,
+init(){const f=()=>{const g=$("rg").value,h=+$("rh").value;$("rhv").textContent=h;const sc=3,floor=230,top=floor-h*sc,gl=g==="glp";const ok=gl?h<=15:true;
+const layer=gl?`<rect x="60" y="${floor-60}" width="480" height="60" fill="var(--c-am)" opacity=".35"/>`:`<rect x="60" y="20" width="480" height="60" fill="var(--c-az)" opacity=".25"/>`;
+const trapped=gl&&h>15?`<rect x="60" y="${top}" width="480" height="${floor-top}" fill="var(--bad)" opacity=".25"/><text x="300" y="${floor-12}" text-anchor="middle" class="smt">Gas atrapado bajo la rejilla</text>`:"";
+$("rsvg").innerHTML=`<rect x="60" y="20" width="480" height="210" fill="none" stroke="var(--ink)" stroke-width="3"/>${layer}${trapped}
+<rect x="532" y="${top}" width="16" height="${Math.min(40,floor-top)}" fill="var(--paper)" stroke="var(--ink)"/><rect x="532" y="30" width="16" height="30" fill="var(--paper)" stroke="var(--ink)"/>
+<path d="M548 ${top+10}h40" stroke="${gl&&ok?"var(--ok)":"var(--muted)"}" stroke-width="3" marker-end="url(#ra)"/><path d="M548 45h40" stroke="${!gl?"var(--ok)":"var(--muted)"}" stroke-width="3" marker-end="url(#ra)"/>
+<defs><marker id="ra" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink)"/></marker></defs>
+<text x="70" y="${gl?Math.min(floor-66,top-8):96}" class="smt">${gl?"Fuga de GLP: se acumula abajo":"Fuga de GN: sube al techo"}</text><line x1="40" y1="${top}" x2="60" y2="${top}" stroke="var(--ink)"/><text x="12" y="${top+4}" class="smt">${h}</text>`;
+$("rmsg").innerHTML=gl?(ok?"<b>Correcto.</b> Con el borde a no más de 15 cm del piso, el gas licuado fugado puede salir.":"<b>Problema.</b> Con la rejilla tan alta, queda una capa de gas licuado atrapada bajo ella: riesgo de explosión."):"<b>Gas natural:</b> sube; la abertura superior es la que ayuda a evacuar una fuga. La inferior sirve para la entrada de aire."};
+["rg","rh"].forEach(i=>$(i).oninput=f);f()}},
+{id:"herm",t:"Prueba de hermeticidad",d:"Inicia la prueba, observa el manómetro durante el tiempo de prueba simulado y decide si la instalación aprueba.",
+html:`<div class="simctl"><button class="cta" id="hgo">Iniciar prueba</button></div><div class="simbox"><svg id="hsvg" viewBox="0 0 600 240" role="img" aria-label="Gráfico de presión de la prueba"></svg></div>
+<div class="opts" id="hdec" hidden><button class="opt" data-h="1">Aprobada: sin fuga</button><button class="opt" data-h="0">Hay una fuga</button></div><p class="simmsg" id="hmsg">Presiona "Iniciar prueba".</p>`,
+init(){let anim=null;const axis=()=>`<line x1="50" y1="200" x2="580" y2="200" stroke="var(--muted)"/><line x1="50" y1="20" x2="50" y2="200" stroke="var(--muted)"/><text x="54" y="16" class="smt">Presión</text><text x="520" y="222" class="smt">Tiempo</text><line x1="50" y1="60" x2="580" y2="60" stroke="var(--line)" stroke-dasharray="4 4"/><text x="8" y="64" class="smt">Inicial</text>`;
+$("hsvg").innerHTML=axis();
+$("hgo").onclick=()=>{if(anim)clearInterval(anim);const leak=Math.random()<0.5;let t=0;const pts=[];$("hdec").hidden=true;$("hmsg").textContent="Midiendo...";document.querySelectorAll("[data-h]").forEach(b=>b.classList.remove("right","wrong"));
+anim=setInterval(()=>{t+=1;const x=50+t*5.3;let y=60+(t<8?t*1.2:9.6);if(leak&&t>=8)y+=(t-8)*0.9;pts.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+$("hsvg").innerHTML=axis()+`<polyline points="${pts.join(" ")}" fill="none" stroke="var(--accent)" stroke-width="3"/><line x1="${50+8*5.3}" y1="20" x2="${50+8*5.3}" y2="200" stroke="var(--live)" stroke-dasharray="3 3"/><text x="${56+8*5.3}" y="34" class="smt">Estabilizada</text>`;
+if(t>=100){clearInterval(anim);anim=null;$("hdec").hidden=false;$("hmsg").textContent="Fin del tiempo de prueba. ¿Qué concluyes?";
+document.querySelectorAll("[data-h]").forEach(b=>b.onclick=()=>{const ans=b.dataset.h==="1",right=ans!==leak;document.querySelectorAll("[data-h]").forEach(x=>{const v=x.dataset.h==="1";x.classList.toggle("right",v!==leak)});if(!right)b.classList.add("wrong");
+$("hmsg").innerHTML=(right?"<b>Correcto.</b> ":"<b>No.</b> ")+(leak?"Después de estabilizarse, la presión siguió bajando: hay una fuga. Búscala con agua jabonosa, corrige y repite.":"La presión bajó un poco al inicio por estabilización y luego se mantuvo: no hay fuga.")})}},40)}}}
+];
+const EXTRA_Q=[
+[1,"El gas natural es principalmente:",["Propano","Metano","Butano"],1,"Metano."],
+[1,"Si hay una fuga de gas natural, el gas tiende a:",["Subir","Bajar"],0,"Es más liviano que el aire."],
+[1,"¿Qué produce una combustión incompleta?",["Solo vapor de agua","Monóxido de carbono"],1,"Por falta de aire."],
+[1,"El CO es peligroso porque:",["Tiene olor fuerte","No tiene color ni olor"],1,"No se percibe."],
+[2,"1 kPa equivale aproximadamente a:",["10 mbar","100 mbar","1 bar"],0,"1 kPa = 10 mbar."],
+[2,"Un artefacto de 5 kW consume:",["4.300 kcal/h","5.000 kcal/h","860 kcal/h"],0,"5 × 860 = 4.300 kcal/h."],
+[2,"Con olor a gas se debe:",["Encender el extractor","Abrir ventanas y cerrar la llave sin accionar interruptores"],1,"Evitar chispas."],
+[2,"¿Qué aparato baja y estabiliza la presión del gas?",["Medidor","Regulador","Manómetro"],1,"El regulador."],
+[3,"¿Quién otorga la licencia de instalador de gas?",["La municipalidad","La SEC","La distribuidora"],1,"La SEC."],
+[3,"Una instalación interior en baja presión de 70 kW es:",["Tipo 3","Tipo 2"],1,"Sobre 60 kW es tipo 2."],
+[3,"¿Cada cuánto es la inspección periódica de gas?",["1 año","2 años","10 años"],1,"Cada dos años."],
+[3,"La instalación interior comienza en:",["La salida del medidor o regulador","La cocina"],0,"DS 191, art. 2."],
+[4,"¿Qué material está prohibido para cañerías de gas?",["Cobre tipo L","Plomo","Acero Sch 40"],1,"Hierro fundido y plomo."],
+[4,"Las cañerías plásticas se permiten:",["Dentro de la casa","Solo enterradas y fuera de edificios"],1,"Art. 45.3."],
+[4,"La cinta señalizadora GAS se pone a:",["5 cm","25 cm","1 m"],1,"25 cm sobre la tubería."],
+[4,"Distancia de una cañería de gas en cruce con una canalización eléctrica:",["10 cm","30 cm","50 cm"],0,"10 cm en cruce."],
+[4,"Bajo una calle con tránsito vehicular, la cubierta mínima es:",["60 cm","80 cm"],1,"80 cm."],
+[5,"Superficie mínima de patio para 2 cilindros de 45 kg:",["2 m²","6 m²","20 m²"],1,"6 m², más 4 m² por par adicional."],
+[5,"Altura de la base del cilindro respecto del piso:",["0 cm","5 cm","30 cm"],1,"Al menos 5 cm."],
+[5,"Con frío, el GLP se vaporiza:",["Más rápido","Más lento"],1,"Por eso se necesitan más cilindros."],
+[5,"¿Puede ir un cilindro de 45 kg en una caja de escala?",["Sí","No"],1,"Art. 64.4."],
+[6,"Un calefont estanco es tipo:",["A","B","C"],2,"Circuito estanco."],
+[6,"Una cocina doméstica es tipo:",["A","B","C"],0,"Sin conducto."],
+[6,"Las tuberías multicapa, ¿se pueden usar como conexión al artefacto?",["Sí","No"],1,"Lo prohíbe la modificación de 2026."],
+[6,"La válvula de paso del artefacto debe estar a no más de:",["1,0 m","1,6 m","2,2 m"],1,"1,6 m del piso."],
+[7,"Altura máxima de cálculo para el volumen de un recinto:",["2,2 m","2,4 m","3,0 m"],1,"2,4 m."],
+[7,"La rejilla de ventilación debe tener malla de al menos:",["1 mm","6 mm"],1,"6 mm o celosía."],
+[7,"Sección mínima para la campana de cocina:",["50 cm²","100 cm²","300 cm²"],1,"100 cm²."],
+[7,"Un patio de ventilación menor de 3 m² exige una abertura de al menos:",["100 cm²","300 cm²"],1,"300 cm²."],
+[8,"El conducto de evacuación debe resistir hasta:",["100 °C","300 °C"],1,"300 °C."],
+[8,"Separación del conducto a elementos combustibles sin protección:",["2 cm","15 cm"],1,"15 cm."],
+[8,"Acero cincado en conductos: espesor mínimo:",["0,3 mm","0,8 mm"],1,"0,8 mm."],
+[8,"El sombrerete en fachada sobresale del muro hasta:",["10 cm","50 cm"],0,"Hasta 10 cm."],
+[9,"Tres artefactos de 20, 8 y 4 kW con GN (9.300 kcal/m³) consumen aprox.:",["2,96 m³/h","32 m³/h"],0,"32 × 860 / 9.300."],
+[9,"¿Qué anexo del DS 66 tiene longitudes equivalentes?",["Anexo 1","Anexo 2","Anexo 3"],1,"Anexo 2."],
+[9,"Los factores de simultaneidad se usan en:",["Viviendas unifamiliares","Edificios colectivos"],1,"Anexo 3."],
+[10,"Durante la prueba de hermeticidad, los artefactos deben estar:",["Conectados y encendidos","Desconectados o aislados"],1,"Se tapan los arranques."],
+[10,"Un sello amarillo indica:",["Que todo cumple","Defectos que deben corregirse en un plazo"],1,"Amarillo: corregir."],
+[10,"La inscripción del TC6:",["Aprueba el proyecto","No constituye aprobación"],1,"Art. 86."],
+[10,"Antes de dar gas a una red nueva se debe:",["Purgar con fuego","Probar la hermeticidad"],1,"Siempre prueba primero."]
+];
+
+/* ---------- Herramientas: calculadoras, simuladores, examen ---------- */
+const fmt=(x,d=2)=>Number.isFinite(x)?x.toLocaleString("es-CL",{maximumFractionDigits:d,minimumFractionDigits:0}):"–";
+const num=id=>{const v=parseFloat(String(($(id)||{}).value||"").replace(",","."));return Number.isFinite(v)?v:NaN};
+const TOOLS={calc:{t:"Calculadoras",sub:"Ingresa tus datos y obtén el resultado con el paso a paso."},sim:{t:"Simuladores",sub:"Prueba, equivócate y observa qué pasa, sin riesgo."},exam:{t:"Examen de práctica",sub:"Preguntas al azar con tiempo, como el día de la evaluación."}};
+function openTool(name,sub){
+  cur=null;$("board").hidden=true;$("hdr").hidden=true;$("lesson").hidden=true;$("tools").hidden=false;
+  const T=TOOLS[name];
+  let body="";
+  if(name==="calc"||name==="sim"){
+    const L=name==="calc"?CALCS:SIMS;const i=Math.max(0,L.findIndex(x=>x.id===sub));
+    body=`<div class="tabs" role="tablist">${L.map((x,j)=>`<button class="tab" role="tab" aria-selected="${j===i}" data-tool="${name}" data-sub="${x.id}"><span class="k">${name==="calc"?"Calculadora":"Simulador"} ${j+1}</span>${esc(x.t)}</button>`).join("")}</div>
+      <section class="panel tool-panel" id="toolpanel"><h3>${esc(L[i].t)}</h3><p class="tool-sub">${esc(L[i].d)}</p>${L[i].html}</section>`;
+    $("tools").innerHTML=toolHead(T)+body;
+    document.querySelectorAll("[data-tool]").forEach(b=>b.onclick=()=>openTool(b.dataset.tool,b.dataset.sub));
+    L[i].init&&L[i].init();
+  } else if(name==="exam"){
+    $("tools").innerHTML=toolHead(T)+`<section class="panel tool-panel" id="toolpanel">${examStartHTML()}</section>`;
+    $("exgo").onclick=startExam;
+  }
+  $("tback").onclick=closeTool;window.scrollTo(0,0);
+}
+function toolHead(T){return `<button class="back" id="tback">‹ Volver a la pizarra</button><div class="lhead"><div><div class="eyebrow">Herramientas</div><h2>${esc(T.t)}</h2></div><div class="lacts"><button class="glosbtn" type="button" onclick="openGlos()">Glosario</button></div></div><p class="tool-intro">${esc(T.sub)}</p>`}
+function closeTool(){stopExamTimer();$("tools").hidden=true;$("board").hidden=false;$("hdr").hidden=false;renderBoard()}
+/* Examen */
+let EX=null,exTimer=null;
+function examBank(){const b=[];clases.forEach(c=>c.quiz.forEach(q=>b.push({c:c.n,q:q.q,o:q.o,a:q.a,e:q.e})));(EXTRA_Q||[]).forEach(([c,q,o,a,e])=>b.push({c,q,o,a,e}));return b}
+function examStartHTML(){const n=examBank().length;return `<h3>Examen tipo certificación</h3>
+  <p>El banco tiene <b>${n} preguntas</b> de las 10 clases. Cada intento saca preguntas al azar, así que puedes repetirlo muchas veces.</p>
+  <div class="exopts"><label for="exn">Cantidad de preguntas</label><select id="exn"><option value="20">20 preguntas · 30 min</option><option value="30" selected>30 preguntas · 45 min</option><option value="45">45 preguntas · 65 min</option></select></div>
+  <ul><li>Responde todas y presiona <b>Entregar</b>. Si se acaba el tiempo, se entrega solo.</li><li>Al final verás tu nota, las respuestas correctas y qué clases repasar.</li><li>Meta: <b>70% o más</b>.</li></ul>
+  <button class="cta" id="exgo">Comenzar examen</button>`}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function startExam(){
+  const n=+$("exn").value;const qs=shuffle(examBank()).slice(0,n).map(q=>{const idx=shuffle(q.o.map((_,i)=>i));return {...q,ord:idx}});
+  EX={qs,ans:new Array(qs.length).fill(-1),end:Date.now()+n*90*1000,done:false};
+  $("toolpanel").innerHTML=`<div class="extop"><div><b id="excount">0</b> de ${qs.length} respondidas</div><div class="extime" id="extime"></div></div>`+
+   qs.map((q,i)=>`<div class="q" data-x="${i}"><p class="qt">${i+1}. ${esc(q.q)} <span class="qc">Clase ${q.c}</span></p><div class="opts">${q.ord.map(oi=>`<button class="opt" data-o="${oi}">${esc(q.o[oi])}</button>`).join("")}</div><div class="exp" hidden></div></div>`).join("")+
+   `<button class="cta" id="exsend">Entregar examen</button><div id="exres"></div>`;
+  document.querySelectorAll(".q[data-x]").forEach(d=>d.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(EX.done)return;const i=+d.dataset.x;EX.ans[i]=+b.dataset.o;d.querySelectorAll(".opt").forEach(x=>x.classList.toggle("sel",x===b));$("excount").textContent=EX.ans.filter(a=>a>=0).length}));
+  $("exsend").onclick=()=>{const left=EX.ans.filter(a=>a<0).length;if(left&&!$("exsend").dataset.ok){$("exsend").dataset.ok=1;$("exsend").textContent=`Te faltan ${left}. Presiona de nuevo para entregar igual`;return}finishExam()};
+  tickExam();exTimer=setInterval(tickExam,1000);
+}
+function stopExamTimer(){if(exTimer){clearInterval(exTimer);exTimer=null}}
+function tickExam(){if(!EX||EX.done)return;const s=Math.max(0,Math.round((EX.end-Date.now())/1000));const el=$("extime");if(!el){stopExamTimer();return}el.textContent=`Tiempo restante ${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`;el.classList.toggle("low",s<300);if(s<=0)finishExam()}
+function finishExam(){
+  if(!EX||EX.done)return;EX.done=true;stopExamTimer();
+  let ok=0;const byC={};
+  EX.qs.forEach((q,i)=>{const r=EX.ans[i]===q.a;if(r)ok++;byC[q.c]=byC[q.c]||{t:0,ok:0};byC[q.c].t++;if(r)byC[q.c].ok++;
+    const d=document.querySelector(`.q[data-x="${i}"]`);d.querySelectorAll(".opt").forEach(b=>{const o=+b.dataset.o;if(o===q.a)b.classList.add("right");else if(o===EX.ans[i])b.classList.add("wrong")});
+    const e=d.querySelector(".exp");e.hidden=false;e.innerHTML=(r?"<b>Correcta.</b> ":EX.ans[i]<0?"<b>Sin responder.</b> ":"<b>Incorrecta.</b> ")+esc(q.e)});
+  const pct=Math.round(ok/EX.qs.length*100);const nota=Math.max(1,Math.min(7,pct>=60?4+(pct-60)/40*3:1+pct/60*3)).toFixed(1);
+  const weak=Object.entries(byC).filter(([c,v])=>v.ok/v.t<0.7).map(([c])=>+c).sort((a,b)=>a-b);
+  $("exsend").hidden=true;
+  $("exres").innerHTML=`<div class="exres ${pct>=70?"pass":"fail"}"><div class="score">Resultado: ${ok} de ${EX.qs.length} (${pct}%) · nota ${nota.replace(".",",")}</div>
+   <p>${pct>=70?"¡Aprobado! Estás en el nivel esperado para la evaluación.":"Aún no llegas al 70%. Repasa las clases indicadas y vuelve a intentarlo."}</p>
+   ${weak.length?`<p><b>Clases para repasar:</b> ${weak.map(c=>`<button class="chip act" data-open="${c}" data-tab="0">Clase ${c}: ${esc(clases.find(x=>x.n===c).t)}</button>`).join(" ")}</p>`:"<p>No hay clases bajo 70%.</p>"}
+   <p class="norm">Nota referencial con exigencia de 60% para el 4,0.</p><button class="cta" id="exagain">Hacer otro intento</button></div>`;
+  $("exagain").onclick=()=>openTool("exam");$("exres").scrollIntoView({behavior:"smooth"});
+}
+/* Guía docente */
+function guiaHTML(c){
+  const k1=c.n+".1",kl=c.n+"."+c.pts.length,x1=EXP[k1]||{},xl=EXP[kl]||{};const per=Math.floor(45/c.pts.length);
+  return `<h3>Guía docente: clase ${c.n}</h3>
+  <div class="gd-meta"><span>Duración sugerida: 90 min (2 horas pedagógicas)</span><span>Modalidad: expositiva con práctica</span></div>
+  <h4>Objetivo de aprendizaje</h4><p>${esc((OBJ||{})[c.n]||"")}</p>
+  <h4>Inicio · 15 min</h4><ol><li><b>Pregunta detonante:</b> "${esc(x1.q||"")}" Deja que respondan sin corregir todavía.</li>
+  <li><b>Activa con una analogía:</b> ${esc(x1.a||"")}</li><li>Presenta el objetivo y la ruta de la clase (${c.pts.length} temas).</li></ol>
+  <h4>Desarrollo · 60 min</h4><ol>${c.pts.map((p,i)=>{const x=EXP[c.n+"."+(i+1)]||{};return `<li><b>${esc(p.t)}</b> (≈ ${per} min). Proyecta el esquema y el recuadro "Explicado fácil". ${x.e&&x.e[0]?`Advierte el error frecuente: ${esc(x.e[0])}`:""}</li>`}).join("")}
+  <li><b>Actividad práctica</b> (≈ 15 min): pestaña "Práctica" de esta clase, en parejas.</li></ol>
+  <h4>Cierre · 15 min</h4><ol><li><b>Autoevaluación</b> de la clase (pestaña "Autoevaluación"), proyectada o individual.</li>
+  <li><b>Ticket de salida:</b> "${esc(xl.q||"")}" <span class="norm">Respuesta esperada: ${esc(xl.ans||"")}</span></li>
+  <li><b>Síntesis:</b> ${c.pts.map((p,i)=>esc(((EXP[c.n+"."+(i+1)]||{}).r||[""])[0])).join(" ")}</li></ol>
+  <h4>Evaluación formativa</h4><ul><li>Logrado: 70% o más en la autoevaluación y ticket de salida correcto.</li><li>En desarrollo: menos de 70%; asignar repaso del recuadro "Explicado fácil" y la sección "Profundiza".</li></ul>
+  <h4>Recursos</h4><ul><li>Modo proyector y flechas del teclado para avanzar.</li><li>Glosario para palabras nuevas.</li><li>Calculadoras y simuladores desde la portada.</li></ul>`;
+}
+
 /* ---------- Estado ---------- */
 const KEY="pizarra-sec-gas3-v1";
 let done=new Set();
@@ -1678,7 +1920,7 @@ const $=id=>document.getElementById(id);
 
 function tabsOf(c){return [...c.pts.map((p,i)=>{const fg=FIGS[c.n+"."+(i+1)];const k=c.n+"."+(i+1);return {key:"Tema "+(i+1),t:p.t,html:`<h3>${esc(p.t)}</h3>`+facilHTML(k)+(fg?`<figure class="ref">${fg.s}<figcaption>${fg.c}</figcaption></figure>`:"")+realHTML(k)+`<div class="prose">${p.h}</div>`+(MORE[k]?`<section class="more prose"><span class="eyebrow">Profundiza</span>${MORE[k]}</section>`:"")+expHTML(k)}}),
   {key:"Práctica",t:"Taller",extra:true,html:`<div class="prose">${c.taller}</div>`},
-  {key:"Prueba",t:"Autoevaluación",extra:true,quiz:true}]}
+  {key:"Prueba",t:"Autoevaluación",extra:true,quiz:true},{key:"Docente",t:"Guía docente",extra:true,html:`<div class="prose">${guiaHTML(c)}</div>`}]}
 
 /* ---------- Pizarra ---------- */
 function renderBoard(){
@@ -1695,7 +1937,8 @@ function renderBoard(){
         <ul class="points">${c.pts.map((p,i)=>`<li><button class="pt" data-open="${c.n}" data-tab="${i}"><span class="k">${c.n}.${i+1}</span><span class="t">${esc(p.t)}</span><span class="go" aria-hidden="true">›</span></button></li>`).join("")}</ul>
         <div class="foot"><span class="chip key">${esc(c.k)}</span>
           <button class="chip act" data-open="${c.n}" data-tab="${c.pts.length}">Taller</button>
-          <button class="chip act" data-open="${c.n}" data-tab="${c.pts.length+1}">Autoevaluación</button></div>
+          <button class="chip act" data-open="${c.n}" data-tab="${c.pts.length+1}">Autoevaluación</button>
+          <button class="chip act" data-open="${c.n}" data-tab="${c.pts.length+2}">Guía docente</button></div>
       </div>`;
     el.querySelector("input").addEventListener("change",ev=>{ev.target.checked?done.add(c.n):done.delete(c.n);save();renderBoard()});
     $("w"+c.w).appendChild(el);
@@ -1709,8 +1952,8 @@ function renderBoard(){
 let cur=null,curTab=0;
 function openLesson(n,tab){
   const c=clases.find(x=>x.n===n);if(!c)return;
-  cur=c;curTab=Math.max(0,Math.min(tab||0,c.pts.length+1));
-  $("board").hidden=true;$("hdr").hidden=true;$("lesson").hidden=false;
+  cur=c;curTab=Math.max(0,Math.min(tab||0,c.pts.length+2));
+  stopExamTimer();$("tools").hidden=true;$("board").hidden=true;$("hdr").hidden=true;$("lesson").hidden=false;
   const tabs=tabsOf(c);
   $("lesson").innerHTML=`<button class="back" id="back">‹ Volver a la pizarra</button>
     <div class="lhead"><div><div class="eyebrow">Clase ${c.n} · ${esc(c.d)} · ${c.w===1?"Semana 1":"Semana 2"}</div><h2>${esc(c.t)}</h2></div>
@@ -1770,7 +2013,9 @@ document.addEventListener("click",e=>{
 try{if(localStorage.getItem(KEY+"-proj"))document.body.classList.add("proj")}catch(e){}
 document.addEventListener("keydown",e=>{if(!cur||e.target.closest("input,textarea,select"))return;const n=tabsOf(cur).length;if(e.key==="ArrowRight"&&curTab<n-1){showTab(curTab+1);e.preventDefault()}else if(e.key==="ArrowLeft"&&curTab>0){showTab(curTab-1);e.preventDefault()}else if(e.key==="Escape"&&document.body.classList.contains("proj")){document.body.classList.remove("proj");const b=$("projbtn");if(b)b.setAttribute("aria-pressed",false);try{localStorage.setItem(KEY+"-proj","")}catch(x){}}});
 try{$("glosbtn").onclick=openGlos}catch(e){}
+$("tb-calc").onclick=()=>openTool("calc");$("tb-sim").onclick=()=>openTool("sim");$("tb-exam").onclick=()=>openTool("exam");
 renderBoard();
+{const h=(location.hash||"").slice(1);if(["calc","sim","exam"].includes(h))setTimeout(()=>openTool(h),0)}
 const m=(location.hash||"").match(/^#c(\d+)(?:-(\d+))?$/);
 if(m)openLesson(+m[1],m[2]?+m[2]-1:0);
 </script>
