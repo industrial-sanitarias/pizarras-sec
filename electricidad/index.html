@@ -248,6 +248,12 @@ body.proj .photo{flex-basis:300px}body.proj .photo img{width:300px}
 body.proj .tab{font-size:16px}
 body.proj .pnav button{font-size:18px;padding:10px 16px}
 .kbd-hint{font-size:12px;color:var(--muted)}
+
+/* Profundiza */
+.more{margin-top:22px;border:1px solid var(--line);border-radius:10px;padding:16px clamp(14px,3vw,24px) 6px;background:linear-gradient(180deg,var(--accent-soft),var(--paper) 120px);max-width:900px}
+.more>.eyebrow{color:var(--accent);font-weight:500;display:block;margin-bottom:4px}
+.more h4:first-of-type{margin-top:6px}
+body.proj .more{max-width:1180px}
 @media (prefers-reduced-motion: reduce){.bar span{transition:none}}
 </style>
 
@@ -692,6 +698,459 @@ function realHTML(k){
    (ls.length?`<div class="links"><div class="eyebrow">Ver en la realidad</div><ul>${ls.map(([t,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${esc(t)} ↗</a></li>`).join("")}</ul></div>`:"")+
   `</div>`;
 }
+
+/* ---------- Profundiza ---------- */
+const MORE={
+"1.1":`<h4>Conductores, semiconductores y aislantes</h4>
+<p>Los materiales se clasifican según qué tan fácil dejan moverse a sus electrones:</p>
+<ul><li><b>Conductores:</b> muchos electrones libres (cobre, aluminio). Se usan en cables.</li>
+<li><b>Semiconductores:</b> conducen solo bajo ciertas condiciones (silicio). Están en LED, cargadores y paneles solares.</li>
+<li><b>Aislantes:</b> casi sin electrones libres (PVC, goma, porcelana). Se usan en cubiertas, cajas y tableros.</li></ul>
+<h4>La carga eléctrica</h4>
+<p>La carga se mide en coulomb (C). Un ampere es el paso de un coulomb por segundo. Cada electrón tiene una carga diminuta, por eso una corriente de 1 A significa el paso de trillones de electrones por segundo.</p>
+<code class="f">1 A = 1 C / s</code>
+<h4>Sentido de la corriente</h4>
+<p>Por convención histórica se dibuja la corriente saliendo del polo positivo hacia el negativo, aunque los electrones se mueven al revés. En la práctica del instalador da igual: lo que importa es que el circuito esté cerrado.</p>`,
+"1.2":`<h4>Valor eficaz y valor peak</h4>
+<p>En corriente alterna la tensión cambia todo el tiempo. Los 220 V de la red son el <b>valor eficaz</b>: el que produce el mismo calor que 220 V de corriente continua. El valor máximo (peak) es mayor:</p>
+<code class="f">V peak = V eficaz × √2 = 220 × 1,414 ≈ 311 V</code>
+<p>Por eso los aislamientos y los instrumentos se diseñan para tensiones bastante mayores que 220 V.</p>
+<h4>Monofásico y trifásico</h4>
+<p>La red trifásica tiene tres fases desfasadas entre sí. Entre una fase y el neutro hay 220 V; entre dos fases hay 380 V:</p>
+<code class="f">380 V ≈ 220 V × √3</code>
+<p>Las viviendas suelen tener empalme monofásico. Talleres y comercios con motores grandes usan trifásico.</p>
+<h4>Diferencia de potencial</h4>
+<p>La tensión siempre se mide <b>entre dos puntos</b>. Un pájaro sobre un solo cable no recibe descarga porque no hay diferencia de potencial entre sus patas.</p>`,
+"1.3":`<h4>La corriente alterna en números</h4>
+<ul><li><b>Frecuencia:</b> 50 Hz, es decir, 50 ciclos completos por segundo.</li>
+<li><b>Período:</b> cada ciclo dura 1/50 = 0,02 s = 20 ms.</li>
+<li>En cada ciclo la corriente cambia de sentido dos veces.</li></ul>
+<h4>Dónde aparece la corriente continua</h4>
+<ul><li>Baterías, pilas y bancos de respaldo.</li><li>Paneles solares (antes del inversor).</li><li>Cargadores de celulares y notebooks: transforman la alterna en continua.</li>
+<li>Cargadores de vehículos eléctricos en carga rápida.</li></ul>
+<h4>Medición con verdadero valor eficaz</h4>
+<p>Muchos equipos modernos (computadores, LED, variadores) deforman la onda de corriente. Un multímetro o pinza <b>True RMS</b> mide correctamente esas corrientes; uno común puede dar lecturas erróneas.</p>
+<h4>Ejemplo</h4>
+<p>Una casa tiene encendidos: refrigerador 0,7 A, televisor 0,5 A, hervidor 9,1 A y 10 ampolletas LED de 0,04 A. La corriente total que pasa por el alimentador es la suma: 0,7 + 0,5 + 9,1 + 0,4 = <b>10,7 A</b>.</p>`,
+"1.4":`<h4>Resistividad de materiales</h4>
+<div class="tw"><table><tr><th>Material</th><th class="n">ρ aprox. (Ω·mm²/m)</th><th>Uso</th></tr>
+<tr><td>Cobre</td><td class="n">0,018</td><td>Conductores de instalaciones</td></tr>
+<tr><td>Aluminio</td><td class="n">0,028</td><td>Líneas aéreas y alimentadores grandes</td></tr>
+<tr><td>Acero</td><td class="n">≈ 0,13</td><td>Estructuras, electrodos con capa de cobre</td></tr></table></div>
+<p>El aluminio conduce menos que el cobre: para la misma corriente necesita mayor sección.</p>
+<h4>Efecto de la temperatura</h4>
+<p>En los metales, la resistencia sube con la temperatura. Un cable sobrecargado se calienta, su resistencia aumenta y se calienta aún más: por eso la protección debe actuar a tiempo.</p>
+<h4>Ejemplo resuelto</h4>
+<p>¿Qué resistencia tiene un rollo de 100 m de cable de 2,5 mm²?</p>
+<code class="f">R = 0,018 × 100 / 2,5 = 0,72 Ω</code>
+<p>Si se mide con el óhmetro y da mucho más, el conductor puede estar dañado o con una unión defectuosa.</p>`,
+"2.1":`<h4>Ejemplos adicionales</h4>
+<ol><li><b>Ampolleta de horno:</b> 220 V y 0,18 A. R = 220 / 0,18 = 1.222 Ω.</li>
+<li><b>Resistencia de calefont eléctrico:</b> 11 Ω. I = 220 / 11 = 20 A: necesita un circuito exclusivo.</li>
+<li><b>Caída en un cable:</b> por un cable de 0,5 Ω pasan 10 A. V = 10 × 0,5 = 5 V que se pierden en el cable.</li></ol>
+<h4>Ley de Ohm y seguridad</h4>
+<p>La corriente que pasa por una persona depende de su resistencia, que cambia mucho:</p>
+<ul><li>Piel seca y calzado aislante: miles de ohm.</li><li>Piel mojada, pies descalzos sobre piso húmedo: unos cientos de ohm.</li></ul>
+<p>Con la misma tensión, la persona mojada recibe muchas veces más corriente. Por eso los baños y zonas húmedas tienen exigencias especiales.</p>
+<h4>Cuándo no se cumple</h4>
+<p>Algunos componentes no siguen la Ley de Ohm de forma lineal (LED, diodos, filamentos que cambian con la temperatura). Para el cálculo de instalaciones domiciliarias, la aproximación es suficiente.</p>`,
+"2.2":`<h4>Potencia activa, aparente y factor de potencia</h4>
+<p>En equipos con motores o electrónica, la corriente no está perfectamente sincronizada con la tensión. Entonces se distinguen:</p>
+<ul><li><b>Potencia activa (W):</b> la que realmente hace trabajo.</li><li><b>Potencia aparente (VA):</b> V × I, la que "ve" el cable.</li>
+<li><b>Factor de potencia (cos φ):</b> relación entre ambas; entre 0 y 1.</li></ul>
+<code class="f">P (W) = V × I × cos φ
+Trifásico: P = √3 × V × I × cos φ</code>
+<h4>Potencias típicas</h4>
+<div class="tw"><table><tr><th>Equipo</th><th class="n">Potencia</th></tr>
+<tr><td>Microondas</td><td class="n">1000 a 1500 W</td></tr><tr><td>Plancha</td><td class="n">1000 a 2000 W</td></tr>
+<tr><td>Lavadora (calentando agua)</td><td class="n">≈ 2000 W</td></tr><tr><td>Secador de pelo</td><td class="n">1200 a 2000 W</td></tr>
+<tr><td>Termo eléctrico</td><td class="n">1500 a 2500 W</td></tr><tr><td>Notebook</td><td class="n">45 a 90 W</td></tr></table></div>
+<p class="norm">Valores orientativos; usa siempre la placa.</p>
+<h4>Ejemplo</h4>
+<p>Un motor monofásico de 1100 W con cos φ 0,8: I = 1100 / (220 × 0,8) = <b>6,25 A</b>, más que los 5 A que daría sin considerar el factor de potencia.</p>`,
+"2.3":`<h4>Estimar el consumo de una casa</h4>
+<div class="tw"><table><tr><th>Equipo</th><th class="n">W</th><th class="n">h/día</th><th class="n">kWh/mes</th></tr>
+<tr><td>Refrigerador</td><td class="n">150</td><td class="n">10</td><td class="n">45</td></tr>
+<tr><td>Televisor</td><td class="n">100</td><td class="n">5</td><td class="n">15</td></tr>
+<tr><td>10 ampolletas LED</td><td class="n">90</td><td class="n">5</td><td class="n">13,5</td></tr>
+<tr><td>Hervidor</td><td class="n">2000</td><td class="n">0,25</td><td class="n">15</td></tr>
+<tr><td>Lavadora</td><td class="n">2000</td><td class="n">0,5</td><td class="n">30</td></tr>
+<tr><th>Total</th><th></th><th></th><th class="n">118,5</th></tr></table></div>
+<p>Este ejercicio sirve para explicar a un cliente de dónde viene su consumo y qué equipos conviene cambiar o usar menos.</p>
+<h4>Etiqueta de eficiencia energética</h4>
+<p>Los equipos vendidos en Chile llevan una etiqueta que indica su consumo y su clase de eficiencia. Un refrigerador más eficiente puede consumir bastante menos por mes que uno antiguo.</p>
+<h4>Potencia contratada</h4>
+<p>Además del consumo, el empalme tiene una capacidad máxima. Si se conectan muchos equipos a la vez y se supera, actúa la protección del empalme.</p>`,
+"2.4":`<h4>Factores que aumentan el riesgo</h4>
+<ul><li><b>Intensidad:</b> la variable principal.</li><li><b>Tiempo:</b> mientras más dura, mayor el daño. Por eso el diferencial corta en milisegundos.</li>
+<li><b>Trayecto:</b> mano a mano o mano a pie, pasando por el pecho, es el más peligroso.</li>
+<li><b>Resistencia del cuerpo:</b> baja con humedad, sudor, heridas y superficie de contacto grande.</li></ul>
+<h4>Primeros auxilios ante una electrocución</h4>
+<ol><li><b>No tocar a la víctima</b> mientras esté en contacto con la tensión.</li>
+<li>Cortar la energía desde el tablero. Si no es posible, separarla con un elemento aislante y seco.</li>
+<li>Llamar al <b>SAMU 131</b>.</li>
+<li>Si no respira, iniciar reanimación cardiopulmonar si sabes hacerla.</li>
+<li>Toda persona electrocutada debe ser evaluada por un médico, aunque parezca estar bien: puede haber daño interno o alteraciones del ritmo cardíaco.</li></ol>
+<h4>Quemaduras eléctricas</h4>
+<p>La corriente quema por dentro siguiendo su recorrido. Una herida pequeña en la piel puede esconder un daño grande en músculos y órganos.</p>`,
+"2.5":`<h4>Bloqueo y etiquetado (LOTO)</h4>
+<p>En industrias se usa el sistema LOTO: cada trabajador pone su propio candado en el punto de corte y solo él puede retirarlo. Si trabajan tres personas, hay tres candados.</p>
+<h4>Elementos de protección personal</h4>
+<div class="tw"><table><tr><th>EPP</th><th>Para qué</th></tr>
+<tr><td>Guantes dieléctricos (clase 00 o 0 en baja tensión)</td><td>Aislar las manos de partes con tensión</td></tr>
+<tr><td>Lentes de seguridad</td><td>Proteger de proyecciones y destellos de un arco eléctrico</td></tr>
+<tr><td>Calzado dieléctrico</td><td>Aislar del suelo</td></tr>
+<tr><td>Ropa de algodón o ignífuga</td><td>La ropa sintética se derrite y se pega a la piel con un arco</td></tr>
+<tr><td>Herramientas aisladas a 1000 V</td><td>Evitar contacto accidental</td></tr></table></div>
+<h4>Trabajos con tensión</h4>
+<p>Como regla, el instalador clase D trabaja <b>sin tensión</b>. Solo las mediciones (tensión, prueba de diferencial) se hacen con la instalación energizada, con instrumento adecuado y EPP.</p>
+<h4>Arco eléctrico</h4>
+<p>Un cortocircuito cerca de la persona puede producir un destello con temperaturas muy altas, capaz de causar quemaduras graves aunque no haya contacto. Es otra razón para no trabajar en tableros energizados.</p>`,
+"3.1":`<h4>Símbolos básicos de un esquema</h4>
+<ul><li>Fuente: círculo con el símbolo ~ (alterna) o líneas largas y cortas (batería).</li>
+<li>Conductor: línea continua.</li><li>Interruptor: línea con un contacto abierto.</li>
+<li>Carga resistiva: rectángulo o zigzag.</li><li>Ampolleta: círculo con una X.</li><li>Tierra: tres líneas horizontales decrecientes.</li></ul>
+<h4>¿Cuánta corriente hay en un cortocircuito?</h4>
+<p>Depende de la resistencia de todo el camino: transformador, red, empalme y cables hasta el punto de falla. En una casa puede ir de cientos a miles de ampere. Por eso el automático tiene un <b>poder de corte</b>, la máxima corriente que puede cortar sin destruirse (por ejemplo 6 kA).</p>
+<h4>Fallas a tierra</h4>
+<p>Además del cortocircuito y la sobrecarga existe la <b>falla a tierra</b>: una fase toca una parte metálica conectada a tierra. La corriente puede ser alta (actúa el automático) o baja (solo la detecta el diferencial).</p>
+<h4>Ejemplo</h4>
+<p>Un circuito de 16 A alimenta enchufes con 3 equipos de 1500 W: 4500 / 220 = 20,5 A. No hay cortocircuito, pero hay sobrecarga: el automático cortará después de unos minutos.</p>`,
+"3.2":`<h4>Serie con resistencias distintas: divisor de tensión</h4>
+<p>Si las resistencias son distintas, la tensión se reparte en proporción a cada una:</p>
+<code class="f">R1 = 100 Ω, R2 = 300 Ω, V = 220 V
+Req = 400 Ω   I = 220 / 400 = 0,55 A
+V1 = 0,55 × 100 = 55 V
+V2 = 0,55 × 300 = 165 V   (55 + 165 = 220 V)</code>
+<p>La resistencia mayor se queda con la mayor parte de la tensión.</p>
+<h4>Aplicación: conexiones defectuosas</h4>
+<p>Una unión floja es una pequeña resistencia en serie con el circuito. Le "roba" tensión al equipo y concentra calor en ese punto. Es la explicación eléctrica de por qué una conexión floja puede iniciar un incendio.</p>
+<h4>Aplicación: protecciones</h4>
+<p>Automáticos, diferenciales e interruptores van siempre en serie con lo que controlan o protegen: si se abren, cortan todo lo que está después.</p>`,
+"3.3":`<h4>Paralelo con resistencias distintas</h4>
+<code class="f">R1 = 100 Ω, R2 = 300 Ω, V = 220 V
+I1 = 220 / 100 = 2,2 A
+I2 = 220 / 300 = 0,73 A
+I total = 2,93 A
+Req = 220 / 2,93 ≈ 75 Ω   (menor que la menor)</code>
+<p>La carga de menor resistencia es la que consume más corriente y más potencia.</p>
+<h4>Por qué agregar cargas aumenta la corriente</h4>
+<p>Cada carga nueva en paralelo abre un camino más para la corriente. La resistencia total baja y la corriente total sube. Por eso se dice que un circuito "se carga" a medida que se enchufan equipos.</p>
+<h4>Circuitos mixtos</h4>
+<p>Una instalación real es mixta: el automático y el cable están en serie con el conjunto, y las cargas están en paralelo entre sí. Para calcular, primero resuelve las partes en paralelo y luego suma lo que está en serie.</p>`,
+"3.4":`<h4>Categorías de medición</h4>
+<div class="tw"><table><tr><th>Categoría</th><th>Dónde se mide</th></tr>
+<tr><td>CAT II</td><td>Enchufes y equipos conectados a ellos</td></tr>
+<tr><td>CAT III</td><td>Tableros, circuitos fijos, enchufes de la instalación</td></tr>
+<tr><td>CAT IV</td><td>Origen de la instalación: empalme, medidor</td></tr></table></div>
+<p>La categoría indica la capacidad del instrumento para soportar sobretensiones transitorias sin explotar. Un instrumento CAT II no debe usarse en un tablero.</p>
+<h4>Otros instrumentos del instalador</h4>
+<ul><li><b>Megóhmetro:</b> mide resistencia de aislación aplicando 500 V CC o más.</li>
+<li><b>Telurómetro:</b> mide la resistencia de la puesta a tierra.</li>
+<li><b>Probador de diferenciales:</b> simula una fuga y mide el tiempo de disparo.</li>
+<li><b>Detector de tensión bipolar:</b> verifica ausencia de tensión de forma segura.</li></ul>
+<h4>Cuidado del instrumento</h4>
+<p>Revisa periódicamente las puntas y la batería. Una batería baja puede dar lecturas falsas, y una punta dañada expone metal con tensión.</p>`,
+"4.1":`<h4>Cómo se organiza la normativa</h4>
+<ul><li><b>Ley General de Servicios Eléctricos:</b> marco general.</li>
+<li><b>Reglamento de Seguridad de las Instalaciones de Consumo de Energía Eléctrica</b> (Ministerio de Energía): obligaciones generales.</li>
+<li><b>Pliegos Técnicos Normativos RIC N°01 al N°19</b> (SEC): exigencias técnicas detalladas.</li></ul>
+<h4>Responsabilidades</h4>
+<ul><li><b>Propietario:</b> mantener la instalación en buen estado y usarla correctamente.</li>
+<li><b>Instalador:</b> proyectar y ejecutar según los pliegos, declarar y responder por su trabajo.</li>
+<li><b>SEC:</b> fiscalizar, recibir declaraciones y sancionar incumplimientos.</li></ul>
+<h4>Otros pliegos útiles</h4>
+<ul><li>RIC N°08: sistemas de emergencia.</li><li>RIC N°09: autogeneración (paneles solares).</li>
+<li>RIC N°15: recarga de vehículos eléctricos.</li><li>RIC N°17: operación y mantenimiento.</li></ul>
+<p>Aunque no los apliques hoy, conviene saber que existen: son áreas de trabajo en crecimiento.</p>`,
+"4.2":`<h4>Tipos de tablero</h4>
+<ul><li><b>TG (tablero general):</b> recibe el alimentador y distribuye.</li>
+<li><b>TDA (tablero de distribución de alumbrado):</b> circuitos de iluminación y enchufes.</li>
+<li><b>TDF (tablero de distribución de fuerza):</b> motores y equipos de mayor potencia.</li></ul>
+<p>En una vivienda normalmente hay un solo tablero que cumple todas las funciones.</p>
+<h4>Qué significa IP 41</h4>
+<ul><li><b>Primer dígito (4):</b> protección contra sólidos mayores de 1 mm (herramientas, alambres).</li>
+<li><b>Segundo dígito (1):</b> protección contra gotas de agua que caen verticalmente.</li></ul>
+<p>Un tablero IP 54 al exterior protege contra polvo y salpicaduras en cualquier dirección.</p>
+<h4>IK: resistencia a impactos</h4>
+<p>El código IK indica qué golpe resiste la envolvente. El RIC N°02 pide al menos IK 07 en materiales no metálicos.</p>
+<h4>Ubicación recomendada</h4>
+<p>Lugar seco, accesible, iluminado, cerca de la entrada y fuera de baños, closets cerrados o zonas de difícil acceso. En emergencias, el usuario debe poder llegar rápido.</p>`,
+"4.3":`<h4>Cuándo dispara la parte magnética</h4>
+<p>Ejemplo con un automático C16:</p>
+<code class="f">Curva C: entre 5 y 10 × In
+5 × 16 = 80 A   10 × 16 = 160 A
+Sobre 160 A corta seguro de forma instantánea</code>
+<p>Entre 16 A y 80 A actúa solo la parte térmica, más rápido mientras mayor sea la sobrecarga.</p>
+<h4>Poder de corte</h4>
+<p>Es la máxima corriente de cortocircuito que el automático puede interrumpir sin dañarse. En viviendas es habitual 6 kA. Debe ser mayor que la corriente de cortocircuito posible en ese punto.</p>
+<h4>Polos</h4>
+<ul><li><b>1P:</b> corta solo la fase.</li><li><b>2P:</b> corta fase y neutro (corte omnipolar).</li>
+<li><b>3P / 4P:</b> instalaciones trifásicas.</li></ul>
+<h4>Selectividad</h4>
+<p>Ante una falla debe saltar el automático más cercano a ella, no el general. Por eso el general es de mayor corriente que los automáticos de los circuitos.</p>
+<h4>Certificación</h4>
+<p>Los automáticos deben estar certificados para su venta en Chile. Evita productos sin certificación: pueden no cortar cuando corresponde.</p>`,
+"4.4":`<h4>Tipos de diferencial</h4>
+<div class="tw"><table><tr><th>Tipo</th><th>Detecta</th><th>Uso</th></tr>
+<tr><td>AC</td><td>Fugas de corriente alterna senoidal</td><td>Cargas simples (cada vez menos común)</td></tr>
+<tr><td>A</td><td>Alterna y continua pulsante</td><td>Equipos electrónicos, lavadoras, inductivos</td></tr>
+<tr><td>B</td><td>También continua pura</td><td>Cargadores de vehículos, variadores, inversores</td></tr></table></div>
+<h4>Tiempo de disparo</h4>
+<p>Según las normas de producto, un diferencial general debe abrir en no más de 300 ms con una fuga igual a su sensibilidad, y mucho más rápido con fugas mayores.</p>
+<h4>Disparos sin falla aparente</h4>
+<p>Muchos equipos tienen pequeñas fugas normales (filtros de computadores, cargadores). Si se conectan muchos en un mismo diferencial, las fugas se suman y pueden hacerlo saltar. Repartir los circuitos entre varios diferenciales evita este problema.</p>
+<h4>Recomendación al usuario</h4>
+<p>Explica al cliente que debe presionar el botón T periódicamente (los fabricantes suelen sugerir una vez al mes) y que, si no corta, debe llamar a un instalador.</p>`,
+"5.1":`<h4>Lectura de la aislación</h4>
+<p>Un conductor trae impreso, por ejemplo: <b>"H07Z1-K 1×2,5 mm² 450/750 V"</b>.</p>
+<ul><li><b>H07:</b> norma armonizada, tensión 450/750 V.</li><li><b>Z1:</b> aislación libre de halógenos.</li>
+<li><b>K:</b> conductor flexible.</li><li><b>1×2,5 mm²:</b> un conductor de 2,5 mm².</li></ul>
+<h4>Factores de corrección: ejemplo</h4>
+<p>Un ducto lleva 4 conductores activos de 2,5 mm² (70 °C, embutido):</p>
+<code class="f">Capacidad base: 18 A
+Factor por agrupamiento (4 a 6 activos): 0,8
+Capacidad corregida: 18 × 0,8 = 14,4 A
+→ el automático de 16 A ya no corresponde; usar 10 A o subir a 4 mm²</code>
+<h4>Alambre o cable</h4>
+<ul><li><b>Alambre (rígido):</b> un solo hilo; para canalizaciones fijas.</li>
+<li><b>Cable (flexible):</b> muchos hilos; más fácil de pasar por ductos con curvas. Requiere terminal en los bornes.</li></ul>`,
+"5.2":`<h4>Instalaciones trifásicas</h4>
+<p>En tableros trifásicos se usan los tres colores de fase (azul, negro y rojo) para identificar cada una. El orden de las fases (secuencia) importa en motores: si se invierte, el motor gira al revés.</p>
+<h4>Instalaciones antiguas</h4>
+<p>En casas antiguas es común encontrar colores que no siguen la norma. Antes de intervenir:</p>
+<ul><li>Identifica cada conductor midiendo, nunca por su color.</li>
+<li>Si vas a dejar un conductor con otro uso, márcalo con cinta del color correcto en ambos extremos.</li>
+<li>Deja anotado en el cuadro de circuitos cualquier excepción.</li></ul>
+<h4>Conductores de más de 21 mm²</h4>
+<p>Si vienen en un solo color, se marcan en los extremos y cada 5 m con el color correspondiente (RIC N°04, 5.33).</p>
+<h4>Para la evaluación</h4>
+<p>El evaluador revisará los colores. Un retorno de alumbrado es una fase interrumpida: usa color de fase, nunca blanco ni verde.</p>`,
+"5.3":`<h4>Tipos de canalización</h4>
+<div class="tw"><table><tr><th>Tipo</th><th>Dónde</th><th>Ventaja</th></tr>
+<tr><td>Embutida en muro o losa</td><td>Obra nueva</td><td>Protegida y estética</td></tr>
+<tr><td>Sobrepuesta con conduit o EMT</td><td>Talleres, bodegas, ampliaciones</td><td>Fácil de modificar</td></tr>
+<tr><td>Canaleta plástica</td><td>Remodelaciones en interiores</td><td>Sin romper muros</td></tr>
+<tr><td>Bandeja</td><td>Industrias, grandes recorridos</td><td>Muchos cables y ventilación</td></tr></table></div>
+<h4>Diámetros de ducto</h4>
+<p>Los conduit domiciliarios más usados son de 16, 20 y 25 mm. Un ducto debe permitir pasar los conductores sin forzarlos: si hay que tirar con fuerza, se daña la aislación.</p>
+<h4>Separación con otras redes</h4>
+<p>Las canalizaciones eléctricas se separan de tuberías de gas (30 cm en paralelo, 10 cm en cruce) y se evita su paso junto a fuentes de calor.</p>
+<h4>Buenas prácticas</h4>
+<ul><li>Recorridos horizontales y verticales, nunca en diagonal: así otros saben dónde no perforar.</li>
+<li>Cajas de registro en tramos largos o con muchas curvas.</li></ul>`,
+"5.4":`<h4>Cómo se mide la resistencia de tierra</h4>
+<p>El método más usado es el de <b>caída de potencial</b> con telurómetro:</p>
+<ol><li>Se desconecta el electrodo de la instalación.</li>
+<li>Se clavan dos estacas auxiliares en línea con el electrodo, a distancias indicadas por el fabricante del instrumento.</li>
+<li>El instrumento inyecta corriente y mide la tensión; muestra la resistencia en ohm.</li></ol>
+<h4>De qué depende el valor</h4>
+<ul><li>Tipo de suelo: arcilla húmeda conduce mejor que arena o roca.</li>
+<li>Humedad: en verano seco la resistencia sube.</li><li>Largo y número de electrodos.</li></ul>
+<p>Para mejorar una tierra se agregan electrodos (separados al menos el doble de su largo) o se mejora el terreno con productos especiales.</p>
+<h4>Equipotencialidad</h4>
+<p>Unir entre sí las partes metálicas (cañerías, tinas metálicas, estructuras) evita que aparezcan diferencias de tensión entre ellas durante una falla. Es especialmente importante en baños.</p>`,
+"6.1":`<h4>Capacidad de los interruptores</h4>
+<p>Los interruptores domiciliarios suelen ser de 10 o 16 A. La carga que controlan debe estar dentro de esa capacidad.</p>
+<h4>Otros controles de alumbrado</h4>
+<ul><li><b>Dimmer:</b> regula la intensidad. Verifica que la ampolleta LED sea "dimerizable".</li>
+<li><b>Sensor de movimiento:</b> enciende al detectar presencia; útil en pasillos y exteriores.</li>
+<li><b>Fotocelda:</b> enciende al oscurecer; típica en alumbrado exterior.</li></ul>
+<h4>Iluminación LED</h4>
+<p>Una ampolleta LED de 9 W entrega una luz parecida a una incandescente de 60 W. Aun así, el RIC pide calcular con 100 W por centro cuando no se conoce la luminaria, para dejar margen.</p>
+<h4>Alumbrado de emergencia</h4>
+<p>En recintos de reunión de público el RIC N°08 exige iluminación de emergencia. En viviendas no es obligatorio, pero es buena práctica en escaleras.</p>
+<h4>Ejemplo de distribución</h4>
+<p>Living de 4 × 4 m (16 m²): 2 centros de luz, cada uno con su interruptor, idealmente junto a la puerta de acceso.</p>`,
+"6.2":`<h4>Tres o más puntos: interruptor de cruce</h4>
+<p>Para controlar una luz desde tres lugares se intercala un <b>interruptor de cruce</b> (inversor) entre los dos conmutadores 9/24. Recibe los dos viajeros y los cruza o los deja directos. Se pueden agregar tantos cruces como puntos extra se necesiten.</p>
+<h4>Alternativa: relé de impulso</h4>
+<p>En pasillos largos con muchos puntos se usan <b>pulsadores</b> que activan un relé de impulso (telerruptor) en el tablero. Cada pulsación cambia el estado de la luz. Simplifica el cableado.</p>
+<h4>Cómo identificar los bornes</h4>
+<ul><li>El común suele estar marcado con una letra, un color distinto o estar separado de los otros dos.</li>
+<li>Si no está marcado: con el multímetro en continuidad, el común es el borne que tiene continuidad con uno u otro de los demás según la posición del balancín.</li></ul>
+<h4>Prueba final</h4>
+<p>Prueba las cuatro combinaciones (A arriba/abajo, B arriba/abajo): la luz debe cambiar de estado cada vez que se mueve cualquiera de los dos.</p>`,
+"6.3":`<h4>Enchufes de 10 y 16 A</h4>
+<p>En Chile se usa el enchufe tipo L (italiano), con pines de distinto grosor para 10 y 16 A, y el tipo C sin tierra en equipos antiguos. Los equipos de alto consumo (hornos, algunos termos) pueden venir con enchufe de 16 A.</p>
+<h4>Enchufes especiales</h4>
+<ul><li><b>Exteriores:</b> con tapa y grado de protección contra agua (por ejemplo IP44).</li>
+<li><b>Cocina sobre cubierta:</b> evitar ubicarlos donde salpique agua del lavaplatos.</li>
+<li><b>Carga de vehículos eléctricos:</b> se rige por el RIC N°15, con circuito exclusivo.</li></ul>
+<h4>Por qué la tierra en el enchufe</h4>
+<p>El borne central conecta la carcasa del equipo a tierra. Si un equipo con carcasa metálica tiene una falla, la corriente se va por la tierra y actúa el diferencial, en vez de pasar por quien lo toca.</p>
+<h4>Ejemplo</h4>
+<p>Cocina de 3 × 3 m: mínimo 3 enchufes dobles de 10/16 A, en circuito exclusivo de cocina de al menos 16 A, más un enchufe de 16 A para horno si corresponde.</p>`,
+"6.4":`<h4>Ejemplo: vivienda de 70 m²</h4>
+<div class="tw"><table><tr><th>Circuito</th><th>Contenido</th><th class="n">Protección</th><th class="n">Sección</th></tr>
+<tr><td>C1</td><td>Alumbrado zona día</td><td class="n">10 A</td><td class="n">1,5 mm²</td></tr>
+<tr><td>C2</td><td>Alumbrado zona noche</td><td class="n">10 A</td><td class="n">1,5 mm²</td></tr>
+<tr><td>C3</td><td>Enchufes living y comedor</td><td class="n">16 A</td><td class="n">2,5 mm²</td></tr>
+<tr><td>C4</td><td>Enchufes dormitorios</td><td class="n">16 A</td><td class="n">2,5 mm²</td></tr>
+<tr><td>C5</td><td>Cocina y lavadero</td><td class="n">16 A</td><td class="n">2,5 mm²</td></tr></table></div>
+<p>Con dos diferenciales de 30 mA: uno para C1, C3 y C4, y otro para C2 y C5 (máximo 3 circuitos por diferencial).</p>
+<h4>Criterios de buen diseño</h4>
+<ul><li>Separar alumbrado y enchufes: si salta un enchufe, la casa no queda a oscuras.</li>
+<li>Repartir el alumbrado en dos circuitos y en distintos diferenciales.</li>
+<li>Dejar circuitos de reserva para ampliaciones futuras.</li></ul>`,
+"6.5":`<h4>Conexión equipotencial suplementaria</h4>
+<p>En baños con tinas o duchas metálicas, se unen con un conductor las partes metálicas accesibles (tina, cañerías metálicas) y el conductor de protección. Así, ante una falla, no aparece tensión entre ellas.</p>
+<h4>Equipos típicos en baños</h4>
+<ul><li><b>Extractor:</b> en el volumen 2 o 3 según su grado IP y lo que indique el fabricante, con diferencial de 30 mA.</li>
+<li><b>Toallero eléctrico:</b> fuera de los volúmenes 0 y 1, con protección diferencial.</li>
+<li><b>Espejo con luz:</b> verificar el volumen donde queda y su grado IP.</li></ul>
+<h4>Grado IPX4</h4>
+<p>La X indica que no se especifica protección contra sólidos; el 4 significa protección contra salpicaduras de agua desde cualquier dirección. Es el mínimo en los volúmenes 1 y 2.</p>
+<h4>En la evaluación</h4>
+<p>Si en un plano el interruptor del baño queda dentro, lo correcto es ubicarlo afuera, junto a la puerta.</p>`,
+"7.1":`<h4>Contenido de la viñeta</h4>
+<ul><li>Nombre del proyecto y dirección.</li><li>Propietario.</li><li>Instalador, clase de licencia y RUT.</li>
+<li>Contenido de la lámina, escala, fecha y número de lámina.</li><li>Espacio para firma.</li></ul>
+<h4>Especificaciones técnicas</h4>
+<p>Describen materiales y métodos: tipo de conductor, canalización, tableros, protecciones, marcas o equivalentes. Permiten que otro instalador ejecute sin ambigüedades.</p>
+<h4>Levantamiento de una instalación existente</h4>
+<ol><li>Identificar el tablero y sus circuitos.</li><li>Recorrer cada recinto anotando luces, interruptores y enchufes.</li>
+<li>Con el circuito desenergizado, verificar a qué automático pertenece cada punto.</li><li>Dibujar la planta y el unilineal "como construido".</li></ol>
+<h4>Revisión antes de presentar</h4>
+<p>Comprueba que cada punto tenga número de circuito, que el cuadro de cargas sume bien y que la potencia total no supere los 10 kW de la clase D.</p>`,
+"7.2":`<h4>Simbología en AutoCAD</h4>
+<ul><li>Crea un <b>bloque</b> por símbolo, con atributo para el número de circuito.</li>
+<li>Usa una <b>capa</b> por tipo: luminarias, enchufes, interruptores, canalizaciones, textos, tablero.</li>
+<li>Usa un color por circuito en las canalizaciones para revisarlo visualmente.</li></ul>
+<h4>Rotulación de puntos</h4>
+<p>Cada símbolo lleva al lado su circuito (por ejemplo C3). Los interruptores llevan una letra que indica qué luz controlan (a, b, c) y la luz lleva la misma letra.</p>
+<h4>Indicación de conductores</h4>
+<p>En las canalizaciones se dibujan pequeñas líneas transversales que indican cuántos conductores van por ese tramo: útil en circuitos de escalera.</p>
+<h4>Leyenda</h4>
+<p>Toda lámina incluye una tabla con cada símbolo y su significado. Sin leyenda, el plano no se puede interpretar con certeza.</p>`,
+"7.3":`<h4>Unilineal trifásico</h4>
+<p>En instalaciones trifásicas se usa la misma lógica: una línea por circuito, con pequeñas diagonales que indican el número de conductores, y se anota a qué fase está conectado cada circuito monofásico para equilibrar las cargas.</p>
+<h4>Datos de cada elemento</h4>
+<div class="tw"><table><tr><th>Elemento</th><th>Datos mínimos</th></tr>
+<tr><td>Alimentador</td><td>Sección, tipo de conductor, canalización</td></tr>
+<tr><td>Protección general</td><td>Polos, corriente, curva, poder de corte</td></tr>
+<tr><td>Diferencial</td><td>Polos, corriente, sensibilidad, tipo</td></tr>
+<tr><td>Circuito</td><td>Número, protección, sección, destino, potencia</td></tr></table></div>
+<h4>Coherencia con el cuadro de cargas</h4>
+<p>El unilineal y el cuadro de cargas deben decir exactamente lo mismo. Una diferencia entre ambos es una observación segura en cualquier revisión.</p>`,
+"7.4":`<h4>Cuadro de cargas completo</h4>
+<p>Además de las columnas básicas, un cuadro profesional incluye:</p>
+<ul><li>Número de centros de luz y de enchufes.</li><li>Potencia por circuito y total.</li>
+<li>Corriente y corriente de diseño (+10%).</li><li>Protección, sección y caída de tensión.</li><li>Diferencial al que pertenece.</li></ul>
+<h4>Ejemplo de demanda con más carga</h4>
+<code class="f">Potencia instalada de alumbrado: 9.000 W
+Primeros 3.000 W × 1     = 3.000 W
+Resto 6.000 W × 0,35     = 2.100 W
+Demanda máxima           = 5.100 W → 23,2 A</code>
+<p>Con 23,2 A, la protección del empalme de 25 A queda justa: conviene revisar el alimentador y la capacidad del empalme.</p>
+<h4>Recordatorio</h4>
+<p>Los factores de demanda se aplican al alimentador, nunca a los circuitos individuales.</p>`,
+"8.1":`<h4>Cargas trifásicas</h4>
+<code class="f">I = P / (√3 × V × cos φ)</code>
+<p>Ejemplo: motor trifásico de 3 kW, 380 V, cos φ 0,85:</p>
+<code class="f">I = 3000 / (1,732 × 380 × 0,85) = 5,4 A</code>
+<h4>Corriente de partida de motores</h4>
+<p>Al arrancar, un motor puede pedir varias veces su corriente nominal durante unos segundos. Por eso los motores usan automáticos curva C o D, que no saltan con esa corriente breve.</p>
+<h4>Usar potencias reales</h4>
+<p>Cuando el cliente ya sabe qué equipos tendrá (horno, termo, lavadora), conviene calcular con su potencia real en vez de 250 W por enchufe. El resultado es más fiel y evita circuitos subdimensionados.</p>
+<h4>Ejemplo</h4>
+<p>Lavadero con lavadora de 2000 W y secadora de 2500 W: 4500 / 220 = 20,5 A. No caben en un circuito de 16 A: necesitan dos circuitos o uno de mayor capacidad con su conductor correspondiente.</p>`,
+"8.2":`<h4>Tabla de selección rápida (referencial)</h4>
+<div class="tw"><table><tr><th class="n">Corriente de diseño</th><th class="n">Automático</th><th class="n">Conductor mínimo</th></tr>
+<tr><td class="n">hasta 10 A</td><td class="n">10 A</td><td class="n">1,5 mm² (alumbrado) / 2,5 mm² (enchufes)</td></tr>
+<tr><td class="n">10 a 16 A</td><td class="n">16 A</td><td class="n">2,5 mm²</td></tr>
+<tr><td class="n">16 a 20 A</td><td class="n">20 A</td><td class="n">4 mm²</td></tr>
+<tr><td class="n">20 a 25 A</td><td class="n">25 A</td><td class="n">6 mm²</td></tr></table></div>
+<p class="norm">Para ductos embutidos a 30 °C sin agrupamiento. Corrige si hay más conductores o mayor temperatura, y verifica siempre la caída de tensión.</p>
+<h4>Coordinación</h4>
+<p>Se debe cumplir siempre:</p>
+<code class="f">Corriente de diseño ≤ Corriente del automático ≤ Capacidad del conductor</code>
+<h4>Ejemplo</h4>
+<p>Termo de 2500 W: 11,4 A × 1,1 = 12,5 A → automático 16 A → conductor 2,5 mm² (18 A). Cumple la coordinación.</p>`,
+"8.3":`<h4>Caída acumulada</h4>
+<p>La caída total es la suma de la caída del alimentador más la del circuito:</p>
+<code class="f">Alimentador: 15 m, 4 mm², 20 A
+ΔV = 2 × 0,018 × 15 × 20 / 4 = 2,7 V (1,2%)
+Circuito: 25 m, 2,5 mm², 12 A
+ΔV = 2 × 0,018 × 25 × 12 / 2,5 = 4,3 V (2,0%)
+Total = 3,2%   → cumple el 5%</code>
+<h4>Efectos de una caída excesiva</h4>
+<ul><li>Motores que arrancan con dificultad y se calientan.</li><li>Luces que bajan su intensidad al encender otros equipos.</li>
+<li>Equipos electrónicos que se reinician.</li></ul>
+<h4>Casos en que más importa</h4>
+<p>Recorridos largos: bodegas al fondo del terreno, portones eléctricos, bombas de agua lejanas, iluminación exterior. En estos casos la caída de tensión, y no la capacidad, suele definir la sección.</p>`,
+"8.4":`<h4>Antes de declarar</h4>
+<ul><li>Instalación terminada y probada según el RIC N°19.</li><li>Planos, unilineal y cuadro de cargas finales.</li>
+<li>Protocolo de mediciones registrado.</li><li>Potencia dentro de la clase de tu licencia.</li></ul>
+<h4>Después de declarar</h4>
+<p>La SEC puede fiscalizar la instalación en cualquier momento. Si encuentra incumplimientos, el instalador debe corregirlos y puede ser sancionado.</p>
+<h4>Instalaciones que se modifican</h4>
+<p>Ampliaciones importantes, aumentos de potencia o cambios del empalme requieren una nueva declaración. Reparaciones menores, como cambiar un enchufe por otro igual, normalmente no.</p>
+<h4>Ética profesional</h4>
+<p>Nunca declares una instalación que no ejecutaste o no revisaste. Tu firma y tu licencia respaldan ese documento.</p>`,
+"9.1":`<h4>Herramientas para armar un tablero</h4>
+<ul><li>Destornilladores aislados (paleta y cruz) de varios tamaños.</li><li>Alicate pelacables y alicate de terminales.</li>
+<li>Alicate cortante aislado.</li><li>Huincha, nivel y taladro para la fijación.</li><li>Amarras plásticas y rotulador.</li></ul>
+<h4>Apriete</h4>
+<p>Cada fabricante indica el apriete adecuado de sus bornes. Un apriete insuficiente genera calor; uno excesivo puede dañar el conductor o el borne.</p>
+<h4>Orden recomendado</h4>
+<ol><li>Montaje mecánico completo (caja, riel, equipos, barras).</li><li>Cableado interno entre protecciones.</li>
+<li>Llegada del alimentador.</li><li>Conexión de los circuitos salientes.</li><li>Revisión visual, rotulado y cierre.</li></ol>
+<h4>Señales de un trabajo profesional</h4>
+<p>Cables a escuadra, sin cruces, con la misma longitud de pelado, rótulos legibles y espacio para agregar circuitos.</p>`,
+"9.2":`<h4>Puentes entre protecciones</h4>
+<p>Para alimentar varios automáticos desde un diferencial se usan puentes de conductor o <b>peines de conexión</b>. El peine reparte la corriente de forma ordenada y evita múltiples cables en un mismo borne.</p>
+<h4>Cuántos conductores por borne</h4>
+<p>Respeta lo que indique el fabricante. Meter varios cables de distinta sección en un mismo borne puede dejar alguno suelto.</p>
+<h4>Revisión de conexiones</h4>
+<ul><li>Tira suavemente de cada conductor después de apretarlo: no debe salir.</li>
+<li>Verifica que la aislación llegue hasta el borne, sin cobre a la vista.</li>
+<li>Revisa que el conductor no quede apretado por la aislación (debe apretar el cobre).</li></ul>
+<h4>Mantención</h4>
+<p>En instalaciones en uso, el reapriete periódico de bornes es parte de la mantención preventiva (RIC N°17). El calor de un borne flojo se puede detectar con termografía.</p>`,
+"9.3":`<h4>Cómo medir aislación paso a paso</h4>
+<ol><li>Instalación desenergizada, general abierto.</li><li>Desconectar o retirar equipos, ampolletas y cargas electrónicas.</li>
+<li>Cerrar los automáticos de los circuitos a medir.</li><li>Medir entre fase y tierra, neutro y tierra, y fase y neutro, a 500 V CC durante un minuto.</li>
+<li>Registrar los valores: deben ser al menos 0,5 MΩ.</li><li>Descargar la instalación antes de tocarla.</li></ol>
+<h4>Prueba del diferencial con instrumento</h4>
+<p>El probador simula una fuga igual a la sensibilidad (30 mA) y mide el tiempo de disparo. Un diferencial que no corta o tarda demasiado se reemplaza.</p>
+<h4>Protocolo</h4>
+<p>Registrar fecha, instrumento, valores por circuito y resultado. Es evidencia de que la instalación se probó antes de ponerla en servicio.</p>`,
+"9.4":`<h4>Árbol de diagnóstico: el diferencial salta</h4>
+<ol><li>¿Salta apenas se sube, sin nada conectado? → revisa neutros cruzados o unidos a tierra.</li>
+<li>¿Salta solo al conectar un equipo? → el equipo tiene fuga.</li>
+<li>¿Salta al azar, con lluvia? → humedad en cajas exteriores o enchufes de patio.</li>
+<li>¿Salta con muchos equipos electrónicos encendidos? → suma de fugas normales; repartir circuitos.</li></ol>
+<h4>Árbol de diagnóstico: no hay tensión</h4>
+<ol><li>¿Está el automático arriba? ¿Y el diferencial?</li><li>¿Hay tensión a la salida del automático?</li>
+<li>¿Hay tensión en el primer punto del circuito? Avanza punto por punto hasta encontrar dónde se pierde.</li></ol>
+<h4>Herramientas de diagnóstico</h4>
+<p>Multímetro, pinza amperimétrica, megóhmetro y, en instalaciones mayores, cámara termográfica para encontrar puntos calientes.</p>`,
+"10.1":`<h4>Unidades de competencia</h4>
+<p>Un perfil de ChileValora se divide en unidades de competencia, cada una con criterios de desempeño. El evaluador revisa cada unidad por separado; puedes quedar competente en unas y no en otras.</p>
+<h4>Portafolio de evidencias</h4>
+<ul><li>Fotos de trabajos realizados (antes y después).</li><li>Planos o esquemas que hayas hecho.</li>
+<li>Certificados de cursos y capacitaciones.</li><li>Cartas de referencia de empleadores o clientes.</li></ul>
+<h4>Prepara la entrevista</h4>
+<p>A veces la evaluación incluye preguntas sobre tu experiencia. Ten claro qué trabajos has hecho, qué normas aplicaste y cómo resolviste problemas.</p>
+<h4>Si no quedas competente</h4>
+<p>Pide la retroalimentación del evaluador: te dirá qué reforzar para una próxima evaluación.</p>`,
+"10.2":`<h4>Errores que más restan puntos</h4>
+<ul><li>No verificar ausencia de tensión antes de intervenir.</li><li>Colores de conductor incorrectos.</li>
+<li>Neutros cruzados entre diferenciales.</li><li>Cobre a la vista en los bornes.</li><li>Energizar sin hacer pruebas previas.</li></ul>
+<h4>Manejo del tiempo</h4>
+<p>Reparte el tiempo: lectura del plano, planificación, montaje, pruebas y cierre. Deja al menos el 20% del tiempo para pruebas y correcciones.</p>
+<h4>Comunicación con el evaluador</h4>
+<p>Explica en voz alta lo que haces y por qué: "voy a verificar ausencia de tensión con el multímetro, primero lo pruebo en una fuente con tensión". Eso demuestra criterio, no solo habilidad manual.</p>`,
+"10.3":`<h4>Lista de verificación de la noche anterior</h4>
+<ul><li>Cédula y ClaveÚnica probada.</li><li>EPP completo y en buen estado.</li><li>Herramientas revisadas y multímetro con batería.</li>
+<li>Calculadora y lápiz.</li><li>Ficha de fórmulas para repasar antes de entrar.</li><li>Ruta y hora de llegada.</li></ul>
+<h4>Repaso final sugerido (30 minutos)</h4>
+<ol><li>Las 5 reglas de oro.</li><li>Colores de conductores.</li><li>Secciones y protecciones.</li>
+<li>Diferencial: 30 mA y máximo 3 circuitos.</li><li>Fórmulas de corriente y caída de tensión.</li></ol>
+<h4>Durante la prueba</h4>
+<p>Si te equivocas, no lo escondas: corrige y explica. El evaluador valora que detectes y corrijas tus propios errores.</p>`
+};
 
 /* ---------- Para exponer en clase ---------- */
 const EXP={
@@ -1511,7 +1970,7 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify([...done]))}catch(e)
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 const $=id=>document.getElementById(id);
 
-function tabsOf(c){return [...c.pts.map((p,i)=>{const fg=FIGS[c.n+"."+(i+1)];const k=c.n+"."+(i+1);return {key:"Tema "+(i+1),t:p.t,html:`<h3>${esc(p.t)}</h3>`+(fg?`<figure class="ref">${fg.s}<figcaption>${fg.c}</figcaption></figure>`:"")+realHTML(k)+`<div class="prose">${p.h}</div>`+expHTML(k)}}),
+function tabsOf(c){return [...c.pts.map((p,i)=>{const fg=FIGS[c.n+"."+(i+1)];const k=c.n+"."+(i+1);return {key:"Tema "+(i+1),t:p.t,html:`<h3>${esc(p.t)}</h3>`+(fg?`<figure class="ref">${fg.s}<figcaption>${fg.c}</figcaption></figure>`:"")+realHTML(k)+`<div class="prose">${p.h}</div>`+(MORE[k]?`<section class="more prose"><span class="eyebrow">Profundiza</span>${MORE[k]}</section>`:"")+expHTML(k)}}),
   {key:"Sin materiales",t:"Práctica",extra:true,html:`<div class="prose">${c.taller}</div>`},
   {key:"Prueba",t:"Autoevaluación",extra:true,quiz:true}]}
 

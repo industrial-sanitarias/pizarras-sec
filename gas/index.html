@@ -250,6 +250,12 @@ body.proj .photo{flex-basis:300px}body.proj .photo img{width:300px}
 body.proj .tab{font-size:16px}
 body.proj .pnav button{font-size:18px;padding:10px 16px}
 .kbd-hint{font-size:12px;color:var(--muted)}
+
+/* Profundiza */
+.more{margin-top:22px;border:1px solid var(--line);border-radius:10px;padding:16px clamp(14px,3vw,24px) 6px;background:linear-gradient(180deg,var(--accent-soft),var(--paper) 120px);max-width:900px}
+.more>.eyebrow{color:var(--accent);font-weight:500;display:block;margin-bottom:4px}
+.more h4:first-of-type{margin-top:6px}
+body.proj .more{max-width:1180px}
 @media (prefers-reduced-motion: reduce){.bar span{transition:none}}
 </style>
 
@@ -587,6 +593,385 @@ function realHTML(k){
    (ls.length?`<div class="links"><div class="eyebrow">Ver en la realidad</div><ul>${ls.map(([t,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${esc(t)} ↗</a></li>`).join("")}</ul></div>`:"")+
   `</div>`;
 }
+
+/* ---------- Profundiza ---------- */
+const MORE={
+"1.1":`<h4>Composición aproximada</h4>
+<div class="tw"><table><tr><th>Gas</th><th>Componentes principales</th><th>Estado en el envase</th></tr>
+<tr><td>Gas natural</td><td>Metano (CH₄), en su mayor parte, con pequeñas cantidades de etano y otros</td><td>Gaseoso en la red</td></tr>
+<tr><td>Gas licuado</td><td>Propano (C₃H₈) y butano (C₄H₁₀)</td><td>Líquido a presión dentro del cilindro</td></tr></table></div>
+<h4>Por qué el GLP viene "líquido"</h4>
+<p>Al comprimirlo, el propano y el butano se licúan. Así cabe mucha energía en un cilindro pequeño. Al abrir la válvula, la presión baja y el líquido hierve, convirtiéndose en gas que sale hacia el regulador.</p>
+<h4>Origen</h4>
+<ul><li>El gas natural se extrae de yacimientos y en Chile llega principalmente importado como gas natural licuado, que se regasifica.</li>
+<li>El gas licuado se obtiene de la refinación del petróleo y del procesamiento del gas natural.</li></ul>
+<h4>Para el instalador</h4>
+<p>Saber qué gas usa la vivienda define materiales, ubicación de artefactos, ventilaciones, cálculo de diámetros y la conversión de artefactos.</p>`,
+"1.2":`<h4>Comparación de propiedades (valores aproximados)</h4>
+<div class="tw"><table><tr><th>Propiedad</th><th>Gas natural</th><th>Propano</th></tr>
+<tr><td>Densidad relativa al aire</td><td>≈ 0,6</td><td>≈ 1,5</td></tr>
+<tr><td>Poder calorífico</td><td>≈ 9.300 kcal/m³</td><td>≈ 24.000 kcal/m³</td></tr>
+<tr><td>Límites de inflamabilidad</td><td>5 a 15 %</td><td>2,1 a 9,5 %</td></tr>
+<tr><td>Aire teórico para quemar 1 m³</td><td>≈ 10 m³</td><td>≈ 24 m³</td></tr></table></div>
+<p class="norm">Valores de referencia. Para el cálculo usa los que informa la distribuidora.</p>
+<h4>Lectura de la tabla</h4>
+<ul><li>El propano entrega más del doble de energía por m³: con la misma potencia, circula menos gas y las cañerías pueden ser más delgadas.</li>
+<li>El propano necesita mucho más aire: las exigencias de ventilación son críticas.</li>
+<li>El propano se inflama con menor porcentaje en el aire: es más fácil llegar a una mezcla peligrosa.</li></ul>`,
+"1.3":`<h4>Aire primario y secundario</h4>
+<p>En un quemador atmosférico (cocina, calefont), el gas sale por un inyector y arrastra <b>aire primario</b> antes de la llama. El resto del oxígeno, el <b>aire secundario</b>, lo toma la llama del ambiente.</p>
+<h4>Partes de la llama</h4>
+<ul><li><b>Cono interior:</b> azul intenso, donde se mezclan gas y aire primario.</li>
+<li><b>Llama exterior:</b> azul más tenue, donde termina la combustión.</li></ul>
+<h4>Problemas de llama</h4>
+<div class="tw"><table><tr><th>Problema</th><th>Qué se ve</th><th>Causa típica</th></tr>
+<tr><td>Puntas amarillas</td><td>Llama alta y amarilla, hollín</td><td>Falta de aire primario, inyector equivocado</td></tr>
+<tr><td>Desprendimiento</td><td>La llama se separa del quemador</td><td>Exceso de presión o de aire</td></tr>
+<tr><td>Retroceso</td><td>La llama entra al quemador con ruido</td><td>Presión baja, quemador sucio o dañado</td></tr></table></div>
+<h4>Exceso de aire</h4>
+<p>Los artefactos trabajan con algo más de aire que el teórico, para asegurar una combustión completa.</p>`,
+"1.4":`<h4>Efectos según concentración (referenciales)</h4>
+<div class="tw"><table><tr><th class="n">CO en el aire</th><th>Efecto aproximado</th></tr>
+<tr><td class="n">200 ppm</td><td>Dolor de cabeza leve después de 2 a 3 horas</td></tr>
+<tr><td class="n">400 ppm</td><td>Dolor de cabeza fuerte en 1 a 2 horas</td></tr>
+<tr><td class="n">800 ppm</td><td>Mareo, náuseas y convulsiones en menos de una hora</td></tr>
+<tr><td class="n">1.600 ppm</td><td>Riesgo de muerte en menos de 2 horas</td></tr></table></div>
+<p class="norm">ppm: partes por millón. Valores de referencia de uso habitual en prevención; varían según la persona.</p>
+<h4>Grupos más vulnerables</h4>
+<p>Niños, adultos mayores, embarazadas y personas con problemas cardíacos o respiratorios se afectan con concentraciones menores.</p>
+<h4>Qué hacer ante una intoxicación</h4>
+<ol><li>Ventilar y sacar a las personas al aire libre.</li><li>Apagar el artefacto si es seguro hacerlo.</li>
+<li>Llamar al <b>SAMU 131</b>.</li><li>No volver a usar el artefacto hasta que lo revise un instalador.</li></ol>`,
+"2.1":`<h4>Presión manométrica y absoluta</h4>
+<p>Los manómetros de terreno miden la presión <b>sobre la atmosférica</b> (manométrica). Cuando decimos que un artefacto trabaja a 2 kPa, son 2 kPa más que la presión del aire que nos rodea.</p>
+<h4>Por qué la presión debe ser estable</h4>
+<ul><li>Presión alta: llama grande, desprendimiento, sobreconsumo y riesgo de CO.</li>
+<li>Presión baja: llama débil, retroceso y artefactos que no alcanzan su potencia.</li></ul>
+<h4>Escalones de presión</h4>
+<p>En redes de gas natural, el gas viaja a presión alta o media por las calles y se reduce en etapas hasta la baja presión de consumo. En gas licuado, el regulador del cilindro o estanque hace esa reducción.</p>
+<h4>Verificación en terreno</h4>
+<p>Con el artefacto funcionando, se mide la presión en su toma de prueba y se compara con la de su placa. Si no coincide, se revisa el regulador o el dimensionamiento de la red.</p>`,
+"2.2":`<h4>Potencia nominal y útil</h4>
+<ul><li><b>Potencia nominal:</b> la energía del gas que consume el artefacto.</li>
+<li><b>Potencia útil:</b> la que entrega realmente (al agua, al ambiente).</li>
+<li><b>Rendimiento:</b> útil / nominal. Un calefont puede rendir alrededor de 85%.</li></ul>
+<h4>Calefont: potencia y litros por minuto</h4>
+<p>Para calentar 1 litro por minuto en 25 °C se necesitan unos 1,74 kW útiles:</p>
+<code class="f">Calefont 10 L/min, ΔT 25 °C
+Potencia útil = 10 × 1,74 = 17,4 kW
+Con rendimiento 85%: nominal = 17,4 / 0,85 ≈ 20,5 kW</code>
+<p>Este cálculo explica por qué un calefont de más litros pide más gas y cañerías de mayor diámetro.</p>
+<h4>Consumo mensual estimado</h4>
+<p>Calefont de 20 kW usado 30 minutos al día con gas natural: 1,85 m³/h × 0,5 h × 30 días ≈ <b>28 m³ al mes</b>.</p>`,
+"2.3":`<h4>Tipos de manómetro</h4>
+<div class="tw"><table><tr><th>Tipo</th><th>Ventaja</th><th>Cuidado</th></tr>
+<tr><td>Columna de agua (U)</td><td>Simple, muy sensible en baja presión</td><td>Leer bien la diferencia entre ramas</td></tr>
+<tr><td>De reloj (Bourdon)</td><td>Robusto, lectura directa</td><td>Elegir un rango adecuado</td></tr>
+<tr><td>Digital</td><td>Preciso, algunos registran la curva</td><td>Batería y calibración</td></tr></table></div>
+<h4>Rango adecuado</h4>
+<p>Si la presión a medir es 3 kPa, un manómetro de 0 a 10 kPa permite ver pequeñas variaciones. Uno de 0 a 1000 kPa marcaría prácticamente cero.</p>
+<h4>Otros instrumentos</h4>
+<ul><li><b>Detector de fugas electrónico:</b> detecta gas en el aire cerca de uniones.</li>
+<li><b>Analizador de gases de combustión:</b> mide CO, O₂ y temperatura en el conducto.</li>
+<li><b>Detector de CO ambiental:</b> para revisar el aire de un recinto.</li></ul>`,
+"2.4":`<h4>Puesta en servicio segura</h4>
+<ol><li>Prueba de hermeticidad aprobada.</li><li>Llaves de artefactos cerradas.</li>
+<li>Abrir la llave general lentamente.</li><li>Purgar el aire de la red por el artefacto más alejado, con ventilación y sin fuentes de ignición.</li>
+<li>Encender cada artefacto y verificar su llama.</li><li>Revisar tiro y ventilación.</li></ol>
+<h4>Al cortar el gas para trabajar</h4>
+<ul><li>Cerrar la llave general o la del tramo.</li><li>Señalizar que se está trabajando.</li>
+<li>Al abrir la tubería, ventilar y no fumar ni usar herramientas que hagan chispa cerca.</li></ul>
+<h4>Detectores de gas</h4>
+<p>Los detectores domésticos se ubican según el gas: arriba para gas natural, cerca del piso para gas licuado. Son un complemento, no un reemplazo de una instalación correcta.</p>`,
+"3.1":`<h4>Certificación de artefactos y materiales</h4>
+<p>Los artefactos a gas y muchos componentes (reguladores, flexibles, válvulas) deben estar certificados para venderse en Chile, y llevan un sello de certificación. El instalador debe usar solo productos certificados.</p>
+<h4>Estructura del DS 66</h4>
+<ul><li>Capítulos I a IV: alcance, disposiciones generales, terminología y responsabilidades.</li>
+<li>Capítulos V a VIII: proyectos, tuberías, medidores y equipos de GLP.</li>
+<li>Capítulos IX y X: artefactos, ventilación y evacuación.</li>
+<li>Capítulos XI y XII: declaración, puesta en servicio e instalaciones en uso.</li>
+<li>Anexos: tablas de cálculo.</li></ul>
+<h4>Cómo estudiarlo</h4>
+<p>No se aprende de memoria. Conviene dominar las cifras clave (las de la ficha de repaso) y saber en qué capítulo buscar el resto.</p>`,
+"3.2":`<h4>Comparación de clases</h4>
+<div class="tw"><table><tr><th>Clase</th><th>Puede ejecutar</th><th>Requisito típico</th></tr>
+<tr><td>1</td><td>Tipos 1, 2 y 3</td><td>Ingeniero civil o de ejecución mecánico o químico</td></tr>
+<tr><td>2</td><td>Tipos 2 y 3</td><td>Ingeniero de otras especialidades con formación en combustión</td></tr>
+<tr><td>3</td><td>Tipo 3</td><td>Técnico afín, instalador de gas titulado o ChileValora</td></tr></table></div>
+<h4>Ejemplos de instalaciones tipo 3</h4>
+<ul><li>Casa con calefont, cocina y estufas a gas natural o licuado.</li>
+<li>Departamento con red interior en baja presión.</li>
+<li>Pequeño local comercial con pocos artefactos, bajo 60 kW.</li></ul>
+<h4>Trámite de la licencia</h4>
+<p>Se solicita en línea en el sitio de la SEC con ClaveÚnica, adjuntando el título o el certificado de competencias. La respuesta llega por correo.</p>`,
+"3.3":`<h4>Registros que conviene guardar</h4>
+<ul><li>Planos y cálculo de la instalación.</li><li>Protocolo de la prueba de hermeticidad (fecha, presión, tiempo, instrumento).</li>
+<li>Copia de la declaración inscrita.</li><li>Fotos de la ejecución, especialmente de tramos que quedan ocultos.</li></ul>
+<h4>Modificaciones e intervenciones menores</h4>
+<p>El DS 66 distingue entre modificaciones, que se declaran, e intervenciones menores (art. 90), que no requieren declaración salvo en conversiones. Ante la duda, revisa el capítulo XII.</p>
+<h4>Responsabilidad en el tiempo</h4>
+<p>Tu responsabilidad cubre la instalación tal como la entregaste. Si después el usuario la modifica sin un instalador, deja constancia de lo que entregaste.</p>`,
+"3.4":`<h4>Recorrido típico del gas en una casa</h4>
+<ol><li>Medidor (gas natural) o batería de cilindros con regulador (gas licuado).</li>
+<li>Llave general de corte.</li><li>Matriz enterrada o adosada hasta la vivienda.</li>
+<li>Red interior por muros o tabiques, con pendiente y fijaciones.</li><li>Derivaciones a cada artefacto, cada una con su llave de paso.</li>
+<li>Artefactos conectados, con su ventilación y evacuación.</li></ol>
+<h4>Similitudes con agua potable</h4>
+<div class="tw"><table><tr><th>Agua potable</th><th>Gas</th></tr>
+<tr><td>Medidor y llave de paso</td><td>Medidor o regulador y llave general</td></tr>
+<tr><td>Caudal por artefacto (L/min)</td><td>Caudal por artefacto (m³/h)</td></tr>
+<tr><td>Pérdida de carga y presión mínima</td><td>Pérdida de carga admisible</td></tr>
+<tr><td>Prueba hidráulica</td><td>Prueba de hermeticidad</td></tr></table></div>`,
+"4.1":`<h4>Diámetros comunes de cobre</h4>
+<p>En viviendas se usan normalmente 3/8", 1/2" y 3/4", y 1" en matrices de mayor caudal. El diámetro se elige con las tablas del DS 66.</p>
+<h4>Cobre tipo L y tipo M</h4>
+<p>El tipo M tiene pared más delgada y es común en agua potable, pero no está entre los permitidos por el DS 66 para gas. Revisa la marca impresa en el tubo.</p>
+<h4>Tuberías multicapa (DS 66 modificado en 2026)</h4>
+<ul><li>Se instalan según el manual del fabricante.</li><li>Tuberías y accesorios del mismo fabricante, salvo intercambiabilidad reconocida.</li>
+<li>Protección contra daño mecánico, químico y radiación UV.</li><li>Prever dilatación y movimientos de la estructura.</li><li>No se usan como conexión a artefactos.</li></ul>
+<h4>Manipulación</h4>
+<p>Guarda los tubos tapados para que no entre polvo ni humedad, y no los dejes expuestos a golpes antes de instalarlos.</p>`,
+"4.2":`<h4>Aleaciones de aporte</h4>
+<ul><li><b>Cobre con cobre:</b> aleaciones de cobre y fósforo, que normalmente no requieren fundente.</li>
+<li><b>Cobre con bronce o latón</b> (válvulas, accesorios): aleaciones con plata y fundente.</li></ul>
+<p>Sigue siempre la indicación del fabricante de la aleación.</p>
+<h4>Señales de una buena soldadura</h4>
+<ul><li>Un anillo continuo de aleación visible alrededor de la unión.</li><li>Sin poros ni zonas sin relleno.</li>
+<li>El cobre no está quemado ni deformado por exceso de calor.</li></ul>
+<h4>Seguridad al soldar</h4>
+<ul><li>Lentes, guantes y ropa que no se derrita.</li><li>Protección térmica para no quemar muros o maderas cercanas.</li>
+<li>Extintor a mano.</li><li>Nunca soldar una tubería que tenga gas.</li></ul>`,
+"4.3":`<h4>Tuberías a la vista</h4>
+<ul><li>Fijadas con abrazaderas a distancias regulares para que no se pandeen.</li>
+<li>Protegidas de golpes donde haya tránsito de personas o vehículos.</li>
+<li>Al atravesar muros o losas, dentro de una vaina o camisa.</li></ul>
+<h4>Tuberías embutidas</h4>
+<p>Deben ir en zonas definidas de los muros y losas (el DS 66 fija franjas desde los muros paralelos) para que nadie perfore sobre ellas después. En el plano se indica su recorrido.</p>
+<h4>Tuberías enterradas: secuencia</h4>
+<ol><li>Excavar la zanja con fondo parejo.</li><li>Cama de arena de al menos 5 cm.</li>
+<li>Instalar la tubería con su protección contra corrosión si corresponde.</li><li>Prueba de hermeticidad.</li>
+<li>Relleno de al menos 15 cm, cinta GAS a 25 cm sobre la tubería y relleno final.</li></ol>`,
+"4.4":`<h4>Válvulas: tipos</h4>
+<ul><li><b>Llave de bola de cuarto de vuelta:</b> la más común. Abierta con la manilla paralela a la tubería; cerrada, perpendicular.</li>
+<li>Deben ser aptas para gas y estar certificadas.</li></ul>
+<h4>Accesibilidad</h4>
+<p>Las llaves deben poder cerrarse rápido en una emergencia: visibles, sin muebles delante y a una altura cómoda (la del artefacto, a no más de 1,6 m del piso).</p>
+<h4>Otras separaciones habituales</h4>
+<ul><li>Con otros servicios enterrados: 50 cm en cruces.</li>
+<li>Venteo del regulador: 1 m de aberturas bajo la descarga y 1,5 m de fuentes de ignición.</li></ul>
+<h4>Ejemplo de revisión</h4>
+<p>Una cocina tiene un enchufe a 30 cm de la llave de paso del gas: no cumple los 50 cm. Se debe mover el enchufe o la llave.</p>`,
+"5.1":`<h4>El medidor de gas</h4>
+<p>Los medidores domiciliarios más comunes son de diafragma: el gas llena y vacía cámaras de volumen conocido y un mecanismo cuenta los ciclos. La lectura está en m³.</p>
+<h4>Regulador de servicio</h4>
+<p>En gas natural, el regulador baja la presión de la red a la de consumo. Tiene un venteo que libera gas si la presión sube demasiado; por eso su descarga debe quedar lejos de aberturas y fuentes de ignición.</p>
+<h4>Lectura y consumo</h4>
+<p>Consumo del período = lectura actual − lectura anterior (m³). Multiplicado por el poder calorífico da la energía consumida.</p>
+<h4>Ejemplo</h4>
+<p>Una casa consume 60 m³ de gas natural en un mes. Con 9.300 kcal/m³: 558.000 kcal, equivalentes a unos 649 kWh.</p>`,
+"5.2":`<h4>Componentes del equipo de cilindros</h4>
+<ol><li><b>Cilindros</b> de 45 kg con su válvula.</li><li><b>Conexión semiflexible</b> con rosca de hilo izquierdo (art. 62.3).</li>
+<li><b>Colector</b> que une los cilindros.</li><li><b>Regulador</b> que deja el gas en baja presión.</li>
+<li><b>Válvula de corte general</b> y te de prueba.</li></ol>
+<h4>Instalación en servicio y reposición</h4>
+<p>Normalmente la mitad de los cilindros está en uso y la otra mitad de reserva. Algunos colectores cambian automáticamente al grupo de reserva cuando el primero se vacía.</p>
+<h4>Revisión en terreno</h4>
+<ul><li>Cilindros verticales, sobre radier y a 5 cm del piso.</li><li>Lejos de sumideros sin sifón, ventanas y fuentes de calor.</li>
+<li>Conexiones sin fugas y flexibles en buen estado.</li><li>Gabinete con ventilación si corresponde.</li></ul>`,
+"5.3":`<h4>Ejemplo del método (valores ilustrativos)</h4>
+<code class="f">Artefactos: calefont 24 kW + cocina 8 kW + estufa 4 kW = 36 kW
+Consumo intermitente, zona templada
+Razón de vaporización por cilindro (tabla XVIII): supongamos 9 kW
+Por vaporización: 36 / 9 = 4 cilindros en uso
+Por consumo (tabla XVII): supongamos 3 cilindros
+Se usa el mayor: 4
+Con reposición: 4 × 2 = 8 cilindros</code>
+<p class="norm">Los 9 kW y los 3 cilindros son supuestos para mostrar el método; los valores reales salen de las tablas del DS 66 para la temperatura y uso del caso.</p>
+<h4>Factores que aumentan los cilindros</h4>
+<ul><li>Clima frío.</li><li>Consumo continuo (por ejemplo, calefacción).</li><li>Artefactos de alta potencia funcionando al mismo tiempo.</li></ul>
+<h4>Señal de subdimensionamiento</h4>
+<p>Cilindros escarchados por fuera y llamas que bajan cuando se usan varios artefactos.</p>`,
+"5.4":`<h4>La conversión de artefactos</h4>
+<ul><li>Se cambian los <b>inyectores</b> por los del nuevo gas: el GLP usa inyectores más pequeños porque es más energético.</li>
+<li>Se ajusta la regulación de aire y la presión.</li><li>Se verifica la llama y el funcionamiento de las seguridades.</li>
+<li>Se rotula el artefacto con el gas para el que quedó.</li></ul>
+<p>El DS 66 indica que las instalaciones sometidas a conversión deben declararse.</p>
+<h4>Ejemplo práctico</h4>
+<p>Un barrio que recibe red de gas natural: las casas con cilindros pueden conectarse, pero cada artefacto debe convertirse y la instalación revisarse antes de dar gas.</p>
+<h4>Diferencias de diseño</h4>
+<ul><li>Gas natural: mayor caudal para la misma potencia, diámetros mayores.</li>
+<li>Gas licuado: menor caudal, pero restricciones de ubicación más estrictas.</li></ul>`,
+"6.1":`<h4>Subtipos</h4>
+<ul><li><b>Tipo B de tiro natural:</b> los gases suben solos por el conducto. Los Bs tienen sensor antirretorno.</li>
+<li><b>Tipo B de tiro forzado:</b> un ventilador expulsa los gases; toma aire del recinto.</li>
+<li><b>Tipo C:</b> cámara estanca; con conducto concéntrico o doble, toma aire de afuera y bota los gases afuera.</li></ul>
+<h4>Ventajas del tipo C</h4>
+<ul><li>No consume el aire del recinto.</li><li>No contamina el recinto aunque haya un problema de combustión.</li>
+<li>Es el único permitido en baños y dormitorios.</li></ul>
+<h4>Cómo reconocerlos</h4>
+<p>La placa del artefacto indica su tipo con una letra y números (por ejemplo B11BS o C32). Revísala antes de decidir dónde instalarlo.</p>`,
+"6.2":`<h4>Tipos de calefont</h4>
+<div class="tw"><table><tr><th>Tipo</th><th>Funcionamiento</th><th>Dónde</th></tr>
+<tr><td>Tiro natural (B)</td><td>Gases suben por diferencia de temperatura</td><td>Logias y cocinas ventiladas</td></tr>
+<tr><td>Tiro forzado (B)</td><td>Ventilador expulsa los gases</td><td>Donde el conducto vertical es difícil</td></tr>
+<tr><td>Estanco (C)</td><td>Aire y gases por el exterior</td><td>Recintos sin buena ventilación</td></tr></table></div>
+<h4>Encendido</h4>
+<ul><li><b>Llama piloto:</b> modelos antiguos.</li><li><b>Electrónico:</b> con pilas o red eléctrica, sin piloto permanente.</li></ul>
+<h4>Mantención</h4>
+<p>Se recomienda una revisión periódica por un técnico: limpieza del quemador e intercambiador, revisión de seguridades y del conducto. Un calefont sin mantención pierde rendimiento y puede producir CO.</p>`,
+"6.3":`<h4>Hornos y cocinas empotradas</h4>
+<p>Requieren espacio para la conexión y la llave de paso accesible. El fabricante indica las distancias y la ventilación del mueble.</p>
+<h4>Flexibles</h4>
+<ul><li>Los flexibles para gas deben ser certificados y del tipo indicado por el DS 66.</li>
+<li>Muchos traen fecha de vencimiento impresa: revísala en cada visita.</li>
+<li>No deben quedar tensos, torcidos ni en contacto con superficies calientes.</li></ul>
+<h4>Estufas portátiles</h4>
+<p>Las estufas de cilindro de 11 o 15 kg también son artefactos a gas: deben tener sensor de atmósfera y usarse en recintos con volumen y ventilación suficientes. Nunca en dormitorios.</p>
+<h4>Ejemplo de revisión</h4>
+<p>Cocina con flexible de 1,5 m que pasa por detrás de un mueble hacia la llave: no cumple el largo máximo de 1 m ni la accesibilidad.</p>`,
+"6.4":`<h4>Soluciones habituales cuando un artefacto está mal ubicado</h4>
+<ul><li><b>Calefont en el baño:</b> trasladarlo a la logia o cocina, o reemplazarlo por uno tipo C.</li>
+<li><b>Estufa en el dormitorio:</b> retirar; usar otro sistema de calefacción o un artefacto estanco.</li>
+<li><b>Artefacto en un loft:</b> solo cocina tipo A doméstica; el resto debe ser estanco.</li></ul>
+<h4>Por qué se prohíben en dormitorios</h4>
+<p>Durante el sueño la persona no percibe los síntomas del CO y puede intoxicarse sin despertar.</p>
+<h4>En inspecciones</h4>
+<p>Un artefacto tipo A o B en un baño o dormitorio es motivo de observación grave. Explica al usuario el riesgo antes de proponer la solución.</p>`,
+"7.1":`<h4>¿Cuánto aire necesita un artefacto?</h4>
+<p>Con gas natural, cada kW de potencia consume unos 0,09 m³/h de gas, y cada m³ de gas necesita cerca de 10 m³ de aire:</p>
+<code class="f">Aire ≈ 0,09 × 10 ≈ 0,9 m³ de aire por hora por cada kW
+Cocina de 8 kW → unos 7 m³ de aire por hora</code>
+<p class="norm">Cálculo orientativo; las exigencias reales salen de las tablas del DS 66.</p>
+<h4>Ventilación directa e indirecta</h4>
+<ul><li><b>Directa:</b> la abertura comunica el recinto con el exterior.</li>
+<li><b>Indirecta:</b> a través de otro recinto o de un conducto, con las condiciones que fija el reglamento.</li></ul>
+<h4>Ventilación y eficiencia energética</h4>
+<p>Las casas modernas son más herméticas. Eso ahorra calefacción, pero hace aún más necesarias las aberturas permanentes cuando hay artefactos a gas.</p>`,
+"7.2":`<h4>Ejemplo completo</h4>
+<code class="f">Cocina de 3,2 × 2,8 m, cielo a 2,5 m
+Altura de cálculo: 2,4 m
+V = 3,2 × 2,8 × 2,4 = 21,5 m³</code>
+<p>Ese volumen se compara con el exigido en la tabla XX según la potencia de los artefactos tipo A del recinto.</p>
+<h4>Recintos comunicados</h4>
+<p>Si la cocina se comunica en forma permanente con otro recinto (por ejemplo, sin puerta hacia el comedor), el reglamento permite considerar volúmenes en ciertas condiciones. Revisa el capítulo IX antes de sumarlos.</p>
+<h4>Qué hacer si no alcanza</h4>
+<ul><li>Cambiar un artefacto tipo A por uno de menor potencia.</li><li>Trasladar artefactos a otro recinto.</li>
+<li>Usar artefactos tipo C, que no dependen del volumen del recinto.</li></ul>`,
+"7.3":`<h4>Altura de las rejillas según el gas</h4>
+<div class="tw"><table><tr><th>Abertura</th><th>Gas licuado</th><th>Gas natural</th></tr>
+<tr><td>Inferior</td><td>Borde superior a no más de 15 cm del piso</td><td>Baja, para la entrada de aire</td></tr>
+<tr><td>Superior</td><td>En la parte alta del recinto</td><td>En la parte alta; además ayuda a evacuar una fuga</td></tr></table></div>
+<h4>Superficie útil</h4>
+<p>La superficie exigida es la <b>libre</b>, es decir, el área real por donde pasa el aire, descontando las lamas y la malla. Una rejilla de 20 × 10 cm no ofrece 200 cm² libres.</p>
+<h4>Ubicación respecto de otros elementos</h4>
+<ul><li>No detrás de muebles ni cortinas.</li><li>No hacia recintos cerrados como closets.</li>
+<li>Separada de salidas de evacuación de gases, según las distancias del DS 66.</li></ul>`,
+"7.4":`<h4>Campanas y extractores</h4>
+<p>Una campana con extractor saca aire de la cocina. Si el recinto no tiene suficiente entrada de aire, la cocina queda en depresión y el calefont tipo B puede revocar.</p>
+<h4>Cómo verificar</h4>
+<ol><li>Cerrar puertas y ventanas.</li><li>Encender la campana a máxima potencia.</li>
+<li>Encender el calefont y hacer la prueba de tiro en el cortatiro.</li><li>Si hay revoco, se necesita más ventilación o cambiar el calefont por uno estanco.</li></ol>
+<h4>Secadoras de ropa</h4>
+<p>Las secadoras con extracción también sacan aire del recinto. Si están junto a un calefont, aplica la misma verificación.</p>`,
+"8.1":`<h4>Cómo funciona el tiro natural</h4>
+<p>Los gases de combustión están calientes y son más livianos que el aire. Suben por el conducto y "aspiran" aire nuevo hacia el artefacto. Mientras más alto y recto el conducto, mejor el tiro.</p>
+<h4>Factores que empeoran el tiro</h4>
+<ul><li>Tramos horizontales largos y muchas curvas.</li><li>Conducto frío o de diámetro insuficiente.</li>
+<li>Viento que empuja hacia adentro sin sombrerete adecuado.</li><li>Recinto en depresión por extractores.</li></ul>
+<h4>Conductos colectivos</h4>
+<p>En edificios, varios calefont pueden descargar a un conducto colectivo vertical. Tienen reglas propias en el capítulo X y se revisan con calibre en la inspección de la distribuidora.</p>`,
+"8.2":`<h4>Materiales habituales</h4>
+<ul><li>Acero inoxidable: durable y resistente a la corrosión.</li><li>Acero cincado de espesor adecuado (mínimo 0,8 mm): económico, con límite de largo.</li>
+<li>Aluminio de espesor adecuado: según lo que permita el fabricante del artefacto.</li></ul>
+<h4>Uniones</h4>
+<p>Las uniones entre tramos se hacen encajando en el sentido del flujo y se sellan con material resistente a la temperatura. La unión con el collarín del calefont se sella con silicona de alta temperatura o equivalente.</p>
+<h4>Condensación</h4>
+<p>En conductos fríos o muy largos, el vapor de agua de la combustión puede condensar. Eso corroe el conducto y puede gotear al artefacto. Un buen trazado y material adecuado lo evitan.</p>`,
+"8.3":`<h4>Funciones del terminal</h4>
+<ul><li>Evitar que el viento empuje los gases hacia adentro.</li><li>Impedir la entrada de lluvia, hojas y animales.</li>
+<li>Dispersar los gases lejos de ventanas y personas.</li></ul>
+<h4>Ubicaciones a evitar</h4>
+<ul><li>Bajo aleros o balcones donde los gases quedan atrapados.</li><li>Junto a ventanas que se abren.</li>
+<li>A la altura de las personas en pasillos o patios.</li></ul>
+<h4>Revisión en terreno</h4>
+<p>Mira el terminal desde afuera: debe estar firme, sin obstrucciones ni nidos, con su sombrerete y a la distancia exigida de techos, muros y aberturas.</p>`,
+"8.4":`<h4>Procedimiento de la prueba de tiro</h4>
+<ol><li>Cerrar puertas y ventanas del recinto.</li><li>Encender el calefont con agua caliente a máxima potencia.</li>
+<li>Esperar unos minutos para que el conducto se caliente.</li><li>Acercar una llama pequeña o una fuente de humo al cortatiro.</li>
+<li>Observar hacia dónde va.</li><li>Repetir con extractores encendidos si los hay.</li></ol>
+<h4>Con analizador de gases</h4>
+<p>En el punto de muestreo se mide el CO de los gases de combustión. Un valor alto indica mala combustión aunque el tiro sea correcto.</p>
+<h4>Si hay revoco</h4>
+<p>Apagar, cerrar la llave del artefacto, informar al usuario y no dejarlo en servicio hasta corregir.</p>`,
+"9.1":`<h4>Ejemplo de vivienda (gas natural, 9.300 kcal/m³)</h4>
+<div class="tw"><table><tr><th>Tramo</th><th>Alimenta</th><th class="n">kW</th><th class="n">m³/h</th></tr>
+<tr><td>A-B</td><td>Todos</td><td class="n">32</td><td class="n">2,96</td></tr>
+<tr><td>B-C</td><td>Cocina + estufa</td><td class="n">12</td><td class="n">1,11</td></tr>
+<tr><td>C-D</td><td>Estufa</td><td class="n">4</td><td class="n">0,37</td></tr>
+<tr><td>B-E</td><td>Calefont</td><td class="n">20</td><td class="n">1,85</td></tr></table></div>
+<h4>Simultaneidad</h4>
+<p>En una vivienda se considera que todos los artefactos pueden funcionar a la vez. En edificios, el Anexo 3 del DS 66 aplica factores según el número de departamentos.</p>
+<h4>Artefactos futuros</h4>
+<p>Si el cliente piensa agregar un artefacto, conviene dejar la red dimensionada para él. Recalcular después obliga a cambiar tramos.</p>`,
+"9.2":`<h4>Ejemplo</h4>
+<code class="f">Tramo B-E (calefont): 6 m de tubería
+Accesorios: 2 codos y 1 llave de paso
+L equivalente (supuesta, según Anexo 2): 0,5 m por codo, 0,3 m por llave
+L cálculo = 6 + 2 × 0,5 + 0,3 = 7,3 m</code>
+<p class="norm">Los valores equivalentes del ejemplo son ilustrativos; usa los del Anexo 2 según diámetro y accesorio.</p>
+<h4>Longitud hasta el artefacto más desfavorable</h4>
+<p>Para elegir diámetros se usa la longitud de cálculo desde el medidor o regulador hasta el artefacto más alejado, porque es el que sufre la mayor pérdida.</p>
+<h4>Consejo de diseño</h4>
+<p>Recorridos simples, con pocos accesorios, reducen la pérdida y el costo.</p>`,
+"9.3":`<h4>Cómo leer la tabla del Anexo 1</h4>
+<ol><li>Elige la tabla del gas correcto (natural o licuado).</li><li>Ubica la columna de la longitud de cálculo (o la inmediatamente superior).</li>
+<li>Baja por la columna hasta el primer caudal mayor o igual al del tramo.</li><li>Esa fila indica el diámetro.</li></ol>
+<h4>Buenas prácticas</h4>
+<ul><li>Usa la longitud inmediatamente superior si no está la exacta: es el lado seguro.</li>
+<li>Revisa que los tramos aguas abajo nunca tengan mayor diámetro que los aguas arriba sin razón.</li></ul>
+<h4>Verificación final</h4>
+<p>Suma las pérdidas de los tramos hasta el artefacto más lejano y compárala con la admisible. Si se pasa, aumenta el diámetro del tramo con mayor pérdida.</p>`,
+"9.4":`<h4>Contenido mínimo del plano de gas</h4>
+<ul><li>Planta con recorrido de tuberías, diámetros y llaves.</li><li>Ubicación de medidor o cilindros y regulador.</li>
+<li>Artefactos con su potencia.</li><li>Rejillas de ventilación y conductos de evacuación.</li>
+<li>Isométrico con tramos, longitudes y diámetros.</li><li>Cuadro de cálculo y viñeta.</li></ul>
+<h4>En AutoCAD</h4>
+<ul><li>Una capa para tuberías, otra para artefactos, otra para ventilaciones y otra para textos.</li>
+<li>Bloques con atributos para artefactos (potencia, tipo).</li>
+<li>El isométrico se dibuja a 30°, igual que en agua potable.</li></ul>`,
+"10.1":`<h4>Registro de la prueba</h4>
+<div class="tw"><table><tr><th>Dato</th><th>Ejemplo de registro</th></tr>
+<tr><td>Fecha y hora</td><td>12/11, 10:30</td></tr><tr><td>Tramo probado</td><td>Red interior completa</td></tr>
+<tr><td>Fluido</td><td>Aire</td></tr><tr><td>Presión inicial y final</td><td>Según procedimiento vigente</td></tr>
+<tr><td>Tiempo</td><td>Según procedimiento vigente</td></tr><tr><td>Instrumento</td><td>Manómetro digital, rango adecuado</td></tr>
+<tr><td>Resultado</td><td>Sin caída de presión: aprobado</td></tr></table></div>
+<h4>Variación por temperatura</h4>
+<p>Si la tubería se calienta o enfría durante la prueba (por ejemplo, al sol), la presión puede cambiar sin que haya fuga. Por eso se espera la estabilización y se evita probar con cambios bruscos de temperatura.</p>
+<h4>Fugas pequeñas</h4>
+<p>Una caída lenta indica una fuga pequeña: revisa uniones roscadas, llaves y soldaduras con agua jabonosa.</p>`,
+"10.2":`<h4>Antes de declarar</h4>
+<ul><li>Instalación terminada y probada.</li><li>Planos y cálculo finales.</li><li>Registro de la prueba de hermeticidad.</li>
+<li>Arranques sin artefacto tapados.</li><li>Ventilaciones y conductos terminados.</li></ul>
+<h4>Durante la inspección de la distribuidora</h4>
+<p>Acompaña al inspector si puedes: si encuentra observaciones, las corriges en el momento o coordinas una nueva visita.</p>
+<h4>Entrega al usuario</h4>
+<p>Explica dónde están las llaves, cómo cerrarlas, por qué no debe tapar las rejillas y qué hacer ante olor a gas. Una buena entrega previene accidentes.</p>`,
+"10.3":`<h4>Defectos frecuentes en inspecciones</h4>
+<ul><li>Rejillas tapadas o insuficientes.</li><li>Calefont sin conducto, con conducto desconectado o en el baño.</li>
+<li>Flexibles vencidos o demasiado largos.</li><li>Llaves de paso inaccesibles.</li><li>Fugas en uniones.</li><li>Estufas en dormitorios.</li></ul>
+<h4>El rol del instalador</h4>
+<p>El organismo de certificación inspecciona; el instalador con licencia corrige. Luego se puede pedir una nueva inspección para obtener el sello verde.</p>
+<h4>Cómo se solicita</h4>
+<p>El usuario pide la inspección en línea; un organismo autorizado lo contacta para coordinar la visita.</p>`,
+"10.4":`<h4>Repaso final sugerido (30 minutos)</h4>
+<ol><li>Clases de licencia y tipos de instalación.</li><li>Materiales, uniones y distancias.</li>
+<li>Tipos de artefactos y dónde no se pueden instalar.</li><li>Ventilación: volumen y rejillas (GLP a no más de 15 cm del piso).</li>
+<li>Conducto: 2 diámetros, pendiente ascendente, sombrerete.</li><li>Hermeticidad, TC6 y sellos.</li></ol>
+<h4>Portafolio de evidencias</h4>
+<p>Fotos de instalaciones ejecutadas, planos, certificados de cursos y referencias de clientes o empleadores.</p>
+<h4>Durante la evaluación</h4>
+<p>Trabaja con orden, explica cada paso y prioriza la seguridad: cierre de llave, ventilación, sin fuentes de ignición y prueba antes de dar gas.</p>`
+};
 
 /* ---------- Para exponer en clase ---------- */
 const EXP={
@@ -1173,7 +1558,7 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify([...done]))}catch(e)
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 const $=id=>document.getElementById(id);
 
-function tabsOf(c){return [...c.pts.map((p,i)=>{const fg=FIGS[c.n+"."+(i+1)];const k=c.n+"."+(i+1);return {key:"Tema "+(i+1),t:p.t,html:`<h3>${esc(p.t)}</h3>`+(fg?`<figure class="ref">${fg.s}<figcaption>${fg.c}</figcaption></figure>`:"")+realHTML(k)+`<div class="prose">${p.h}</div>`+expHTML(k)}}),
+function tabsOf(c){return [...c.pts.map((p,i)=>{const fg=FIGS[c.n+"."+(i+1)];const k=c.n+"."+(i+1);return {key:"Tema "+(i+1),t:p.t,html:`<h3>${esc(p.t)}</h3>`+(fg?`<figure class="ref">${fg.s}<figcaption>${fg.c}</figcaption></figure>`:"")+realHTML(k)+`<div class="prose">${p.h}</div>`+(MORE[k]?`<section class="more prose"><span class="eyebrow">Profundiza</span>${MORE[k]}</section>`:"")+expHTML(k)}}),
   {key:"Práctica",t:"Taller",extra:true,html:`<div class="prose">${c.taller}</div>`},
   {key:"Prueba",t:"Autoevaluación",extra:true,quiz:true}]}
 
