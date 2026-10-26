@@ -320,6 +320,14 @@ body.proj .facil{max-width:1180px}
 .toolbtn:hover{border-color:var(--accent);color:var(--accent)}
 #tools{display:flex;flex-direction:column;gap:16px}
 
+
+/* Pliegos RIC uno por uno */
+details.ric{background:var(--paper);padding:10px 14px}
+details.ric summary{font-weight:500}
+details.ric summary .chip{margin-left:6px;font-weight:400}
+details.ric ul{margin:0 0 10px}
+.ric-f{border-left:4px solid var(--accent);background:var(--accent-soft);padding:8px 12px;border-radius:0 4px 4px 0}
+body.proj details.ric summary{font-size:21px}
 /* Prueba y temario */
 a.toolbtn{text-decoration:none;display:inline-flex;align-items:center}
 .toolbtn.tb-hi{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
@@ -795,7 +803,7 @@ ebar:["Easy: barra de tierra 5/8","https://www.easy.cl/barra-tomatierra-35-micra
 const LINKS={
 "1.1":["ric04pdf"],"1.2":["f117","ric05"],"1.3":["f323"],"1.4":["ric04pdf"],
 "2.4":["ric05"],"3.4":["f117"],
-"4.1":["lic","ricIdx"],"4.2":["ric02"],"4.3":["eaut"],"4.4":["edif","ric05"],
+"4.1":["lic","ricIdx"],"4.2":["ric02"],"4.3":["eaut"],"4.4":["edif","ric05"],"4.5":["ricIdx"],
 "5.1":["ric04pdf","ric03"],"5.2":["ric04pdf"],"5.3":["ric04"],"5.4":["ebar","ric06"],
 "6.1":["e912","e915","ric10"],"6.2":["e924"],"6.3":["ench"],"6.4":["ric10"],"6.5":["ric11"],
 "7.1":["ric18"],"7.4":["ric03"],"8.3":["ric03"],"8.4":["edecl","ric18"],
@@ -827,6 +835,7 @@ const FACIL={
 "3.2":{f:"En serie, los elementos están uno detrás de otro, como vagones de un tren. Toda la corriente pasa por todos. Si uno falla, se corta todo. En las casas no se conectan los equipos así, pero sí el interruptor con la ampolleta: por eso el interruptor puede apagarla.",w:[["Serie","Conexión uno tras otro, con un solo camino."],["Req","Resistencia total equivalente del conjunto."]]},
 "3.3":{f:"En paralelo, cada equipo tiene su propio camino, como varias llaves de agua conectadas a la misma cañería. Todos reciben los 220 V. Si apagas uno, los demás siguen funcionando. Así está conectada una casa. Eso sí: la corriente de todos los equipos se suma en el cable principal.",w:[["Paralelo","Cada equipo conectado con su propio camino entre fase y neutro."],["Corriente total","Suma de las corrientes de todos los equipos en paralelo."]]},
 "3.4":{f:"El multímetro es el instrumento básico del electricista. Sirve para medir tensión, resistencia y saber si un cable está cortado (continuidad). Tiene una perilla para elegir qué medir y orificios para las puntas. La punta negra va siempre en COM. Equivocarse de posición puede dañar el instrumento o al usuario.",w:[["Multímetro","Instrumento que mide tensión, resistencia y continuidad."],["Continuidad","Comprobar si hay un camino eléctrico; el multímetro suena."],["COM","Orificio común del multímetro, para la punta negra."]]},
+"4.5":{f: "Los pliegos RIC son 19 capítulos de un mismo reglamento. Cada uno trata una parte de la instalación: el empalme, el tablero, los cables, la tierra, los circuitos de la casa y los papeles del proyecto. Para la clase D hay que dominar nueve y saber para qué sirven los demás.", w: [["Pliego técnico", "Documento de la SEC con las exigencias de una parte de la instalación."], ["Alcance", "A qué instalaciones se aplica un pliego."], ["Anexo", "Parte final de un pliego con tablas, fórmulas y formatos."]]},
 "4.1":{f:"Las instalaciones eléctricas tienen reglas obligatorias para que sean seguras. En Chile, la SEC es el organismo que las fiscaliza y entrega las licencias. Las reglas técnicas están en documentos llamados pliegos RIC. La licencia clase D permite hacer instalaciones pequeñas, de hasta 10 kW, como una casa.",w:[["SEC","Superintendencia de Electricidad y Combustibles. Fiscaliza y da licencias."],["Pliego RIC","Documento con las reglas técnicas de una parte de la instalación."],["Licencia clase D","Autorización para instalaciones de baja tensión hasta 10 kW."]]},
 "4.2":{f:"El tablero es la caja donde llega la electricidad de la calle y desde donde se reparte a toda la casa. Adentro hay interruptores especiales que protegen cada parte de la instalación. Cada uno controla un grupo de luces o enchufes llamado circuito. Desde el tablero puedes cortar toda la casa o solo una parte.",w:[["Tablero","Caja que reparte y protege la electricidad de la instalación."],["Empalme","Conexión entre la red de la calle y la casa."],["Alimentador","Cable que va del medidor al tablero."],["Riel DIN","Barra metálica donde se montan las protecciones."]]},
 "4.3":{f:"El automático es un interruptor que se baja solo cuando pasa demasiada corriente. Protege el cable para que no se caliente ni se queme. Si conectas demasiados equipos, se baja después de un rato. Si hay un cortocircuito, se baja al instante. Nunca se debe cambiar por uno más grande para que \"no salte\".",w:[["Automático o termomagnético","Protección que corta por exceso de corriente."],["Corriente nominal","El número del automático: hasta cuánto aguanta, por ejemplo 16 A."],["Curva","Letra (B, C, D) que indica qué tan rápido corta."]]},
@@ -1364,6 +1373,7 @@ const EXP={
 "3.2":{r:["En serie hay un solo camino: la corriente es la misma en todo el circuito.","La tensión se reparte entre las cargas.","Si una carga se corta, se apagan todas."],a:"Las luces navideñas antiguas: si se quemaba una ampolleta, se apagaba toda la guirnalda.",v:"El interruptor está en serie con la ampolleta: por eso, al abrirlo, se corta toda la corriente de esa luz.",e:["Pensar que en serie cada ampolleta recibe 220 V.","Instalar cargas de una casa en serie."],q:"Dos ampolletas iguales en serie a 220 V, ¿cuánta tensión recibe cada una?",ans:"110 V cada una; por eso brillan poco."},
 "3.3":{r:["En paralelo cada carga tiene su camino: todas reciben 220 V.","Las corrientes se suman en el tramo común.","Si una carga se desconecta, las demás siguen funcionando."],a:"Varias llaves de agua conectadas a la misma cañería principal: cada una sale con la misma presión, pero la cañería principal lleva la suma de todos los caudales.",v:"En una casa todo está en paralelo. Por eso puedes apagar la luz del baño sin apagar el refrigerador.",e:["Olvidar que la suma de corrientes pasa por el primer tramo del circuito y por su protección.","Pensar que agregar cargas en paralelo baja la corriente."],q:"Hervidor de 9 A y microondas de 6 A en paralelo: ¿qué corriente pasa por el automático?",ans:"15 A, la suma de ambas."},
 "3.4":{r:["Punta negra siempre en COM; roja en VΩ para tensión, resistencia y continuidad.","Tensión con circuito energizado y en paralelo; resistencia y continuidad siempre sin tensión.","Para trabajos domiciliarios, multímetro CAT III 600 V o superior."],a:"El multímetro son varios instrumentos en uno: el selector decide cuál estás usando. Equivocarse de posición es como usar un martillo para atornillar.",v:"Un alumno mide un enchufe con la punta roja en el borne de 10 A: el instrumento hace cortocircuito y puede explotar el fusible o la punta.",e:["Dejar las puntas en el borne de corriente y luego medir tensión.","Medir continuidad con el circuito energizado."],q:"¿Qué tres revisiones haces antes de medir tensión en un tablero?",ans:"Estado de las puntas, bornes correctos (COM y VΩ) y selector en V~, probando primero en una fuente conocida."},
+"4.5":{r: ["Son 19 pliegos; para la clase D se dominan el 01 al 06, el 10, el 18 y el 19.", "Las exigencias se citan con pliego y número, por ejemplo RIC 10, 5.1.4.4.", "Números que se repiten: 20 Ω, 30 mA, 3 %, 4 mm² y 90 %."], a: "Los pliegos son como los capítulos de un manual de construcción: cada especialista abre el capítulo de lo que está haciendo.", v: "Al revisar una casa, recorre la energía en orden: empalme (01), alimentador (03), tablero (02), circuitos (10), conductores (04), protecciones (05) y tierra (06).", e: ["Citar la NCh Elec. 4/2003 en vez de los RIC.", "Confundir el RIC 03 (alimentadores) con el RIC 04 (conductores y ductos de los circuitos)."], q: "¿Qué pliego revisas para saber cuántos enchufes caben en un circuito?", ans: "El RIC 10: 250 W por enchufe y hasta el 90 % de la capacidad del circuito (5.1.4.4 y 5.1.4.6)."},
 "4.1":{r:["La SEC fiscaliza y otorga las licencias.","Las exigencias técnicas están en los 19 pliegos RIC, vigentes desde 2021.","La clase D permite instalaciones de baja tensión de hasta 10 kW."],a:"Los pliegos RIC son el \"reglamento del tránsito\" de las instalaciones: dicen qué se puede, qué no y con qué medidas.",v:"Muchas casas antiguas se hicieron con la NCh Elec. 4/2003. Al ampliarlas hoy, se aplican los RIC.",e:["Estudiar con apuntes de la NCh Elec. 4/2003.","Creer que la clase D sirve para cualquier potencia."],q:"Una casa tiene 12 kW instalados. ¿La puede declarar un instalador clase D?",ans:"No: supera los 10 kW. Corresponde a una clase superior."},
 "4.2":{r:["Orden de la energía: empalme, medidor, alimentador, tablero, circuitos.","El tablero tiene general, diferenciales, automáticos, barras de neutro y tierra.","Exigencias: IP 41 interior, altura 0,45 a 2,0 m, 25% de reserva, rótulos y unilineal."],a:"El tablero es el centro de mando de la casa: desde ahí se decide qué circuito recibe energía y se protege cada uno.",v:"Un tablero sin rótulos obliga a bajar todo para trabajar en un solo circuito. Un tablero rotulado ahorra tiempo y evita errores.",e:["Dejar el tablero sin tapa o con partes con tensión al alcance.","No dejar espacio de reserva para ampliaciones."],q:"¿Por qué el RIC exige dejar un 25% de espacio libre en tableros nuevos?",ans:"Para agregar circuitos en el futuro sin cambiar el tablero."},
 "4.3":{r:["El automático protege el conductor, no a las personas.","Parte térmica: sobrecarga, lenta. Parte magnética: cortocircuito, instantánea.","Regla de oro: la corriente del automático nunca mayor que la capacidad del cable."],a:"El automático es un fusible que se puede reponer: tiene un \"termómetro\" para el calor lento y un \"imán\" para el golpe brusco.",v:"Un usuario cambia el automático de 10 A por uno de 20 A \"porque saltaba mucho\". El cable de 1,5 mm² queda sin protección y puede incendiarse.",e:["Subir el automático para que no salte.","Elegir curva D para enchufes domiciliarios."],q:"¿Qué significa la marca C16 en un automático?",ans:"Curva C (dispara instantáneo entre 5 y 10 veces su corriente) y corriente nominal de 16 A."},
@@ -1658,6 +1668,7 @@ pts:[
 <tr><td>RIC N°10</td><td>Instalaciones de uso general (viviendas)</td><td>Dominar</td></tr>
 <tr><td>RIC N°11</td><td>Instalaciones especiales (incluye baños)</td><td>Conocer sección 6</td></tr>
 <tr><td>RIC N°18 y N°19</td><td>Presentación de proyectos (TE1) y puesta en servicio</td><td>Conocer</td></tr></table></div>
+<p><button class="chip act" data-open="4" data-tab="4">Ver los 19 pliegos explicados uno por uno</button></p>
 <p>Descárgalos gratis desde <a href="https://www.sec.cl" target="_blank" rel="noopener">sec.cl</a>.</p>
 <h4>Qué puede hacer un instalador clase D</h4>
 <p>Instalaciones de baja tensión con una potencia instalada total de hasta <b>10 kW</b>. Es la licencia típica para viviendas y locales pequeños. Las clases C (hasta 100 kW), B (hasta 500 kW) y A (sin límite) cubren instalaciones mayores.</p>
@@ -1712,7 +1723,208 @@ pts:[
 <li>Máximo <b>3 circuitos</b> por diferencial.</li>
 <li>El diferencial va coordinado con un termomagnético (5.1.3.6): su corriente nominal no debe quedar por debajo de la del automático que lo protege, o de la suma de los automáticos que tiene aguas abajo.</li></ul>
 <p class="norm">RIC N°10: 5.1.3.5, 5.1.3.6, 5.1.3.7. RIC N°05: 7.8.</p>
-<div class="warn">El diferencial <b>no</b> protege contra sobrecarga ni cortocircuito entre fase y neutro. Por eso siempre va junto con automáticos.</div>`}],
+<div class="warn">El diferencial <b>no</b> protege contra sobrecarga ni cortocircuito entre fase y neutro. Por eso siempre va junto con automáticos.</div>`},
+{t:"Los 19 pliegos RIC, uno por uno",h:`
+<p>Los pliegos RIC son <b>19 documentos técnicos</b> de la SEC. Cada uno trata una parte de la instalación. Se dictaron con la Resolución Exenta N°33.877 de 2020, bajo el Reglamento de Seguridad de las Instalaciones de Consumo de Energía Eléctrica (Decreto 8 de 2019), y reemplazaron a la NCh Elec. 4/2003.</p>
+<h4>Cómo se lee un pliego</h4>
+<ul><li>Todos tienen la misma estructura: <b>1 Objetivo</b>, <b>2 Alcance</b>, <b>3 Referencias</b>, <b>4 Terminología</b> y desde el <b>5</b> las exigencias. Al final vienen los <b>anexos</b> con tablas y formatos.</li>
+<li>Una cita como <b>RIC 10, 5.1.4.4</b> se lee: pliego RIC N°10, punto 5.1.4.4, que está dentro del capítulo 5 de exigencias. Así aparecen en la prueba y en las pautas.</li></ul>
+<h4>Dónde actúa cada pliego</h4>
+<code class="f">Red → Empalme (01) → Alimentador (03) → Tablero (02) → Circuitos de la casa (10)
+     Conductores y ductos (04) en todo el recorrido
+     Protección de personas (05) y puesta a tierra (06) en todo el recorrido
+Papeles: proyecto y TE1 (18) → verificación y puesta en servicio (19)</code>
+<div class="tw"><table><tr><th>Pliego</th><th>Tema</th><th>Para la clase D</th><th class="n">Preguntas en el simulador</th></tr>
+<tr><td style="white-space:nowrap">RIC N°01</td><td>Empalmes</td><td><b>Dominar</b></td><td class="n">4 a 10</td></tr>
+<tr><td style="white-space:nowrap">RIC N°02</td><td>Tableros eléctricos</td><td><b>Dominar</b></td><td class="n">8 a 16</td></tr>
+<tr><td style="white-space:nowrap">RIC N°03</td><td>Alimentadores y demanda</td><td><b>Dominar</b></td><td class="n">6 a 14</td></tr>
+<tr><td style="white-space:nowrap">RIC N°04</td><td>Conductores y canalizaciones</td><td><b>Dominar</b></td><td class="n">8 a 16</td></tr>
+<tr><td style="white-space:nowrap">RIC N°05</td><td>Protección contra tensiones peligrosas</td><td><b>Dominar</b></td><td class="n">5 a 12</td></tr>
+<tr><td style="white-space:nowrap">RIC N°06</td><td>Puesta a tierra y enlace equipotencial</td><td><b>Dominar</b></td><td class="n">7 a 14</td></tr>
+<tr><td style="white-space:nowrap">RIC N°07</td><td>Instalaciones de equipos (motores, climatización)</td><td>Conocer</td><td class="n">0 a 3</td></tr>
+<tr><td style="white-space:nowrap">RIC N°08</td><td>Sistemas de emergencia</td><td>Saber que existe</td><td class="n">0</td></tr>
+<tr><td style="white-space:nowrap">RIC N°09</td><td>Sistemas de autogeneración</td><td>Saber que existe</td><td class="n">0</td></tr>
+<tr><td style="white-space:nowrap">RIC N°10</td><td>Instalaciones de uso general</td><td><b>Dominar</b></td><td class="n">10 a 22</td></tr>
+<tr><td style="white-space:nowrap">RIC N°11</td><td>Instalaciones especiales</td><td>Conocer</td><td class="n">0</td></tr>
+<tr><td style="white-space:nowrap">RIC N°12</td><td>Ambientes explosivos</td><td>Saber que existe</td><td class="n">0</td></tr>
+<tr><td style="white-space:nowrap">RIC N°13</td><td>Subestaciones y salas eléctricas</td><td>Saber que existe</td><td class="n">0</td></tr>
+<tr><td style="white-space:nowrap">RIC N°14</td><td>Eficiencia energética en edificios</td><td>Saber que existe</td><td class="n">0</td></tr>
+<tr><td style="white-space:nowrap">RIC N°15</td><td>Recarga de vehículos eléctricos</td><td>Conocer</td><td class="n">0</td></tr>
+<tr><td style="white-space:nowrap">RIC N°16</td><td>Subsistemas de distribución</td><td>Saber que existe</td><td class="n">0</td></tr>
+<tr><td style="white-space:nowrap">RIC N°17</td><td>Operación y mantenimiento</td><td>Conocer</td><td class="n">0</td></tr>
+<tr><td style="white-space:nowrap">RIC N°18</td><td>Presentación de proyectos</td><td><b>Dominar</b></td><td class="n">6 a 12</td></tr>
+<tr><td style="white-space:nowrap">RIC N°19</td><td>Puesta en servicio</td><td><b>Dominar</b></td><td class="n">0 a 12</td></tr></table></div>
+<p>Abre cada pliego para ver qué regula, una explicación simple y los datos que se preguntan.</p>
+
+<details class="ric"><summary><b>RIC N°01 · Empalmes</b> <span class="chip key">Dominar</span></summary>
+<p><b>Qué regula:</b> la conexión entre la red de la distribuidora y tu instalación: la acometida, el equipo de medida (medidor) y la protección del empalme.</p>
+<p class="ric-f"><b>Explicado fácil:</b> es la puerta de entrada de la electricidad a la casa. La construye la distribuidora, pero tú debes saber dónde va el medidor, qué capacidad corresponde y qué papeles se piden.</p>
+<ul><li>Solo se da empalme a instalaciones construidas según la norma y con la <b>comunicación de energización (TE1) inscrita</b> en la SEC (5.2).</li>
+<li>La capacidad del empalme se fija según la potencia declarada, <b>igual o inferior</b>, en valores normalizados (5.3, anexo 1.3). Monofásico: 25 A = 5 kW, 32 A = 6,5 kW, 40 A = 8 kW, 50 A = 10 kW.</li>
+<li>En vivienda, la protección del empalme es de <b>al menos 25 A</b> (RIC 10, 5.2.1).</li>
+<li>El medidor va en la fachada, visible desde la calle y a <b>menos de 15 m</b> de la puerta de acceso (7.2); si no se puede, junto a la línea de cierre (7.3).</li>
+<li>La acometida no puede cruzar propiedades vecinas sin servidumbre de paso (7.1).</li>
+<li>El ducto entre medidor y primer tablero mide <b>32 mm como mínimo</b> y debe permitir duplicar la sección (7.15). En ese tramo no se puede derivar (7.19).</li>
+<li>Si la instalación no existe o está inconclusa, la distribuidora no conecta y avisa a la SEC en 24 horas (5.4.3).</li></ul>
+<p><b>En la prueba:</b> actividad 12-1 (documento para el empalme, protección para 10 kW) y preguntas sobre la ubicación del medidor.</p></details>
+
+<details class="ric"><summary><b>RIC N°02 · Tableros eléctricos</b> <span class="chip key">Dominar</span></summary>
+<p><b>Qué regula:</b> cómo se diseñan, construyen, ubican y montan los tableros, y las salas eléctricas.</p>
+<p class="ric-f"><b>Explicado fácil:</b> el tablero es el centro de control de la casa. El pliego dice qué debe tener adentro, dónde se puede poner y cómo se rotula para que cualquiera lo opere sin riesgo.</p>
+<ul><li>Lugar seguro y de fácil acceso (5.2). En vivienda, nunca en dormitorios, baños, lavaderos ni clósets (RIC 10, 5.1.3.2).</li>
+<li>Interruptor general de <b>corte omnipolar</b> (fase y neutro) (6.6.2), salvo tableros domiciliarios de hasta 3 circuitos.</li>
+<li>Cada protección rotulada, con cuadro de circuitos y unilineal adheridos al tablero (5.3.6 y 5.3.7).</li>
+<li>Dispositivos de comando entre <b>0,45 y 2,0 m</b> del piso (6.1.22).</li>
+<li>Luz piloto en todos los tableros, salvo domiciliarios de hasta 3 circuitos (6.2.14). Regletas de salida desde 8 circuitos (6.2.12). Instrumentos de tensión y corriente desde 100 A (6.2.13).</li>
+<li>No se cablea de dispositivo a dispositivo (6.2.4). La envolvente metálica va conectada a tierra (6.4.2).</li>
+<li>Espacio libre frente al tablero: 0,90, 1,20 o 1,50 m según lo que haya al frente (tabla 2.1).</li>
+<li>Salas eléctricas: de uso exclusivo, resistencia al fuego <b>RF 120</b> y alumbrado de emergencia de 2 horas (5.4.9 y 5.4.10).</li></ul>
+<p><b>En la prueba:</b> actividades 11-1 (exigencias del tablero y la sala eléctrica) y 11-3 (montaje práctico).</p></details>
+
+<details class="ric"><summary><b>RIC N°03 · Alimentadores y demanda</b> <span class="chip key">Dominar</span></summary>
+<p><b>Qué regula:</b> los conductores que van del medidor al primer tablero (alimentador) y entre tableros (subalimentador), y cómo se calcula la demanda de una instalación.</p>
+<p class="ric-f"><b>Explicado fácil:</b> el alimentador es la cañería matriz de la casa. Si queda delgada, toda la instalación queda corta, aunque los circuitos estén bien.</p>
+<ul><li>Sección mínima: <b>4 mm²</b> para alimentadores y 2,5 mm² para subalimentadores (5.1.2). Se instala la mayor entre el cálculo y el mínimo.</li>
+<li>Caída de tensión: hasta <b>3 %</b> en el alimentador y hasta <b>5 %</b> en total hasta el punto más desfavorable (5.1.3).</li>
+<li>Factores de demanda de alumbrado en casa habitación: 1 para los primeros 3 kW y 0,35 sobre eso (tabla 3.1). Solo se aplican al alimentador, nunca a los circuitos.</li>
+<li>Conjuntos de viviendas con un solo empalme usan factores de simultaneidad (tabla 3.2).</li>
+<li>La protección del alimentador principal es de corte omnipolar (5.2.5), y el conductor de protección no lleva protecciones (5.2.3).</li></ul>
+<p><b>En la prueba:</b> actividad 10-3 (sección calculada, mínima y ducto del alimentador).</p></details>
+
+<details class="ric"><summary><b>RIC N°04 · Conductores y canalizaciones</b> <span class="chip key">Dominar</span></summary>
+<p><b>Qué regula:</b> los tipos de conductores, cuánta corriente soportan, sus colores y los sistemas que los protegen: tubos, ductos, bandejas y cajas.</p>
+<p class="ric-f"><b>Explicado fácil:</b> los conductores son las cañerías por donde pasa la electricidad y las canalizaciones son la funda que las protege de golpes, humedad y contacto.</p>
+<ul><li>Secciones mínimas: <b>1,5 mm²</b> alumbrado, <b>2,5 mm²</b> enchufes, <b>4 mm²</b> alimentador (5.4).</li>
+<li>La corriente que soporta un conductor depende del método de instalación (tabla 4.4) y se corrige si van varios juntos (tabla 4.6).</li>
+<li>Un ducto lleva solo conductores de <b>un mismo circuito</b> (5.27).</li>
+<li>El diámetro del ducto sale de las tablas 4.17 a 4.20, contando también el conductor de tierra.</li>
+<li>Uniones y derivaciones solo dentro de cajas. La entrada de cables a las cajas lleva boquillas o prensaestopas (5.14 y 5.15).</li>
+<li>Colores: fases azul, negro y rojo; neutro blanco; tierra verde o verde/amarillo (5.32).</li>
+<li>Las canalizaciones no pueden ser rojas, amarillas ni azules (5.30).</li></ul>
+<p><b>En la prueba:</b> actividades 10-1 (sección por caída de tensión y tabla 4.4) y 10-2 (diámetro del ducto con tabla 4.17).</p></details>
+
+<details class="ric"><summary><b>RIC N°05 · Protección contra tensiones peligrosas</b> <span class="chip key">Dominar</span></summary>
+<p><b>Qué regula:</b> cómo proteger a las personas de descargas eléctricas, tanto por contacto directo (tocar algo que normalmente tiene tensión) como indirecto (tocar una carcasa que quedó con tensión por una falla).</p>
+<p class="ric-f"><b>Explicado fácil:</b> es el pliego de las personas. Define desde qué tensión hay peligro y qué barreras se usan para que nadie reciba una descarga.</p>
+<ul><li>Tensión de seguridad: <b>50 V</b> en corriente alterna en lugares secos y <b>24 V</b> en lugares húmedos o mojados (5.8).</li>
+<li>Contra contacto directo: aislación, barreras, envolventes y distancia (sección 7).</li>
+<li>Contra contacto indirecto: corte automático con puesta a tierra. En esquema TN a 220 V, el corte debe ocurrir en <b>0,4 s</b> como máximo (tabla 5.1).</li>
+<li>El diferencial de <b>30 mA</b> o menos es protección complementaria: ayuda, pero no reemplaza a las otras medidas (7.8.1 y 7.8.2).</li>
+<li>Diferencial clase A donde haya corrientes de falla no senoidales; clase B si puede haber corriente continua (7.8.3).</li>
+<li>Esquemas permitidos: TN-S, TT o IT. En viviendas se usa <b>TN-S</b> (RIC 10, 5.2). Los equipos de doble aislación (clase II) también protegen (8.6.3.1).</li></ul>
+<p><b>En la prueba:</b> preguntas sobre el diferencial, el esquema TN-S y qué medida protege en cada caso.</p></details>
+
+<details class="ric"><summary><b>RIC N°06 · Puesta a tierra y enlace equipotencial</b> <span class="chip key">Dominar</span></summary>
+<p><b>Qué regula:</b> cómo se diseña, construye y mide la puesta a tierra, y cómo se unen entre sí las partes metálicas (enlace equipotencial).</p>
+<p class="ric-f"><b>Explicado fácil:</b> es la vía de escape de la corriente de falla hacia el suelo. Si funciona bien, la falla hace saltar la protección en vez de pasar por una persona.</p>
+<ul><li>Tierra de servicio: <b>20 Ω como máximo</b> (6.1). Se aceptan hasta 80 Ω solo en baja tensión y con las condiciones del 6.2: por ejemplo, instalaciones de hasta 10 kW con interruptor general omnipolar, diferencial de 300 mA en el alimentador y de 30 mA o menos en los circuitos (6.2.1).</li>
+<li>Estimación simple de una barra vertical: <b>R = ρ / L</b> (tabla 6.4).</li>
+<li>Si hay varias barras: separación de <b>al menos el doble del largo</b> y unión de 16 mm² o más (8.3.2).</li>
+<li>Conductor de tierra al tablero: igual sección que el alimentador, con mínimo de <b>4 mm²</b> (7.11 b).</li>
+<li>Camarilla de registro de 160 mm de diámetro como mínimo, para poder medir (5.15).</li>
+<li>Nunca usar cañerías de agua o gas como tierra (5.12 y 7.10), ni intercalar protecciones en el conductor de tierra (7.6).</li>
+<li>Medición por caída de potencial: electrodo de corriente a 6 veces la diagonal o más y de potencial al 62 % (anexo 6.3). El telurómetro de pinza solo sirve para revisar sistemas existentes (11.1).</li></ul>
+<p><b>En la prueba:</b> actividades 12-2 (diseño con barras) y 12-3 (medición con el método del 62 %).</p></details>
+
+<details class="ric"><summary><b>RIC N°07 · Instalaciones de equipos</b> <span class="chip">Conocer</span></summary>
+<p><b>Qué regula:</b> la instalación de equipos de fuerza: motores, climatización, condensadores y calefacción.</p>
+<p class="ric-f"><b>Explicado fácil:</b> lo que mueve o calienta necesita reglas propias, porque al partir consume mucha más corriente que en marcha.</p>
+<ul><li>Conductor de un motor: al menos <b>1,25 veces</b> su corriente de plena carga (5.5.2).</li>
+<li>Motores de 3 A o más: termomagnético y guardamotor dedicados (5.4.11). Todo motor lleva diferencial (5.6.2.9).</li>
+<li>Protección de sobrecarga regulada a no más de 1,25 veces la corriente nominal si el factor de servicio es 1,15 o más (5.6.1.2).</li>
+<li>Climatización: conductores de al menos 1,25 veces la corriente del circuito y mínimo 2,5 mm² (7.3.4).</li>
+<li>La distribuidora fija la potencia máxima con partida directa, que no puede ser menor a 3 kW (5.6.3.2).</li></ul>
+<p><b>En la prueba:</b> actividad 8-4 (motores y climatización).</p></details>
+
+<details class="ric"><summary><b>RIC N°08 · Sistemas de emergencia</b> <span class="chip">Saber que existe</span></summary>
+<p><b>Qué regula:</b> la alimentación de emergencia y respaldo: alumbrado de emergencia, grupos electrógenos y transferencias.</p>
+<ul><li>Baterías del alumbrado de emergencia: al menos <b>60 minutos</b>; 120 minutos en edificios de más de 5 pisos (8.7.1 c).</li>
+<li>Grupos electrógenos con combustible para 120 minutos a plena carga (8.8.2).</li>
+<li>La transferencia automática parte cuando la tensión baja de 0,6 veces la nominal por 0,5 s (8.14).</li></ul></details>
+
+<details class="ric"><summary><b>RIC N°09 · Sistemas de autogeneración</b> <span class="chip">Saber que existe</span></summary>
+<p><b>Qué regula:</b> instalaciones con generación propia, como paneles solares, que funcionan en paralelo con la red sin inyectarle energía.</p>
+<ul><li>Diferencial clase A o B: 30 mA como máximo bajo 10 kW de generación y 300 mA sobre eso (6.4.1).</li>
+<li>Protección anti-isla: si se corta la red, el sistema se desconecta en 2 s como máximo (6.5.6.1), para no energizar la red mientras alguien trabaja en ella.</li>
+<li>Inyectar a la red (net billing) tiene su propia normativa y trámite.</li></ul></details>
+
+<details class="ric" open><summary><b>RIC N°10 · Instalaciones de uso general</b> <span class="chip key">Dominar</span></summary>
+<p><b>Qué regula:</b> las instalaciones de alumbrado, enchufes y circuitos de viviendas, oficinas y locales. Es el pliego que más se pregunta.</p>
+<p class="ric-f"><b>Explicado fácil:</b> es el pliego de la casa. Dice cuántos circuitos se necesitan, cuánto se puede conectar en cada uno y cómo se instalan interruptores, enchufes y centros de luz.</p>
+<ul><li>Carga de cálculo: <b>100 W por centro</b> y <b>250 W por enchufe</b> cuando no se conoce la potencia (5.1.4.5 y 5.1.4.6). Cada circuito se carga hasta el <b>90 %</b> de su capacidad (5.1.4.4).</li>
+<li>Protección de un circuito de enchufes: corriente + 10 % y luego la normalizada superior (5.1.4.1).</li>
+<li>Diferencial de <b>30 mA</b> como máximo, también en todo circuito de alumbrado (5.1.3.5). Un diferencial no protege más de 3 circuitos ni el 100 % de la instalación (5.1.3.7).</li>
+<li>Circuitos mínimos: 2 en viviendas de menos de 30 m² y 3 desde 30 m², uno exclusivo para cocina y lavadero de al menos 16 A. Si hay horno eléctrico, otro circuito de al menos 16 A (5.2.1).</li>
+<li>Uniones solo dentro de cajas; prohibido el centro a centro sin cajas (5.1.2.2). Todo centro de luz lleva conductor de protección (5.1.2.13).</li>
+<li>Interruptores entre <b>0,80 y 1,40 m</b> (5.1.2.4). Enchufes a la altura que pida el uso (5.1.2.7) y de alvéolos protegidos (5.1.2.8).</li>
+<li>Viviendas con esquema TN-S y protección del empalme de al menos 25 A (5.2).</li></ul>
+<p><b>En la prueba:</b> actividades 8-3 y 11-2 (máximo de enchufes y centros), y el cuadro de cargas de la 9-1.</p></details>
+
+<details class="ric"><summary><b>RIC N°11 · Instalaciones especiales</b> <span class="chip">Conocer</span></summary>
+<p><b>Qué regula:</b> lugares con riesgos o usos especiales: locales de reunión de personas, centros asistenciales, recintos educacionales, baños con tina o ducha, piscinas, ascensores y data centers.</p>
+<ul><li>Baños: zonas de seguridad alrededor de la tina o ducha, con restricciones para enchufes e interruptores, y conexión equipotencial local.</li>
+<li>Salas de clases de enseñanza básica y media: <b>mínimo 3 enchufes hembra triples</b>; párvulos, 2 (4.3.3).</li>
+<li>Centros asistenciales: diferenciales tipo A de hasta 30 mA en ciertos circuitos (3.8.1.1).</li></ul>
+<p><b>En la prueba:</b> preguntas de baños y zonas húmedas.</p></details>
+
+<details class="ric"><summary><b>RIC N°12 · Ambientes explosivos</b> <span class="chip">Saber que existe</span></summary>
+<p><b>Qué regula:</b> instalaciones donde hay gases, vapores, líquidos, polvos o fibras inflamables: bencineras, bodegas de solventes, molinos.</p>
+<ul><li>Equipos certificados para la zona peligrosa en que se instalan.</li>
+<li>La corriente admisible de los conductores se reduce un 15 % (11.1.5) y los cables fijos son de 450/750 V en ducto (11.2.1.1).</li>
+<li>Se conecta con tu especialidad de gas: la lógica de zonas peligrosas es la misma.</li></ul></details>
+
+<details class="ric"><summary><b>RIC N°13 · Subestaciones y salas eléctricas</b> <span class="chip">Saber que existe</span></summary>
+<p><b>Qué regula:</b> subestaciones con transformadores de hasta 23.000 V dentro de instalaciones de consumo. Complementa al RIC 02.</p>
+<ul><li>Distancias mínimas de seguridad entre fases y a tierra (tabla 13.1).</li>
+<li>Fosos para el aceite de los transformadores (8.8) y protección en el lado primario (13.2).</li>
+<li>Está fuera del alcance de la clase D, que trabaja solo en baja tensión.</li></ul></details>
+
+<details class="ric"><summary><b>RIC N°14 · Eficiencia energética</b> <span class="chip">Saber que existe</span></summary>
+<p><b>Qué regula:</b> exigencias de eficiencia para edificios nuevos. No aplica a edificios residenciales ni oficinas de menos de 2.500 m² (2.3.1).</p>
+<ul><li>Registro de consumos cada 15 minutos como mínimo (5.2.3).</li>
+<li>La iluminación de áreas comunes baja automáticamente tras 20 minutos sin actividad (5.3.2.7).</li></ul></details>
+
+<details class="ric"><summary><b>RIC N°15 · Recarga de vehículos eléctricos</b> <span class="chip">Conocer</span></summary>
+<p><b>Qué regula:</b> las instalaciones que alimentan cargadores de vehículos eléctricos y los cargadores mismos, en viviendas, edificios, condominios y vía pública.</p>
+<ul><li>Fija las protecciones según el modo de carga y el tipo de instalación.</li>
+<li>Estas instalaciones se declaran ante la SEC con su propio trámite (TE6).</li>
+<li>La declaración TE1 ya pregunta si la instalación tiene cargadores. La SEC publicó una versión actualizada del pliego: revisa la vigente en sec.cl.</li></ul></details>
+
+<details class="ric"><summary><b>RIC N°16 · Subsistemas de distribución</b> <span class="chip">Saber que existe</span></summary>
+<p><b>Qué regula:</b> redes eléctricas privadas internas que abastecen condominios y loteos desde un único punto de conexión con la distribuidora.</p>
+<ul><li>Requiere factibilidad de suministro de la distribuidora (4.2).</li>
+<li>Todo el subsistema se considera un único servicio (4.3).</li></ul></details>
+
+<details class="ric"><summary><b>RIC N°17 · Operación y mantenimiento</b> <span class="chip">Conocer</span></summary>
+<p><b>Qué regula:</b> la seguridad al instalar, operar, mantener y desmantelar instalaciones, para electricistas y usuarios.</p>
+<p class="ric-f"><b>Explicado fácil:</b> es el pliego de las 5 reglas de oro: cómo trabajar sin que la instalación te sorprenda energizada.</p>
+<ul><li>Todo se considera energizado hasta abrir las fuentes de alimentación (6.3.1).</li>
+<li>El detector de tensión se prueba antes y después de cada verificación (6.3.2.3).</li>
+<li>Sobre 300 kW o con empalme en media tensión se exige un programa de seguridad eléctrica (5.3).</li></ul>
+<p><b>En la prueba:</b> actividades 8-1 y 8-2 (entorno seguro y verificación de energía cero).</p></details>
+
+<details class="ric"><summary><b>RIC N°18 · Presentación de proyectos</b> <span class="chip key">Dominar</span></summary>
+<p><b>Qué regula:</b> cómo se arma y se presenta a la SEC el proyecto de una instalación (declaración TE1).</p>
+<p class="ric-f"><b>Explicado fácil:</b> es el pliego de los papeles. Dice qué planos, cálculos y documentos tiene que tener un proyecto para que la SEC lo acepte.</p>
+<ul><li>Partes del proyecto: memoria explicativa, planos, informe de verificación inicial e informe de imágenes (6.1.1).</li>
+<li>La memoria es obligatoria <b>sobre 10 kW</b>, en edificios, conjuntos habitacionales, locales de reunión de personas y con empalme en media tensión (6.2.1).</li>
+<li>Planos en formato serie A, de preferencia a escala 1:50 (6.3.3 y 6.3.11), con cuadro de simbología según el anexo 18.3 (6.3.9).</li>
+<li>Cuadro de cargas obligatorio (6.3.16, anexo 18.4) y diagrama unilineal desde el empalme hasta la última protección (6.3.14).</li>
+<li>No se proyectan potencias futuras: un circuito sin carga definida se declara con 0 W (5.6).</li></ul>
+<p><b>En la prueba:</b> actividades 9-2 y 9-3 (documentación, cubicación y TE1).</p></details>
+
+<details class="ric"><summary><b>RIC N°19 · Puesta en servicio</b> <span class="chip key">Dominar</span></summary>
+<p><b>Qué regula:</b> cómo se inspecciona y ensaya una instalación antes de energizarla y declararla.</p>
+<p class="ric-f"><b>Explicado fácil:</b> es el control de calidad final: antes de dar la luz, se revisa a la vista y se mide para comprobar que todo quedó seguro.</p>
+<ul><li>Primero la inspección visual, después los ensayos (6.1).</li>
+<li>Continuidad del conductor de protección con una fuente de 4 a 24 V y al menos 0,2 A (7.2).</li>
+<li>Aislación con megóhmetro: circuitos de hasta 500 V se ensayan a <b>500 V CC</b> y deben dar <b>0,5 MΩ</b> o más (tabla 19.1). Si hay equipos que no se pueden desconectar, se ensaya a 250 V CC y se exige 1 MΩ (7.3.6).</li>
+<li>Prueba de diferenciales con instrumento según IEC 61557-6 (7.6.7).</li>
+<li>Polaridad: los dispositivos de corte van en la fase (7.8.1).</li>
+<li>El informe de verificación inicial incluye los resultados por tablero y fotos de las pruebas (8.1.2.3).</li></ul>
+<p><b>En la prueba:</b> actividad 9-1 y las mediciones de la 11-3.</p></details>
+<p class="norm">Fuente: pliegos técnicos RIC de la SEC (Res. Ex. N°33.877/2020). Descárgalos completos y vigentes desde sec.cl.</p>
+`}],
 taller:`<h3>Práctica: leer un tablero sin abrirlo</h3><div class="idea">Estas actividades no necesitan materiales del taller: usan simuladores gratuitos, observación de instalaciones sin intervenirlas y ejercicios en papel.</div>
 <p>Usa el tablero de tu casa o del colegio, <b>sin quitar la tapa</b>. Solo observa y anota lo que está a la vista en el frente de los aparatos:</p>
 <ol><li>Interruptor general: corriente nominal, curva y número de polos.</li>
@@ -1790,7 +2002,7 @@ pts:[
 <li>Todo centro de iluminación lleva conductor de protección (RIC N°10, 5.1.2.13).</li>
 <li>Las bañeras y duchas metálicas se unen con conexión equipotencial local (RIC N°11).</li></ul>
 <h4>Valores</h4>
-<ul><li>Tierra de servicio: <b>20 Ω máximo</b> (RIC N°06, 6.1).</li>
+<ul><li>Tierra de servicio: <b>20 Ω máximo</b> (RIC N°06, 6.1). Hasta 80 Ω solo en baja tensión con las condiciones del 6.2, por ejemplo instalaciones de hasta 10 kW con general omnipolar, diferencial de 300 mA en el alimentador y de 30 mA o menos en los circuitos.</li>
 <li>Tierra de protección: se calcula con R = Vs / I0, donde Vs es la tensión de seguridad (50 V seco) e I0 la corriente que hace operar la protección. Con un diferencial de 30 mA: 50 / 0,03 ≈ 1.667 Ω. Por eso el diferencial hace tan eficaz la protección en viviendas.</li></ul>
 <p>La resistencia de tierra se mide con un <b>telurómetro</b>.</p>`}],
 taller:`<h3>Práctica: conductores y tierra en papel</h3><div class="idea">Estas actividades no necesitan materiales del taller: usan simuladores gratuitos, observación de instalaciones sin intervenirlas y ejercicios en papel.</div>
@@ -2512,7 +2724,7 @@ const PRUEBA=[
   {k:"txt",s:"Al verificar el empalme de una casa, se indica usar cable preensamblado. ¿Qué acción tomas?",cri:true,ans:"Observarlo y consultarlo con la distribuidora: los empalmes aéreos normalizados son de tipo concéntrico (letra A del anexo 1.3).",why:"El empalme lo construye la distribuidora según sus normas; el instalador verifica que el material coincida con el tipo normalizado.",ref:"RIC 1, anexo 1.3",cl:[4,0]}]},
  {c:"12-2",t:"Diseñar la puesta a tierra según el RIC 06",req:"Con una aplicación, prueba combinaciones de largo (1; 1,5; 3 m), diámetro (0,015; 0,020 m) y separación (1; 2; 3 m) en un terreno de 170 Ω·m, y elige la configuración más cercana al valor permitido.",data:()=>`<div class="ptcalc"><div class="cf"><label>ρ del suelo (Ω·m)<input id="ptr" type="text" inputmode="decimal" value="170"></label><label>Largo L (m)<select id="ptl"><option>1</option><option>1.5</option><option selected>3</option></select></label><label>Diámetro d (m)<select id="ptd"><option>0.015</option><option selected>0.020</option></select></label><label>Separación D (m)<select id="pts"><option>1</option><option>2</option><option selected>3</option></select></label></div><div class="cr" id="ptout"></div><p class="norm">Fórmulas de ingeniería: una barra R1 = ρ/(2πL)·(ln(8L/d) − 1); resistencia mutua Rm = ρ/(2πD); dos barras R2 = (R1 + Rm)/2; tres barras en triángulo R3 = (R1 + 2Rm)/3. La aplicación de la prueba puede dar valores algo distintos: lo que importa es el método.</p></div>`,items:[
   {k:"num",s:"Según tu diseño, ¿qué valor obtienes para la puesta a tierra? (L = 3 m, d = 0,020 m, D = 3 m, tres barras)",u:"Ω",a:24.3,tol:0.08,ans:"Cerca de 24 Ω (R3)",why:"R1 = 170/(2π·3)·(ln(1.200) − 1) ≈ 54,9 Ω; Rm = 170/(2π·3) ≈ 9,0 Ω; R3 = (54,9 + 2 × 9,0)/3 ≈ 24,3 Ω. Con la fórmula simple del RIC 6 (tabla 6.4), una barra de 3 m da ρ/L = 56,7 Ω.",ref:"RIC 6, tabla 6.4",cl:[5,3]},
-  {k:"vf",s:"El valor obtenido cumple con lo que establece la norma.",a:false,why:"La tierra de servicio debe ser de 20 Ω como máximo (80 Ω solo en los casos del 6.2). Con 24 Ω no cumple: hay que agregar barras, aumentar la separación o mejorar el terreno. Además, el pliego exige separar las barras al menos el doble de su largo (con L = 3 m, D ≥ 6 m).",ref:"RIC 6, 6.1 y 8.3.2",cl:[5,3]},
+  {k:"vf",s:"El valor obtenido cumple con lo que establece la norma.",a:false,cri:true,why:"El límite general de la tierra de servicio es 20 Ω (6.1): con 24 Ω no cumple, y hay que agregar barras, aumentar la separación o mejorar el terreno. Solo se aceptarían hasta 80 Ω si la instalación cumple el 6.2, por ejemplo hasta 10 kW con general omnipolar, diferencial de 300 mA en el alimentador y de 30 mA o menos en todos los circuitos (6.2.1); el cuadro de esta prueba no los tiene en todos. Además, el pliego exige separar las barras al menos el doble de su largo (con L = 3 m, D ≥ 6 m).",ref:"RIC 6, 6.1, 6.2.1 y 8.3.2",cl:[5,3]},
   {k:"txt",s:"¿Qué configuración utilizas: R1, R2 o R3?",ans:"R3, tres barras: es la más cercana al valor permitido.",why:"Cada barra en paralelo baja la resistencia, aunque no en proporción exacta por la influencia mutua entre barras cercanas.",ref:"RIC 6, 8.3.2",cl:[5,3]}]},
  {c:"12-3",t:"Verificar la puesta a tierra según el RIC 06 (caída de potencial)",req:"Con una aplicación, mide una malla de 6 × 5 m: ubica el electrodo de corriente (C2) y el de potencial (P2), registra la curva de resistencia y responde.",data:()=>`<div class="cr"><ol class="steps"><li>Diagonal de la malla: D = √(6² + 5²) = <b>7,81 m</b>.</li><li>Electrodo de corriente C2 a 6 veces la diagonal o más: <b>46,9 m</b> (100 %).</li><li>Electrodo de potencial P2 al 62 %: <b>29,1 m</b>. Se confirma moviéndolo al 52 % (24,4 m) y al 72 % (33,8 m): si las lecturas casi no cambian, la medición es válida.</li></ol></div><div class="warn"><b>Ojo:</b> la curva de la aplicación de la prueba va de 13 a 23 m, así que parece usar una distancia menor a la del pliego. En la prueba, anota los valores que te entregue la aplicación.</div>`,items:[
   {k:"num",s:"¿Cuál fue la distancia de medición más cercana a la malla? (punto del 52 %)",u:"m",a:24.4,tol:0.02,cri:true,ans:"24,4 m",why:"52 % de 46,9 m = 24,4 m. Es la posición más cercana de las tres lecturas de control.",ref:"RIC 6, anexo 6.3",cl:[5,3]},
@@ -2584,7 +2796,7 @@ const TEM_DATOS=[
  ["Motores","Conductor ≥ 1,25 × corriente nominal","RIC 7, 5.5.2"],
  ["Empalme de vivienda","Protección de al menos 25 A; capacidad igual o inferior a la potencia declarada","RIC 10, 5.2.1 · RIC 1, 5.3"],
  ["Medidor","En fachada, a menos de 15 m de la puerta de acceso","RIC 1, 7.2"],["Ducto medidor-primer tablero","32 mm como mínimo","RIC 1, 7.15"],
- ["Tierra de servicio","20 Ω como máximo","RIC 6, 6.1"],["Varias barras","Separación ≥ 2 × largo; unión ≥ 16 mm²","RIC 6, 8.3.2"],
+ ["Tierra de servicio","20 Ω como máximo (80 Ω solo con las condiciones del 6.2)","RIC 6, 6.1 y 6.2"],["Varias barras","Separación ≥ 2 × largo; unión ≥ 16 mm²","RIC 6, 8.3.2"],
  ["Medición de tierra","Electrodo de corriente a ≥ 6 diagonales; potencial al 62 %","RIC 6, anexo 6.3"],
  ["Aislación","≥ 0,5 MΩ a 500 V CC","RIC 19, tabla 19.1"],["Memoria explicativa","Obligatoria sobre 10 kW, edificios, conjuntos y locales de reunión","RIC 18, 6.2.1"]];
 function temarioHTML(){
@@ -2600,7 +2812,7 @@ function temarioHTML(){
   <h4>2. Unidades de competencia evaluadas</h4>
   <div class="tw"><table><thead><tr><th>Unidad</th><th>Actividades clave</th><th>Pliegos</th><th>Tipo de ítem</th><th>Repasar</th></tr></thead><tbody>${TEM_UCL.map(r=>`<tr><td><span class="pcode">${r[0]}</span><br><b>${r[1]}</b></td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5].map(c=>`<button class="chip act" data-open="${c[0]}" data-tab="${c[1]}">Clase ${c[0]}: ${c[2]}</button>`).join(" ")}</td></tr>`).join("")}</tbody></table></div>
   <h4>3. Peso de cada pliego en la parte teórica</h4>
-  <p>Así reparte el simulador sus 100 preguntas por intento. Úsalo para decidir qué estudiar primero.</p>
+  <p>Así reparte el simulador sus 100 preguntas por intento. Úsalo para decidir qué estudiar primero. <button class="chip act" data-open="4" data-tab="4">Ver los 19 pliegos explicados</button></p>
   <div class="tw"><table><thead><tr><th>Pliego</th><th class="n">Preguntas por intento</th><th class="n">En el banco</th><th>Repasar</th></tr></thead><tbody>${TEM_RIC.map(r=>`<tr><td>${r[0]}</td><td class="n">${r[1]} a ${r[2]}</td><td class="n">${r[3]}</td><td><button class="chip act" data-open="${r[4][0]}" data-tab="${r[4][1]}">Clase ${r[4][0]}</button></td></tr>`).join("")}</tbody></table></div>
   <div class="idea">Lo que más pesa: <b>RIC 10</b> (alumbrado y enchufes), <b>RIC 02 y RIC 04</b> (tableros, conductores y ductos), <b>RIC 06</b> (puesta a tierra) y <b>RIC 18</b> (proyecto y cuadro de cargas).</div>
   <h4>4. Datos que se repiten en las pruebas</h4>
