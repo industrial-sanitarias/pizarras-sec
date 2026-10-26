@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Pizarra de estudio para la licencia SEC de instalador eléctrico clase D.">
+<meta name="color-scheme" content="light">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>SEC - ELECTR. CLASE D</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -194,6 +195,24 @@ figure.ref .fig{margin:0}
 .hero,#lesson .lhead{--hero-bg:repeating-linear-gradient(0deg,rgba(120,190,255,.07) 0 1px,transparent 1px 28px),repeating-linear-gradient(90deg,rgba(120,190,255,.07) 0 1px,transparent 1px 28px),radial-gradient(120% 140% at 85% 15%,#16406a 0%,#0c2135 55%,#08131f 100%);--glow:#ffc53d;--mark-bg:linear-gradient(145deg,#ffd666,#f0a500)}
 .hero .bar{height:14px;border-radius:3px;background:rgba(255,255,255,.1);-webkit-mask:repeating-linear-gradient(90deg,#000 0 calc(10% - 3px),transparent calc(10% - 3px) 10%);mask:repeating-linear-gradient(90deg,#000 0 calc(10% - 3px),transparent calc(10% - 3px) 10%)}
 .hero .bar span{background:linear-gradient(90deg,#5fd3ff,#ffc53d);box-shadow:0 0 12px #ffc53d}
+
+/* Encabezado en versión clara */
+.hero{color:var(--ink);box-shadow:0 14px 34px -26px rgba(20,40,60,.45);border:1px solid var(--line)}
+.hero .eyebrow,#lesson .lhead .eyebrow{color:var(--muted)}
+.hero h1{color:var(--ink)}
+.hero .sub{color:var(--muted)}
+.specs span{border-color:var(--line);background:rgba(255,255,255,.7);color:var(--ink)}
+.specs span:first-child{border-color:var(--accent);color:var(--accent);font-weight:500}
+.hero .progress{background:rgba(255,255,255,.82);border-color:var(--line);color:var(--ink)}
+.hero .progress .eyebrow{color:var(--muted)}
+.hero .progress .big{color:var(--accent);text-shadow:none}
+.hero .next{color:var(--muted)}.hero .next b{color:var(--ink)}
+#lesson .lhead{color:var(--ink);border:1px solid var(--line);box-shadow:none}
+#lesson .lhead .chk{color:var(--muted)}
+.hero .mark{box-shadow:0 0 0 1px var(--line),0 8px 20px -10px var(--glow)}
+.hero,#lesson .lhead{--hero-bg:repeating-linear-gradient(0deg,rgba(31,95,139,.07) 0 1px,transparent 1px 28px),repeating-linear-gradient(90deg,rgba(31,95,139,.07) 0 1px,transparent 1px 28px),linear-gradient(135deg,#f7fbff 0%,#dfeefa 100%);--glow:#e0a100}
+.hero .bar{background:rgba(31,95,139,.14)}
+.hero .bar span{background:linear-gradient(90deg,#1f7fc0,#e0a100);box-shadow:none}
 @media (prefers-reduced-motion: reduce){.bar span{transition:none}}
 </style>
 
@@ -202,10 +221,10 @@ figure.ref .fig{margin:0}
 <div class="wrap">
   <header id="hdr" class="hero">
     <div class="art" aria-hidden="true"><svg viewBox="0 0 600 260" preserveAspectRatio="xMaxYMid slice"><defs><filter id="glw" x="-10%" y="-40%" width="120%" height="180%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-      <line x1="0" y1="130" x2="600" y2="130" stroke="rgba(150,210,255,.35)" stroke-width="1"/>
-      <g stroke="rgba(150,210,255,.35)" stroke-width="1"><line x1="0" y1="125" x2="0" y2="135"/><line x1="25" y1="125" x2="25" y2="135"/><line x1="50" y1="125" x2="50" y2="135"/><line x1="75" y1="125" x2="75" y2="135"/><line x1="100" y1="125" x2="100" y2="135"/><line x1="125" y1="125" x2="125" y2="135"/><line x1="150" y1="125" x2="150" y2="135"/><line x1="175" y1="125" x2="175" y2="135"/><line x1="200" y1="125" x2="200" y2="135"/><line x1="225" y1="125" x2="225" y2="135"/><line x1="250" y1="125" x2="250" y2="135"/><line x1="275" y1="125" x2="275" y2="135"/><line x1="300" y1="125" x2="300" y2="135"/><line x1="325" y1="125" x2="325" y2="135"/><line x1="350" y1="125" x2="350" y2="135"/><line x1="375" y1="125" x2="375" y2="135"/><line x1="400" y1="125" x2="400" y2="135"/><line x1="425" y1="125" x2="425" y2="135"/><line x1="450" y1="125" x2="450" y2="135"/><line x1="475" y1="125" x2="475" y2="135"/><line x1="500" y1="125" x2="500" y2="135"/><line x1="525" y1="125" x2="525" y2="135"/><line x1="550" y1="125" x2="550" y2="135"/><line x1="575" y1="125" x2="575" y2="135"/><line x1="600" y1="125" x2="600" y2="135"/></g>
-      <path d="M0 130Q37.5 50 75 130T150 130T225 130T300 130T375 130T450 130T525 130T600 130" fill="none" stroke="#5fd3ff" stroke-width="2.6" filter="url(#glw)"/>
-      <path d="M25 130Q62.5 70 100 130T175 130T250 130T325 130T400 130T475 130T550 130T625 130" fill="none" stroke="#ffc53d" stroke-width="1.8" opacity=".75" filter="url(#glw)"/>
+      <line x1="0" y1="130" x2="600" y2="130" stroke="rgba(31,95,139,.3)" stroke-width="1"/>
+      <g stroke="rgba(31,95,139,.3)" stroke-width="1"><line x1="0" y1="125" x2="0" y2="135"/><line x1="25" y1="125" x2="25" y2="135"/><line x1="50" y1="125" x2="50" y2="135"/><line x1="75" y1="125" x2="75" y2="135"/><line x1="100" y1="125" x2="100" y2="135"/><line x1="125" y1="125" x2="125" y2="135"/><line x1="150" y1="125" x2="150" y2="135"/><line x1="175" y1="125" x2="175" y2="135"/><line x1="200" y1="125" x2="200" y2="135"/><line x1="225" y1="125" x2="225" y2="135"/><line x1="250" y1="125" x2="250" y2="135"/><line x1="275" y1="125" x2="275" y2="135"/><line x1="300" y1="125" x2="300" y2="135"/><line x1="325" y1="125" x2="325" y2="135"/><line x1="350" y1="125" x2="350" y2="135"/><line x1="375" y1="125" x2="375" y2="135"/><line x1="400" y1="125" x2="400" y2="135"/><line x1="425" y1="125" x2="425" y2="135"/><line x1="450" y1="125" x2="450" y2="135"/><line x1="475" y1="125" x2="475" y2="135"/><line x1="500" y1="125" x2="500" y2="135"/><line x1="525" y1="125" x2="525" y2="135"/><line x1="550" y1="125" x2="550" y2="135"/><line x1="575" y1="125" x2="575" y2="135"/><line x1="600" y1="125" x2="600" y2="135"/></g>
+      <path d="M0 130Q37.5 50 75 130T150 130T225 130T300 130T375 130T450 130T525 130T600 130" fill="none" stroke="#1f7fc0" stroke-width="2.6" filter="url(#glw)"/>
+      <path d="M25 130Q62.5 70 100 130T175 130T250 130T325 130T400 130T475 130T550 130T625 130" fill="none" stroke="#e0a100" stroke-width="1.8" opacity=".85" filter="url(#glw)"/>
       <text x="590" y="40" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="12" fill="rgba(234,242,248,.55)">CH1 220 V~  ·  50 Hz</text>
     </svg></div>
     <div>

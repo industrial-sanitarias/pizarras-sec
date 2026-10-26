@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Pizarra de estudio para la licencia SEC de instalador de gas clase 3.">
+<meta name="color-scheme" content="light">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>SEC - GAS CLASE 3</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -198,6 +199,22 @@ figure.ref .fig{margin:0}
 @media (prefers-reduced-motion: reduce){.gauge .needle{transition:none}}
 .hero .progress .row{justify-content:center;gap:10px}
 .hero .bar{display:none}
+
+/* Encabezado en versión clara */
+.hero{color:var(--ink);box-shadow:0 14px 34px -26px rgba(20,40,60,.45);border:1px solid var(--line)}
+.hero .eyebrow,#lesson .lhead .eyebrow{color:var(--muted)}
+.hero h1{color:var(--ink)}
+.hero .sub{color:var(--muted)}
+.specs span{border-color:var(--line);background:rgba(255,255,255,.7);color:var(--ink)}
+.specs span:first-child{border-color:var(--accent);color:var(--accent);font-weight:500}
+.hero .progress{background:rgba(255,255,255,.82);border-color:var(--line);color:var(--ink)}
+.hero .progress .eyebrow{color:var(--muted)}
+.hero .progress .big{color:var(--accent);text-shadow:none}
+.hero .next{color:var(--muted)}.hero .next b{color:var(--ink)}
+#lesson .lhead{color:var(--ink);border:1px solid var(--line);box-shadow:none}
+#lesson .lhead .chk{color:var(--muted)}
+.hero .mark{box-shadow:0 0 0 1px var(--line),0 8px 20px -10px var(--glow)}
+.hero,#lesson .lhead{--hero-bg:radial-gradient(70% 120% at 84% 110%,rgba(255,138,61,.30) 0%,rgba(255,138,61,0) 60%),radial-gradient(50% 80% at 70% 0%,rgba(61,139,255,.14) 0%,rgba(61,139,255,0) 70%),linear-gradient(160deg,#fffaf6 0%,#fbe9dc 100%);--glow:#ff8a3d;--mark-bg:linear-gradient(145deg,#ffffff,#fde3d1)}
 @media (prefers-reduced-motion: reduce){.bar span{transition:none}}
 </style>
 
@@ -219,10 +236,10 @@ figure.ref .fig{margin:0}
     </div>
     <div class="progress" aria-live="polite">
       <svg class="gauge" viewBox="0 0 200 118" aria-hidden="true"><defs><linearGradient id="ga" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3d8bff"/><stop offset="1" stop-color="#ff8a3d"/></linearGradient></defs>
-        <path d="M22 100A78 78 0 0 1 178 100" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="12" stroke-linecap="round"/>
-        <path d="M22 100A78 78 0 0 1 178 100" fill="none" stroke="url(#ga)" stroke-width="5" stroke-linecap="round"/><line x1="38.0" y1="100.0" x2="30.0" y2="100.0" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="41.0" y1="80.8" x2="33.4" y2="78.4" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="49.8" y1="63.6" x2="43.4" y2="58.9" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="63.6" y1="49.8" x2="58.9" y2="43.4" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="80.8" y1="41.0" x2="78.4" y2="33.4" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="100.0" y1="38.0" x2="100.0" y2="30.0" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="119.2" y1="41.0" x2="121.6" y2="33.4" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="136.4" y1="49.8" x2="141.1" y2="43.4" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="150.2" y1="63.6" x2="156.6" y2="58.9" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="159.0" y1="80.8" x2="166.6" y2="78.4" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="162.0" y1="100.0" x2="170.0" y2="100.0" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/>
-        <text x="22" y="116" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="rgba(234,242,248,.6)">0</text><text x="178" y="116" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="rgba(234,242,248,.6)">10</text>
-        <g class="needle"><path d="M100 100L97 96L100 34L103 96Z" fill="#ff8a3d"/></g><circle cx="100" cy="100" r="7" fill="#e9eef5"/><circle cx="100" cy="100" r="3" fill="#1b1512"/>
+        <path d="M22 100A78 78 0 0 1 178 100" fill="none" stroke="rgba(22,35,42,.10)" stroke-width="12" stroke-linecap="round"/>
+        <path d="M22 100A78 78 0 0 1 178 100" fill="none" stroke="url(#ga)" stroke-width="5" stroke-linecap="round"/><line x1="38.0" y1="100.0" x2="30.0" y2="100.0" stroke="rgba(22,35,42,.45)" stroke-width="1.5"/><line x1="41.0" y1="80.8" x2="33.4" y2="78.4" stroke="rgba(22,35,42,.45)" stroke-width="1.5"/><line x1="49.8" y1="63.6" x2="43.4" y2="58.9" stroke="rgba(22,35,42,.45)" stroke-width="1.5"/><line x1="63.6" y1="49.8" x2="58.9" y2="43.4" stroke="rgba(22,35,42,.45)" stroke-width="1.5"/><line x1="80.8" y1="41.0" x2="78.4" y2="33.4" stroke="rgba(22,35,42,.45)" stroke-width="1.5"/><line x1="100.0" y1="38.0" x2="100.0" y2="30.0" stroke="rgba(22,35,42,.45)" stroke-width="1.5"/><line x1="119.2" y1="41.0" x2="121.6" y2="33.4" stroke="rgba(22,35,42,.45)" stroke-width="1.5"/><line x1="136.4" y1="49.8" x2="141.1" y2="43.4" stroke="rgba(22,35,42,.45)" stroke-width="1.5"/><line x1="150.2" y1="63.6" x2="156.6" y2="58.9" stroke="rgba(22,35,42,.45)" stroke-width="1.5"/><line x1="159.0" y1="80.8" x2="166.6" y2="78.4" stroke="rgba(22,35,42,.45)" stroke-width="1.5"/><line x1="162.0" y1="100.0" x2="170.0" y2="100.0" stroke="rgba(22,35,42,.45)" stroke-width="1.5"/>
+        <text x="22" y="116" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="rgba(22,35,42,.6)">0</text><text x="178" y="116" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="rgba(22,35,42,.6)">10</text>
+        <g class="needle"><path d="M100 100L97 96L100 34L103 96Z" fill="#ff8a3d"/></g><circle cx="100" cy="100" r="7" fill="#16232a"/><circle cx="100" cy="100" r="3" fill="#fff"/>
       </svg>
       <div class="row"><span class="eyebrow">Avance</span><span class="big" id="count">0/10</span></div>
       <div class="bar"><span id="fill"></span></div>
