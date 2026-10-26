@@ -254,6 +254,31 @@ body.proj .pnav button{font-size:18px;padding:10px 16px}
 .more>.eyebrow{color:var(--accent);font-weight:500;display:block;margin-bottom:4px}
 .more h4:first-of-type{margin-top:6px}
 body.proj .more{max-width:1180px}
+
+/* Explicado fácil, glosario y guía */
+.facil{border:2px solid var(--ok);background:var(--ok-soft);border-radius:10px;padding:14px 18px;margin:0 0 18px;max-width:900px}
+.facil-tag{display:inline-block;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;background:var(--ok);color:#fff;border-radius:999px;padding:3px 10px;margin-bottom:8px}
+.facil p{margin:0 0 4px;font-size:1.04em;line-height:1.6}
+.words{margin-top:12px;border-top:1px dashed color-mix(in srgb,var(--ok) 50%,transparent);padding-top:10px}
+.words .eyebrow{display:block;margin-bottom:6px;color:var(--ok)}
+.words dl,.glos dl{margin:0;display:grid;gap:6px}
+.words dl>div,.glos dl>div{display:grid;grid-template-columns:minmax(120px,190px) 1fr;gap:10px}
+@media (max-width:560px){.words dl>div,.glos dl>div{grid-template-columns:1fr;gap:0}}
+.words dt,.glos dt{font-weight:600}
+.words dd,.glos dd{margin:0}
+.glosbtn{background:var(--ok);color:#fff;border:0;border-radius:6px;padding:8px 14px;cursor:pointer;font-size:14px;font-weight:500}
+.glosbtn:hover{filter:brightness(1.08)}
+.hero-acts{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.glos{position:fixed;inset:0;z-index:50;background:rgba(15,25,30,.45);display:flex;align-items:flex-start;justify-content:center;padding:max(24px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px));overflow:auto}
+.glos-box{background:var(--paper);border-radius:12px;max-width:720px;width:100%;padding:20px 22px;box-shadow:0 20px 50px -20px rgba(0,0,0,.5)}
+.glos-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.glos-top h3{font-family:var(--f-display);font-size:28px;margin:0}
+#glosq{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:6px;margin-bottom:14px;box-sizing:border-box}
+.glos dl>div{border-bottom:1px solid var(--line);padding:6px 0}
+.start{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--ok);border-radius:10px;padding:16px 22px;margin-bottom:22px}
+.start h2{font-family:var(--f-display);font-weight:600;font-size:24px;margin:0 0 8px}
+.start ol{margin:0;padding-left:22px;display:grid;gap:4px}
+body.proj .facil{max-width:1180px}
 @media (prefers-reduced-motion: reduce){.bar span{transition:none}}
 </style>
 
@@ -273,6 +298,7 @@ body.proj .more{max-width:1180px}
       <h1><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13.5 2L4.5 13.5h6l-1.5 8.5 9.5-12h-6.2z" fill="#0c2135"/></svg></span><span>Pizarra Instalador Clase D</span></h1>
       <p class="sub">10 clases en 2 semanas. Toca cualquier tema para abrir su materia completa, con ejemplos, normativa, taller y autoevaluación.</p>
       <div class="specs"><span>220 V · 50 Hz</span><span>Baja tensión</span><span>Hasta 10 kW</span><span>Pliegos RIC</span></div>
+      <div class="hero-acts"><button class="glosbtn" id="glosbtn" type="button">Abrir glosario</button><span class="kbd-hint">¿Una palabra que no entiendes? Búscala aquí.</span></div>
     </div>
     <div class="progress" aria-live="polite">
       <div class="row"><span class="eyebrow">Avance</span><span class="big" id="count">0/10</span></div>
@@ -282,6 +308,17 @@ body.proj .more{max-width:1180px}
   </header>
 
   <main id="board">
+    <section class="start" aria-label="Cómo usar esta pizarra">
+      <h2>¿Partes desde cero? Así se usa esta pizarra</h2>
+      <ol>
+        <li><b>Avanza en orden.</b> Cada clase usa lo que aprendiste en la anterior. Empieza por la Clase 1.</li>
+        <li><b>Lee primero el recuadro "Explicado fácil".</b> Te da la idea con palabras simples antes de la parte técnica.</li>
+        <li><b>Mira el esquema y la foto.</b> Ver cómo se conecta algo ayuda más que leerlo.</li>
+        <li><b>No te preocupes si no entiendes todo al tiro.</b> La sección "Profundiza" es para una segunda lectura.</li>
+        <li><b>Usa el glosario</b> cada vez que aparezca una palabra nueva.</li>
+        <li><b>Cierra cada clase con la autoevaluación.</b> Si sacas menos de 70%, vuelve a leer los temas que fallaste.</li>
+      </ol>
+    </section>
     <div class="lanes">
       <section class="lane" id="w1"><h2>Semana 1 <small>Fundamentos y normativa · 26 al 30 oct</small></h2></section>
       <section class="lane" id="w2"><h2>Semana 2 <small>Instalación, planos y práctica · 2 al 6 nov</small></h2></section>
@@ -698,6 +735,90 @@ function realHTML(k){
    (ls.length?`<div class="links"><div class="eyebrow">Ver en la realidad</div><ul>${ls.map(([t,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${esc(t)} ↗</a></li>`).join("")}</ul></div>`:"")+
   `</div>`;
 }
+
+/* ---------- Explicado fácil y glosario ---------- */
+const FACIL={
+"1.1":{f:"Todo está hecho de partículas diminutas. Algunas de ellas, los electrones, pueden moverse dentro de los metales. Cuando los empujamos para que avancen todos en la misma dirección, eso es la corriente eléctrica. Los cables tienen cobre por dentro porque el cobre deja moverse muy bien a los electrones, y plástico por fuera para que la electricidad no salga hacia nosotros.",w:[["Electrón","Partícula muy pequeña que, al moverse, forma la corriente."],["Conductor","Material que deja pasar la electricidad, como el cobre."],["Aislante","Material que no deja pasar la electricidad, como el plástico."]]},
+"1.2":{f:"Para que el agua salga por una llave, tiene que haber presión en la cañería. En electricidad, esa presión se llama tensión o voltaje. Sin tensión, la electricidad no se mueve. En un enchufe de una casa chilena hay 220 volt de tensión: esa es la \"fuerza\" con que empuja la electricidad.",w:[["Tensión o voltaje","La fuerza que empuja la electricidad. Se mide en volt (V)."],["Fase","El cable que trae la tensión. Es el peligroso."],["Neutro","El cable por donde vuelve la corriente."],["Tierra","Cable de seguridad que no lleva corriente salvo cuando hay una falla."]]},
+"1.3":{f:"Si la tensión es la presión del agua, la corriente es la cantidad de agua que pasa. Se mide en ampere. Un equipo que necesita mucha energía, como un hervidor, hace pasar mucha corriente por el cable. Mientras más corriente, más se calienta el cable. Por eso los cables tienen un límite.",w:[["Corriente","Cantidad de electricidad que pasa por un cable. Se mide en ampere (A)."],["Corriente alterna","La de los enchufes: cambia de sentido 50 veces por segundo."],["Corriente continua","La de pilas y baterías: va siempre en el mismo sentido."],["Pinza amperimétrica","Instrumento que mide la corriente abrazando un cable."]]},
+"1.4":{f:"La resistencia es lo que frena a la electricidad. Un cable delgado o muy largo frena más que uno grueso y corto. Cuando algo frena la electricidad, se calienta: así funcionan una estufa o un hervidor. Pero en un cable ese calor es peligroso, por eso se elige un cable del grosor adecuado.",w:[["Resistencia","Lo que se opone al paso de la corriente. Se mide en ohm (Ω)."],["Sección","El grosor del cobre del cable. Se mide en mm²."],["Óhmetro","Instrumento que mide la resistencia, siempre sin tensión."]]},
+"2.1":{f:"Tensión, corriente y resistencia están siempre conectadas. Si aumentas la fuerza (tensión), pasa más corriente. Si frenas más (resistencia), pasa menos corriente. La Ley de Ohm es solo esa idea escrita como fórmula: con dos de los tres valores puedes calcular el tercero.",w:[["Ley de Ohm","V = I × R. Relaciona tensión, corriente y resistencia."],["Fórmula","Una regla escrita con letras para calcular un valor."]]},
+"2.2":{f:"La potencia dice cuánta energía usa un equipo en cada momento. Un hervidor de 2000 watt usa mucho más que una ampolleta de 9 watt. Está escrita en una etiqueta del equipo. Si conoces la potencia, puedes calcular cuánta corriente va a pasar por el cable: divides la potencia por 220.",w:[["Potencia","Cuánta energía usa un equipo. Se mide en watt (W)."],["kW (kilowatt)","1.000 watt."],["Placa","Etiqueta del equipo con su tensión y su potencia."]]},
+"2.3":{f:"La boleta de la luz no cobra por la potencia, sino por la energía: cuánta potencia usaste y durante cuánto tiempo. Una estufa encendida toda la tarde gasta mucho más que un hervidor encendido 5 minutos, aunque el hervidor sea más potente.",w:[["Energía","Potencia por tiempo. Es lo que se paga."],["kWh","Unidad de energía: 1.000 watt durante 1 hora."],["Medidor","Aparato que cuenta la energía que consume la casa."]]},
+"2.4":{f:"La electricidad puede pasar por el cuerpo si tocamos un cable con tensión. Una corriente muy pequeña ya se siente, una un poco mayor impide soltar el cable y una mayor puede detener el corazón. Por eso existen protecciones que cortan la electricidad en una fracción de segundo.",w:[["Contacto directo","Tocar un cable o parte que tiene tensión."],["Contacto indirecto","Tocar algo metálico que quedó con tensión por una falla."],["mA (miliampere)","Milésima de ampere. 30 mA = 0,03 A."]]},
+"2.5":{f:"Antes de tocar una instalación hay que asegurarse de que no tenga electricidad. Las 5 reglas de oro son una lista de pasos que se hacen siempre, en orden: cortar, bloquear para que nadie vuelva a conectar, comprobar con un instrumento que no hay tensión, conectar a tierra y marcar la zona de trabajo.",w:[["Desenergizar","Cortar la electricidad de una instalación."],["Bloquear","Poner un candado para que nadie pueda volver a dar la energía."],["EPP","Elementos de protección personal: guantes, lentes, zapatos."]]},
+"3.1":{f:"Para que la electricidad funcione, tiene que hacer un camino de ida y vuelta, como una vuelta completa. Va desde la fuente por la fase, pasa por el equipo y vuelve por el neutro. Si el camino se corta en cualquier punto, no funciona. Si fase y neutro se tocan sin pasar por un equipo, ocurre un cortocircuito.",w:[["Circuito","Camino cerrado por donde circula la corriente."],["Carga","El equipo que usa la electricidad: ampolleta, estufa, motor."],["Cortocircuito","Fase y neutro se tocan directamente. La corriente se dispara."],["Sobrecarga","Hay más equipos conectados de los que el circuito aguanta."]]},
+"3.2":{f:"En serie, los elementos están uno detrás de otro, como vagones de un tren. Toda la corriente pasa por todos. Si uno falla, se corta todo. En las casas no se conectan los equipos así, pero sí el interruptor con la ampolleta: por eso el interruptor puede apagarla.",w:[["Serie","Conexión uno tras otro, con un solo camino."],["Req","Resistencia total equivalente del conjunto."]]},
+"3.3":{f:"En paralelo, cada equipo tiene su propio camino, como varias llaves de agua conectadas a la misma cañería. Todos reciben los 220 V. Si apagas uno, los demás siguen funcionando. Así está conectada una casa. Eso sí: la corriente de todos los equipos se suma en el cable principal.",w:[["Paralelo","Cada equipo conectado con su propio camino entre fase y neutro."],["Corriente total","Suma de las corrientes de todos los equipos en paralelo."]]},
+"3.4":{f:"El multímetro es el instrumento básico del electricista. Sirve para medir tensión, resistencia y saber si un cable está cortado (continuidad). Tiene una perilla para elegir qué medir y orificios para las puntas. La punta negra va siempre en COM. Equivocarse de posición puede dañar el instrumento o al usuario.",w:[["Multímetro","Instrumento que mide tensión, resistencia y continuidad."],["Continuidad","Comprobar si hay un camino eléctrico; el multímetro suena."],["COM","Orificio común del multímetro, para la punta negra."]]},
+"4.1":{f:"Las instalaciones eléctricas tienen reglas obligatorias para que sean seguras. En Chile, la SEC es el organismo que las fiscaliza y entrega las licencias. Las reglas técnicas están en documentos llamados pliegos RIC. La licencia clase D permite hacer instalaciones pequeñas, de hasta 10 kW, como una casa.",w:[["SEC","Superintendencia de Electricidad y Combustibles. Fiscaliza y da licencias."],["Pliego RIC","Documento con las reglas técnicas de una parte de la instalación."],["Licencia clase D","Autorización para instalaciones de baja tensión hasta 10 kW."]]},
+"4.2":{f:"El tablero es la caja donde llega la electricidad de la calle y desde donde se reparte a toda la casa. Adentro hay interruptores especiales que protegen cada parte de la instalación. Cada uno controla un grupo de luces o enchufes llamado circuito. Desde el tablero puedes cortar toda la casa o solo una parte.",w:[["Tablero","Caja que reparte y protege la electricidad de la instalación."],["Empalme","Conexión entre la red de la calle y la casa."],["Alimentador","Cable que va del medidor al tablero."],["Riel DIN","Barra metálica donde se montan las protecciones."]]},
+"4.3":{f:"El automático es un interruptor que se baja solo cuando pasa demasiada corriente. Protege el cable para que no se caliente ni se queme. Si conectas demasiados equipos, se baja después de un rato. Si hay un cortocircuito, se baja al instante. Nunca se debe cambiar por uno más grande para que \"no salte\".",w:[["Automático o termomagnético","Protección que corta por exceso de corriente."],["Corriente nominal","El número del automático: hasta cuánto aguanta, por ejemplo 16 A."],["Curva","Letra (B, C, D) que indica qué tan rápido corta."]]},
+"4.4":{f:"El diferencial protege a las personas. Vigila que toda la electricidad que sale por un cable vuelva por el otro. Si una parte se escapa, por ejemplo a través de una persona que tocó algo con falla, lo detecta y corta en milésimas de segundo. Tiene un botón de prueba que conviene presionar de vez en cuando.",w:[["Diferencial","Protección que corta cuando hay una fuga de corriente."],["Fuga","Corriente que se escapa por un camino distinto, como la tierra o una persona."],["30 mA","Sensibilidad del diferencial que protege a las personas."]]},
+"5.1":{f:"No todos los cables son iguales: los más gruesos aguantan más corriente. Por eso las luces usan cable de 1,5 mm² y los enchufes de 2,5 mm². Cada grosor tiene un automático que le corresponde, para que el automático corte antes de que el cable se caliente.",w:[["mm²","Unidad del grosor del cobre del cable."],["Capacidad","Corriente máxima que aguanta un cable sin calentarse de más."],["Alambre y cable","Alambre: un solo hilo rígido. Cable: muchos hilos, flexible."]]},
+"5.2":{f:"Los cables tienen colores para saber qué es cada uno sin medir. En una casa en Chile: la fase es azul, el neutro es blanco y la tierra es verde o verde con amarillo. Ojo: en Europa el azul es neutro, así que no copies videos extranjeros.",w:[["Código de colores","Regla que asigna un color a cada tipo de cable."],["Retorno","Cable que va del interruptor a la luz. Es una fase."]]},
+"5.3":{f:"Los cables no van sueltos dentro de los muros: van dentro de tubos para protegerlos. Esos tubos se llaman canalizaciones o ductos. Cuando hay que unir cables, se hace siempre dentro de una caja, nunca dentro del tubo, para poder revisarlos después.",w:[["Canalización o ducto","Tubo que protege los cables."],["Caja de derivación","Caja donde se unen o reparten los cables."],["Conduit","Tipo de tubo para cables, de PVC o metal."]]},
+"5.4":{f:"La tierra es un cable de seguridad conectado a una barra de cobre enterrada. Si un equipo metálico se daña y queda con electricidad, esa electricidad se va por la tierra en lugar de pasar por quien lo toca, y el diferencial corta. Por eso los enchufes tienen tres orificios: el del medio es la tierra.",w:[["Puesta a tierra","Conexión de la instalación con el suelo mediante un electrodo."],["Electrodo o barra Copperweld","Barra metálica enterrada para hacer la tierra."],["Telurómetro","Instrumento que mide la resistencia de la tierra."]]},
+"6.1":{f:"Un interruptor es el que prende y apaga la luz. Se instala cortando el cable de fase, para que la ampolleta quede sin electricidad cuando está apagada. Hay interruptores simples (una luz), dobles (dos luces) y de escalera (una luz desde dos lugares). Cada uno tiene un código comercial.",w:[["9/12","Interruptor simple."],["9/15","Interruptor doble."],["9/24","Interruptor de escalera o conmutador."],["Centro de luz","Punto donde va una lámpara."]]},
+"6.2":{f:"El circuito de escalera permite prender y apagar la misma luz desde dos lugares, por ejemplo abajo y arriba de una escalera. Se usan dos interruptores especiales unidos por dos cables llamados viajeros. Funciona como dos desvíos de tren: la luz prende cuando ambos apuntan a la misma vía.",w:[["Conmutador","Interruptor que cambia la corriente entre dos caminos."],["Viajeros","Los dos cables que unen los dos conmutadores."],["Común","El borne central del conmutador."]]},
+"6.3":{f:"Los enchufes de Chile tienen tres orificios en línea: a los lados van la fase y el neutro, y al centro la tierra. La norma pide una cantidad mínima según el tamaño de la pieza: al menos uno doble por cada 8 metros de perímetro, y tres en la cocina.",w:[["Enchufe doble","Placa con dos tomas de corriente."],["Perímetro","Suma de las medidas de todas las paredes de una pieza."]]},
+"6.4":{f:"Una casa no tiene un solo circuito: se divide en varios grupos, por ejemplo las luces, los enchufes y la cocina. Así, si uno falla, el resto sigue funcionando. La norma pide un mínimo de circuitos según el tamaño de la casa y un circuito exclusivo para la cocina.",w:[["Circuito","Grupo de luces o enchufes protegido por un mismo automático."],["Circuito exclusivo","Circuito que alimenta solo un uso, como la cocina."]]},
+"6.5":{f:"El agua y la electricidad son una mezcla peligrosa. Por eso el baño se divide en zonas alrededor de la ducha o la tina. Mientras más cerca del agua, menos cosas eléctricas se permiten. Los interruptores y enchufes comunes deben quedar lejos de la ducha.",w:[["Volumen","Zona del baño con reglas de seguridad propias."],["IP","Código que indica cuánto protege un equipo contra polvo y agua."]]},
+"7.1":{f:"Antes de instalar se dibuja un plano, igual que en una casa se dibuja antes de construir. El plano eléctrico muestra dónde va cada luz, enchufe e interruptor, y a qué circuito pertenece. Junto al plano van un esquema del tablero y una tabla con los cálculos.",w:[["Proyecto","Conjunto de planos y cálculos de una instalación."],["Planta","Dibujo visto desde arriba de la casa."],["Viñeta","Recuadro del plano con los datos del proyecto."]]},
+"7.2":{f:"En los planos no se dibujan los objetos reales, sino símbolos: un círculo con una X es una luz, un pequeño círculo con un trazo es un interruptor. Es como aprender un alfabeto nuevo. Todo plano trae una leyenda que explica cada símbolo.",w:[["Simbología","Conjunto de dibujos que representan los elementos eléctricos."],["Leyenda","Tabla que explica qué significa cada símbolo."]]},
+"7.3":{f:"El diagrama unilineal es un dibujo simplificado del tablero. Muestra qué protecciones tiene y qué circuitos salen de él, con una sola línea por circuito para no complicar el dibujo, aunque en la realidad cada circuito tenga tres cables.",w:[["Unilineal","Esquema del tablero con una línea por circuito."]]},
+"7.4":{f:"El cuadro de cargas es una tabla con los números de cada circuito: cuánta potencia tiene, cuánta corriente pasa, qué automático usa y qué cable. Como no todos los equipos se usan a la vez, la potencia que realmente se usa al mismo tiempo (demanda) es menor que la suma total.",w:[["Cuadro de cargas","Tabla con los datos de cada circuito."],["Potencia instalada","Suma de las potencias de todo lo conectado."],["Demanda máxima","Potencia que realmente se usa al mismo tiempo."]]},
+"8.1":{f:"Para elegir cables y protecciones primero hay que saber cuánta corriente va a pasar. Es fácil: divides la potencia del equipo por 220. Un hervidor de 2200 watt pide 10 ampere.",w:[["I = P / V","Corriente igual a potencia dividida por tensión."]]},
+"8.2":{f:"Con la corriente calculada se elige el automático: el primero que sea mayor (10, 16, 20 ampere...). Después se elige un cable que aguante al menos lo mismo que el automático. Así, si hay un problema, el automático corta antes de que el cable se caliente.",w:[["Corriente de diseño","Corriente calculada más un 10% de margen."],["Coordinación","Que el automático proteja siempre al cable."]]},
+"8.3":{f:"En un cable largo, la electricidad pierde un poco de fuerza en el camino, como el agua pierde presión en una manguera muy larga. Eso es la caída de tensión. La norma permite perder poco: si se pierde demasiado, se usa un cable más grueso.",w:[["Caída de tensión","Tensión que se pierde a lo largo del cable."],["%","Porcentaje: 5% de 220 V son 11 V."]]},
+"8.4":{f:"Cuando el instalador termina un trabajo, lo informa a la SEC con un documento llamado TE1. Es como firmar el trabajo: el instalador declara que la instalación cumple la norma. Sin ese documento, la empresa eléctrica no conecta una casa nueva.",w:[["TE1","Declaración de una instalación eléctrica ante la SEC."],["ClaveÚnica","Clave del Estado para hacer trámites en línea."]]},
+"9.1":{f:"Armar un tablero es ordenar las protecciones en su caja, conectar los cables de forma prolija y ponerle etiquetas a cada circuito. Un tablero ordenado es más seguro y más fácil de revisar.",w:[["Rotular","Poner etiquetas con el número y uso de cada circuito."],["Reserva","Espacio libre para agregar circuitos en el futuro."]]},
+"9.2":{f:"Cada cable debe quedar bien apretado en su lugar, con el color correcto y sin cobre a la vista. Los cables flexibles llevan una pequeña punta metálica llamada terminal. Una conexión floja se calienta y puede provocar un incendio.",w:[["Borne","Lugar del aparato donde se aprieta el cable."],["Terminal o puntera","Pieza metálica que se pone en la punta del cable flexible."]]},
+"9.3":{f:"Antes de dar la electricidad, la instalación se revisa y se mide. Se comprueba que la tierra llegue a todos los puntos, que los cables no tengan daños en su plástico y que el diferencial corte. Es como revisar una cañería antes de abrir el agua.",w:[["Aislación","El plástico que cubre el cable. Se mide con megóhmetro."],["Megóhmetro","Instrumento que mide si la aislación está en buen estado."],["MΩ (megaohm)","Un millón de ohm."]]},
+"9.4":{f:"Cuando algo no funciona, el instalador busca la falla con método: observa qué pasa, piensa en las causas posibles y mide para confirmar. Un buen truco es revisar a la mitad del circuito para saber si la falla está antes o después.",w:[["Falla","Cualquier problema que impide el funcionamiento normal."],["Diagnóstico","Proceso de encontrar la causa de una falla."]]},
+"10.1":{f:"Para obtener la licencia por esta vía, un evaluador revisa lo que sabes y lo que sabes hacer. Hay una prueba escrita, una prueba práctica donde te observan trabajar y una revisión de tu experiencia. Si apruebas, recibes un certificado y con él pides la licencia a la SEC.",w:[["ChileValora","Sistema que certifica competencias laborales."],["Competencia","Lo que una persona sabe hacer bien en su trabajo."]]},
+"10.2":{f:"El evaluador usa una lista de cosas que debe ver: que trabajes seguro, que instales bien, que pruebes antes de energizar y que dejes todo ordenado. Si conoces esa lista antes, sabes exactamente qué practicar.",w:[["Pauta de cotejo","Lista de puntos que el evaluador revisa."]]},
+"10.3":{f:"El día de la evaluación lleva tus documentos, tus elementos de seguridad y tus herramientas. Lee todo antes de empezar, trabaja con calma y explica lo que haces. La seguridad y el orden valen tanto como que funcione.",w:[["Simulacro","Ensayo de la evaluación antes del día real."]]}
+};
+const GLOS=[
+["Aislación","Plástico que cubre el conductor para que la electricidad no salga."],["Aislante","Material que no deja pasar la electricidad."],["Alimentador","Cable que va del medidor al tablero."],
+["Ampere (A)","Unidad de corriente."],["Automático","Protección que corta por exceso de corriente; protege el cable."],["Borne","Punto de conexión donde se aprieta un cable."],
+["Caída de tensión","Tensión que se pierde a lo largo de un cable."],["Canalización","Tubo o canal que protege los cables."],["Carga","Equipo que usa electricidad."],
+["Circuito","Camino cerrado de la corriente; grupo de puntos con una misma protección."],["Conductor","Material que deja pasar la electricidad; también se llama así al cable."],
+["Continuidad","Existencia de un camino eléctrico; el multímetro suena."],["Cortocircuito","Unión directa de fase y neutro; corriente muy alta."],
+["Corriente","Cantidad de electricidad que circula. Se mide en ampere."],["Diferencial","Protección que corta ante fugas; protege a las personas."],
+["Empalme","Conexión de la casa con la red de la empresa eléctrica."],["Energía","Potencia por tiempo; se cobra en kWh."],["EPP","Elementos de protección personal."],
+["Fase","Cable que trae la tensión. En Chile, azul (o negro o rojo)."],["Fuga","Corriente que se escapa por un camino no previsto."],["Hz (hertz)","Ciclos por segundo de la corriente alterna; en Chile, 50."],
+["IP","Código de protección contra polvo y agua."],["kW","Kilowatt: 1.000 watt."],["kWh","Kilowatt hora: unidad de energía de la boleta."],
+["Medidor","Aparato que registra la energía consumida."],["Megóhmetro","Instrumento para medir la aislación."],["Multímetro","Instrumento para medir tensión, resistencia y continuidad."],
+["Neutro","Cable de retorno de la corriente. En Chile, blanco."],["Ohm (Ω)","Unidad de resistencia."],["Paralelo","Conexión donde cada carga tiene su propio camino."],
+["Pinza amperimétrica","Instrumento que mide corriente abrazando un cable."],["Pliego RIC","Documento técnico con las reglas de las instalaciones."],
+["Potencia","Energía que usa un equipo en cada momento. Se mide en watt."],["Puesta a tierra","Conexión de seguridad con el suelo."],
+["Resistencia","Oposición al paso de la corriente."],["Retorno","Cable del interruptor a la luz; es una fase interrumpida."],["SEC","Superintendencia de Electricidad y Combustibles."],
+["Sección","Grosor del cobre de un cable, en mm²."],["Serie","Conexión uno tras otro, con un solo camino."],["Sobrecarga","Más carga conectada de la que el circuito soporta."],
+["Tablero","Caja que reparte y protege los circuitos."],["TE1","Declaración de la instalación ante la SEC."],["Tensión","Fuerza que empuja la electricidad. Se mide en volt."],
+["Tierra","Conductor de seguridad, verde o verde/amarillo."],["Unilineal","Esquema del tablero con una línea por circuito."],["Volt (V)","Unidad de tensión."],["Watt (W)","Unidad de potencia."]
+];
+function facilHTML(k){
+  const x=FACIL[k]; if(!x) return "";
+  return `<section class="facil"><div class="facil-h"><span class="facil-tag">Explicado fácil</span></div><p>${esc(x.f)}</p>${x.w&&x.w.length?`<div class="words"><span class="eyebrow">Palabras nuevas de este tema</span><dl>${x.w.map(([t,d])=>`<div><dt>${esc(t)}</dt><dd>${esc(d)}</dd></div>`).join("")}</dl></div>`:""}</section>`;
+}
+function openGlos(){
+  let d=document.getElementById("glos");
+  if(!d){
+    d=document.createElement("div");d.id="glos";d.className="glos";d.setAttribute("role","dialog");d.setAttribute("aria-label","Glosario");
+    d.innerHTML=`<div class="glos-box"><div class="glos-top"><h3>Glosario</h3><button class="back" id="glosx">Cerrar</button></div>
+      <input id="glosq" type="search" placeholder="Busca una palabra, por ejemplo: fase" aria-label="Buscar en el glosario">
+      <dl id="glosl"></dl></div>`;
+    document.body.appendChild(d);
+    const render=q=>{q=(q||"").toLowerCase();$("glosl").innerHTML=GLOS.filter(([t,x])=>!q||t.toLowerCase().includes(q)||x.toLowerCase().includes(q)).map(([t,x])=>`<div><dt>${esc(t)}</dt><dd>${esc(x)}</dd></div>`).join("")||"<p>No hay resultados.</p>"};
+    $("glosq").oninput=e=>render(e.target.value);$("glosx").onclick=()=>{d.hidden=true};
+    d.addEventListener("click",e=>{if(e.target===d)d.hidden=true});
+    render("");
+  }
+  d.hidden=false;setTimeout(()=>{try{$("glosq").focus()}catch(e){}},50);
+}
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){const d=document.getElementById("glos");if(d&&!d.hidden){d.hidden=true;e.stopImmediatePropagation()}}},true);
 
 /* ---------- Profundiza ---------- */
 const MORE={
@@ -1971,7 +2092,7 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify([...done]))}catch(e)
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 const $=id=>document.getElementById(id);
 
-function tabsOf(c){return [...c.pts.map((p,i)=>{const fg=FIGS[c.n+"."+(i+1)];const k=c.n+"."+(i+1);return {key:"Tema "+(i+1),t:p.t,html:`<h3>${esc(p.t)}</h3>`+(fg?`<figure class="ref">${fg.s}<figcaption>${fg.c}</figcaption></figure>`:"")+realHTML(k)+`<div class="prose">${p.h}</div>`+(MORE[k]?`<section class="more prose"><span class="eyebrow">Profundiza</span>${MORE[k]}</section>`:"")+expHTML(k)}}),
+function tabsOf(c){return [...c.pts.map((p,i)=>{const fg=FIGS[c.n+"."+(i+1)];const k=c.n+"."+(i+1);return {key:"Tema "+(i+1),t:p.t,html:`<h3>${esc(p.t)}</h3>`+facilHTML(k)+(fg?`<figure class="ref">${fg.s}<figcaption>${fg.c}</figcaption></figure>`:"")+realHTML(k)+`<div class="prose">${p.h}</div>`+(MORE[k]?`<section class="more prose"><span class="eyebrow">Profundiza</span>${MORE[k]}</section>`:"")+expHTML(k)}}),
   {key:"Sin materiales",t:"Práctica",extra:true,html:`<div class="prose">${c.taller}</div>`},
   {key:"Prueba",t:"Autoevaluación",extra:true,quiz:true}]}
 
@@ -2009,10 +2130,10 @@ function openLesson(n,tab){
   const tabs=tabsOf(c);
   $("lesson").innerHTML=`<button class="back" id="back">‹ Volver a la pizarra</button>
     <div class="lhead"><div><div class="eyebrow">Clase ${c.n} · ${esc(c.d)} · ${c.w===1?"Semana 1":"Semana 2"}</div><h2>${esc(c.t)}</h2></div>
-      <div class="lacts"><button class="projbtn" id="projbtn" aria-pressed="${document.body.classList.contains("proj")}">Modo proyector</button><label class="chk" for="lc"><input type="checkbox" id="lc" ${done.has(c.n)?"checked":""}>Marcar clase como lista</label></div></div><div class="kbd-hint">Usa las flechas ← → del teclado para pasar de pestaña.</div>
+      <div class="lacts"><button class="glosbtn" id="glosbtn2" type="button">Glosario</button><button class="projbtn" id="projbtn" aria-pressed="${document.body.classList.contains("proj")}">Modo proyector</button><label class="chk" for="lc"><input type="checkbox" id="lc" ${done.has(c.n)?"checked":""}>Marcar clase como lista</label></div></div><div class="kbd-hint">Usa las flechas ← → del teclado para pasar de pestaña.</div>
     <div class="tabs" role="tablist">${tabs.map((t,i)=>`<button class="tab${t.extra?" extra":""}" role="tab" id="tab${i}" aria-selected="${i===curTab}" data-i="${i}"><span class="k">${t.key}</span>${esc(t.t)}</button>`).join("")}</div>
     <section class="panel" role="tabpanel" id="panel"></section>`;
-  $("back").onclick=closeLesson;$("projbtn").onclick=()=>{const on=document.body.classList.toggle("proj");$("projbtn").setAttribute("aria-pressed",on);try{localStorage.setItem(KEY+"-proj",on?"1":"")}catch(e){}};
+  $("back").onclick=closeLesson;$("glosbtn2").onclick=openGlos;$("projbtn").onclick=()=>{const on=document.body.classList.toggle("proj");$("projbtn").setAttribute("aria-pressed",on);try{localStorage.setItem(KEY+"-proj",on?"1":"")}catch(e){}};
   $("lc").onchange=e=>{e.target.checked?done.add(c.n):done.delete(c.n);save()};
   document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>showTab(+b.dataset.i));
   showTab(curTab);
@@ -2064,6 +2185,7 @@ document.addEventListener("click",e=>{
 });
 try{if(localStorage.getItem(KEY+"-proj"))document.body.classList.add("proj")}catch(e){}
 document.addEventListener("keydown",e=>{if(!cur||e.target.closest("input,textarea,select"))return;const n=tabsOf(cur).length;if(e.key==="ArrowRight"&&curTab<n-1){showTab(curTab+1);e.preventDefault()}else if(e.key==="ArrowLeft"&&curTab>0){showTab(curTab-1);e.preventDefault()}else if(e.key==="Escape"&&document.body.classList.contains("proj")){document.body.classList.remove("proj");const b=$("projbtn");if(b)b.setAttribute("aria-pressed",false);try{localStorage.setItem(KEY+"-proj","")}catch(x){}}});
+try{$("glosbtn").onclick=openGlos}catch(e){}
 renderBoard();
 const m=(location.hash||"").match(/^#c(\d+)(?:-(\d+))?$/);
 if(m)openLesson(+m[1],m[2]?+m[2]-1:0);
