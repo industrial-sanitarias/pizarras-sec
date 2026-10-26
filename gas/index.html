@@ -1,0 +1,1170 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Pizarra de estudio para la licencia SEC de instalador de gas clase 3.">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>SEC - GAS CLASE 3</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: plano técnico con grilla. Vista pizarra (dos carriles de tarjetas) y vista clase (pestañas por tema, taller y autoevaluación) */
+:root{
+  --bg:#eef2f3; --grid:#dde5e8; --paper:#ffffff; --ink:#16232a; --muted:#56666e; --line:#c4d0d5;
+  --accent:#a3461b; --accent-soft:#f5e2d6; --live:#5b46b0; --live-soft:#e8e3f7;
+  --ok:#2f7d4f; --ok-soft:#dcefe3; --bad:#b03a2e; --bad-soft:#f7dedb;
+  --c-az:#2a6db5; --c-ro:#c0392b; --c-ve:#2e8b4a; --c-am:#e0b100; --c-cu:#c8792f; --c-bl:#fbfbfb;
+  --f-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f171b;--grid:#172328;--paper:#152126;--ink:#e3ecef;--muted:#97a9b1;--line:#2b3b42;
+  --accent:#f0956a;--accent-soft:#3b2318;--live:#b3a2f2;--live-soft:#2a2342;
+  --ok:#6cc893;--ok-soft:#173326;--bad:#f08a7e;--bad-soft:#3d1d1a;--c-az:#5b9be0;--c-ro:#e5675a;--c-ve:#55b673;--c-am:#e8c33a;--c-cu:#d68b45;--c-bl:#e9eef0;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f171b;--grid:#172328;--paper:#152126;--ink:#e3ecef;--muted:#97a9b1;--line:#2b3b42;
+  --accent:#f0956a;--accent-soft:#3b2318;--live:#b3a2f2;--live-soft:#2a2342;
+  --ok:#6cc893;--ok-soft:#173326;--bad:#f08a7e;--bad-soft:#3d1d1a;--c-az:#5b9be0;--c-ro:#e5675a;--c-ve:#55b673;--c-am:#e8c33a;--c-cu:#d68b45;--c-bl:#e9eef0;color-scheme:dark}
+
+body{background-color:var(--bg);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding-block:26px 56px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:22px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* Cabecera */
+header{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;justify-content:space-between}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(34px,6vw,52px);line-height:1;margin:6px 0 8px;text-wrap:balance}
+.sub{color:var(--muted);max-width:62ch;margin:0}
+.progress{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:14px 16px;flex:0 1 300px;min-width:230px}
+.progress .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.progress .big{font-family:var(--f-display);font-size:34px;font-weight:700;font-variant-numeric:tabular-nums}
+.bar{height:10px;border-radius:5px;background:var(--accent-soft);overflow:hidden;margin-top:8px}
+.bar span{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.next{font-size:13px;color:var(--muted);margin-top:8px}
+.next b{color:var(--ink)}
+
+/* Pizarra */
+.lanes{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media (max-width:860px){.lanes{grid-template-columns:1fr}}
+.lane{display:flex;flex-direction:column;gap:14px;min-width:0}
+.lane h2{font-family:var(--f-display);font-weight:600;font-size:24px;margin:0;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.lane h2 small{font-family:var(--f-mono);font-size:12px;font-weight:400;color:var(--muted)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:6px;display:grid;grid-template-columns:62px 1fr;min-width:0;overflow:hidden}
+.card.done{background:var(--ok-soft)}
+.card.now{border-color:var(--live);box-shadow:0 0 0 1px var(--live)}
+.tag{border-right:1px dashed var(--line);display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 4px}
+.tag .n{font-family:var(--f-display);font-size:34px;font-weight:700;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.card.done .tag .n{color:var(--ok)}
+.tag .d{font-family:var(--f-mono);font-size:11px;color:var(--muted);text-align:center;line-height:1.3}
+.cbody{padding:12px 14px 14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.top{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
+.now-badge{display:none;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--live)}
+.card.now .now-badge{display:block}
+.title-btn{background:none;border:0;padding:0;text-align:left;cursor:pointer}
+.title-btn h3{font-family:var(--f-display);font-weight:600;font-size:21px;line-height:1.15;margin:0;text-wrap:balance}
+.title-btn:hover h3{color:var(--accent)}
+.chk{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);cursor:pointer;white-space:nowrap;user-select:none}
+.chk input{width:18px;height:18px;accent-color:var(--ok);cursor:pointer}
+.points{display:flex;flex-direction:column;gap:2px;margin:0;padding:0;list-style:none}
+.pt{width:100%;display:flex;gap:8px;align-items:baseline;text-align:left;background:none;border:0;border-radius:4px;padding:5px 6px;cursor:pointer}
+.pt:hover{background:var(--accent-soft)}
+.pt .k{font-family:var(--f-mono);font-size:11.5px;color:var(--accent);flex:0 0 auto}
+.pt .t{flex:1}
+.pt .go{color:var(--muted);font-size:13px}
+.foot{display:flex;flex-wrap:wrap;gap:8px;padding-top:2px}
+.chip{font-size:12.5px;border-radius:4px;padding:3px 8px;border:1px solid var(--line);background:var(--bg)}
+.chip.key{font-family:var(--f-mono);background:var(--accent-soft);border-color:transparent}
+.chip.act{cursor:pointer}
+.chip.act:hover{border-color:var(--accent)}
+.legend{font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:16px;border-top:1px solid var(--line);padding-top:14px}
+
+/* Vista clase */
+#lesson{display:flex;flex-direction:column;gap:16px}
+.back{align-self:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:6px 12px;cursor:pointer;font-size:14px}
+.back:hover{border-color:var(--accent)}
+.lhead{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-end;justify-content:space-between}
+.lhead h2{font-family:var(--f-display);font-weight:700;font-size:clamp(30px,5vw,44px);line-height:1.02;margin:4px 0 0;text-wrap:balance}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.tab{flex:0 0 auto;background:var(--paper);border:1px solid var(--line);border-radius:4px 4px 0 0;border-bottom:3px solid transparent;padding:8px 12px;cursor:pointer;font-size:14px;max-width:240px;text-align:left;line-height:1.25}
+.tab .k{display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.tab[aria-selected="true"]{border-bottom-color:var(--accent);background:var(--accent-soft)}
+.tab.extra .k{color:var(--live)}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:22px clamp(16px,4vw,36px) 26px;min-width:0}
+.panel h3{font-family:var(--f-display);font-weight:600;font-size:28px;margin:0 0 12px;line-height:1.1;text-wrap:balance}
+.panel h4{font-family:var(--f-display);font-weight:600;font-size:20px;margin:22px 0 6px}
+.prose{max-width:74ch}
+.prose p{margin:0 0 12px}
+.prose ul,.prose ol{margin:0 0 12px;padding-left:22px}
+.prose li{margin-bottom:4px}
+.prose b{font-weight:600}
+.f{font-family:var(--f-mono);background:var(--accent-soft);border-radius:4px;padding:10px 14px;margin:0 0 12px;display:block;font-size:15px;overflow-x:auto;white-space:pre}
+.idea{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 4px 4px 0;margin:0 0 12px}
+.warn{border-left:4px solid var(--live);background:var(--live-soft);padding:10px 14px;border-radius:0 4px 4px 0;margin:0 0 12px}
+.norm{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.tw{overflow-x:auto;margin:0 0 14px}
+table{border-collapse:collapse;font-size:14px;min-width:100%}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--bg);font-weight:600}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+details{border:1px solid var(--line);border-radius:4px;padding:8px 12px;margin:0 0 8px;background:var(--bg)}
+details summary{cursor:pointer;font-weight:500}
+details[open] summary{margin-bottom:6px}
+.fig{overflow-x:auto;margin:4px 0 14px}
+.fig svg{display:block;max-width:100%;height:auto}
+.fig svg text{fill:var(--ink);font-family:var(--f-mono);font-size:12px}
+.fig .s{stroke:var(--ink);fill:none;stroke-width:1.6}
+.fig .ph{stroke:#c0392b;fill:none;stroke-width:2}
+.fig .nu{stroke:var(--muted);fill:none;stroke-width:2;stroke-dasharray:5 4}
+.fig .tr{stroke:var(--accent);fill:none;stroke-width:2}
+.fig .box{fill:var(--bg);stroke:var(--ink);stroke-width:1.4}
+.pnav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
+.pnav button{background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:8px 12px;cursor:pointer;font-size:14px;max-width:48%}
+.pnav button:hover{border-color:var(--accent)}
+.pnav button[disabled]{opacity:.4;cursor:default}
+
+/* Quiz */
+.q{border:1px solid var(--line);border-radius:6px;padding:14px;margin-bottom:12px;background:var(--bg)}
+.q p.qt{font-weight:600;margin:0 0 10px}
+.opts{display:flex;flex-direction:column;gap:6px}
+.opt{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:8px 12px;text-align:left;cursor:pointer}
+.opt:hover{border-color:var(--accent)}
+.opt.right{background:var(--ok-soft);border-color:var(--ok)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.exp{margin-top:8px;font-size:14px}
+.score{font-family:var(--f-display);font-size:22px;font-weight:600;margin:4px 0 14px}
+/* Figuras referenciales */
+figure.ref{margin:0 0 18px;border:1px solid var(--line);border-radius:6px;background:var(--bg);padding:12px 12px 8px;max-width:760px}
+figure.ref figcaption{font-size:13px;color:var(--muted);margin-top:4px}
+figure.ref .fig{margin:0}
+.ref .box{fill:var(--paper)}
+.fig svg{color:var(--ink)}
+.fig text.tc{text-anchor:middle}.fig text.end{text-anchor:end}
+.fig text.sm{font-size:11px}.fig text.xs{font-size:9px}.fig text.bd{font-weight:600}
+.fig text.big{font-family:var(--f-display);font-size:24px;font-weight:700}
+.fig text.mt{fill:var(--muted)}.fig text.ac{fill:var(--accent)}
+.fig .thick{stroke-width:3}.fig .thin{stroke-width:1}
+.fig .ax{stroke:var(--muted);stroke-width:1;fill:none}
+.fig .dash{stroke-dasharray:5 4}
+.fig .w-az{stroke:var(--c-az);stroke-width:3;fill:none}.fig .w-ro{stroke:var(--c-ro);stroke-width:3;fill:none}
+.fig .w-ve{stroke:var(--c-ve);stroke-width:3;fill:none}.fig .w-ne{stroke:var(--ink);stroke-width:3;fill:none}
+.fig .w-ok{stroke:var(--ok);stroke-width:2.5;fill:none}.fig .w-live{stroke:var(--live);stroke-width:2;fill:none}
+.fig .f-az{fill:var(--c-az)}.fig .f-ro{fill:var(--c-ro)}.fig .f-ve{fill:var(--c-ve)}.fig .f-am{fill:var(--c-am)}
+.fig .f-cu{fill:var(--c-cu)}.fig .f-bl{fill:var(--c-bl);stroke:var(--ink);stroke-width:1}.fig .f-ink{fill:var(--ink)}
+.fig .f-acc{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.2}.fig .f-acc2{fill:var(--accent)}
+.fig .f-ok{fill:var(--ok-soft)}.fig .f-live{fill:var(--live-soft)}.fig .f-bad{fill:var(--bad-soft)}.fig .f-bad2{fill:var(--bad);opacity:.55}
+.fig .f-mt{fill:var(--line);stroke:var(--ink);stroke-width:1}.fig .f-soil{fill:var(--line);opacity:.5}
+.fig .tog{fill:var(--ink)}.fig .box2{fill:var(--paper);stroke:var(--ink);stroke-width:1.2}.fig .hl{fill:none;stroke:var(--accent);stroke-width:2}
+.fig .ink{fill:var(--ink)}
+.fig .w-cu{stroke:var(--c-cu);stroke-width:4;fill:none}.fig .w-am{stroke:var(--c-am);stroke-width:3;fill:none}
+/* Fotos referenciales y enlaces */
+.real{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:flex-start;margin:0 0 20px;max-width:760px}
+.photo{margin:0;flex:0 0 200px;max-width:100%}
+.photo img{display:block;width:200px;max-width:100%;height:auto;border-radius:4px;border:1px solid var(--line);background:var(--bg)}
+.photo a:hover img{border-color:var(--accent)}
+.photo figcaption{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.4}
+.photo .ai{display:block;margin-top:4px;font-size:11.5px}
+.real a{color:var(--accent)}
+.links{flex:1 1 240px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.links ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.links li a{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:4px;background:var(--bg);text-decoration:none;font-size:14px}
+.links li a:hover{border-color:var(--accent)}
+
+/* Encabezado tipo panel de instrumento */
+.hero{position:relative;overflow:hidden;isolation:isolate;border-radius:14px;padding:30px clamp(18px,4vw,38px) 28px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:26px;align-items:end;color:#eaf2f8;background:var(--hero-bg);box-shadow:0 18px 40px -24px rgba(0,0,0,.6)}
+@media (max-width:860px){.hero{grid-template-columns:1fr}}
+.hero .art{position:absolute;inset:0;z-index:-1;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent 42%,#000 78%);mask-image:linear-gradient(90deg,transparent 42%,#000 78%)}
+.hero .art svg{width:100%;height:100%;display:block}
+@media (max-width:860px){.hero .art{opacity:.45}}
+.hero .eyebrow{color:rgba(234,242,248,.72)}
+.hero h1{color:#fff;display:flex;align-items:center;gap:16px;font-size:clamp(32px,5.4vw,52px);margin:10px 0 10px}
+.hero .mark{flex:0 0 auto;width:58px;height:58px;border-radius:14px;display:grid;place-items:center;background:var(--mark-bg);box-shadow:0 0 0 1px rgba(255,255,255,.18),0 10px 26px -10px var(--glow)}
+.hero .mark svg{width:32px;height:32px}
+.hero .sub{color:rgba(234,242,248,.82)}
+.specs{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.specs span{font-family:var(--f-mono);font-size:12px;padding:5px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);color:#eaf2f8}
+.specs span:first-child{border-color:var(--glow);color:#fff}
+.hero .progress{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#eaf2f8;border-radius:12px;min-width:0}
+.hero .progress .eyebrow{color:rgba(234,242,248,.72)}
+.hero .progress .big{font-family:var(--f-mono);font-weight:500;color:var(--glow);text-shadow:0 0 14px var(--glow)}
+.hero .next{color:rgba(234,242,248,.78)}.hero .next b{color:#fff}
+#lesson .lhead{background:var(--hero-bg);color:#fff;border-radius:12px;padding:18px 22px;box-shadow:0 14px 30px -22px rgba(0,0,0,.6)}
+#lesson .lhead .eyebrow{color:rgba(234,242,248,.75)}
+#lesson .lhead .chk{color:rgba(234,242,248,.85)}
+.hero,#lesson .lhead{--hero-bg:radial-gradient(70% 120% at 84% 105%,rgba(255,122,48,.42) 0%,rgba(255,122,48,0) 60%),radial-gradient(50% 80% at 70% 0%,rgba(61,139,255,.22) 0%,rgba(61,139,255,0) 70%),linear-gradient(160deg,#111827 0%,#1b1512 100%);--glow:#ff8a3d;--mark-bg:linear-gradient(145deg,#2a2f3d,#141820)}
+.gauge{display:block;width:100%;max-width:240px;margin:2px auto 0}
+.gauge .needle{transform-origin:100px 100px;transform:rotate(calc(var(--prog,0) * 180deg - 90deg));transition:transform .6s cubic-bezier(.3,1.4,.5,1)}
+@media (prefers-reduced-motion: reduce){.gauge .needle{transition:none}}
+.hero .progress .row{justify-content:center;gap:10px}
+.hero .bar{display:none}
+@media (prefers-reduced-motion: reduce){.bar span{transition:none}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header id="hdr" class="hero">
+    <div class="art" aria-hidden="true"><svg viewBox="0 0 600 260" preserveAspectRatio="xMaxYMax slice"><defs><filter id="glw" x="-20%" y="-30%" width="140%" height="160%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <linearGradient id="fo" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#2f6dff"/><stop offset=".55" stop-color="#3d8bff"/><stop offset="1" stop-color="#ff8a3d" stop-opacity=".9"/></linearGradient>
+      <linearGradient id="br" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b7486"/><stop offset="1" stop-color="#2b313d"/></linearGradient></defs>
+      <g filter="url(#glw)"><g transform="translate(318 0)"><path d="M0 186C-11 170 -9 150 0 128C9 150 11 170 0 186Z" fill="url(#fo)"/><path d="M0 186C-6 176 -5 164 0 150C5 164 6 176 0 186Z" fill="#cfe9ff" opacity=".85"/></g><g transform="translate(344 0)"><path d="M0 186C-11 170 -9 150 0 128C9 150 11 170 0 186Z" fill="url(#fo)"/><path d="M0 186C-6 176 -5 164 0 150C5 164 6 176 0 186Z" fill="#cfe9ff" opacity=".85"/></g><g transform="translate(370 0)"><path d="M0 186C-11 170 -9 150 0 128C9 150 11 170 0 186Z" fill="url(#fo)"/><path d="M0 186C-6 176 -5 164 0 150C5 164 6 176 0 186Z" fill="#cfe9ff" opacity=".85"/></g><g transform="translate(396 0)"><path d="M0 186C-11 170 -9 150 0 128C9 150 11 170 0 186Z" fill="url(#fo)"/><path d="M0 186C-6 176 -5 164 0 150C5 164 6 176 0 186Z" fill="#cfe9ff" opacity=".85"/></g><g transform="translate(422 0)"><path d="M0 186C-11 170 -9 150 0 128C9 150 11 170 0 186Z" fill="url(#fo)"/><path d="M0 186C-6 176 -5 164 0 150C5 164 6 176 0 186Z" fill="#cfe9ff" opacity=".85"/></g><g transform="translate(448 0)"><path d="M0 186C-11 170 -9 150 0 128C9 150 11 170 0 186Z" fill="url(#fo)"/><path d="M0 186C-6 176 -5 164 0 150C5 164 6 176 0 186Z" fill="#cfe9ff" opacity=".85"/></g><g transform="translate(474 0)"><path d="M0 186C-11 170 -9 150 0 128C9 150 11 170 0 186Z" fill="url(#fo)"/><path d="M0 186C-6 176 -5 164 0 150C5 164 6 176 0 186Z" fill="#cfe9ff" opacity=".85"/></g><g transform="translate(500 0)"><path d="M0 186C-11 170 -9 150 0 128C9 150 11 170 0 186Z" fill="url(#fo)"/><path d="M0 186C-6 176 -5 164 0 150C5 164 6 176 0 186Z" fill="#cfe9ff" opacity=".85"/></g><g transform="translate(526 0)"><path d="M0 186C-11 170 -9 150 0 128C9 150 11 170 0 186Z" fill="url(#fo)"/><path d="M0 186C-6 176 -5 164 0 150C5 164 6 176 0 186Z" fill="#cfe9ff" opacity=".85"/></g><g transform="translate(552 0)"><path d="M0 186C-11 170 -9 150 0 128C9 150 11 170 0 186Z" fill="url(#fo)"/><path d="M0 186C-6 176 -5 164 0 150C5 164 6 176 0 186Z" fill="#cfe9ff" opacity=".85"/></g><g transform="translate(578 0)"><path d="M0 186C-11 170 -9 150 0 128C9 150 11 170 0 186Z" fill="url(#fo)"/><path d="M0 186C-6 176 -5 164 0 150C5 164 6 176 0 186Z" fill="#cfe9ff" opacity=".85"/></g></g>
+      <rect x="296" y="186" width="290" height="14" rx="7" fill="url(#br)"/>
+    </svg></div>
+    <div>
+      <div class="eyebrow">Licencia SEC de gas · Instalaciones tipo 3</div>
+      <h1><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><defs><linearGradient id="mk" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff6a2b"/><stop offset="1" stop-color="#ffc53d"/></linearGradient></defs><path d="M12 2c1.2 4 6.5 6.4 6.5 11.5a6.5 6.5 0 0 1-13 0c0-3.2 2-5.4 3.3-7.2.2 2 1.2 3.2 2.4 3.4C11 6.8 10.6 4.3 12 2z" fill="url(#mk)"/><path d="M12 12.5c1 1.6 2.4 2.6 2.4 4.3a2.4 2.4 0 0 1-4.8 0c0-1.5 1.4-2.6 2.4-4.3z" fill="#3d8bff"/></svg></span><span>Pizarra Instalador de Gas Clase 3</span></h1>
+      <p class="sub">10 clases en 2 semanas para instalaciones interiores de gas en baja presión hasta 60 kW. Toca cualquier tema para abrir su materia, esquemas, fotos referenciales, taller y autoevaluación.</p>
+      <div class="specs"><span>Baja presión &lt; 5 kPa</span><span>Hasta 60 kW</span><span>DS 66</span><span>DS 191</span></div>
+    </div>
+    <div class="progress" aria-live="polite">
+      <svg class="gauge" viewBox="0 0 200 118" aria-hidden="true"><defs><linearGradient id="ga" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3d8bff"/><stop offset="1" stop-color="#ff8a3d"/></linearGradient></defs>
+        <path d="M22 100A78 78 0 0 1 178 100" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="12" stroke-linecap="round"/>
+        <path d="M22 100A78 78 0 0 1 178 100" fill="none" stroke="url(#ga)" stroke-width="5" stroke-linecap="round"/><line x1="38.0" y1="100.0" x2="30.0" y2="100.0" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="41.0" y1="80.8" x2="33.4" y2="78.4" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="49.8" y1="63.6" x2="43.4" y2="58.9" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="63.6" y1="49.8" x2="58.9" y2="43.4" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="80.8" y1="41.0" x2="78.4" y2="33.4" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="100.0" y1="38.0" x2="100.0" y2="30.0" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="119.2" y1="41.0" x2="121.6" y2="33.4" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="136.4" y1="49.8" x2="141.1" y2="43.4" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="150.2" y1="63.6" x2="156.6" y2="58.9" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="159.0" y1="80.8" x2="166.6" y2="78.4" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/><line x1="162.0" y1="100.0" x2="170.0" y2="100.0" stroke="rgba(234,242,248,.6)" stroke-width="1.5"/>
+        <text x="22" y="116" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="rgba(234,242,248,.6)">0</text><text x="178" y="116" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="rgba(234,242,248,.6)">10</text>
+        <g class="needle"><path d="M100 100L97 96L100 34L103 96Z" fill="#ff8a3d"/></g><circle cx="100" cy="100" r="7" fill="#e9eef5"/><circle cx="100" cy="100" r="3" fill="#1b1512"/>
+      </svg>
+      <div class="row"><span class="eyebrow">Avance</span><span class="big" id="count">0/10</span></div>
+      <div class="bar"><span id="fill"></span></div>
+      <div class="next" id="next"></div>
+    </div>
+  </header>
+
+  <main id="board">
+    <div class="lanes">
+      <section class="lane" id="w1"><h2>Semana 1 <small>Gases, normativa, tuberías y cilindros</small></h2></section>
+      <section class="lane" id="w2"><h2>Semana 2 <small>Artefactos, ventilación, cálculo y pruebas</small></h2></section>
+    </div>
+    <div class="legend" style="margin-top:22px">
+      <span>Borde naranjo: clase en curso</span><span>Fondo verde: clase terminada</span><span>El avance se guarda solo en este navegador</span>
+    </div>
+  </main>
+
+  <main id="lesson" hidden></main>
+</div>
+
+<script>
+/* ---------- Ayudantes de dibujo ---------- */
+const SV=(h,body,lab)=>`<div class="fig"><svg viewBox="0 0 600 ${h}" role="img" aria-label="${lab}"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker></defs>${body}</svg></div>`;
+const Tx=(x,y,s,c="")=>`<text x="${x}" y="${y}" class="${c}">${s}</text>`;
+const Bx=(x,y,w,h,s,c="box")=>{const ls=s?s.split("|"):[];const cy=y+h/2-(ls.length-1)*7+4;return `<rect class="${c}" x="${x}" y="${y}" width="${w}" height="${h}" rx="3"/>`+ls.map((l,i)=>`<text x="${x+w/2}" y="${cy+i*14}" class="tc">${l}</text>`).join("")};
+const Ar=(x1,y1,x2,y2,c="s")=>`<line class="${c}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" marker-end="url(#ar)"/>`;
+const Ln=(d,c="s")=>`<path class="${c}" d="${d}"/>`;
+const Ci=(cx,cy,r,c="s")=>`<circle class="${c}" cx="${cx}" cy="${cy}" r="${r}"/>`;
+const Rc=(x,y,w,h,c="box",rx=3)=>`<rect class="${c}" x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}"/>`;
+const Valve=(x,y)=>Ln(`M${x-9} ${y-7}L${x+9} ${y+7}V${y-7}L${x-9} ${y+7}Z`,"f-ink");
+const Flame=(x,y,c="f-az")=>Ln(`M${x} ${y-16}C${x+10} ${y-6} ${x+8} ${y+4} ${x} ${y+4}C${x-8} ${y+4} ${x-10} ${y-6} ${x} ${y-16}Z`,c);
+const NoX=(x,y,r=10)=>Ln(`M${x-r} ${y-r}L${x+r} ${y+r}M${x+r} ${y-r}L${x-r} ${y+r}`,"w-ro thick");
+
+/* ---------- Ilustraciones por tema ---------- */
+const FIGS={};
+FIGS["1.1"]={c:"El gas natural es más liviano que el aire y sube; el gas licuado es más pesado y se acumula a ras de piso. Esto define dónde van las rejillas y qué recintos están prohibidos.",s:SV(210,
+Rc(20,20,560,170,"s",4)+Ln("M20 190H580","s thick")+Tx(30,40,"Recinto","sm mt")
++Bx(80,110,120,44,"Gas natural|densidad ≈ 0,6")+Ar(140,104,140,40,"w-az")+Tx(150,60,"sube","sm bd")
++Bx(380,60,140,44,"Gas licuado|densidad ≈ 1,5 a 2")+Ar(450,110,450,180,"w-ro")+Tx(460,160,"baja al piso","sm bd")
++Tx(300,205,"Densidad relativa respecto del aire = 1","tc sm mt"),"Gas natural y gas licuado en un recinto")};
+
+FIGS["1.2"]={c:"Rango de inflamabilidad aproximado: bajo el límite inferior la mezcla es demasiado pobre; sobre el superior, demasiado rica. Ambos gases arden con muy poco porcentaje en el aire.",s:SV(170,
+Ln("M40 120H560","ax")+[0,5,10,15,20].map(v=>{const x=40+v*26;return Ln(`M${x} 115V125`,"ax")+Tx(x,142,v+" %","tc sm")}).join("")
++Rc(170,60,260,26,"f-acc",2)+Tx(165,78,"Gas natural","end sm bd")+Tx(300,78,"5 a 15 %","tc sm bd")
++Rc(95,92,192,22,"f-bad",2)+Tx(90,107,"Propano","end sm bd")+Tx(191,107,"2,1 a 9,5 %","tc sm bd")
++Tx(40,30,"Porcentaje de gas en el aire (valores aproximados)","sm mt")+Tx(560,160,"Muy pocos % bastan para una explosión","end sm"),"Límites de inflamabilidad")};
+
+FIGS["1.3"]={c:"Para que haya combustión se necesitan combustible, oxígeno y calor. Si falta aire, la combustión queda incompleta y aparece monóxido de carbono.",s:SV(200,
+Ln("M120 20L30 180H210Z","s thick")+Tx(120,70,"Calor","tc sm bd")+Tx(60,150,"Combustible","tc sm bd")+Tx(180,150,"Oxígeno","tc sm bd")
++Bx(260,30,320,50,"Completa: CH₄ + 2 O₂ → CO₂ + 2 H₂O|llama azul, sin hollín","f-ok")
++Bx(260,110,320,50,"Incompleta (falta aire): aparece CO|llama amarilla, hollín","f-bad")
++Tx(260,190,"CO = monóxido de carbono, gas tóxico","sm bd"),"Triángulo del fuego y tipos de combustión")};
+
+FIGS["1.4"]={c:"Un calefont sin evacuación o con el conducto tapado devuelve los gases quemados al recinto. El monóxido de carbono no tiene color ni olor.",s:SV(210,
+Rc(20,20,260,170,"s",4)+Rc(120,80,60,80,"box",4)+Tx(150,125,"Calefont","tc sm")+Ln("M150 80V30","s thick dash")+NoX(150,40,8)
++Ar(130,78,70,50,"w-ro")+Ar(170,78,230,50,"w-ro")+Tx(150,205,"Sin conducto: CO al recinto","tc sm bd")
++Rc(320,20,260,170,"s",4)+Rc(420,80,60,80,"box",4)+Tx(450,125,"Calefont","tc sm")+Ln("M450 80V20","s thick")+Ar(450,40,450,6,"w-ok")
++Tx(450,205,"Con conducto: gases al exterior","tc sm bd"),"Riesgo de monóxido de carbono")};
+
+FIGS["2.1"]={c:"Equivalencias de presión y los rangos del reglamento: las instalaciones tipo 3 trabajan en baja presión, bajo 5 kPa.",s:SV(190,
+Bx(20,20,170,44,"1 kPa = 1.000 Pa")+Bx(215,20,170,44,"1 kPa = 10 mbar")+Bx(410,20,170,44,"1 kPa ≈ 102 mm c.a.")
++Rc(40,110,120,30,"f-ok",2)+Rc(160,110,240,30,"f-live",2)+Rc(400,110,160,30,"f-bad",2)
++Tx(100,130,"Baja < 5 kPa","tc sm bd")+Tx(280,130,"Media","tc sm bd")+Tx(480,130,"Alta > 600 kPa","tc sm bd")
++Tx(40,165,"Escala ilustrativa · DS 191, art. 2","sm mt")+Tx(100,105,"Clase 3","tc sm ac bd"),"Unidades y rangos de presión")};
+
+FIGS["2.2"]={c:"De la potencia del artefacto a su consumo de gas. El poder calorífico lo informa la distribuidora; aquí se usa un valor aproximado para gas natural.",s:SV(150,
+Bx(20,30,120,50,"Potencia|kW")+Ar(140,55,170,55)+Bx(172,30,110,50,"× 860")+Ar(282,55,312,55)+Bx(314,30,110,50,"kcal/h")+Ar(424,55,454,55)+Bx(456,30,124,50,"÷ poder|calorífico")
++Tx(20,115,"Ej.: calefont 20 kW → 17.200 kcal/h ÷ 9.300 kcal/m³ ≈ 1,85 m³/h de gas natural","sm bd"),"Cálculo de consumo")};
+
+FIGS["2.3"]={c:"Manómetro de columna de agua en U: la diferencia de altura entre las dos ramas indica la presión. 100 mm de columna equivalen a cerca de 1 kPa.",s:SV(220,
+Ln("M200 30V170a30 30 0 0 0 60 0V30M215 30V170a15 15 0 0 0 30 0V30","s")
++Rc(201,120,13,55,"f-az",0)+Rc(246,70,13,105,"f-az",0)+Ln("M207 175a23 23 0 0 0 46 0","w-az thick")
++Ar(200,20,200,60)+Tx(150,18,"Presión del gas","sm bd")
++Ln("M270 70H330M270 120H330","ax")+Ln("M320 72V118","s")+Tx(340,100,"h = diferencia de altura","sm bd")+Tx(340,118,"100 mm c.a. ≈ 1 kPa","sm")
++Tx(420,60,"Hoy se usan también","sm mt")+Tx(420,76,"manómetros digitales","sm mt"),"Manómetro en U")};
+
+FIGS["2.4"]={c:"Qué hacer si se siente olor a gas.",s:SV(150,
+[["No encender","ni apagar nada"],["Abrir puertas","y ventanas"],["Cerrar la","llave de paso"],["Salir del","recinto"],["Llamar desde","afuera"]].map(([a,b],i)=>{const x=6+i*118,cx=x+54;let ic="";
+if(i===0)ic=Rc(cx-10,36,20,30,"s",3)+NoX(cx,51,14);
+if(i===1)ic=Rc(cx-20,34,40,36,"s",2)+Ln(`M${cx} 34V70`)+Ar(cx+24,52,cx+40,52);
+if(i===2)ic=Ln(`M${cx-26} 52H${cx+26}`,"w-ve thick")+Valve(cx,52)+Ln(`M${cx} 45V32H${cx+14}`,"s thick");
+if(i===3)ic=Rc(cx-14,32,28,40,"s",2)+Ar(cx-4,52,cx+30,52);
+if(i===4)ic=Rc(cx-10,32,20,38,"s",4)+Ci(cx,64,2,"ink");
+return Rc(x,10,108,125,"box",4)+Tx(x+8,26,String(i+1),"bd ac")+ic+Tx(cx,98,a,"tc sm bd")+Tx(cx,113,b,"tc sm bd")}).join(""),"Ante una fuga de gas")};
+
+FIGS["3.1"]={c:"La normativa que rige al instalador de gas: un reglamento para las instalaciones y otro para los instaladores, fiscalizados por la SEC.",s:SV(190,
+Bx(200,15,200,40,"SEC fiscaliza","f-acc")+Ln("M300 55V75M150 75H450M150 75V90M450 75V90")
++Bx(30,90,240,60,"DS 66 (2007)|Instalaciones interiores|y medidores de gas")+Bx(330,90,240,60,"DS 191 (1995)|Reglamento de|instaladores de gas")
++Tx(30,175,"DS 66 modificado en 2026 para tuberías multicapa","sm mt"),"Normativa de gas")};
+
+FIGS["3.2"]={c:"Lo que cubre cada clase de licencia. La clase 3 solo puede trabajar en instalaciones tipo 3: interiores, en baja presión y de hasta 60 kW.",s:SV(180,
+Tx(20,18,"DS 191, arts. 3 y 4","sm mt")
++[["Clase 3","Tipo 3: interior, baja presión, ≤ 60 kW","f-acc2",200],["Clase 2","Tipos 2 y 3: media presión, > 60 kW, cilindros ≤ 6.000 kg","f-acc",330],["Clase 1","Tipos 1, 2 y 3: todo, incluida alta presión","f-acc",460]].map(([n,t,c,w],i)=>{const y=34+i*44;return Tx(20,y+19,n,"bd")+Rc(100,y,w,28,c,2)+Tx(100,y+42,t,"sm")}).join(""),"Clases de licencia de gas")};
+
+FIGS["3.3"]={c:"Ciclo de vida de una instalación interior de gas.",s:SV(150,
+[["Proyecto",""],["Ejecución",""],["Pruebas","hermeticidad"],["Declaración","TC6"],["Inspección","distribuidora"],["Sello verde","cada 2 años"]].map(([a,b],i)=>{const x=10+i*99;return Bx(x,40,86,54,a+(b?"|"+b:""),i===3?"f-acc":"box")+(i<5?Ar(x+86,67,x+97,67):"")}).join("")
++Tx(10,125,"La inscripción del TC6 no es una aprobación del proyecto (DS 66, art. 86)","sm"),"Ciclo de una instalación")};
+
+FIGS["3.4"]={c:"Partes de una instalación interior típica de una vivienda.",s:SV(220,
+Bx(15,90,80,50,"Medidor o|cilindros")+Ln("M95 115H125","w-cu")+Bx(125,95,70,40,"Regulador")+Ln("M195 115H230","w-cu")+Valve(240,115)+Tx(240,145,"Llave","tc sm")+Tx(240,158,"general","tc sm")
++Ln("M250 115H560M330 115V60M480 115V170","w-cu")+Valve(330,80)+Valve(480,150)
++Bx(295,20,70,30,"Calefont")+Ln("M330 20V8","s thick")+Bx(440,170,80,34,"Cocina")
++Rc(540,80,40,12,"f-mt",1)+Tx(560,74,"Rejilla","tc sm")+Tx(300,213,"Red de cobre, llave de paso por artefacto, ventilación y evacuación","tc sm mt"),"Partes de la instalación interior")};
+
+FIGS["4.1"]={c:"Materiales permitidos y sus límites según el DS 66, art. 45. Hierro fundido y plomo están prohibidos.",s:SV(215,
+[["Cobre tipo L","hasta 140 kPa","f-cu"],["Cobre tipo K","sobre 140 kPa","f-cu"],["Acero Sch 40","cambios de dirección con codos","f-mt"],["Polietileno (PE)","solo fuera del edificio y enterrado","f-am"],["Multicapa","no como conexión a artefactos","f-acc"]].map(([n,t,c],i)=>{const y=14+i*40;return Rc(20,y,200,22,c,11)+Tx(240,y+16,n,"bd")+Tx(380,y+16,t,"sm")}).join(""),"Materiales de tuberías")};
+
+FIGS["4.2"]={c:"Soldadura fuerte en cobre: el tubo entra en el accesorio, se calienta la unión y la aleación de aporte se desliza por capilaridad.",s:SV(190,
+Rc(60,80,240,30,"f-cu",2)+Rc(260,70,140,50,"f-cu",4)+Rc(260,70,140,50,"s",4)+Tx(330,140,"Accesorio","tc sm")+Tx(150,140,"Tubo","tc sm")
++Ln("M262 80H300M262 110H300","w-live")+Tx(250,30,"Holgura capilar","sm bd")+Ar(270,36,282,78)
++Flame(330,62,"f-live")+Flame(300,58,"f-live")+Tx(420,40,"Calor del soplete","sm")
++Ln("M440 60L320 78","s thick")+Tx(450,64,"Varilla de aporte","sm")+Tx(20,180,"DS 66, art. 45.2.6: uniones soldadas de cobre con soldadura fuerte","sm mt"),"Soldadura fuerte")};
+
+FIGS["4.3"]={c:"Corte de una zanja para tubería enterrada (DS 66, art. 46.2.2).",s:SV(240,
+Ln("M60 30H540","s thick")+Rc(150,30,300,190,"f-soil",0)+Ln("M150 30V220H450V30")
++Rc(150,195,300,25,"f-am",0)+Tx(470,212,"Cama de arena ≥ 5 cm","sm")
++Ci(300,186,9,"f-cu")+Ln("M190 120H410","w-am thick dash")+Tx(470,124,"Cinta GAS a 25 cm","sm")+Tx(470,140,"sobre la tubería","sm")
++Ln("M120 30V178","s")+Ar(120,60,120,30)+Ar(120,150,120,178)+Tx(60,100,"60 cm","sm bd")+Tx(60,116,"80 bajo","sm")+Tx(60,130,"calzada","sm")
++Tx(470,180,"Relleno ≥ 15 cm","sm"),"Zanja de tubería enterrada")};
+
+FIGS["4.4"]={c:"Separaciones mínimas entre tuberías de gas e instalación eléctrica.",s:SV(190,
+Ln("M40 50H360","w-cu")+Tx(40,42,"Gas","sm bd")+Ln("M40 95H360","w-az dash")+Tx(40,112,"Eléctrica","sm bd")+Ln("M380 52V93","s")+Tx(390,78,"30 cm en paralelo","sm bd")
++Ln("M460 120V180","w-cu")+Ln("M420 150H560","w-az dash")+Tx(430,140,"10 cm en cruce","sm bd")
++Tx(40,150,"Tableros, interruptores, enchufes: 50 cm","sm")+Tx(40,170,"Medidor de gas y eléctrico: 1 m (50 cm con tabique F-60)","sm"),"Distancias a electricidad")};
+
+FIGS["5.1"]={c:"Medidor de gas en nicho con ventilación superior e inferior, y válvula de corte antes del medidor.",s:SV(210,
+Rc(150,20,300,170,"box",4)+Rc(170,28,60,12,"f-mt",1)+Rc(170,170,60,12,"f-mt",1)+Tx(240,38,"Ventilación superior","sm")+Tx(240,180,"Ventilación inferior","sm")
++Bx(300,70,90,70,"Medidor")+Ln("M60 120H260","w-cu")+Valve(230,120)+Tx(230,150,"Válvula","tc sm")+Ln("M390 105H560","w-cu")
++Tx(20,112,"Red","sm"),"Nicho de medidor")};
+
+FIGS["5.2"]={c:"Batería de cilindros de 45 kg en patio (vista en planta). Distancias del DS 66, arts. 64 a 66.",s:SV(220,
+Ln("M20 30H580","s thick")+Tx(20,22,"Muro de la vivienda","sm mt")
++Ci(100,70,22,"f-acc")+Ci(160,70,22,"f-acc")+Tx(130,110,"2 cilindros 45 kg","tc sm bd")+Rc(70,42,120,56,"s dash",4)
++Tx(220,58,"Patio a cielo abierto: ≥ 6 m² para 2","sm")+Tx(220,74,"+ 4 m² por cada par adicional","sm")
++Rc(440,150,40,40,"s",2)+Tx(460,205,"Sumidero sin sifón","tc sm")+Ln("M190 70H440V150","ax")+Tx(310,140,"≥ 1,5 m (hasta 4 cilindros)","sm bd")
++Tx(220,96,"Gabinete obligatorio con más de 4 cilindros","sm"),"Cilindros de 45 kg")};
+
+FIGS["5.3"]={c:"Procedimiento del DS 66, art. 63, para calcular la cantidad de cilindros. Los valores de vaporización y consumo se toman de las tablas XVIII y XVII.",s:SV(190,
+Bx(20,20,170,54,"A: potencia total|÷ vaporización")+Bx(215,20,170,54,"B: consumo diario|(tabla XVII)")+Bx(410,20,170,54,"Temperatura mínima|zona + 5 °C")
++Ln("M105 74V100H300V120M300 74V100","s")+Bx(215,120,170,44,"Se usa el mayor","f-acc")+Ar(385,142,418,142)+Bx(420,120,160,44,"× 2 por|reposición")
++Tx(20,182,"Mínimo 2 y máximo 12 cilindros por equipo (art. 62.2)","sm mt"),"Cálculo de cilindros")};
+
+FIGS["5.4"]={c:"Por su densidad, el gas licuado no se puede instalar bajo el nivel del terreno; el gas natural sí puede llegar a un primer subterráneo.",s:SV(210,
+Ln("M20 100H580","s thick")+Tx(25,92,"Nivel de terreno","sm mt")+Rc(60,100,220,90,"f-soil",0)+Rc(320,100,220,90,"f-soil",0)
++Tx(170,150,"Subterráneo","tc sm bd")+Tx(430,150,"Subterráneo","tc sm bd")
++Flame(170,175,"f-az")+Tx(170,40,"Gas natural","tc bd")+Tx(170,60,"permitido","tc sm")
++Flame(430,175,"f-ro")+NoX(430,168,16)+Tx(430,40,"Gas licuado","tc bd")+Tx(430,60,"prohibido","tc sm"),"GN y GLP bajo cota cero")};
+
+FIGS["6.1"]={c:"Los tres tipos de artefactos según cómo toman el aire y evacúan los gases.",s:SV(210,
+[["Tipo A","sin conducto","Cocina, estufa"],["Tipo B","conducto, aire del recinto","Calefont tiro natural"],["Tipo C","estanco, aire exterior","Calefont estanco"]].map(([n,a,b],i)=>{const x=10+i*197;let g=Rc(x,20,180,120,"s",3)+Rc(x+60,70,60,50,"box",4);
+if(i===0)g+=Flame(x+90,95,"f-az")+Ar(x+75,66,x+55,40,"w-ro");
+if(i===1)g+=Flame(x+90,95,"f-az")+Ln(`M${x+90} 70V20`,"s thick")+Ar(x+30,110,x+58,100,"w-az");
+if(i===2)g+=Flame(x+90,95,"f-az")+Ln(`M${x+120} 85H${x+180}M${x+120} 95H${x+180}`,"s thick")+Ar(x+178,90,x+190,90,"w-ok");
+return g+Tx(x+90,160,n,"tc bd")+Tx(x+90,176,a,"tc sm")+Tx(x+90,192,b,"tc sm mt")}).join(""),"Tipos de artefactos")};
+
+FIGS["6.2"]={c:"Partes principales de un calefont de tiro natural y sus seguridades.",s:SV(230,
+Rc(220,40,160,160,"box",8)+Rc(240,60,120,40,"f-mt",2)+Tx(300,85,"Intercambiador","tc sm")+Flame(270,135)+Flame(300,135)+Flame(330,135)+Tx(300,160,"Quemador","tc sm")
++Rc(270,20,60,20,"s",2)+Tx(340,32,"Cortatiro","sm")+Ln("M300 20V4","s thick")
++Ln("M240 200V220M300 200V220M360 200V220","s")
++Tx(150,215,"Agua fría","sm")+Tx(310,215,"Gas","sm")+Tx(370,215,"Agua caliente","sm")
++Tx(20,60,"Seguridades:","sm bd")+Tx(20,78,"· válvula de agua","sm")+Tx(20,94,"· detector de llama","sm")+Tx(20,110,"· sensor de tiro (Bs)","sm")
++Tx(400,60,"Conducto al exterior","sm")+Tx(400,76,"siempre obligatorio","sm bd"),"Partes del calefont")};
+
+FIGS["6.3"]={c:"Conexión de artefactos: válvula de paso visible en el mismo recinto y conexión de largo limitado (DS 66, cap. IX).",s:SV(200,
+Ln("M20 40H200V110","w-cu")+Valve(200,110)+Tx(215,108,"Válvula de paso","sm bd")+Tx(215,124,"visible, ≤ 1,6 m del piso","sm")
++Ln("M200 120C200 170 300 170 330 150","w-ne dash")+Tx(220,190,"Flexible: ≤ 1 m cocina, ≤ 2 m otros","sm")
++Rc(330,120,140,60,"box",4)+Tx(400,155,"Cocina","tc")+Ln("M20 190H580","s thick")
++Ln("M120 110V190","ax")+Tx(60,160,"1,6 m","sm"),"Conexión de artefactos")};
+
+FIGS["6.4"]={c:"Dónde no pueden ir artefactos de tipo A y B: dormitorios, baños y recintos a los que solo se accede por ellos. Ahí solo se aceptan artefactos tipo C.",s:SV(210,
+Rc(20,20,560,170,"s thick",0)+Ln("M200 20V190M380 20V190")+Tx(110,45,"Dormitorio","tc bd")+Tx(290,45,"Baño","tc bd")+Tx(480,45,"Cocina / logia","tc bd")
++Tx(110,100,"A y B: no","tc ac bd")+Tx(110,120,"Solo tipo C","tc sm")+Tx(290,100,"A y B: no","tc ac bd")+Tx(290,120,"Solo tipo C","tc sm")
++Tx(480,100,"Permitidos","tc bd")+Tx(480,120,"con ventilación","tc sm")+Tx(480,136,"y volumen suficiente","tc sm"),"Prohibiciones de ubicación")};
+
+FIGS["7.1"]={c:"La ventilación cumple dos funciones: entrega aire para la combustión y diluye los productos de combustión.",s:SV(200,
+Rc(150,20,300,170,"s thick",0)+Rc(140,150,12,30,"f-mt",0)+Rc(448,30,12,30,"f-mt",0)
++Ar(60,165,170,165,"w-az")+Tx(30,150,"Aire nuevo","sm bd")+Bx(260,110,80,60,"Artefacto")+Flame(300,105)
++Ar(320,90,440,46,"w-ro")+Ar(460,45,560,45,"w-ro")+Tx(470,70,"Aire viciado","sm bd"),"Función de la ventilación")};
+
+FIGS["7.2"]={c:"El volumen se calcula con una altura máxima de 2,4 m aunque el cielo sea más alto. Para estufas tipo A el mínimo es 15 m³.",s:SV(200,
+Ln("M120 160L260 190L460 150L320 120Z","s")+Ln("M120 60L260 90L460 50L320 20Z","s")+Ln("M120 60V160M260 90V190M460 50V150","s")
++Tx(170,185,"3 m","sm bd")+Tx(370,185,"2,5 m","sm bd")+Tx(470,105,"2,6 m reales","sm")+Tx(470,121,"→ usar 2,4 m","sm bd")
++Tx(20,20,"V = 3 × 2,5 × 2,4 = 18 m³","bd"),"Volumen de un recinto")};
+
+FIGS["7.3"]={c:"Ubicación de las aberturas de ventilación en el muro (DS 66, cap. IX).",s:SV(220,
+Rc(40,10,520,200,"s",0)+Ln("M40 200H560","s thick")+Rc(90,178,90,20,"f-mt",2)+Tx(135,172,"Inferior","tc sm bd")+Ln("M190 178V200","w-live")+Tx(196,194,"GLP: borde superior a no más de 15 cm del piso","sm bd")
++Rc(380,30,90,22,"f-mt",2)+Tx(425,24,"Superior","tc sm bd")+Bx(250,90,70,90,"Artefacto")
++Tx(60,120,"Malla ≥ 6 mm o celosía","sm")+Tx(60,138,"El rebaje de la puerta no cuenta","sm")
++Tx(340,90,"≥ 40 cm de salidas tipo B o C","sm")+Tx(340,106,"≥ 60 cm del sombrerete B natural","sm")
+,"Ubicación de rejillas")};
+
+FIGS["7.4"]={c:"Otras exigencias de ventilación del DS 66, cap. IX.",s:SV(150,
+Bx(10,20,135,70,"Campana|≥ 100 cm²")+Bx(158,20,135,70,"Extractor|≥ 80 cm²")+Bx(306,20,135,70,"Patio < 3 m²|≥ 300 cm²")+Bx(454,20,136,70,"Conducto > 3 m|+50 % sección")
++Tx(10,125,"Letrero obligatorio: Por su protección no tapar esta ventilación","sm bd"),"Otras exigencias de ventilación")};
+
+FIGS["8.1"]={c:"Conducto individual de tiro natural para un calefont tipo B (DS 66, art. 81).",s:SV(230,
+Rc(60,130,80,90,"box",6)+Tx(100,180,"Calefont","tc sm")+Ln("M100 130V60L130 40H300","s thick")+Rc(300,30,14,20,"f-mt",1)+Tx(320,30,"Fachada","sm")
++Ln("M80 130V60","ax dash")+Tx(30,100,"≥ 2 D","sm bd")+Ln("M100 60V20","ax dash")+Tx(140,24,"Desviación máxima 10°","sm")
++Tx(160,70,"Pendiente siempre ascendente","sm")+Tx(160,86,"Solo un cambio de dirección","sm")+Tx(160,120,"Sección vertical libre ≥ 126 cm²","sm")+Tx(160,136,"(o diámetro del fabricante)","sm mt"),"Conducto de evacuación")};
+
+FIGS["8.2"]={c:"Materiales y separaciones del conducto de evacuación.",s:SV(180,
+Rc(60,20,40,150,"f-mt",2)+Tx(80,15,"Conducto","tc sm")+Rc(250,20,30,150,"f-am",0)+Tx(265,15,"Madera","tc sm")
++Ln("M102 90H248","ax")+Tx(120,84,"≥ 15 cm","sm bd")+Tx(110,110,"(2 cm con aislante","sm")+Tx(110,124,"no combustible)","sm")
++Ci(80,60,4,"ink")+Tx(320,50,"Punto de muestreo de 9 mm","sm")+Tx(320,70,"Material no combustible, liso","sm")+Tx(320,90,"Resiste hasta 300 °C","sm")+Tx(320,110,"Acero cincado: ≥ 0,8 mm","sm")+Tx(320,130,"y ≤ 10 m de largo","sm"),"Materiales del conducto")};
+
+FIGS["8.3"]={c:"Terminal en fachada: sobresale hasta 10 cm, con sombrerete para fachada y a no menos de 2,20 m del suelo con tránsito. Para techumbres se aplican las figuras 32 a 36 del DS 66.",s:SV(210,
+Rc(300,10,20,190,"f-mt",0)+Ln("M20 200H580","s thick")+Ln("M200 60H330","s thick")+Rc(330,52,14,16,"box",2)+Tx(350,50,"Sombrerete","sm")
++Ln("M322 70H344","s")+Tx(350,86,"≤ 10 cm","sm bd")+Ln("M400 60V200","ax")+Ar(400,130,400,62)+Ar(400,130,400,198)+Tx(410,134,"≥ 2,20 m","sm bd")
++Tx(40,40,"Interior","sm mt")+Tx(500,40,"Exterior","sm mt"),"Terminal de fachada")};
+
+FIGS["8.4"]={c:"Prueba de tiro: con el calefont funcionando, una llama o humo junto al cortatiro debe ser aspirada hacia el conducto. Si sale hacia afuera, hay revoco.",s:SV(190,
+Rc(220,80,120,100,"box",6)+Rc(250,60,60,20,"s",2)+Ln("M280 60V10","s thick")
++Ar(200,70,248,68,"w-ok")+Tx(120,66,"Bien: entra","sm bd")+Ar(330,68,390,80,"w-ro")+Tx(395,86,"Mal: revoco","sm bd")
++Tx(20,180,"Revisa también el CO con analizador si está disponible","sm mt"),"Prueba de tiro")};
+
+FIGS["9.1"]={c:"Ejemplo de consumo por artefacto con gas natural (poder calorífico aproximado de 9.300 kcal/m³).",s:SV(190,
+[["Calefont 20 kW","17.200 kcal/h","1,85 m³/h"],["Cocina 8 kW","6.880 kcal/h","0,74 m³/h"],["Estufa 4 kW","3.440 kcal/h","0,37 m³/h"]].map(([a,b,c],i)=>{const y=20+i*40;return Tx(20,y+16,a,"bd")+Tx(220,y+16,b,"sm")+Tx(400,y+16,c,"bd ac")}).join("")
++Ln("M20 140H580")+Tx(20,165,"Total: 32 kW","bd")+Tx(400,165,"2,96 m³/h","bd ac"),"Consumo por artefacto")};
+
+FIGS["9.2"]={c:"Longitud de cálculo = longitud real de tubería + longitudes equivalentes de cada accesorio (Anexo 2 del DS 66).",s:SV(190,
+Ln("M40 140H240V60H420V120H560","w-cu")+Ci(240,140,6,"f-acc")+Ci(240,60,6,"f-acc")+Ci(420,60,6,"f-acc")+Ci(420,120,6,"f-acc")+Valve(520,120)
++Tx(40,130,"Medidor","sm")+Tx(540,105,"Artefacto","sm")+Tx(250,160,"Codo","sm")+Tx(250,50,"Codo","sm")
++Tx(40,180,"L cálculo = L real + Σ L equivalentes (codos, tes, válvulas)","sm bd"),"Longitud equivalente")};
+
+FIGS["9.3"]={c:"Pasos para elegir el diámetro de cada tramo con las tablas del DS 66.",s:SV(180,
+Bx(10,30,110,54,"Caudal del|tramo (m³/h)")+Ar(120,57,140,57)+Bx(142,30,110,54,"Longitud de|cálculo (m)")+Ar(252,57,272,57)+Bx(274,30,110,54,"Tabla|Anexo 1")+Ar(384,57,404,57)+Bx(406,30,90,54,"Diámetro")+Ar(496,57,516,57)+Bx(518,30,72,54,"¿ΔP ok?","f-acc")
++Tx(10,120,"Si no cumple la pérdida de carga admisible, se sube al diámetro siguiente","sm"),"Selección de diámetro")};
+
+FIGS["9.4"]={c:"Isométrico simple de una red: cada tramo se identifica con letras y se calcula con el caudal que lleva.",s:SV(200,
+Ln("M60 160L200 90L340 160M200 90V30","w-cu")+Ln("M340 160L480 90","w-cu")
++[[60,160,"A"],[200,90,"B"],[340,160,"C"],[480,90,"D"],[200,30,"E"]].map(([x,y,t])=>Ci(x,y,5,"f-acc")+Tx(x+8,y-6,t,"bd")).join("")
++Tx(330,40,"A-B: todos los artefactos","sm")+Tx(330,56,"B-C: cocina + estufa","sm")+Tx(330,72,"B-E: calefont","sm")+Tx(60,190,"Medidor en A","sm mt"),"Isométrico de red")};
+
+FIGS["10.1"]={c:"Montaje típico para la prueba de hermeticidad: artefactos desconectados, arranques tapados, manómetro en una te de prueba.",s:SV(200,
+Ln("M40 100H540M200 100V40M380 100V160","w-cu")+Rc(190,30,20,10,"f-ink",1)+Rc(370,160,20,10,"f-ink",1)+Rc(530,90,10,20,"f-ink",1)
++Tx(215,38,"Tapón","sm")+Tx(395,170,"Tapón","sm")+Ci(100,70,22)+Ln("M100 92V100")+Ln("M100 70L112 58","s thick")+Tx(130,60,"Manómetro","sm bd")
++Tx(40,140,"Presurizar, estabilizar,","sm")+Tx(40,156,"esperar el tiempo exigido","sm")+Tx(40,172,"y verificar que no baje","sm"),"Prueba de hermeticidad")};
+
+FIGS["10.2"]={c:"De la declaración al suministro definitivo (DS 66, arts. 86 y 87).",s:SV(140,
+Bx(10,30,135,60,"Instalador|inscribe TC6")+Ar(145,60,165,60)+Bx(167,30,135,60,"Inspección|reducida")+Ar(302,60,322,60)+Bx(324,30,135,60,"Distribuidora|abre y purga")+Ar(459,60,479,60)+Bx(481,30,109,60,"Suministro|definitivo","f-acc")
++Tx(10,120,"Válvulas de artefactos pendientes: cerradas, bloqueadas y selladas","sm"),"TC6 y puesta en servicio")};
+
+FIGS["10.3"]={c:"Resultado de la inspección periódica, que se hace cada dos años con un organismo autorizado por la SEC.",s:SV(160,
+[["Verde","Cumple","f-ok"],["Amarillo","Defectos que deben","f-live"],["Rojo","Defectos graves","f-bad"]].map(([n,t,c],i)=>{const x=40+i*190;return Ci(x+60,60,40,c)+Tx(x+60,66,n,"tc bd")+Tx(x+60,125,t,"tc sm")}).join("")
++Tx(230,141,"corregirse en plazo","tc sm")+Tx(420,141,"suspensión del gas","tc sm"),"Sellos de gas")};
+
+FIGS["10.4"]={c:"Camino desde la preparación hasta la licencia SEC clase 3 de gas.",s:SV(190,
+Bx(15,70,110,50,"Preparación|10 clases")+Ar(125,95,153,95)+Rc(155,20,200,155,"s dash",6)+Tx(255,38,"Evaluación ChileValora","tc sm bd")
++Bx(170,50,170,30,"Prueba teórica","box2")+Bx(170,88,170,30,"Observación práctica","box2")+Bx(170,126,170,30,"Evidencias","box2")
++Ar(355,95,383,95)+Bx(385,70,100,50,"Certificado|competencia")+Ar(485,95,498,95)+Bx(500,70,90,50,"Licencia|gas clase 3","f-acc")
++Tx(590,140,"Renueva cada 5 años","end sm"),"Ruta de certificación")};
+
+/* ---------- Fotos referenciales (Canva IA) y enlaces reales ---------- */
+const PHOTOS={
+"1.3":["MAHZEkipnno","Llama azul de combustión completa (izquierda) y llama amarilla de combustión incompleta (derecha)."],
+"1.4":["MAHZEihH0s8","Detector de monóxido de carbono instalado en muro."],
+"2.1":["MAHZEiI1Bh8","Regulador de baja presión con manómetro conectado a un cilindro de gas licuado."],
+"2.4":["MAHZEsszxX4","Revisión de una unión de la red de gas, con la llave cerrada."],
+"4.2":["MAHZEv3YWxA","Soldadura fuerte de una unión de cobre con soplete, con lentes y guantes."],
+"4.3":["MAHZEiHdgsk","Tubería de cobre enterrada con cinta señalizadora GAS."],
+"5.1":["MAHZEqy5zao","Medidor de gas con regulador y válvula en nicho con puerta ventilada."],
+"5.2":["MAHZEob5mHE","Dos cilindros de 45 kg a cielo abierto, sobre radier, con su colector. Las marcas se difuminaron."],
+"6.1":["MAHZEkw4kJY","Estufa a gas con sensor de atmósfera. El rótulo en inglés lo agregó la IA."],
+"6.2":["MAHZEhMGQoA","Calefont mural con su conducto de evacuación y llave de paso."],
+"6.3":["MAHZEiuF2kA","Conexión flexible de una cocina a su llave de paso en el muro."],
+"7.3":["MAHZEm-l7-E","Rejilla de ventilación inferior a ras de piso en una cocina."],
+"8.3":["MAHZEhF1qsg","Sombrerete de evacuación sobre una techumbre metálica."],
+"10.1":["MAHZEvZ0fdg","Prueba de hermeticidad con manómetro conectado a la red de cobre."]
+};
+const MG="https://modulor.cl/especialidades/gas/";
+const L={
+licgas:["ChileAtiende: licencia de instalador de gas","https://www.chileatiende.gob.cl/fichas/2641-licencia-de-instalador-de-gas"],
+d2:["DS 191, art. 2: definiciones de presión","https://iura.cl/dto-191-ministerio-de-economa/2"],
+d3:["DS 191, art. 3: tipos de instalación","https://iura.cl/dto-191-ministerio-de-economa/3"],
+d4:["DS 191, art. 4: clases de licencia","https://iura.cl/dto-191-ministerio-de-economa/4"],
+gidx:["DS 66 por capítulos","https://modulor.cl/especialidades/gas/"],
+m26:["Diario Oficial 2026: modificación DS 66 (multicapa)","https://www.diariooficial.interior.gob.cl/publicaciones/2026/08/10/44521/01/2851196.pdf"],
+c04:["DS 66, cap. IV: obligaciones","https://modulor.cl/especialidades/gas/capitulo-04-obligaciones-y-responsabilidades/"],
+c05:["DS 66, cap. V: proyectos de gas","https://modulor.cl/especialidades/gas/capitulo-05-proyectos-de-gas/"],
+c06:["DS 66, cap. VI: tuberías","https://modulor.cl/especialidades/gas/capitulo-06-construccion-tuberias-de-gas/"],
+c07:["DS 66, cap. VII: medidores","https://modulor.cl/especialidades/gas/capitulo-07-medidores-de-gas/"],
+c08:["DS 66, cap. VIII: cilindros y estanques","https://modulor.cl/especialidades/gas/capitulo-08-equipos-glp-estanques-cilindros/"],
+c09:["DS 66, cap. IX: artefactos y ventilación","https://modulor.cl/especialidades/gas/capitulo-09-instalacion-artefactos-y-ventilaciones/"],
+c10:["DS 66, cap. X: evacuación de gases","https://modulor.cl/especialidades/gas/capitulo-10-evacuacion-gases-combustion/"],
+c11:["DS 66, cap. XI: declaración y puesta en servicio","https://modulor.cl/especialidades/gas/capitulo-11-declaracion-y-puesta-en-servicio/"],
+c12:["DS 66, cap. XII: instalaciones en uso","https://modulor.cl/especialidades/gas/capitulo-12-operaciones-instalaciones-en-uso/"],
+anx:["DS 66, anexos: tablas de cálculo","https://modulor.cl/especialidades/gas/anexos-ds66/"],
+sello:["ChileAtiende: inspección periódica (sello verde)","https://www.chileatiende.gob.cl/fichas/67289-inspeccion-periodica-a-organismos-de-certificacion-de-gas-sello-verde-ok"],
+edecl:["ChileAtiende: declaración por E-Declarador","https://www.chileatiende.gob.cl/fichas/2656-declaracion-de-instalaciones-a-traves-de-e-declarador"],
+usach:["USACH: programa preparatorio clase 3 (PDF)","https://cai.usach.cl/sites/default/files/2024-12/T%C3%A9cnicas%20de%20Instalaci%C3%B3n%20de%20Gas%2C%20Hasta%2060%20KW%20de%20Potencia%2C%20Preparatorio%20Licencia%20SEC%20Clase%203%2060%20hrs_Presencial.pdf"],
+becas:["Mintrab: becas para certificar gas clase 3","https://www.mintrab.gob.cl/pgm/CanalRegional/Aysen/disponen-de-becas-para-que-instaladores-de-gas-clase-3-y-albaniles-puedan-certificar-sus-competencias-laborales/"]
+};
+const LINKS={
+"2.1":["d2"],"3.1":["gidx","m26"],"3.2":["d3","d4","licgas"],"3.3":["c04","c11"],"3.4":["c05"],
+"4.1":["c06","m26"],"4.2":["c06"],"4.3":["c06"],"4.4":["c06"],
+"5.1":["c07"],"5.2":["c08"],"5.3":["c08"],"5.4":["c08","c09"],
+"6.1":["c09"],"6.2":["c09"],"6.3":["c09"],"6.4":["c09"],
+"7.1":["c09"],"7.2":["c09"],"7.3":["c09"],"7.4":["c09"],
+"8.1":["c10"],"8.2":["c10"],"8.3":["c10"],"8.4":["c10"],
+"9.1":["anx"],"9.2":["anx"],"9.3":["anx"],"9.4":["c05"],
+"10.1":["c06"],"10.2":["c11","edecl"],"10.3":["sello","c12"],"10.4":["licgas","usach","becas"]
+};
+function realHTML(k){
+  const p=PHOTOS[k],ls=(LINKS[k]||[]).map(x=>L[x]);
+  if(!p&&!ls.length)return "";
+  const cv=p?"https://www.canva.com/M/"+p[0]:"";
+  return `<div class="real">`+
+   (p?`<figure class="photo"><a href="${cv}" target="_blank" rel="noopener"><img src="img/${k.replace(".","-")}.png" alt="${esc(p[1])}" width="200" height="150" loading="lazy"></a>
+     <figcaption>${esc(p[1])}<span class="ai">Imagen generada con IA en Canva, referencial. <a href="${cv}" target="_blank" rel="noopener">Ver en tamaño completo</a></span></figcaption></figure>`:"")+
+   (ls.length?`<div class="links"><div class="eyebrow">Ver en la realidad</div><ul>${ls.map(([t,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${esc(t)} ↗</a></li>`).join("")}</ul></div>`:"")+
+  `</div>`;
+}
+
+/* ---------- Contenido ---------- */
+const clases=[
+{n:1,w:1,d:"Día 1",t:"Los gases combustibles y la combustión",k:"GN sube · GLP baja",
+pts:[
+{t:"Qué es un gas combustible y sus familias",h:`
+<p>Un <b>gas combustible</b> es un gas que, mezclado con el oxígeno del aire y con una fuente de calor, arde y libera energía. En las viviendas chilenas se usan principalmente dos:</p>
+<div class="tw"><table><tr><th>Gas</th><th>Qué es</th><th>Cómo llega</th></tr>
+<tr><td><b>Gas natural (GN)</b></td><td>Principalmente metano (CH₄)</td><td>Por red de la distribuidora, con medidor</td></tr>
+<tr><td><b>Gas licuado de petróleo (GLP)</b></td><td>Mezcla de propano y butano</td><td>En cilindros (5, 11, 15, 45 kg) o estanques</td></tr>
+<tr><td>Gas de ciudad</td><td>Gas manufacturado</td><td>Histórico; en Santiago la red pasó a gas natural</td></tr></table></div>
+<p>Cada artefacto está fabricado para una familia de gas. Usar un artefacto de GLP con GN, o al revés, sin la <b>conversión</b> correcta (inyectores y regulación), produce mala combustión y riesgo de monóxido de carbono.</p>
+<div class="idea"><b>Idea clave:</b> antes de conectar un artefacto, revisa en su placa para qué gas está preparado.</div>`},
+{t:"Propiedades: densidad, poder calorífico y olor",h:`
+<h4>Densidad relativa</h4>
+<p>Compara el peso del gas con el del aire (aire = 1).</p>
+<ul><li><b>Gas natural:</b> cerca de 0,6. Es más liviano que el aire: si hay fuga, <b>sube</b> y se acumula en la parte alta.</li>
+<li><b>Gas licuado:</b> entre 1,5 y 2. Es más pesado: si hay fuga, <b>baja</b> y se acumula a ras de piso, en fosos y subterráneos.</li></ul>
+<p>Por eso el DS 66 prohíbe instalar GLP bajo el nivel del terreno, y la ubicación de rejillas se piensa según el gas.</p>
+<h4>Poder calorífico</h4>
+<p>Es la energía que entrega un metro cúbico (o un kilo) de gas al quemarse. Valores aproximados:</p>
+<div class="tw"><table><tr><th>Gas</th><th class="n">Poder calorífico aproximado</th></tr>
+<tr><td>Gas natural</td><td class="n">≈ 9.300 kcal/m³</td></tr>
+<tr><td>Propano</td><td class="n">≈ 24.000 kcal/m³ (≈ 12.000 kcal/kg)</td></tr></table></div>
+<p>El valor exacto lo informa la distribuidora y es el que debes usar en el cálculo.</p>
+<h4>Olor</h4>
+<p>El gas natural y el licuado no tienen olor propio. Se les agrega un <b>odorizante</b> (mercaptanos), que da el olor característico, para que una fuga se pueda detectar.</p>
+<h4>Inflamabilidad</h4>
+<p>El gas solo arde si su porcentaje en el aire está dentro de un rango. Aproximadamente: gas natural entre 5 y 15%, propano entre 2,1 y 9,5%. Con muy poca cantidad ya hay riesgo de explosión.</p>`},
+{t:"La combustión completa e incompleta",h:`
+<p>Para que haya combustión se necesitan tres elementos: <b>combustible</b> (el gas), <b>oxígeno</b> (del aire) y <b>calor</b> (la chispa o la llama piloto). Es el triángulo del fuego.</p>
+<h4>Combustión completa</h4>
+<code class="f">CH₄ + 2 O₂  →  CO₂ + 2 H₂O + calor</code>
+<p>Con suficiente aire, el gas se transforma en dióxido de carbono y vapor de agua. La llama es <b>azul</b>, estable y no deja hollín.</p>
+<h4>Combustión incompleta</h4>
+<p>Si falta aire (recinto sin ventilación, quemador sucio, inyector equivocado), parte del carbono no se quema bien y se forma <b>monóxido de carbono (CO)</b>. Señales:</p>
+<ul><li>Llama amarilla o anaranjada, inestable.</li><li>Hollín en el artefacto o en el cielo.</li><li>Olor fuerte o irritación en los ojos.</li></ul>
+<div class="idea">Por cada metro cúbico de gas natural que se quema se necesitan alrededor de 10 m³ de aire. Por eso la ventilación es una exigencia de seguridad, no de comodidad.</div>`},
+{t:"Monóxido de carbono y seguridad",h:`
+<p>El <b>monóxido de carbono (CO)</b> es el principal riesgo de los artefactos a gas.</p>
+<ul><li>No tiene color, olor ni sabor.</li>
+<li>Se une a la hemoglobina de la sangre con mucha más fuerza que el oxígeno y bloquea su transporte.</li>
+<li>Síntomas: dolor de cabeza, mareo, náuseas, somnolencia, confusión. En concentraciones altas, pérdida de conciencia y muerte.</li></ul>
+<h4>Causas típicas en viviendas</h4>
+<ul><li>Calefont sin conducto de evacuación, o con el conducto tapado, desconectado o mal instalado.</li>
+<li>Rejillas de ventilación tapadas para "no perder calor".</li>
+<li>Artefactos tipo A o B instalados en baños o dormitorios.</li>
+<li>Artefactos sin mantención o mal convertidos.</li></ul>
+<div class="warn">Ante síntomas: apagar el artefacto, ventilar, salir del recinto y buscar atención médica. Un detector de CO es una buena protección adicional, pero no reemplaza una instalación correcta.</div>`}],
+taller:`<h3>Taller: reconocer gases y llamas</h3>
+<ol><li>Revisa la placa de tres artefactos (cocina, calefont, estufa) y anota para qué gas están fabricados y su potencia en kW.</li>
+<li>Observa la llama de una cocina en buen estado: debe ser azul y estable. Anota cómo cambia si se tapa parcialmente la entrada de aire del quemador (solo con supervisión).</li>
+<li>Busca en tu casa o en el taller el conducto del calefont y la rejilla de ventilación. Anota si están despejados.</li>
+<li>Escribe con tus palabras por qué el GLP no puede instalarse en un subterráneo.</li></ol>`,
+quiz:[
+{q:"Si hay una fuga de gas licuado, ¿dónde se acumula?",o:["En la parte alta del recinto","A ras de piso","Se dispersa igual en todo el recinto"],a:1,e:"El GLP es más pesado que el aire (densidad 1,5 a 2)."},
+{q:"¿Qué gas se produce en una combustión incompleta?",o:["Dióxido de carbono","Monóxido de carbono","Oxígeno"],a:1,e:"La falta de aire produce CO, que es tóxico."},
+{q:"Una llama amarilla y con hollín indica:",o:["Combustión completa","Combustión incompleta","Gas natural de buena calidad"],a:1,e:"La llama correcta es azul y estable."},
+{q:"¿Por qué el gas tiene olor?",o:["Es su olor natural","Se le agrega un odorizante","Por la combustión"],a:1,e:"Se agregan mercaptanos para detectar fugas."},
+{q:"El gas natural está formado principalmente por:",o:["Propano","Butano","Metano"],a:2,e:"El GN es principalmente metano (CH₄)."}]},
+
+{n:2,w:1,d:"Día 2",t:"Presión, potencia y seguridad",k:"1 kW = 860 kcal/h",
+pts:[
+{t:"Presión y sus unidades",h:`
+<p>La <b>presión</b> es la fuerza con que el gas empuja dentro de la tubería. Se mide sobre la presión atmosférica (presión manométrica).</p>
+<div class="tw"><table><tr><th>Unidad</th><th>Equivalencia</th></tr>
+<tr><td>kilopascal (kPa)</td><td>1 kPa = 1.000 Pa</td></tr><tr><td>milibar (mbar)</td><td>1 kPa = 10 mbar</td></tr>
+<tr><td>milímetros de columna de agua (mm c.a.)</td><td>1 kPa ≈ 102 mm c.a.</td></tr></table></div>
+<h4>Rangos del reglamento (DS 191, art. 2)</h4>
+<ul><li><b>Baja presión:</b> menos de 5 kPa (510 mm c.a.). Es la presión con que funcionan los artefactos domésticos.</li>
+<li><b>Media presión:</b> la que va sobre la de consumo y necesita reguladores para bajarla.</li>
+<li><b>Alta presión:</b> más de 600 kPa.</li></ul>
+<p>El instalador <b>clase 3</b> trabaja solo en baja presión. La presión de servicio de cada artefacto aparece en su placa, normalmente del orden de 2 a 3 kPa según el gas.</p>
+<h4>El regulador</h4>
+<p>Baja la presión del gas desde la red o el cilindro hasta la presión de consumo, y la mantiene estable aunque cambie el consumo. Su venteo debe quedar a 1 m de aberturas bajo la descarga y a 1,5 m de fuentes de ignición (art. 55.1.8).</p>`},
+{t:"Potencia y consumo de gas",h:`
+<p>La <b>potencia</b> de un artefacto es la energía que consume por unidad de tiempo. Se expresa en kW o en kcal/h.</p>
+<code class="f">1 kW = 860 kcal/h
+Consumo (m³/h) = Potencia (kcal/h) / Poder calorífico (kcal/m³)</code>
+<h4>Ejemplo resuelto</h4>
+<p>Calefont de 20 kW con gas natural (≈ 9.300 kcal/m³):</p>
+<code class="f">20 × 860 = 17.200 kcal/h
+17.200 / 9.300 = 1,85 m³/h</code>
+<h4>Potencias típicas</h4>
+<div class="tw"><table><tr><th>Artefacto</th><th class="n">Potencia habitual</th></tr>
+<tr><td>Cocina de 4 platos con horno</td><td class="n">6 a 10 kW</td></tr><tr><td>Calefont de 10 a 16 L/min</td><td class="n">17 a 28 kW</td></tr><tr><td>Estufa</td><td class="n">3 a 5 kW</td></tr></table></div>
+<p class="norm">Valores orientativos; usa siempre la placa del artefacto.</p>
+<div class="idea">La suma de potencias define el tipo de instalación: si una vivienda supera los 60 kW instalados, ya no es tipo 3 y no la puede ejecutar un instalador clase 3.</div>`},
+{t:"Instrumentos: el manómetro",h:`
+<p>El <b>manómetro</b> mide la presión del gas. Se usa para verificar la presión de servicio y para las pruebas de hermeticidad.</p>
+<h4>Manómetro de columna de agua (en U)</h4>
+<p>Un tubo transparente en forma de U con agua. El gas empuja una rama y el agua sube en la otra. La diferencia de altura (h) es la presión en mm c.a. 100 mm equivalen aproximadamente a 1 kPa.</p>
+<h4>Manómetro digital y de reloj</h4>
+<p>Más prácticos en terreno. Deben tener un rango acorde a la presión que se mide: un manómetro de rango muy alto no muestra pequeñas caídas de presión.</p>
+<h4>Otros instrumentos del instalador</h4>
+<ul><li>Detector de fugas electrónico o solución jabonosa.</li><li>Analizador de gases de combustión (CO) cuando esté disponible.</li><li>Huincha, nivel, cortatubos, escariador, soplete y llaves adecuadas.</li></ul>`},
+{t:"Seguridad: fugas y trabajos con gas",h:`
+<h4>Cómo buscar una fuga</h4>
+<ul><li>Con <b>agua jabonosa</b> en uniones y llaves: si hay fuga, aparecen burbujas.</li>
+<li>Con un detector de fugas electrónico.</li>
+<li><b>Nunca con fósforo o encendedor.</b></li></ul>
+<h4>Si se siente olor a gas</h4>
+<ol><li>No encender ni apagar luces, interruptores ni equipos eléctricos: una chispa basta.</li><li>Abrir puertas y ventanas.</li><li>Cerrar la llave de paso o la llave general.</li><li>Salir del recinto.</li><li>Llamar a la distribuidora o a emergencias desde afuera.</li></ol>
+<h4>Al trabajar en una instalación</h4>
+<ul><li>Cerrar y bloquear la llave antes de intervenir, y señalizar.</li><li>Ventilar el recinto.</li><li>Sin fuentes de ignición cerca al abrir tuberías.</li><li>Al terminar, prueba de hermeticidad antes de dejar el gas en servicio.</li></ul>`}],
+taller:`<h3>Taller: presión y consumo</h3>
+<details><summary>1. Convierte 2,5 kPa a mbar y a mm c.a.</summary>25 mbar; 2,5 × 102 ≈ 255 mm c.a.</details>
+<details><summary>2. Una cocina de 8 kW, ¿cuántas kcal/h consume?</summary>8 × 860 = 6.880 kcal/h</details>
+<details><summary>3. ¿Cuánto gas natural consume por hora? (9.300 kcal/m³)</summary>6.880 / 9.300 = 0,74 m³/h</details>
+<details><summary>4. Una vivienda tiene calefont 24 kW, cocina 9 kW, 3 estufas de 4 kW y un horno de 3 kW. ¿Es tipo 3?</summary>24 + 9 + 12 + 3 = 48 kW. Sí, es menor o igual a 60 kW.</details>
+<details><summary>5. Si agrega una caldera de 20 kW, ¿sigue siendo tipo 3?</summary>48 + 20 = 68 kW. No: supera 60 kW y pasa a tipo 2.</details>
+<p>Práctica: arma un manómetro en U con una manguera transparente y agua, y mide la presión de soplado. Después busca una fuga simulada en una unión con agua jabonosa.</p>`,
+quiz:[
+{q:"¿Bajo qué presión está la baja presión?",o:["5 kPa","60 kPa","600 kPa"],a:0,e:"DS 191: baja presión es menos de 5 kPa."},
+{q:"1 kW equivale a:",o:["100 kcal/h","860 kcal/h","1.000 kcal/h"],a:1,e:"1 kW = 860 kcal/h."},
+{q:"¿Cómo se busca una fuga en una unión?",o:["Con un encendedor","Con agua jabonosa o detector","Oliendo de cerca"],a:1,e:"Nunca con llama."},
+{q:"Si sientes olor a gas, ¿qué NO debes hacer?",o:["Abrir ventanas","Encender la luz","Cerrar la llave de paso"],a:1,e:"Una chispa de un interruptor puede encender la mezcla."},
+{q:"Una vivienda con 70 kW instalados es:",o:["Tipo 3","Tipo 2"],a:1,e:"Sobre 60 kW en baja presión es tipo 2."}]},
+
+{n:3,w:1,d:"Día 3",t:"Normativa y el instalador",k:"Clase 3: ≤ 60 kW en baja presión",
+pts:[
+{t:"Los reglamentos de gas",h:`
+<p>La <b>SEC</b> fiscaliza las instalaciones de gas y otorga las licencias. Los dos reglamentos centrales para ti son:</p>
+<div class="tw"><table><tr><th>Norma</th><th>Qué regula</th></tr>
+<tr><td><b>DS 66 de 2007</b>, Ministerio de Economía</td><td>Instalaciones interiores y medidores de gas: proyecto, materiales, tuberías, artefactos, ventilación, evacuación, declaración y puesta en servicio</td></tr>
+<tr><td><b>DS 191 de 1995</b></td><td>Instaladores de gas: clases de licencia y lo que cada una puede hacer</td></tr></table></div>
+<h4>Novedad 2026</h4>
+<p>Un decreto del Ministerio de Energía publicado el 10 de agosto de 2026 modificó el DS 66 para incorporar las <b>tuberías multicapa</b> con capa central de aluminio. Entró en vigencia 30 días después. Entre otras cosas, prohíbe usarlas como conexión a artefactos.</p>
+<p>El texto del DS 66 se puede consultar por capítulo en los enlaces de esta pestaña.</p>`},
+{t:"Licencias y tipos de instalación",h:`
+<h4>Tipos de instalación (DS 191, art. 3)</h4>
+<div class="tw"><table><tr><th>Tipo</th><th>Comprende</th></tr>
+<tr><td>Tipo 1</td><td>Producción, almacenamiento, transporte y distribución; interiores en alta presión; cilindros de GLP sobre 6.000 kg</td></tr>
+<tr><td>Tipo 2</td><td>Interiores en media presión; cilindros de GLP hasta 6.000 kg; interiores en baja presión sobre 60 kW</td></tr>
+<tr><td><b>Tipo 3</b></td><td><b>Interiores en baja presión con potencia total instalada igual o menor a 60 kW</b></td></tr></table></div>
+<h4>Clases de licencia (art. 4)</h4>
+<ul><li>Clase 1: tipos 1, 2 y 3.</li><li>Clase 2: tipos 2 y 3.</li><li><b>Clase 3: solo tipo 3.</b></li></ul>
+<h4>Requisitos para la clase 3</h4>
+<ul><li>Título de técnico universitario con mención en construcción o instalaciones, o</li>
+<li>Título de instalador de gas de una universidad, instituto, CFT o liceo técnico profesional, o</li>
+<li>Certificado de competencias de un organismo acreditado por <b>ChileValora</b>.</li></ul>
+<div class="warn">Tu título de ingeniero constructor no aparece expresamente en la lista. Consulta a la SEC si lo acepta; si no, la vía es ChileValora. La licencia por competencias se renueva cada 5 años.</div>`},
+{t:"Responsabilidades y ciclo de una instalación",h:`
+<p>El instalador responde por que la instalación cumpla el reglamento. El ciclo es:</p>
+<ol><li><b>Proyecto:</b> planos, cálculo de diámetros, ubicación de artefactos, ventilación y evacuación.</li>
+<li><b>Ejecución:</b> tendido de tuberías, uniones, llaves, conexión de artefactos.</li>
+<li><b>Pruebas:</b> hermeticidad según el procedimiento de la SEC.</li>
+<li><b>Declaración TC6:</b> se inscribe ante la SEC antes de la puesta en servicio. La inscripción no es una aprobación del proyecto (DS 66, art. 86).</li>
+<li><b>Inspección de la distribuidora:</b> verifica fugas, ventilación, evacuación y conexiones (art. 87).</li>
+<li><b>Uso:</b> inspección periódica cada 2 años con un organismo de certificación (sello verde).</li></ol>
+<div class="idea">Las modificaciones de una instalación declarada también se declaran. Las intervenciones menores del art. 90 no, salvo en conversiones.</div>`},
+{t:"Partes de una instalación interior",h:`
+<p>La instalación interior comienza a la salida del medidor o del regulador, según el tipo de suministro (DS 191, art. 2).</p>
+<ol><li><b>Suministro:</b> medidor de la red (GN) o cilindros/estanque (GLP).</li>
+<li><b>Regulador:</b> deja el gas en baja presión.</li>
+<li><b>Válvula de corte general.</b></li>
+<li><b>Red interior:</b> tuberías de cobre u otro material permitido.</li>
+<li><b>Válvula de paso por artefacto:</b> una para cada uno, visible y accesible.</li>
+<li><b>Artefactos:</b> cocina, calefont, estufas.</li>
+<li><b>Ventilación</b> de los recintos y <b>evacuación</b> de los gases de combustión.</li></ol>
+<p>Tu experiencia en agua potable ayuda mucho: el razonamiento de red, tramos, caudales y pérdidas de carga es muy parecido.</p>`}],
+taller:`<h3>Taller: leer la normativa</h3>
+<ol><li>Abre el capítulo IV del DS 66 (obligaciones y responsabilidades) en el enlace del tema 1 y anota tres obligaciones del instalador.</li>
+<li>Haz un esquema de la instalación de gas de tu casa: suministro, regulador, llaves, recorrido y artefactos.</li>
+<li>Suma la potencia de los artefactos y clasifica la instalación (tipo 2 o tipo 3).</li></ol>`,
+quiz:[
+{q:"¿Qué reglamento regula las instalaciones interiores de gas?",o:["DS 191","DS 66","RIC N°10"],a:1,e:"DS 66 de 2007."},
+{q:"Un instalador clase 3 puede ejecutar:",o:["Instalaciones en media presión","Instalaciones interiores en baja presión hasta 60 kW","Almacenamientos de 6.000 kg"],a:1,e:"Solo instalaciones tipo 3."},
+{q:"¿La inscripción del TC6 significa que la SEC aprobó el proyecto?",o:["Sí","No"],a:1,e:"DS 66, art. 86: la inscripción no constituye aprobación."},
+{q:"¿Dónde comienza la instalación interior?",o:["En la cocina","A la salida del medidor o regulador","En la red de la calle"],a:1,e:"DS 191, art. 2."},
+{q:"¿Qué cambió en el DS 66 en 2026?",o:["Se derogó","Se incorporaron las tuberías multicapa","Se prohibió el cobre"],a:1,e:"Decreto publicado el 10 de agosto de 2026."}]},
+
+{n:4,w:1,d:"Día 4",t:"Tuberías, uniones y tendido",k:"Cobre L ≤ 140 kPa · soldadura fuerte",
+pts:[
+{t:"Materiales permitidos",h:`
+<p>DS 66, art. 45:</p>
+<div class="tw"><table><tr><th>Material</th><th>Uso</th></tr>
+<tr><td>Cobre tipo L</td><td>Presiones iniciales hasta 140 kPa. Es el más usado en viviendas.</td></tr>
+<tr><td>Cobre tipo K, sin costura</td><td>Presiones sobre 140 kPa</td></tr>
+<tr><td>Acero Schedule 40 o superior</td><td>Baja y media presión. Los cambios de dirección con codos, no doblando el tubo.</td></tr>
+<tr><td>Plásticos (como PE)</td><td>Solo fuera de edificios y enterrados</td></tr>
+<tr><td>Multicapa con aluminio</td><td>Interiores, según manual del fabricante. No como conexión a artefactos.</td></tr>
+<tr><td>Flexible metálico</td><td>Solo sin costura</td></tr></table></div>
+<h4>Prohibido</h4>
+<ul><li>Hierro fundido y plomo.</li><li>Reutilizar materiales de otra instalación de gas (art. 45.1.2).</li><li>Reparar defectos de tuberías o accesorios: se reemplazan (art. 45.2.8).</li>
+<li>Cobre o bronce si el gas tiene más de 7 mg de H₂S por m³ (art. 45.2.3).</li></ul>`},
+{t:"Uniones y soldadura fuerte",h:`
+<p>Las uniones soldadas de cobre y acero deben ser de <b>soldadura fuerte</b> (art. 45.2.6), es decir, con aleación de aporte que funde a alta temperatura. La soldadura blanda de estaño, que se usa en agua potable, <b>no sirve para gas</b>.</p>
+<h4>Procedimiento de soldadura fuerte en cobre</h4>
+<ol><li>Cortar el tubo a escuadra con cortatubos.</li><li>Escariar el borde para quitar la rebaba.</li><li>Limpiar tubo y accesorio hasta dejar el cobre brillante.</li>
+<li>Aplicar fundente si la aleación lo requiere.</li><li>Insertar el tubo hasta el tope del accesorio.</li>
+<li>Calentar la unión de forma pareja con el soplete.</li><li>Aplicar la varilla: la aleación corre por capilaridad y llena la holgura.</li>
+<li>Dejar enfriar sin mover y limpiar restos de fundente.</li></ol>
+<div class="idea">Esto conecta directo con tu asignatura de Uniones y Soldaduras: la diferencia clave con agua potable es el tipo de soldadura.</div>
+<h4>Uniones roscadas</h4>
+<p>En acero se usan uniones roscadas con sellante apto para gas. Los arranques deben sobresalir 5 cm sobre pisos y 2,5 cm al atravesar muros o cielos (art. 49.2.1).</p>`},
+{t:"Tendido y tuberías enterradas",h:`
+<h4>Prohibiciones de recorrido (art. 46.5.4)</h4>
+<ul><li>Dentro de ductos de ventilación, de basura, de chimeneas, de ascensores, ni en recintos con transformadores.</li>
+<li>Por cielos, pisos o suelos de dormitorios.</li><li>Tuberías de GLP por entretechos o cielorrasos.</li><li>GLP bajo el nivel del terreno (subterráneos, zócalos).</li></ul>
+<h4>Pendiente (art. 46.6)</h4>
+<p>Para gas no seco: 1 cm cada 7 m, hacia los puntos de subida, medidor o artefacto.</p>
+<h4>Tuberías enterradas (art. 46.2)</h4>
+<ul><li>Cubierta mínima <b>60 cm</b>; <b>80 cm</b> bajo calles con tránsito vehicular.</li>
+<li>Cama de arena de al menos 5 cm en el fondo.</li><li>Relleno de al menos 15 cm sobre la tubería.</li>
+<li><b>Cinta señalizadora "GAS"</b> 25 cm sobre la tubería.</li><li>Prueba de hermeticidad <b>antes de tapar</b>.</li>
+<li>Cruce con otros servicios: 50 cm de separación.</li></ul>`},
+{t:"Distancias y llaves de paso",h:`
+<h4>Distancias a instalaciones eléctricas</h4>
+<div class="tw"><table><tr><th>Situación</th><th class="n">Distancia</th></tr>
+<tr><td>Paralela a canalización eléctrica</td><td class="n">30 cm</td></tr><tr><td>Cruce con canalización eléctrica</td><td class="n">10 cm</td></tr>
+<tr><td>Tableros, interruptores y enchufes</td><td class="n">50 cm</td></tr><tr><td>Medidor de gas y medidor eléctrico</td><td class="n">1 m (50 cm con tabique F-60)</td></tr></table></div>
+<h4>Válvulas y llaves (arts. 52 y 53)</h4>
+<ul><li>Una válvula de corte antes del medidor.</li><li>Una válvula de corte de acceso expedito antes de cada regulador.</li>
+<li><b>Una válvula de paso para cada artefacto</b>, a la vista y accesible.</li><li>No se ubican válvulas sobre cielorrasos, salvo las de corte exigidas para artefactos.</li></ul>`}],
+taller:`<h3>Taller: soldadura fuerte en cobre</h3>
+<ol><li>Corta, escaría y limpia un tubo de cobre tipo L de 1/2".</li>
+<li>Suelda con soldadura fuerte un codo y una te. Usa lentes y guantes, y ten un extintor cerca.</li>
+<li>Arma un tramo con una válvula de paso y un tapón.</li>
+<li>Guárdalo para la prueba de hermeticidad de la clase 10.</li>
+<li>Saca fotos de cada etapa para tu cuaderno de evidencias.</li></ol>`,
+quiz:[
+{q:"¿Qué tipo de cobre se usa hasta 140 kPa?",o:["Tipo M","Tipo L","Cualquiera"],a:1,e:"DS 66, art. 45.2.2: cobre tipo L."},
+{q:"Las uniones soldadas de cobre para gas deben ser:",o:["Soldadura blanda de estaño","Soldadura fuerte","Pegadas con adhesivo"],a:1,e:"Art. 45.2.6: soldadura fuerte."},
+{q:"Cubierta mínima de una tubería enterrada en jardín:",o:["30 cm","60 cm","1 m"],a:1,e:"60 cm; 80 cm bajo calles con tránsito."},
+{q:"¿Puede pasar una tubería de gas por el cielo de un dormitorio?",o:["Sí","No"],a:1,e:"Art. 46.5.4: prohibido."},
+{q:"Distancia mínima de una tubería de gas a un enchufe:",o:["10 cm","30 cm","50 cm"],a:2,e:"50 cm a tableros, interruptores y enchufes."}]},
+
+{n:5,w:1,d:"Día 5",t:"Medidores, reguladores y cilindros",k:"2 a 12 cilindros · patio ≥ 6 m²",
+pts:[
+{t:"Medidor y regulador",h:`
+<p>En gas natural el suministro llega por la red de la distribuidora hasta el <b>medidor</b>, que registra el consumo en m³.</p>
+<ul><li>Antes del medidor va una <b>válvula de corte</b> (art. 52.1.2).</li>
+<li>El regulador de servicio baja la presión de la red a la de consumo.</li>
+<li>Los nichos de medidores deben tener ventilación superior e inferior.</li>
+<li>Entre medidor de gas y medidor eléctrico: 1 m, o 50 cm con tabique F-60.</li>
+<li>El venteo del regulador no descarga en chimeneas ni conductos de evacuación (art. 55.1.5).</li></ul>
+<div class="idea">El medidor y el empalme son de la distribuidora. La instalación interior, que es tu responsabilidad, comienza a la salida del medidor o del regulador.</div>`},
+{t:"Cilindros de 45 kg",h:`
+<h4>Cantidad (art. 62.2)</h4>
+<p>Un equipo de cilindros tiene entre <b>2 y 12 cilindros</b>, incluidos los de reposición. El recambio lo hace personal de la empresa de gas o sus distribuidores.</p>
+<h4>Ubicación (art. 64)</h4>
+<ul><li>En <b>patios a cielo abierto</b>: al menos 6 m² para 2 cilindros, más 4 m² por cada par adicional.</li>
+<li>Prohibidos en locales bajo el nivel de la calle, sótanos, cajas de escala, pasillos, interiores de departamentos en altura, terrazas y balcones.</li></ul>
+<h4>Distancias y protección (arts. 65 y 66)</h4>
+<ul><li>Sumideros sin sifón: al menos 1,5 m hasta 4 cilindros, más 0,5 m por cada par adicional.</li>
+<li>Muro combustible: plancha no combustible y 2 cm libres.</li>
+<li><b>Gabinete</b> obligatorio con más de 4 cilindros o donde transite público: mínimo 1,5 m de alto, 0,5 m de fondo y 0,9 m de ancho para 2 cilindros; dos aberturas de 150 cm² por cilindro.</li>
+<li>Radier de hormigón parejo; base del cilindro a 5 cm del piso.</li></ul>`},
+{t:"Cálculo de la cantidad de cilindros",h:`
+<p>El DS 66, art. 63, calcula la cantidad por dos caminos y usa el mayor:</p>
+<ol><li><b>Por vaporización:</b> potencia total de los artefactos dividida por la razón de vaporización de un cilindro (tabla XVIII), que depende de la temperatura y de si el consumo es continuo o intermitente.</li>
+<li><b>Por consumo:</b> según el consumo diario de la tabla XVII.</li></ol>
+<p>La temperatura de cálculo es la mínima del mes más frío de la zona más 5 °C. El resultado se <b>duplica</b> para tener cilindros de reposición.</p>
+<h4>Ejemplo del método</h4>
+<code class="f">Potencia instalada: 36 kW
+Vaporización por cilindro (tabla XVIII): V kW
+Cilindros en uso = 36 / V
+Total = 2 × (cilindros en uso)</code>
+<p>Si V fuera 9 kW (valor ilustrativo), resultan 4 en uso y 8 en total. El valor real de V se toma de la tabla del DS 66 para tu zona y tipo de consumo.</p>
+<div class="warn">El gas licuado se vaporiza más lento con frío. Por eso en el sur se necesitan más cilindros para la misma potencia.</div>`},
+{t:"Gas natural y gas licuado: diferencias",h:`
+<div class="tw"><table><tr><th>Aspecto</th><th>Gas natural</th><th>Gas licuado</th></tr>
+<tr><td>Densidad</td><td>Más liviano que el aire</td><td>Más pesado que el aire</td></tr>
+<tr><td>Suministro</td><td>Red y medidor</td><td>Cilindros o estanque con regulador</td></tr>
+<tr><td>Bajo el nivel del terreno</td><td>Puede llegar a un primer subterráneo</td><td>Prohibido</td></tr>
+<tr><td>Tubería por entretechos</td><td>Según reglamento</td><td>Prohibido</td></tr>
+<tr><td>Poder calorífico</td><td>Menor</td><td>Mayor</td></tr></table></div>
+<p>Un artefacto preparado para un gas no sirve para el otro sin <b>conversión</b>: cambio de inyectores y ajuste de la regulación, hecho por personal habilitado.</p>`}],
+taller:`<h3>Taller: cilindros y quiz de la semana 1</h3>
+<ol><li>Observa una instalación de cilindros de 45 kg (en el colegio, tu casa o un vecino). Anota cuántos cilindros hay, si están a cielo abierto y las distancias a sumideros y ventanas.</li>
+<li>Indica qué no cumple el DS 66, si encuentras algo.</li>
+<li>Dibuja la planta del patio con los cilindros y las distancias.</li>
+<li>Rinde la autoevaluación de esta clase como cierre de la semana 1.</li></ol>`,
+quiz:[
+{q:"¿Cuántos cilindros puede tener como máximo un equipo?",o:["4","12","20"],a:1,e:"Art. 62.2: entre 2 y 12."},
+{q:"¿Se pueden instalar cilindros de 45 kg en un balcón?",o:["Sí","No"],a:1,e:"Art. 64.4: prohibido."},
+{q:"¿Cuándo es obligatorio el gabinete?",o:["Siempre","Con más de 4 cilindros o con tránsito de público","Nunca"],a:1,e:"Art. 66.1."},
+{q:"El resultado del cálculo de cilindros se:",o:["Divide por 2","Duplica por reposición","Deja igual"],a:1,e:"Art. 63.3.5."},
+{q:"¿Puede ir gas licuado en un subterráneo?",o:["Sí","No"],a:1,e:"Por su densidad, se acumularía."},
+{q:"Antes del medidor debe ir:",o:["Una válvula de corte","Un regulador doble","Nada"],a:0,e:"Art. 52.1.2."}]},
+
+{n:6,w:2,d:"Día 6",t:"Artefactos a gas",k:"A sin conducto · B con conducto · C estanco",
+pts:[
+{t:"Tipos de artefactos: A, B y C",h:`
+<div class="tw"><table><tr><th>Tipo</th><th>Cómo funciona</th><th>Ejemplos</th></tr>
+<tr><td><b>A</b></td><td>No se conecta a conducto: toma aire del recinto y los gases quedan en él</td><td>Cocinas, hornos, estufas con sensor de atmósfera</td></tr>
+<tr><td><b>B</b></td><td>Toma aire del recinto y evacúa los gases por un conducto al exterior</td><td>Calefont de tiro natural (Bs: con sensor antirretorno)</td></tr>
+<tr><td><b>C</b></td><td>Circuito estanco: toma aire del exterior y evacúa al exterior, sin contacto con el recinto</td><td>Calefont o caldera estanca (tiro forzado)</td></tr></table></div>
+<div class="idea">Mientras más depende del aire del recinto, más exigencias de ventilación y más prohibiciones de ubicación tiene.</div>`},
+{t:"El calefont",h:`
+<p>Calienta agua al paso. Es el artefacto con más accidentes por CO cuando está mal instalado.</p>
+<h4>Partes</h4>
+<ul><li>Quemador e intercambiador de calor.</li><li><b>Cortatiro</b> en la salida de gases.</li><li>Válvula de agua: no enciende si no circula agua.</li>
+<li>Detector de llama (termocupla o ionización): corta el gas si la llama se apaga.</li><li>Sensor de tiro en los Bs: apaga si los gases se devuelven.</li></ul>
+<h4>Reglas de instalación (DS 66, cap. IX)</h4>
+<ul><li>Siempre con conducto de evacuación al exterior.</li><li>No sobre otros artefactos a gas ni sobre artefactos sanitarios.</li>
+<li>Sobre superficie no combustible.</li><li>En compartimentos: exclusivos, con ventilación superior e inferior y sin uso como bodega.</li>
+<li>Distancia a paredes combustibles en armarios: 20 cm (5 cm si son no combustibles).</li>
+<li>Unión del conducto sellada con silicona de alta temperatura o equivalente.</li></ul>`},
+{t:"Conexión de cocinas y estufas",h:`
+<ul><li><b>Válvula de paso</b> en el mismo recinto, visible, de fácil acceso y a no más de 1,6 m del piso.</li>
+<li>Tubo metálico rígido: máximo 1 m.</li><li>Manguera flexible con cubierta metálica (tipo C): máximo <b>1 m para cocinas</b> y 2 m en otros casos. No puede atravesar muros, pisos ni cielos.</li>
+<li>Las tuberías multicapa no se usan como conexión a artefactos.</li>
+<li>Antes de agregar un artefacto, se recalcula la capacidad de la red.</li></ul>
+<h4>Estufas</h4>
+<ul><li>Las estufas tipo A requieren sensor de atmósfera (corta si baja el oxígeno).</li>
+<li>Recinto con volumen mínimo de 15 m³.</li><li>Zona de protección no combustible que sobresalga al menos 5 cm de la estufa si hay materiales combustibles.</li></ul>`},
+{t:"Dónde no se puede instalar",h:`
+<p>DS 66, cap. IX:</p>
+<ul><li><b>Dormitorios, baños, duchas</b> y bodegas de solventes: <b>prohibidos los tipo A y B</b>. Solo tipo C.</li>
+<li>Recintos a los que solo se accede por un dormitorio o baño: sin artefactos de tiro natural.</li>
+<li>Ambiente único (tipo loft): solo tipo A doméstico para cocinar; el resto debe ser estanco.</li>
+<li>Gas licuado: nunca en subterráneos, zócalos o niveles donde se acumule.</li></ul>
+<div class="warn">El calefont tipo B dentro del baño es una de las causas clásicas de intoxicación. Si lo ves en una inspección, la instalación no cumple.</div>`}],
+taller:`<h3>Taller: identificar artefactos</h3>
+<ol><li>Clasifica como A, B o C los artefactos de tu casa y del taller.</li>
+<li>Revisa un calefont: ubica cortatiro, conducto, válvula de paso y sus seguridades.</li>
+<li>Revisa la conexión de una cocina: tipo de flexible, largo y ubicación de la llave.</li>
+<li>Anota cualquier incumplimiento y cómo lo corregirías.</li></ol>`,
+quiz:[
+{q:"Un calefont de tiro natural es tipo:",o:["A","B","C"],a:1,e:"Toma aire del recinto y evacúa por conducto."},
+{q:"En un baño solo se puede instalar un artefacto tipo:",o:["A","B","C"],a:2,e:"Circuito estanco."},
+{q:"Largo máximo de la manguera flexible de una cocina:",o:["1 m","2 m","3 m"],a:0,e:"1 m para cocinas, 2 m en otros casos."},
+{q:"¿Qué hace la válvula de agua del calefont?",o:["Regula la presión del gas","Impide que encienda sin circulación de agua","Evacúa los gases"],a:1,e:"Sin flujo de agua no abre el gas al quemador."},
+{q:"Volumen mínimo de un recinto con estufa tipo A:",o:["8 m³","15 m³","30 m³"],a:1,e:"Mínimo 15 m³."}]},
+
+{n:7,w:2,d:"Día 7",t:"Ventilación y volumen de recintos",k:"Altura máxima de cálculo: 2,4 m",
+pts:[
+{t:"Para qué sirve la ventilación",h:`
+<p>La ventilación de un recinto con artefactos a gas cumple dos funciones:</p>
+<ol><li><b>Entregar aire para la combustión.</b> Sin aire suficiente, la combustión es incompleta y aparece CO.</li>
+<li><b>Diluir y sacar los productos de combustión</b> de los artefactos tipo A, que quedan en el recinto.</li></ol>
+<p>Se logra con <b>aberturas permanentes</b>: una inferior, por donde entra aire, y una superior, por donde sale el aire viciado.</p>
+<div class="idea">Los usuarios tienden a tapar las rejillas en invierno. Por eso el reglamento exige un letrero junto a ellas.</div>`},
+{t:"Volumen mínimo del recinto",h:`
+<p>Un recinto con artefactos tipo A necesita un volumen mínimo según la potencia instalada (tabla XX del DS 66).</p>
+<ul><li>Para <b>estufas tipo A</b>, el volumen mínimo es el que da la fórmula f.8, con un mínimo de <b>15 m³</b>.</li>
+<li>El volumen se calcula con una <b>altura máxima de 2,4 m</b>, aunque el cielo sea más alto.</li></ul>
+<h4>Ejemplo</h4>
+<code class="f">Cocina de 3 × 2,5 m, cielo a 2,6 m
+Altura de cálculo: 2,4 m
+V = 3 × 2,5 × 2,4 = 18 m³</code>
+<p>Ese volumen se compara con el que exige la tabla para la potencia de los artefactos del recinto. Si no alcanza, se debe cambiar de recinto, de artefacto o resolver con comunicación a otro recinto según el reglamento.</p>`},
+{t:"Rejillas: ubicación y exigencias",h:`
+<p>Las superficies libres mínimas de las aberturas están en las tablas XXI y XXII del DS 66, según la potencia y el tipo de artefacto.</p>
+<h4>Ubicación</h4>
+<ul><li>Inferior: a ras de piso. <b>Con gas licuado, su borde superior debe quedar a no más de 15 cm del piso</b>, para que el gas fugado, que es más pesado que el aire, pueda salir.</li>
+<li>Inferior: además, a al menos 40 cm de cualquier punto del sombrerete de artefactos tipo B forzado o C. Esta es una distancia horizontal al sombrerete, no una altura.</li>
+<li>Superior: en la parte alta, a al menos 40 cm de salidas tipo B o C y a 60 cm del sombrerete de un B de tiro natural.</li>
+<li>Con gas licuado, la abertura inferior es clave: el gas fugado se acumula abajo. Una rejilla a 40 cm del piso dejaría una capa de gas atrapada bajo ella.</li></ul>
+<h4>Exigencias</h4>
+<ul><li>Malla de al menos 6 mm o celosía.</li><li>El rebaje de la puerta <b>no</b> cuenta como abertura.</li>
+<li>Conductos de ventilación de más de 3 m: sección 50% mayor.</li>
+<li>Letrero obligatorio: <b>"Por su protección no tapar esta ventilación"</b>.</li></ul>`},
+{t:"Casos especiales",h:`
+<ul><li><b>Campana</b> de cocina: sección libre mínima de 100 cm².</li>
+<li><b>Extractor</b> mecánico: 80 cm².</li>
+<li><b>Patios de ventilación</b> menores de 3 m²: abertura de al menos 300 cm².</li>
+<li>Prohibido conectar extractores mecánicos a conductos colectivos con artefactos a gas (art. 83.2).</li></ul>
+<div class="warn">Un extractor potente en una cocina cerrada puede invertir el tiro del calefont y devolver los gases al recinto. Siempre revisa ambos juntos.</div>`}],
+taller:`<h3>Taller: ventilación de una cocina</h3>
+<ol><li>Mide una cocina real: largo, ancho y alto. Calcula el volumen con altura máxima de 2,4 m.</li>
+<li>Suma la potencia de sus artefactos a gas.</li>
+<li>Ubica las rejillas existentes, mide su tamaño útil y verifica la malla y el letrero.</li>
+<li>Indica si hay campana o extractor y si podría afectar el tiro del calefont.</li></ol>`,
+quiz:[
+{q:"Una cocina de 4 × 3 m con cielo a 2,7 m tiene un volumen de cálculo de:",o:["32,4 m³","28,8 m³","12 m³"],a:1,e:"4 × 3 × 2,4 = 28,8 m³."},
+{q:"¿El rebaje de la puerta cuenta como ventilación?",o:["Sí","No"],a:1,e:"No se considera abertura."},
+{q:"Con gas licuado, la abertura más importante para una fuga es la:",o:["Superior","Inferior"],a:1,e:"El GLP se acumula abajo."},
+{q:"Con gas licuado, ¿a qué altura debe quedar la ventilación inferior?",o:["Su borde superior a no más de 15 cm del piso","A 40 cm del piso","A cualquier altura"],a:0,e:"Debe quedar a ras de piso para evacuar el gas, que es más pesado que el aire."},
+{q:"Malla mínima de una rejilla:",o:["1 mm","6 mm","20 mm"],a:1,e:"Al menos 6 mm o celosía."},
+{q:"Un conducto de ventilación de 4 m debe tener:",o:["La misma sección","Sección 50% mayor"],a:1,e:"Sobre 3 m, 50% más."}]},
+
+{n:8,w:2,d:"Día 8",t:"Evacuación de gases",k:"Tramo vertical ≥ 2 diámetros",
+pts:[
+{t:"Conducto individual de tiro natural",h:`
+<p>Los artefactos tipo B, como el calefont, evacúan sus gases por un conducto que funciona por <b>tiro natural</b>: los gases calientes suben solos.</p>
+<h4>Reglas (DS 66, art. 81)</h4>
+<ul><li>Tramo recto vertical inicial de al menos <b>2 veces el diámetro</b> del conducto, desde el collarín hasta la primera curva.</li>
+<li>Pendiente siempre ascendente; desviación máxima de 10° respecto de la vertical en trazados verticales.</li>
+<li>Solo un cambio de dirección.</li>
+<li>Diámetro: el del fabricante, sin ser menor que la tabla XXXIII. En conductos verticales, sección libre mínima de 126 cm², salvo que el fabricante indique menos.</li>
+<li>Solo se conectan artefactos tipo B con cortatiro y sensor antirretorno (Bs).</li></ul>`},
+{t:"Materiales y separaciones",h:`
+<ul><li>Material no combustible, no quebradizo, liso por dentro y resistente a la corrosión.</li>
+<li>Debe resistir hasta 300 °C.</li>
+<li>Acero cincado: espesor mínimo 0,8 mm, largo máximo 10 m y fácil recambio.</li>
+<li>Separación de al menos 15 cm de elementos combustibles; 2 cm si se interpone material no combustible.</li>
+<li>Punto de muestreo de 9 mm a al menos dos diámetros del collarín, para medir gases.</li>
+<li>Evitar la corrosión galvánica entre metales distintos.</li></ul>`},
+{t:"Terminales y sombreretes",h:`
+<p>El <b>sombrerete</b> dispersa los gases, reduce el efecto del viento e impide la entrada de lluvia, basura o animales (art. 80.1.1).</p>
+<h4>Descarga en fachada</h4>
+<ul><li>El conducto sobresale del muro hasta 10 cm, con sombrerete para fachada.</li>
+<li>Salida a no menos de 2,20 m del suelo exterior si hay tránsito de personas (art. 82.2).</li></ul>
+<h4>Descarga en techumbre</h4>
+<p>Las alturas y distancias respecto de caballetes, muros y antepechos están en las figuras 32 a 36 del DS 66, con referencias de 3 m. Revísalas en el capítulo X.</p>`},
+{t:"Revisión del tiro",h:`
+<p>Con el calefont funcionando unos minutos, se acerca una llama pequeña o humo junto al cortatiro:</p>
+<ul><li><b>Bien:</b> la llama o el humo son aspirados hacia el conducto.</li>
+<li><b>Mal (revoco):</b> salen hacia el recinto. Hay que revisar obstrucciones, largo y pendiente del conducto, ventilación o extractores que inviertan el tiro.</li></ul>
+<p>Si hay analizador de gases, se mide el CO en el punto de muestreo.</p>
+<div class="warn">Un calefont con revoco no se deja en servicio.</div>`}],
+taller:`<h3>Taller: conducto de un calefont</h3>
+<ol><li>Revisa el conducto de un calefont real: material, diámetro, tramo vertical inicial, pendiente y cambios de dirección.</li>
+<li>Verifica el sombrerete y la altura de salida.</li>
+<li>Con supervisión, haz la prueba de tiro en el cortatiro.</li>
+<li>Dibuja el trazado del conducto con sus medidas.</li></ol>`,
+quiz:[
+{q:"Un conducto de 10 cm de diámetro necesita un tramo vertical inicial de:",o:["10 cm","20 cm","1 m"],a:1,e:"Al menos 2 veces el diámetro."},
+{q:"¿Cuántos cambios de dirección se permiten?",o:["Uno","Tres","Ilimitados"],a:0,e:"Art. 81.2.2."},
+{q:"Separación de un conducto a madera sin protección:",o:["2 cm","15 cm","50 cm"],a:1,e:"15 cm; 2 cm con material no combustible interpuesto."},
+{q:"Si el humo sale del cortatiro hacia el recinto, hay:",o:["Buen tiro","Revoco"],a:1,e:"Los gases se devuelven."},
+{q:"Altura mínima de una salida en fachada con tránsito de personas:",o:["1,5 m","2,2 m","3 m"],a:1,e:"Art. 82.2: 2,20 m."}]},
+
+{n:9,w:2,d:"Día 9",t:"Cálculo de red y planos",k:"L cálculo = L real + L equivalente",
+pts:[
+{t:"Consumo por artefacto y por tramo",h:`
+<p>Cada tramo de la red se calcula con el caudal de los artefactos que alimenta.</p>
+<code class="f">Q (m³/h) = Potencia (kW) × 860 / Poder calorífico (kcal/m³)</code>
+<h4>Ejemplo con gas natural (≈ 9.300 kcal/m³)</h4>
+<div class="tw"><table><tr><th>Artefacto</th><th class="n">kW</th><th class="n">Caudal</th></tr>
+<tr><td>Calefont</td><td class="n">20</td><td class="n">1,85 m³/h</td></tr><tr><td>Cocina</td><td class="n">8</td><td class="n">0,74 m³/h</td></tr>
+<tr><td>Estufa</td><td class="n">4</td><td class="n">0,37 m³/h</td></tr><tr><th>Total</th><th class="n">32</th><th class="n">2,96 m³/h</th></tr></table></div>
+<p>En una vivienda se suma todo. En edificios se aplican factores de simultaneidad (Anexo 3 del DS 66).</p>`},
+{t:"Longitud de cálculo",h:`
+<p>Los accesorios (codos, tes, válvulas) producen pérdidas como si la tubería fuera más larga. Por eso:</p>
+<code class="f">L cálculo = L real + Σ L equivalentes</code>
+<p>Las longitudes equivalentes de cada accesorio están en el Anexo 2 del DS 66.</p>
+<div class="idea">Es el mismo concepto que usas en agua potable para pérdidas singulares: el razonamiento se traslada directo.</div>`},
+{t:"Selección de diámetros",h:`
+<p>El Anexo 1 del DS 66 entrega los caudales máximos de cobre tipo L, de 3/8" a 1 1/4", para gas natural y gas licuado, según la longitud.</p>
+<ol><li>Divide la red en tramos (A-B, B-C...).</li><li>Calcula el caudal de cada tramo.</li><li>Calcula la longitud de cálculo hasta el artefacto más lejano.</li>
+<li>En la tabla, busca el diámetro cuyo caudal máximo sea mayor o igual al del tramo para esa longitud.</li>
+<li>Verifica que la pérdida de carga no supere la admisible. Para gas natural el anexo indica 1,0 mbar.</li></ol>
+<p>Como el gas licuado tiene mayor poder calorífico, para la misma potencia circula menos caudal y los diámetros suelen ser menores.</p>`},
+{t:"Planos de gas",h:`
+<p>El proyecto de una instalación de gas incluye:</p>
+<ul><li><b>Planta</b> con recorrido de tuberías, ubicación de medidor o cilindros, llaves, artefactos, rejillas y conductos.</li>
+<li><b>Isométrico</b> con tramos identificados, diámetros y longitudes.</li>
+<li><b>Cuadro de artefactos y cálculo:</b> potencia, caudal, tramo, diámetro y pérdida.</li>
+<li>Detalles de ventilación y evacuación.</li></ul>
+<div class="idea">Aquí tienes ventaja por tu trabajo en CONTACT: el isométrico de gas se dibuja igual que el de agua potable, con otra simbología y otras tablas.</div>`}],
+taller:`<h3>Taller: calcular una red</h3>
+<ol><li>Toma una vivienda con calefont, cocina y una estufa.</li><li>Dibuja la planta y el isométrico con los tramos.</li>
+<li>Calcula el caudal de cada tramo.</li><li>Calcula la longitud de cálculo con el Anexo 2.</li>
+<li>Elige el diámetro de cada tramo con el Anexo 1 del DS 66.</li></ol>
+<p>Me puedes enviar el cálculo y lo reviso con criterio de evaluador.</p>`,
+quiz:[
+{q:"Un artefacto de 10 kW con gas natural (9.300 kcal/m³) consume aprox.:",o:["0,92 m³/h","1,5 m³/h","9,3 m³/h"],a:0,e:"10 × 860 / 9.300 = 0,92 m³/h."},
+{q:"¿Qué incluye la longitud de cálculo?",o:["Solo la tubería recta","Tubería real más equivalentes de accesorios"],a:1,e:"Anexo 2 del DS 66."},
+{q:"Si la pérdida de carga supera la admisible:",o:["Se acepta igual","Se sube el diámetro"],a:1,e:"Mayor diámetro, menor pérdida."},
+{q:"¿Con qué gas suelen resultar menores los diámetros para la misma potencia?",o:["Gas natural","Gas licuado"],a:1,e:"Por su mayor poder calorífico circula menos caudal."}]},
+
+{n:10,w:2,d:"Día 10",t:"Pruebas, declaración y simulacro",k:"Sello verde cada 2 años",
+pts:[
+{t:"Prueba de hermeticidad",h:`
+<p>Comprueba que la instalación no tenga fugas. Se hace siempre antes de la puesta en servicio, y en tuberías enterradas antes de tapar la zanja (art. 46.2.2).</p>
+<h4>Procedimiento general</h4>
+<ol><li>Desconectar o aislar los artefactos y tapar los arranques libres.</li>
+<li>Conectar el manómetro en una te de prueba.</li>
+<li>Presurizar con aire o gas inerte a la presión de prueba.</li>
+<li>Esperar que la presión se estabilice.</li>
+<li>Mantener el tiempo exigido y verificar que la presión <b>no baje</b>.</li>
+<li>Si baja, buscar la fuga con agua jabonosa, corregir y repetir.</li>
+<li>Registrar el resultado (fecha, presión, tiempo, instrumento).</li></ol>
+<div class="warn">La presión y el tiempo de prueba los fija el procedimiento vigente de la SEC para cada tipo de instalación. Pide los valores exactos al organismo evaluador y apréndelos tal cual.</div>`},
+{t:"Declaración TC6 y puesta en servicio",h:`
+<ul><li>Las instalaciones nuevas se declaran ante la SEC <b>antes</b> de su puesta en servicio (art. 86). La declaración se hace en línea.</li>
+<li>También se declaran las modificaciones de instalaciones declaradas.</li>
+<li>La inscripción no es una aprobación del proyecto.</li></ul>
+<h4>Inspección reducida de la distribuidora (art. 87)</h4>
+<ul><li>Ausencia de fugas en la red interior.</li><li>Arranques sin artefacto sellados.</li><li>Conducto colectivo vertical y sin obstrucciones.</li>
+<li>Artefactos conectados a la red y a la evacuación.</li><li>Aberturas de ventilación en los recintos con artefactos.</li></ul>
+<p>Aprobada la inspección, la distribuidora abre la válvula general y purga, y deja cerradas, bloqueadas y selladas las válvulas de artefactos pendientes.</p>`},
+{t:"Sellos e instalaciones en uso",h:`
+<p>Las instalaciones interiores de gas tienen una <b>inspección periódica cada dos años</b>, hecha por un organismo de certificación autorizado por la SEC. El resultado es un sello:</p>
+<ul><li><b>Verde:</b> la instalación cumple.</li><li><b>Amarillo:</b> tiene defectos que deben corregirse en un plazo.</li><li><b>Rojo:</b> tiene defectos graves; se suspende el suministro hasta corregir.</li></ul>
+<p>Como instalador clase 3, muchas veces te llamarán para <b>corregir los defectos</b> de una instalación con sello amarillo o rojo: rejillas tapadas, calefont sin conducto o en el baño, conexiones vencidas.</p>`},
+{t:"Simulacro y día de la evaluación",h:`
+<h4>Pauta práctica</h4>
+<ul><li><b>Seguridad:</b> cierre y bloqueo de llave, ventilación, sin fuentes de ignición.</li>
+<li><b>Ejecución:</b> corte, escariado, soldadura fuerte, llaves de paso, conexión de artefacto con largos correctos.</li>
+<li><b>Verificación:</b> prueba de hermeticidad, búsqueda de fugas con agua jabonosa, revisión de ventilación y conducto.</li>
+<li><b>Cierre:</b> orden y explicación al evaluador.</li></ul>
+<h4>Ficha de repaso</h4>
+<code class="f">Baja presión < 5 kPa       Clase 3: tipo 3 ≤ 60 kW
+1 kW = 860 kcal/h          Q = kW × 860 / PC
+Cobre L ≤ 140 kPa          Uniones: soldadura fuerte
+Enterrada 60 cm (80 calle)  Cinta GAS a 25 cm
+Cilindros: 2 a 12           Patio ≥ 6 m² para 2
+Flexible cocina ≤ 1 m       Válvula ≤ 1,6 m, visible
+Altura cálculo ≤ 2,4 m      Estufa A: ≥ 15 m³
+Tramo vertical ≥ 2 D        Salida fachada ≥ 2,2 m
+Sello: cada 2 años</code>
+<p>Lleva cédula, ClaveÚnica activa, EPP (lentes, guantes), herramientas propias si lo permiten y calculadora.</p>`}],
+taller:`<h3>Simulacro práctico</h3>
+<ol><li>Con el tramo soldado de la clase 4, haz la prueba de hermeticidad completa con manómetro.</li>
+<li>Provoca una fuga pequeña (unión floja) y encuéntrala con agua jabonosa.</li>
+<li>Pide a un colega que te observe con la pauta de cotejo.</li>
+<li>Rinde el simulacro teórico de la pestaña siguiente. Meta: 70% o más.</li></ol>`,
+quiz:[
+{q:"¿Cuándo se hace la prueba de hermeticidad de una tubería enterrada?",o:["Después de tapar","Antes de tapar"],a:1,e:"Art. 46.2.2."},
+{q:"¿Cada cuánto es la inspección periódica de gas?",o:["Cada año","Cada 2 años","Cada 5 años"],a:1,e:"Cada dos años."},
+{q:"Un sello rojo significa:",o:["Cumple","Defectos graves y suspensión del suministro"],a:1,e:"Hay que corregir antes de volver a dar gas."},
+{q:"El TC6 se presenta:",o:["Antes de la puesta en servicio","Un año después"],a:0,e:"Art. 86."},
+{q:"Un calefont tipo B en el baño:",o:["Cumple si hay rejilla","No cumple"],a:1,e:"En baños solo tipo C."},
+{q:"¿Qué soldadura se usa en cobre para gas?",o:["Blanda","Fuerte"],a:1,e:"Art. 45.2.6."},
+{q:"Volumen de cálculo de una cocina de 3 × 3 m con cielo a 2,5 m:",o:["22,5 m³","21,6 m³"],a:1,e:"3 × 3 × 2,4 = 21,6 m³."},
+{q:"Clase 3 puede ejecutar una vivienda de:",o:["55 kW en baja presión","70 kW en baja presión","Cualquier potencia en media presión"],a:0,e:"Tipo 3: baja presión hasta 60 kW."},
+{q:"¿Puede ir una manguera flexible a través de un muro?",o:["Sí","No"],a:1,e:"No puede atravesar muros, pisos ni cielos."},
+{q:"Distancia de sumidero sin sifón a 2 cilindros de 45 kg:",o:["0,5 m","1,5 m","5 m"],a:1,e:"1,5 m hasta 4 cilindros."},
+{q:"Tramo vertical inicial con conducto de 12 cm:",o:["12 cm","24 cm"],a:1,e:"2 × 12 = 24 cm."},
+{q:"¿Qué detecta el sensor Bs del calefont?",o:["Falta de agua","Revoco de gases","Sobrepresión"],a:1,e:"Apaga si los gases se devuelven."},
+{q:"La licencia clase 3 por competencias se renueva cada:",o:["2 años","5 años","Es indefinida"],a:1,e:"Cada cinco años."},
+{q:"Con olor a gas en una casa, lo primero es:",o:["Encender la luz para ver","No accionar nada eléctrico, ventilar y cerrar la llave"],a:1,e:"Evitar chispas."},
+{q:"Una rejilla debe llevar el letrero:",o:["Peligro gas","Por su protección no tapar esta ventilación"],a:1,e:"Exigencia del DS 66."}]}
+];
+
+/* ---------- Estado ---------- */
+const KEY="pizarra-sec-gas3-v1";
+let done=new Set();
+try{const s=JSON.parse(localStorage.getItem(KEY)||"[]");if(Array.isArray(s))done=new Set(s)}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify([...done]))}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+const $=id=>document.getElementById(id);
+
+function tabsOf(c){return [...c.pts.map((p,i)=>{const fg=FIGS[c.n+"."+(i+1)];const k=c.n+"."+(i+1);return {key:"Tema "+(i+1),t:p.t,html:`<h3>${esc(p.t)}</h3>`+(fg?`<figure class="ref">${fg.s}<figcaption>${fg.c}</figcaption></figure>`:"")+realHTML(k)+`<div class="prose">${p.h}</div>`}}),
+  {key:"Práctica",t:"Taller",extra:true,html:`<div class="prose">${c.taller}</div>`},
+  {key:"Prueba",t:"Autoevaluación",extra:true,quiz:true}]}
+
+/* ---------- Pizarra ---------- */
+function renderBoard(){
+  document.querySelectorAll(".card").forEach(e=>e.remove());
+  const nxt=clases.find(c=>!done.has(c.n));
+  clases.forEach(c=>{
+    const el=document.createElement("article");
+    el.className="card"+(done.has(c.n)?" done":"")+(nxt&&nxt.n===c.n?" now":"");
+    el.innerHTML=`<div class="tag"><span class="n">${c.n}</span><span class="d">${esc(c.d)}</span></div>
+      <div class="cbody">
+        <div class="top"><div><span class="now-badge">En curso</span>
+          <button class="title-btn" data-open="${c.n}" data-tab="0"><h3>${esc(c.t)}</h3></button></div>
+          <label class="chk" for="c${c.n}"><input type="checkbox" id="c${c.n}" ${done.has(c.n)?"checked":""}>Lista</label></div>
+        <ul class="points">${c.pts.map((p,i)=>`<li><button class="pt" data-open="${c.n}" data-tab="${i}"><span class="k">${c.n}.${i+1}</span><span class="t">${esc(p.t)}</span><span class="go" aria-hidden="true">›</span></button></li>`).join("")}</ul>
+        <div class="foot"><span class="chip key">${esc(c.k)}</span>
+          <button class="chip act" data-open="${c.n}" data-tab="${c.pts.length}">Taller</button>
+          <button class="chip act" data-open="${c.n}" data-tab="${c.pts.length+1}">Autoevaluación</button></div>
+      </div>`;
+    el.querySelector("input").addEventListener("change",ev=>{ev.target.checked?done.add(c.n):done.delete(c.n);save();renderBoard()});
+    $("w"+c.w).appendChild(el);
+  });
+  $("count").textContent=done.size+"/10";
+  $("fill").style.width=(done.size*10)+"%";document.documentElement.style.setProperty("--prog",done.size/10);
+  $("next").innerHTML=nxt?`Siguiente: <b>Clase ${nxt.n}</b> · ${esc(nxt.t)}`:"<b>Las 10 clases listas.</b> A rendir la evaluación.";
+}
+
+/* ---------- Clase ---------- */
+let cur=null,curTab=0;
+function openLesson(n,tab){
+  const c=clases.find(x=>x.n===n);if(!c)return;
+  cur=c;curTab=Math.max(0,Math.min(tab||0,c.pts.length+1));
+  $("board").hidden=true;$("hdr").hidden=true;$("lesson").hidden=false;
+  const tabs=tabsOf(c);
+  $("lesson").innerHTML=`<button class="back" id="back">‹ Volver a la pizarra</button>
+    <div class="lhead"><div><div class="eyebrow">Clase ${c.n} · ${esc(c.d)} · ${c.w===1?"Semana 1":"Semana 2"}</div><h2>${esc(c.t)}</h2></div>
+      <label class="chk" for="lc"><input type="checkbox" id="lc" ${done.has(c.n)?"checked":""}>Marcar clase como lista</label></div>
+    <div class="tabs" role="tablist">${tabs.map((t,i)=>`<button class="tab${t.extra?" extra":""}" role="tab" id="tab${i}" aria-selected="${i===curTab}" data-i="${i}"><span class="k">${t.key}</span>${esc(t.t)}</button>`).join("")}</div>
+    <section class="panel" role="tabpanel" id="panel"></section>`;
+  $("back").onclick=closeLesson;
+  $("lc").onchange=e=>{e.target.checked?done.add(c.n):done.delete(c.n);save()};
+  document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>showTab(+b.dataset.i));
+  showTab(curTab);
+  window.scrollTo(0,0);
+}
+function showTab(i){
+  const c=cur,tabs=tabsOf(c);curTab=i;
+  document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",+b.dataset.i===i));
+  const t=tabs[i];
+  const prev=i>0?tabs[i-1]:null,next=i<tabs.length-1?tabs[i+1]:null;
+  const nextClass=clases.find(x=>x.n===c.n+1);
+  $("panel").innerHTML=(t.quiz?quizHTML(c):t.html)+`<div class="pnav">
+    <button id="pv" ${prev?"":"disabled"}>‹ ${prev?esc(prev.t):"Inicio"}</button>
+    ${next?`<button id="nx">${esc(next.t)} ›</button>`:(nextClass?`<button id="nc">Clase ${nextClass.n}: ${esc(nextClass.t)} ›</button>`:`<button id="bk">Volver a la pizarra ›</button>`)}</div>`;
+  if(prev)$("pv").onclick=()=>showTab(i-1);
+  if(next)$("nx").onclick=()=>showTab(i+1);
+  if($("nc"))$("nc").onclick=()=>openLesson(nextClass.n,0);
+  if($("bk"))$("bk").onclick=closeLesson;
+  if(t.quiz)wireQuiz(c);
+  const tb=$("tab"+i);if(tb)tb.scrollIntoView({block:"nearest",inline:"nearest"});
+}
+function quizHTML(c){
+  return `<h3>Autoevaluación clase ${c.n}</h3><p class="score" id="score">0 de ${c.quiz.length} respondidas</p>`+
+  c.quiz.map((q,qi)=>`<div class="q" data-q="${qi}"><p class="qt">${qi+1}. ${esc(q.q)}</p><div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-o="${oi}">${esc(o)}</button>`).join("")}</div><div class="exp" hidden></div></div>`).join("")+
+  `<button class="back" id="rq">Reiniciar autoevaluación</button>`;
+}
+function wireQuiz(c){
+  let answered=0,right=0;
+  document.querySelectorAll(".q").forEach(div=>{
+    const q=c.quiz[+div.dataset.q];
+    div.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+      if(div.dataset.done)return;div.dataset.done=1;answered++;
+      const oi=+b.dataset.o,ok=oi===q.a;if(ok)right++;
+      div.querySelectorAll(".opt").forEach(x=>{const k=+x.dataset.o;if(k===q.a)x.classList.add("right");else if(k===oi)x.classList.add("wrong")});
+      const ex=div.querySelector(".exp");ex.hidden=false;ex.innerHTML=(ok?"<b>Correcto.</b> ":"<b>No es correcta.</b> ")+esc(q.e);
+      const pct=Math.round(right/c.quiz.length*100);
+      $("score").textContent=answered<c.quiz.length?`${answered} de ${c.quiz.length} respondidas · ${right} correctas`:`Resultado: ${right} de ${c.quiz.length} (${pct}%) ${pct>=70?"· Aprobado":"· Repasa los temas fallados"}`;
+    });
+  });
+  $("rq").onclick=()=>showTab(curTab);
+}
+function closeLesson(){
+  $("lesson").hidden=true;$("board").hidden=false;$("hdr").hidden=false;cur=null;renderBoard();
+  try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-open]");if(!b)return;
+  openLesson(+b.dataset.open,+b.dataset.tab);
+});
+renderBoard();
+const m=(location.hash||"").match(/^#c(\d+)(?:-(\d+))?$/);
+if(m)openLesson(+m[1],m[2]?+m[2]-1:0);
+</script>
+
+</body>
+</html>

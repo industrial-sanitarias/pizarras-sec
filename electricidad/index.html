@@ -1,0 +1,1505 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Pizarra de estudio para la licencia SEC de instalador eléctrico clase D.">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>SEC - ELECTR. CLASE D</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: plano técnico con grilla. Vista pizarra (dos carriles de tarjetas) y vista clase (pestañas por tema, taller y autoevaluación) */
+:root{
+  --bg:#eef2f3; --grid:#dde5e8; --paper:#ffffff; --ink:#16232a; --muted:#56666e; --line:#c4d0d5;
+  --accent:#1f5f8b; --accent-soft:#dbe8f1; --live:#b86e05; --live-soft:#fbecd3;
+  --ok:#2f7d4f; --ok-soft:#dcefe3; --bad:#b03a2e; --bad-soft:#f7dedb;
+  --c-az:#2a6db5; --c-ro:#c0392b; --c-ve:#2e8b4a; --c-am:#e0b100; --c-cu:#c8792f; --c-bl:#fbfbfb;
+  --f-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f171b;--grid:#172328;--paper:#152126;--ink:#e3ecef;--muted:#97a9b1;--line:#2b3b42;
+  --accent:#72b2de;--accent-soft:#1b3342;--live:#f0a83a;--live-soft:#3a2a12;
+  --ok:#6cc893;--ok-soft:#173326;--bad:#f08a7e;--bad-soft:#3d1d1a;--c-az:#5b9be0;--c-ro:#e5675a;--c-ve:#55b673;--c-am:#e8c33a;--c-cu:#d68b45;--c-bl:#e9eef0;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f171b;--grid:#172328;--paper:#152126;--ink:#e3ecef;--muted:#97a9b1;--line:#2b3b42;
+  --accent:#72b2de;--accent-soft:#1b3342;--live:#f0a83a;--live-soft:#3a2a12;
+  --ok:#6cc893;--ok-soft:#173326;--bad:#f08a7e;--bad-soft:#3d1d1a;--c-az:#5b9be0;--c-ro:#e5675a;--c-ve:#55b673;--c-am:#e8c33a;--c-cu:#d68b45;--c-bl:#e9eef0;color-scheme:dark}
+
+body{background-color:var(--bg);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding-block:26px 56px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:22px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* Cabecera */
+header{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;justify-content:space-between}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(34px,6vw,52px);line-height:1;margin:6px 0 8px;text-wrap:balance}
+.sub{color:var(--muted);max-width:62ch;margin:0}
+.progress{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:14px 16px;flex:0 1 300px;min-width:230px}
+.progress .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.progress .big{font-family:var(--f-display);font-size:34px;font-weight:700;font-variant-numeric:tabular-nums}
+.bar{height:10px;border-radius:5px;background:var(--accent-soft);overflow:hidden;margin-top:8px}
+.bar span{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.next{font-size:13px;color:var(--muted);margin-top:8px}
+.next b{color:var(--ink)}
+
+/* Pizarra */
+.lanes{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media (max-width:860px){.lanes{grid-template-columns:1fr}}
+.lane{display:flex;flex-direction:column;gap:14px;min-width:0}
+.lane h2{font-family:var(--f-display);font-weight:600;font-size:24px;margin:0;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.lane h2 small{font-family:var(--f-mono);font-size:12px;font-weight:400;color:var(--muted)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:6px;display:grid;grid-template-columns:62px 1fr;min-width:0;overflow:hidden}
+.card.done{background:var(--ok-soft)}
+.card.now{border-color:var(--live);box-shadow:0 0 0 1px var(--live)}
+.tag{border-right:1px dashed var(--line);display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 4px}
+.tag .n{font-family:var(--f-display);font-size:34px;font-weight:700;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.card.done .tag .n{color:var(--ok)}
+.tag .d{font-family:var(--f-mono);font-size:11px;color:var(--muted);text-align:center;line-height:1.3}
+.cbody{padding:12px 14px 14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.top{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
+.now-badge{display:none;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--live)}
+.card.now .now-badge{display:block}
+.title-btn{background:none;border:0;padding:0;text-align:left;cursor:pointer}
+.title-btn h3{font-family:var(--f-display);font-weight:600;font-size:21px;line-height:1.15;margin:0;text-wrap:balance}
+.title-btn:hover h3{color:var(--accent)}
+.chk{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);cursor:pointer;white-space:nowrap;user-select:none}
+.chk input{width:18px;height:18px;accent-color:var(--ok);cursor:pointer}
+.points{display:flex;flex-direction:column;gap:2px;margin:0;padding:0;list-style:none}
+.pt{width:100%;display:flex;gap:8px;align-items:baseline;text-align:left;background:none;border:0;border-radius:4px;padding:5px 6px;cursor:pointer}
+.pt:hover{background:var(--accent-soft)}
+.pt .k{font-family:var(--f-mono);font-size:11.5px;color:var(--accent);flex:0 0 auto}
+.pt .t{flex:1}
+.pt .go{color:var(--muted);font-size:13px}
+.foot{display:flex;flex-wrap:wrap;gap:8px;padding-top:2px}
+.chip{font-size:12.5px;border-radius:4px;padding:3px 8px;border:1px solid var(--line);background:var(--bg)}
+.chip.key{font-family:var(--f-mono);background:var(--accent-soft);border-color:transparent}
+.chip.act{cursor:pointer}
+.chip.act:hover{border-color:var(--accent)}
+.legend{font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:16px;border-top:1px solid var(--line);padding-top:14px}
+
+/* Vista clase */
+#lesson{display:flex;flex-direction:column;gap:16px}
+.back{align-self:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:6px 12px;cursor:pointer;font-size:14px}
+.back:hover{border-color:var(--accent)}
+.lhead{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-end;justify-content:space-between}
+.lhead h2{font-family:var(--f-display);font-weight:700;font-size:clamp(30px,5vw,44px);line-height:1.02;margin:4px 0 0;text-wrap:balance}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.tab{flex:0 0 auto;background:var(--paper);border:1px solid var(--line);border-radius:4px 4px 0 0;border-bottom:3px solid transparent;padding:8px 12px;cursor:pointer;font-size:14px;max-width:240px;text-align:left;line-height:1.25}
+.tab .k{display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.tab[aria-selected="true"]{border-bottom-color:var(--accent);background:var(--accent-soft)}
+.tab.extra .k{color:var(--live)}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:22px clamp(16px,4vw,36px) 26px;min-width:0}
+.panel h3{font-family:var(--f-display);font-weight:600;font-size:28px;margin:0 0 12px;line-height:1.1;text-wrap:balance}
+.panel h4{font-family:var(--f-display);font-weight:600;font-size:20px;margin:22px 0 6px}
+.prose{max-width:74ch}
+.prose p{margin:0 0 12px}
+.prose ul,.prose ol{margin:0 0 12px;padding-left:22px}
+.prose li{margin-bottom:4px}
+.prose b{font-weight:600}
+.f{font-family:var(--f-mono);background:var(--accent-soft);border-radius:4px;padding:10px 14px;margin:0 0 12px;display:block;font-size:15px;overflow-x:auto;white-space:pre}
+.idea{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 4px 4px 0;margin:0 0 12px}
+.warn{border-left:4px solid var(--live);background:var(--live-soft);padding:10px 14px;border-radius:0 4px 4px 0;margin:0 0 12px}
+.norm{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.tw{overflow-x:auto;margin:0 0 14px}
+table{border-collapse:collapse;font-size:14px;min-width:100%}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--bg);font-weight:600}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+details{border:1px solid var(--line);border-radius:4px;padding:8px 12px;margin:0 0 8px;background:var(--bg)}
+details summary{cursor:pointer;font-weight:500}
+details[open] summary{margin-bottom:6px}
+.fig{overflow-x:auto;margin:4px 0 14px}
+.fig svg{display:block;max-width:100%;height:auto}
+.fig svg text{fill:var(--ink);font-family:var(--f-mono);font-size:12px}
+.fig .s{stroke:var(--ink);fill:none;stroke-width:1.6}
+.fig .ph{stroke:#c0392b;fill:none;stroke-width:2}
+.fig .nu{stroke:var(--muted);fill:none;stroke-width:2;stroke-dasharray:5 4}
+.fig .tr{stroke:var(--accent);fill:none;stroke-width:2}
+.fig .box{fill:var(--bg);stroke:var(--ink);stroke-width:1.4}
+.pnav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
+.pnav button{background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:8px 12px;cursor:pointer;font-size:14px;max-width:48%}
+.pnav button:hover{border-color:var(--accent)}
+.pnav button[disabled]{opacity:.4;cursor:default}
+
+/* Quiz */
+.q{border:1px solid var(--line);border-radius:6px;padding:14px;margin-bottom:12px;background:var(--bg)}
+.q p.qt{font-weight:600;margin:0 0 10px}
+.opts{display:flex;flex-direction:column;gap:6px}
+.opt{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:8px 12px;text-align:left;cursor:pointer}
+.opt:hover{border-color:var(--accent)}
+.opt.right{background:var(--ok-soft);border-color:var(--ok)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.exp{margin-top:8px;font-size:14px}
+.score{font-family:var(--f-display);font-size:22px;font-weight:600;margin:4px 0 14px}
+/* Figuras referenciales */
+figure.ref{margin:0 0 18px;border:1px solid var(--line);border-radius:6px;background:var(--bg);padding:12px 12px 8px;max-width:760px}
+figure.ref figcaption{font-size:13px;color:var(--muted);margin-top:4px}
+figure.ref .fig{margin:0}
+.ref .box{fill:var(--paper)}
+.fig svg{color:var(--ink)}
+.fig text.tc{text-anchor:middle}.fig text.end{text-anchor:end}
+.fig text.sm{font-size:11px}.fig text.xs{font-size:9px}.fig text.bd{font-weight:600}
+.fig text.big{font-family:var(--f-display);font-size:24px;font-weight:700}
+.fig text.mt{fill:var(--muted)}.fig text.ac{fill:var(--accent)}
+.fig .thick{stroke-width:3}.fig .thin{stroke-width:1}
+.fig .ax{stroke:var(--muted);stroke-width:1;fill:none}
+.fig .dash{stroke-dasharray:5 4}
+.fig .w-az{stroke:var(--c-az);stroke-width:3;fill:none}.fig .w-ro{stroke:var(--c-ro);stroke-width:3;fill:none}
+.fig .w-ve{stroke:var(--c-ve);stroke-width:3;fill:none}.fig .w-ne{stroke:var(--ink);stroke-width:3;fill:none}
+.fig .w-ok{stroke:var(--ok);stroke-width:2.5;fill:none}.fig .w-live{stroke:var(--live);stroke-width:2;fill:none}
+.fig .f-az{fill:var(--c-az)}.fig .f-ro{fill:var(--c-ro)}.fig .f-ve{fill:var(--c-ve)}.fig .f-am{fill:var(--c-am)}
+.fig .f-cu{fill:var(--c-cu)}.fig .f-bl{fill:var(--c-bl);stroke:var(--ink);stroke-width:1}.fig .f-ink{fill:var(--ink)}
+.fig .f-acc{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.2}.fig .f-acc2{fill:var(--accent)}
+.fig .f-ok{fill:var(--ok-soft)}.fig .f-live{fill:var(--live-soft)}.fig .f-bad{fill:var(--bad-soft)}.fig .f-bad2{fill:var(--bad);opacity:.55}
+.fig .f-mt{fill:var(--line);stroke:var(--ink);stroke-width:1}.fig .f-soil{fill:var(--line);opacity:.5}
+.fig .tog{fill:var(--ink)}.fig .box2{fill:var(--paper);stroke:var(--ink);stroke-width:1.2}.fig .hl{fill:none;stroke:var(--accent);stroke-width:2}
+.fig .ink{fill:var(--ink)}
+/* Fotos referenciales y enlaces */
+.real{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:flex-start;margin:0 0 20px;max-width:760px}
+.photo{margin:0;flex:0 0 200px;max-width:100%}
+.photo img{display:block;width:200px;max-width:100%;height:auto;border-radius:4px;border:1px solid var(--line);background:var(--bg)}
+.photo a:hover img{border-color:var(--accent)}
+.photo figcaption{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.4}
+.photo .ai{display:block;margin-top:4px;font-size:11.5px}
+.real a{color:var(--accent)}
+.links{flex:1 1 240px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.links ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.links li a{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:4px;background:var(--bg);text-decoration:none;font-size:14px}
+.links li a:hover{border-color:var(--accent)}
+
+/* Encabezado tipo panel de instrumento */
+.hero{position:relative;overflow:hidden;isolation:isolate;border-radius:14px;padding:30px clamp(18px,4vw,38px) 28px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:26px;align-items:end;color:#eaf2f8;background:var(--hero-bg);box-shadow:0 18px 40px -24px rgba(0,0,0,.6)}
+@media (max-width:860px){.hero{grid-template-columns:1fr}}
+.hero .art{position:absolute;inset:0;z-index:-1;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent 42%,#000 78%);mask-image:linear-gradient(90deg,transparent 42%,#000 78%)}
+.hero .art svg{width:100%;height:100%;display:block}
+@media (max-width:860px){.hero .art{opacity:.45}}
+.hero .eyebrow{color:rgba(234,242,248,.72)}
+.hero h1{color:#fff;display:flex;align-items:center;gap:16px;font-size:clamp(32px,5.4vw,52px);margin:10px 0 10px}
+.hero .mark{flex:0 0 auto;width:58px;height:58px;border-radius:14px;display:grid;place-items:center;background:var(--mark-bg);box-shadow:0 0 0 1px rgba(255,255,255,.18),0 10px 26px -10px var(--glow)}
+.hero .mark svg{width:32px;height:32px}
+.hero .sub{color:rgba(234,242,248,.82)}
+.specs{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.specs span{font-family:var(--f-mono);font-size:12px;padding:5px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);color:#eaf2f8}
+.specs span:first-child{border-color:var(--glow);color:#fff}
+.hero .progress{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#eaf2f8;border-radius:12px;min-width:0}
+.hero .progress .eyebrow{color:rgba(234,242,248,.72)}
+.hero .progress .big{font-family:var(--f-mono);font-weight:500;color:var(--glow);text-shadow:0 0 14px var(--glow)}
+.hero .next{color:rgba(234,242,248,.78)}.hero .next b{color:#fff}
+#lesson .lhead{background:var(--hero-bg);color:#fff;border-radius:12px;padding:18px 22px;box-shadow:0 14px 30px -22px rgba(0,0,0,.6)}
+#lesson .lhead .eyebrow{color:rgba(234,242,248,.75)}
+#lesson .lhead .chk{color:rgba(234,242,248,.85)}
+.hero,#lesson .lhead{--hero-bg:repeating-linear-gradient(0deg,rgba(120,190,255,.07) 0 1px,transparent 1px 28px),repeating-linear-gradient(90deg,rgba(120,190,255,.07) 0 1px,transparent 1px 28px),radial-gradient(120% 140% at 85% 15%,#16406a 0%,#0c2135 55%,#08131f 100%);--glow:#ffc53d;--mark-bg:linear-gradient(145deg,#ffd666,#f0a500)}
+.hero .bar{height:14px;border-radius:3px;background:rgba(255,255,255,.1);-webkit-mask:repeating-linear-gradient(90deg,#000 0 calc(10% - 3px),transparent calc(10% - 3px) 10%);mask:repeating-linear-gradient(90deg,#000 0 calc(10% - 3px),transparent calc(10% - 3px) 10%)}
+.hero .bar span{background:linear-gradient(90deg,#5fd3ff,#ffc53d);box-shadow:0 0 12px #ffc53d}
+@media (prefers-reduced-motion: reduce){.bar span{transition:none}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header id="hdr" class="hero">
+    <div class="art" aria-hidden="true"><svg viewBox="0 0 600 260" preserveAspectRatio="xMaxYMid slice"><defs><filter id="glw" x="-10%" y="-40%" width="120%" height="180%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+      <line x1="0" y1="130" x2="600" y2="130" stroke="rgba(150,210,255,.35)" stroke-width="1"/>
+      <g stroke="rgba(150,210,255,.35)" stroke-width="1"><line x1="0" y1="125" x2="0" y2="135"/><line x1="25" y1="125" x2="25" y2="135"/><line x1="50" y1="125" x2="50" y2="135"/><line x1="75" y1="125" x2="75" y2="135"/><line x1="100" y1="125" x2="100" y2="135"/><line x1="125" y1="125" x2="125" y2="135"/><line x1="150" y1="125" x2="150" y2="135"/><line x1="175" y1="125" x2="175" y2="135"/><line x1="200" y1="125" x2="200" y2="135"/><line x1="225" y1="125" x2="225" y2="135"/><line x1="250" y1="125" x2="250" y2="135"/><line x1="275" y1="125" x2="275" y2="135"/><line x1="300" y1="125" x2="300" y2="135"/><line x1="325" y1="125" x2="325" y2="135"/><line x1="350" y1="125" x2="350" y2="135"/><line x1="375" y1="125" x2="375" y2="135"/><line x1="400" y1="125" x2="400" y2="135"/><line x1="425" y1="125" x2="425" y2="135"/><line x1="450" y1="125" x2="450" y2="135"/><line x1="475" y1="125" x2="475" y2="135"/><line x1="500" y1="125" x2="500" y2="135"/><line x1="525" y1="125" x2="525" y2="135"/><line x1="550" y1="125" x2="550" y2="135"/><line x1="575" y1="125" x2="575" y2="135"/><line x1="600" y1="125" x2="600" y2="135"/></g>
+      <path d="M0 130Q37.5 50 75 130T150 130T225 130T300 130T375 130T450 130T525 130T600 130" fill="none" stroke="#5fd3ff" stroke-width="2.6" filter="url(#glw)"/>
+      <path d="M25 130Q62.5 70 100 130T175 130T250 130T325 130T400 130T475 130T550 130T625 130" fill="none" stroke="#ffc53d" stroke-width="1.8" opacity=".75" filter="url(#glw)"/>
+      <text x="590" y="40" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="12" fill="rgba(234,242,248,.55)">CH1 220 V~  ·  50 Hz</text>
+    </svg></div>
+    <div>
+      <div class="eyebrow">Licencia SEC · Competencias laborales ChileValora</div>
+      <h1><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13.5 2L4.5 13.5h6l-1.5 8.5 9.5-12h-6.2z" fill="#0c2135"/></svg></span><span>Pizarra Instalador Clase D</span></h1>
+      <p class="sub">10 clases en 2 semanas. Toca cualquier tema para abrir su materia completa, con ejemplos, normativa, taller y autoevaluación.</p>
+      <div class="specs"><span>220 V · 50 Hz</span><span>Baja tensión</span><span>Hasta 10 kW</span><span>Pliegos RIC</span></div>
+    </div>
+    <div class="progress" aria-live="polite">
+      <div class="row"><span class="eyebrow">Avance</span><span class="big" id="count">0/10</span></div>
+      <div class="bar"><span id="fill"></span></div>
+      <div class="next" id="next"></div>
+    </div>
+  </header>
+
+  <main id="board">
+    <div class="lanes">
+      <section class="lane" id="w1"><h2>Semana 1 <small>Fundamentos y normativa · 26 al 30 oct</small></h2></section>
+      <section class="lane" id="w2"><h2>Semana 2 <small>Instalación, planos y práctica · 2 al 6 nov</small></h2></section>
+    </div>
+    <div class="legend" style="margin-top:22px">
+      <span>Borde naranjo: clase en curso</span><span>Fondo verde: clase terminada</span><span>El avance se guarda solo en este navegador</span>
+    </div>
+  </main>
+
+  <main id="lesson" hidden></main>
+</div>
+
+<script>
+/* ---------- Figuras ---------- */
+const FIG_SERIE=`<div class="fig"><svg viewBox="0 0 560 170" role="img" aria-label="Comparación de circuito serie y paralelo">
+<text x="10" y="18">SERIE: una sola ruta</text>
+<rect class="box" x="10" y="60" width="40" height="50"/><text x="16" y="90">220V</text>
+<path class="s" d="M50 70 H90 M130 70 H170 M210 70 H250 V140 H30 V110"/>
+<rect class="box" x="90" y="58" width="40" height="24"/><text x="100" y="74">R1</text>
+<rect class="box" x="170" y="58" width="40" height="24"/><text x="180" y="74">R2</text>
+<text x="300" y="18">PARALELO: cada carga con su ruta</text>
+<rect class="box" x="300" y="60" width="40" height="50"/><text x="306" y="90">220V</text>
+<path class="s" d="M340 70 H520 M340 100 H520 M400 70 V76 M400 94 V100 M470 70 V76 M470 94 V100"/>
+<rect class="box" x="385" y="76" width="30" height="18"/><text x="390" y="89">R1</text>
+<rect class="box" x="455" y="76" width="30" height="18"/><text x="460" y="89">R2</text>
+<text x="300" y="140">Misma tensión en R1 y R2</text>
+<text x="10" y="162">Misma corriente en R1 y R2</text>
+</svg></div>`;
+
+const FIG_ESCALERA=`<div class="fig"><svg viewBox="0 0 620 200" role="img" aria-label="Esquema de conexión de escalera con dos conmutadores 9/24">
+<text x="10" y="20">Fase (roja) · Viajeros (azul) · Neutro (gris)</text>
+<text x="10" y="70">FASE</text><path class="ph" d="M50 66 H120"/>
+<rect class="box" x="120" y="44" width="90" height="70"/><text x="128" y="62">Conmutador</text><text x="140" y="78">9/24 (A)</text>
+<text x="124" y="108">común</text>
+<path class="tr" d="M210 58 H390 M210 100 H390"/><text x="270" y="52">viajero 1</text><text x="270" y="94">viajero 2</text>
+<rect class="box" x="390" y="44" width="90" height="70"/><text x="398" y="62">Conmutador</text><text x="410" y="78">9/24 (B)</text>
+<text x="436" y="108">común</text>
+<path class="ph" d="M480 80 H540 V130"/>
+<circle class="s" cx="540" cy="148" r="18"/><path class="s" d="M527 135 L553 161 M553 135 L527 161"/>
+<text x="566" y="152">Luz</text>
+<path class="nu" d="M540 166 V185 H50"/><text x="10" y="189">NEUTRO</text>
+</svg></div>`;
+
+const FIG_UNI=`<div class="fig"><svg viewBox="0 0 640 300" role="img" aria-label="Diagrama unilineal de una vivienda con tres circuitos">
+<rect class="box" x="10" y="20" width="90" height="36"/><text x="20" y="42">Empalme</text>
+<path class="s" d="M100 38 H140"/>
+<rect class="box" x="140" y="20" width="80" height="36"/><text x="150" y="42">Medidor</text>
+<path class="s" d="M220 38 H250"/><text x="226" y="70">4 mm²</text>
+<rect class="box" x="250" y="20" width="120" height="36"/><text x="258" y="36">Gral. 2x25 A</text><text x="258" y="50">corte omnipolar</text>
+<path class="s" d="M310 56 V90 M130 90 H500 M160 90 V110 M440 90 V110"/>
+<rect class="box" x="90" y="110" width="140" height="36"/><text x="98" y="126">ID-1 2x25 A</text><text x="98" y="140">30 mA</text>
+<rect class="box" x="370" y="110" width="140" height="36"/><text x="378" y="126">ID-2 2x25 A</text><text x="378" y="140">30 mA</text>
+<path class="s" d="M160 146 V170 M90 170 H230 M100 170 V190 M220 170 V190 M440 146 V190"/>
+<rect class="box" x="40" y="190" width="120" height="44"/><text x="48" y="206">C1 10 A</text><text x="48" y="220">1,5 mm²</text>
+<rect class="box" x="170" y="190" width="120" height="44"/><text x="178" y="206">C2 16 A</text><text x="178" y="220">2,5 mm²</text>
+<rect class="box" x="380" y="190" width="120" height="44"/><text x="388" y="206">C3 16 A</text><text x="388" y="220">2,5 mm²</text>
+<text x="44" y="256">Alumbrado</text><text x="44" y="272">900 W</text>
+<text x="174" y="256">Enchufes</text><text x="174" y="272">2000 W</text>
+<text x="384" y="256">Cocina y lavadero</text><text x="384" y="272">2500 W</text>
+</svg></div>`;
+
+/* ---------- Ilustraciones referenciales por tema ---------- */
+const SV=(h,body,lab)=>`<div class="fig"><svg viewBox="0 0 600 ${h}" role="img" aria-label="${lab}"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker></defs>${body}</svg></div>`;
+const Tx=(x,y,s,c="")=>`<text x="${x}" y="${y}" class="${c}">${s}</text>`;
+const Bx=(x,y,w,h,s,c="box")=>{const ls=s?s.split("|"):[];const cy=y+h/2-(ls.length-1)*7+4;return `<rect class="${c}" x="${x}" y="${y}" width="${w}" height="${h}" rx="3"/>`+ls.map((l,i)=>`<text x="${x+w/2}" y="${cy+i*14}" class="tc">${l}</text>`).join("")};
+const Ar=(x1,y1,x2,y2,c="s")=>`<line class="${c}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" marker-end="url(#ar)"/>`;
+const Ln=(d,c="s")=>`<path class="${c}" d="${d}"/>`;
+const Ci=(cx,cy,r,c="s")=>`<circle class="${c}" cx="${cx}" cy="${cy}" r="${r}"/>`;
+const Rc=(x,y,w,h,c="box",rx=3)=>`<rect class="${c}" x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}"/>`;
+const Lamp=(cx,cy,r=18)=>Ci(cx,cy,r)+Ln(`M${cx-r*.7} ${cy-r*.7}L${cx+r*.7} ${cy+r*.7}M${cx+r*.7} ${cy-r*.7}L${cx-r*.7} ${cy+r*.7}`);
+const Gnd=(x,y)=>Ln(`M${x} ${y}V${y+8}M${x-14} ${y+8}H${x+14}M${x-9} ${y+14}H${x+9}M${x-4} ${y+20}H${x+4}`);
+
+const FIGS={};
+/* Clase 1 */
+FIGS["1.1"]={c:"A la izquierda, un átomo con su núcleo y electrones. A la derecha, un conductor: los electrones libres del cobre se mueven por dentro y el PVC los aísla.",s:SV(200,
+`<ellipse class="s" cx="110" cy="100" rx="80" ry="30"/><ellipse class="s" cx="110" cy="100" rx="80" ry="30" transform="rotate(60 110 100)"/><ellipse class="s" cx="110" cy="100" rx="80" ry="30" transform="rotate(-60 110 100)"/>`
++Ci(110,100,16,"f-acc")+Tx(110,105,"+","tc bd")+Ci(190,100,6,"f-az")+Ci(150,169,6,"f-az")+Ci(150,31,6,"f-az")+Ci(30,100,6,"f-az")
++Tx(10,195,"Núcleo (+) y electrones (−)","sm")
++Rc(260,70,320,60,"f-acc",30)+Rc(262,88,316,24,"f-cu",4)
++[290,330,370,410,450,490,530].map(x=>Ci(x,100,4,"f-az")).join("")
++Ar(300,52,540,52)+Tx(300,44,"Electrones libres en movimiento = corriente","sm")
++Tx(262,152,"Cobre: conductor","sm")+Tx(440,152,"PVC: aislante","sm"),"Átomo y conductor")};
+
+FIGS["1.2"]={c:"La tensión es como la diferencia de nivel entre dos estanques: empuja la corriente. A la derecha, el voltímetro mide 220 V entre fase y neutro de un enchufe.",s:SV(205,
+Rc(30,30,70,130,"s",2)+Rc(31,50,68,109,"f-az",0)+Rc(170,30,70,130,"s",2)+Rc(171,130,68,29,"f-az",0)
++Rc(100,146,70,10,"f-az",0)+Ar(115,138,158,138)
++Tx(30,22,"Nivel alto","sm")+Tx(170,22,"Nivel bajo","sm")+Tx(20,195,"La diferencia de nivel empuja el agua","sm mt")
++Rc(330,40,150,120,"box",18)+Ci(405,100,44)
++Rc(375,94,8,12,"f-ink",1)+Rc(401,94,8,12,"f-ink",1)+Rc(427,94,8,12,"f-ink",1)
++Tx(379,125,"F","tc sm bd")+Tx(405,125,"T","tc sm bd")+Tx(431,125,"N","tc sm bd")
++Rc(505,40,85,110,"box",8)+Rc(513,50,69,30,"f-acc",3)+Tx(547,71,"220 V","tc bd")
++Ln("M525 150C515 180 400 180 379 108","w-ro")+Ln("M570 150C570 190 450 190 431 108","w-ne")
++Tx(330,198,"Voltímetro en paralelo: fase y neutro","sm"),"Analogía hidráulica y medición de tensión")};
+
+FIGS["1.3"]={c:"La corriente continua circula siempre en un sentido; la alterna cambia de sentido 50 veces por segundo. La pinza mide la corriente abrazando un solo conductor.",s:SV(215,
+Tx(20,18,"Corriente continua (CC)","sm bd")+Ln("M30 70H290","ax")+Ln("M30 42H290","w-az")+Ar(240,56,285,56)
++Tx(20,105,"Corriente alterna (CA) 50 Hz","sm bd")+Ln("M30 160H290","ax")+Ln("M30 160Q61 80 92.5 160T155 160T217.5 160T280 160","w-ro")
++Tx(30,212,"Sube, baja y cambia de sentido","sm mt")
++Ln("M330 60H590","w-az")+Tx(335,50,"Fase","sm")
++Ci(460,60,26,"s thick")+Rc(435,86,50,100,"box",8)+Rc(441,98,38,22,"f-acc",2)+Tx(460,114,"9,1 A","tc sm bd")
++Tx(330,205,"La pinza abraza un solo conductor","sm"),"Corriente continua, alterna y pinza amperimétrica")};
+
+FIGS["1.4"]={c:"Un conductor largo y delgado tiene más resistencia y se calienta más que uno corto y grueso del mismo material.",s:SV(190,
+Rc(30,40,420,6,"f-cu",1)+Ln("M100 28q5-8 10 0t10 0M200 28q5-8 10 0t10 0M300 28q5-8 10 0t10 0","w-ro thin")
++Tx(30,68,"Largo y delgado: más resistencia y más calor","sm")
++Rc(30,95,200,24,"f-cu",3)+Tx(30,140,"Corto y grueso: menos resistencia","sm")
++Bx(300,92,270,40,"R = ρ · L / S")+Tx(300,158,"ρ cobre ≈ 0,018 Ω·mm²/m","sm")+Tx(300,176,"L: largo en m · S: sección en mm²","sm"),"Resistencia según largo y sección")};
+
+/* Clase 2 */
+FIGS["2.1"]={c:"El triángulo de la Ley de Ohm: tapa la magnitud que buscas y lo que queda te dice la operación.",s:SV(190,
+Ln("M110 15L20 175H200Z","s thick")+Ln("M62 100H158")+Ln("M110 100V175")
++Tx(110,78,"V","tc big")+Tx(70,152,"I","tc big")+Tx(150,152,"R","tc big")
++Tx(250,50,"Tapa V:  V = I × R","bd")+Tx(250,95,"Tapa I:  I = V / R","bd")+Tx(250,140,"Tapa R:  R = V / I","bd")
++Tx(250,175,"Ej.: 220 V / 32 Ω = 6,9 A","sm mt"),"Triángulo de la Ley de Ohm")};
+
+FIGS["2.2"]={c:"Placa de características referencial de un equipo. Con la potencia de la placa calculas la corriente.",s:SV(190,
+Rc(30,20,300,150,"box",8)+Tx(180,50,"HERVIDOR ELÉCTRICO","tc bd")+Tx(180,72,"Modelo referencial","tc sm mt")
++Tx(180,100,"220-240 V ~ 50 Hz","tc")+Rc(125,108,110,32,"hl",4)+Tx(180,133,"2000 W","tc big")+Tx(180,160,"Clase I (con tierra)","tc sm")
++Ar(340,124,395,124)+Tx(405,105,"Corriente:","sm")+Tx(405,130,"2000 / 220 = 9,1 A","bd"),"Placa de características")};
+
+FIGS["2.3"]={c:"Medidor de energía. El consumo del período es la lectura actual menos la anterior (valores de ejemplo).",s:SV(190,
+Rc(30,15,190,165,"box",12)+Tx(125,38,"MEDIDOR","tc sm")+Rc(48,52,154,42,"f-acc",4)+Tx(125,81,"0 4 5 2 1","tc big")+Tx(125,114,"kWh","tc sm")
++`<ellipse class="s" cx="125" cy="148" rx="40" ry="8"/>`
++Tx(270,50,"Lectura actual","sm")+Tx(570,50,"04.521","end bd")+Tx(270,85,"Lectura anterior","sm")+Tx(570,85,"− 04.336","end bd")
++Ln("M270 100H570")+Tx(270,132,"Consumo del período","sm")+Tx(570,134,"185 kWh","end big")+Tx(270,172,"Valores de ejemplo","sm mt"),"Medidor y lectura de consumo")};
+
+FIGS["2.4"]={c:"Escala aproximada de efectos de la corriente alterna en el cuerpo. El diferencial de 30 mA corta antes de la zona de fibrilación.",s:SV(175,
+Tx(30,22,"Corriente por el cuerpo (CA 50 Hz, valores aproximados)","sm mt")
++Rc(30,60,108,28,"f-ok",0)+Rc(138,60,108,28,"f-live",0)+Rc(246,60,108,28,"f-bad",0)+Rc(354,60,108,28,"f-bad2",0)+Rc(462,60,108,28,"f-bad2",0)
++[["0,5 mA",30],["10 mA",138],["30 mA",246],["50 mA",354],["1 A",462]].map(([t,x])=>Ln(`M${x} 52V96`,"ax")+Tx(x+3,48,t,"sm bd")).join("")
++[["Percepción",84],["No soltar",192],["Respiración",300],["Fibrilación",408],["Quemaduras",516]].map(([t,x])=>Tx(x,112,t,"tc sm")).join("")
++Ln("M246 96V130","w-live")+Tx(246,148,"Diferencial 30 mA","tc sm bd")+Ar(470,148,570,148)+Tx(470,140,"más peligro","sm mt"),"Efectos de la corriente en el cuerpo")};
+
+FIGS["2.5"]={c:"Las 5 reglas de oro, en orden, para trabajar sin tensión.",s:SV(150,
+[["Cortar",""],["Bloquear y","señalizar"],["Verificar","ausencia"],["Tierra y","cortocircuito"],["Delimitar","la zona"]].map(([a,b],i)=>{const x=6+i*118,cx=x+54;let ic="";
+if(i===0)ic=Ln(`M${cx-30} 62H${cx-12}L${cx+12} 42M${cx+14} 62H${cx+30}`)+Ci(cx-12,62,3,"ink")+Ci(cx+14,62,3,"ink");
+if(i===1)ic=Rc(cx-14,50,28,22,"s",2)+Ln(`M${cx-9} 50V43a9 9 0 0 1 18 0V50`);
+if(i===2)ic=Rc(cx-16,34,32,40,"s",4)+Rc(cx-11,40,22,13,"f-acc",2)+Tx(cx,50,"0V","tc xs bd");
+if(i===3)ic=Gnd(cx,36);
+if(i===4)ic=Ln(`M${cx} 34L${cx+22} 72H${cx-22}Z`)+Tx(cx,67,"!","tc bd");
+return Rc(x,10,108,125,"box",4)+Tx(x+8,26,String(i+1),"bd ac")+ic+Tx(cx,98,a,"tc sm bd")+Tx(cx,113,b,"tc sm bd")}).join(""),"Cinco reglas de oro")};
+
+/* Clase 3 */
+FIGS["3.1"]={c:"Las cinco partes de un circuito: fuente, protección, control, carga y conductores de ida y vuelta.",s:SV(205,
+Ci(70,110,26)+Tx(70,117,"~","tc big")+Tx(70,165,"Fuente","tc sm")
++Ln("M70 84V40H180","ph")+Bx(180,25,100,30,"Automático")+Ln("M280 40H340","ph")
++Ci(340,40,3,"ink")+Ci(380,40,3,"ink")+Ln("M340 40L376 24","s thick")+Ln("M380 40H500V87","ph")
++Lamp(500,110,22)+Ln("M500 132V180H70V136","nu")
++Tx(230,75,"Protección","tc sm")+Tx(360,70,"Control","tc sm")+Tx(530,115,"Carga","sm")
++Tx(285,200,"Fase de ida (rojo) y neutro de vuelta (gris)","tc sm mt"),"Partes de un circuito")};
+
+FIGS["3.3"]={c:"Tres equipos en paralelo en un circuito de 16 A: cada uno recibe 220 V, pero sus corrientes se suman en el tramo común.",s:SV(205,
+Bx(20,40,70,120,"Tablero|16 A")+Ln("M90 60H580","ph")+Ln("M90 140H580","nu")
++[["Hervidor","9,1 A",220],["Estufa","6,8 A",350],["Secador","5,5 A",480]].map(([n,a,x])=>Ln(`M${x} 60V80`,"ph")+Bx(x-45,80,90,40,n)+Ln(`M${x} 120V140`,"nu")+Tx(x,162,a,"tc bd")).join("")
++Tx(100,52,"21,4 A","bd ac")
++Tx(20,195,"9,1 + 6,8 + 5,5 = 21,4 A, más que 16 A: el automático corta","sm"),"Circuito en paralelo con suma de corrientes")};
+
+FIGS["3.4"]={c:"Partes de un multímetro digital. La punta negra va siempre en COM; la roja en VΩ para tensión, resistencia y continuidad.",s:SV(235,
+Rc(200,10,200,210,"box",18)+Rc(220,25,160,45,"f-acc",4)+Tx(300,57,"220,4 V~","tc big")
++Ci(300,132,34)+Ln("M300 132L280 104","s thick")
++Tx(270,96,"V~","sm")+Tx(240,136,"V=","sm")+Tx(262,176,"Ω","sm")+Tx(300,184,"·)))","tc sm")+Tx(334,176,"A","sm")+Tx(342,136,"OFF","sm")
++Ci(240,203,8)+Ci(300,203,8,"f-ink")+Ci(360,203,8,"f-ro")
++Tx(240,230,"10A","tc sm")+Tx(300,230,"COM","tc sm")+Tx(360,230,"VΩ","tc sm")
++Tx(20,52,"Pantalla","sm")+Ln("M78 48H216","ax")+Tx(20,136,"Selector","sm")+Ln("M80 132H264","ax")+Tx(20,206,"Bornes","sm")+Ln("M70 202H230","ax")
++Tx(420,60,"Roja en VΩ:","sm bd")+Tx(420,76,"tensión, resistencia,","sm")+Tx(420,92,"continuidad","sm")+Tx(420,130,"Negra siempre","sm bd")+Tx(420,146,"en COM","sm"),"Multímetro digital")};
+
+/* Clase 4 */
+FIGS["4.1"]={c:"Potencia instalada máxima por clase de licencia. La clase D cubre viviendas y locales pequeños de hasta 10 kW.",s:SV(180,
+Tx(20,18,"Escala ilustrativa","sm mt")
++[["Clase D",50,"10 kW","f-acc2"],["Clase C",150,"100 kW","f-acc"],["Clase B",300,"500 kW","f-acc"],["Clase A",380,"","f-acc"]].map(([n,w,v,c],i)=>{const y=32+i*36;return Tx(20,y+17,n,"bd")+Rc(100,y,w,24,c,2)+(v?Tx(108+w,y+17,v,"sm bd"):Ar(480,y+12,520,y+12)+Tx(528,y+17,"Sin límite","sm bd"))}).join(""),"Licencias por potencia")};
+
+FIGS["4.2"]={c:"Tablero domiciliario sin tapa: protección general, dos diferenciales con sus automáticos, espacio de reserva y barras de neutro y tierra.",s:SV(215,
+Rc(30,10,370,195,"box",6)+Rc(45,64,340,8,"f-mt",1)
++[[55,44,"1"],[107,44,"2"],[159,22,"3"],[185,22,"3"],[219,44,"2"],[271,22,"3"]].map(([x,w,n])=>Rc(x,45,w,70,"box2",2)+Rc(x+5,72,w-10,12,"tog",2)+Tx(x+w/2,40,n,"tc sm bd ac")).join("")
++[305,331,357].map(x=>Rc(x,45,22,70,"s dash",2)).join("")+Tx(343,40,"4","tc sm bd ac")
++Rc(55,150,140,12,"f-bl",2)+[70,95,120,145,170].map(x=>Ci(x,156,3,"ink")).join("")+Tx(125,180,"5","tc sm bd ac")
++Rc(220,150,140,12,"f-ve",2)+[235,260,285,310,335].map(x=>Ci(x,156,3,"ink")).join("")+Tx(290,180,"6","tc sm bd ac")
++[["1 General 2x25 A",""],["2 Diferenciales 30 mA",""],["3 Automáticos",""],["4 Reserva 25%",""],["5 Barra de neutros",""],["6 Barra de tierra",""]].map(([t],i)=>Tx(415,40+i*26,t,"sm")).join(""),"Partes del tablero")};
+
+FIGS["4.3"]={c:"Dentro del automático hay dos mecanismos. A la derecha, el rango de disparo instantáneo de cada curva en múltiplos de su corriente nominal.",s:SV(205,
+Rc(20,15,230,180,"box",6)+Tx(35,40,"Térmico: bimetal","sm bd")+Ln("M45 58H150","w-ro thick")+Ln("M45 64Q98 84 150 64","w-az thick")+Tx(35,100,"Se curva con el calor (sobrecarga)","sm mt")
++Ln("M50 140c5-16 10-16 15 0c5-16 10-16 15 0c5-16 10-16 15 0c5-16 10-16 15 0c5-16 10-16 15 0","s thick")+Tx(35,165,"Magnético: bobina","sm bd")+Tx(35,182,"Actúa en cortocircuito","sm mt")
++Tx(285,25,"Disparo magnético (veces In)","sm bd")+Ln("M300 170H585","ax")
++[[1,300],[3,360],[5,400],[10,460],[20,520]].map(([v,x])=>Ln(`M${x} 165V175`,"ax")+Tx(x,190,String(v),"tc sm")).join("")
++[["B",360,40,45],["C",400,60,85],["D",460,60,125]].map(([n,x,w,y])=>Rc(x,y,w,26,"f-acc",2)+Tx(x-8,y+18,n,"end bd")).join(""),"Automático termomagnético y curvas")};
+
+FIGS["4.4"]={c:"El diferencial compara la corriente de fase con la de neutro en su toroide. Si una parte se fuga a tierra y la diferencia llega a 30 mA, corta.",s:SV(205,
+Ln("M20 70H380","ph")+Ln("M20 120H380","nu")+`<ellipse class="s thick" cx="150" cy="95" rx="22" ry="58"/>`
++Tx(30,60,"Fase: 10,00 A","sm")+Tx(30,140,"Neutro: 9,97 A","sm")+Tx(150,172,"Toroide","tc sm")
++Bx(380,55,130,80,"Equipo con|carcasa|metálica")+Ln("M445 135V165","w-ro dash")+Gnd(445,165)
++Tx(462,162,"Fuga a tierra","sm")+Tx(462,178,"30 mA","sm bd")
++Tx(200,28,"Diferencia de 30 mA: corta en milisegundos","sm bd ac"),"Funcionamiento del diferencial")};
+
+/* Clase 5 */
+FIGS["5.1"]={c:"Secciones habituales dibujadas en proporción, con su capacidad en ducto embutido (70 °C) y el automático que les corresponde.",s:SV(185,
+[[1.5,"1,5 mm²","14 A","10 A",80],[2.5,"2,5 mm²","18 A","16 A",215],[4,"4 mm²","24 A","20 A",350],[6,"6 mm²","31 A","25 A",490]].map(([s,n,a,p,x])=>{const r=Math.sqrt(s)*13;return Ci(x,70,r+7,"f-acc")+Ci(x,70,r,"f-cu")+Tx(x,132,n,"tc bd")+Tx(x,150,"admite "+a,"tc sm")+Tx(x,168,"automático "+p,"tc sm")}).join(""),"Secciones de conductores")};
+
+FIGS["5.2"]={c:"Código de colores de la aislación según el RIC N°04, punto 5.32. En Chile el azul es fase.",s:SV(195,
+`<defs><pattern id="vy" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="12" height="12" style="fill:var(--c-ve)"/><rect width="6" height="12" style="fill:var(--c-am)"/></pattern></defs>`
++[["f-az","Fase 1 · azul"],["f-ink","Fase 2 · negro"],["f-ro","Fase 3 · rojo"],["f-bl","Neutro · blanco"],["","Protección · verde o verde/amarillo"]].map(([c,t],i)=>{const y=14+i*35;return (c?Rc(30,y,300,18,c,9):`<rect x="30" y="${y}" width="300" height="18" rx="9" fill="url(#vy)"/>`)+Tx(350,y+14,t,"bd")}).join(""),"Código de colores")};
+
+FIGS["5.3"]={c:"Canalización embutida entre dos cajas. Las uniones se hacen solo dentro de cajas y cada ducto lleva un solo circuito.",s:SV(195,
+Rc(20,60,560,80,"f-soil",0)+Tx(25,54,"Muro","sm mt")
++Rc(60,70,70,60,"box",3)+Rc(470,70,70,60,"box",3)+Ln("M130 88H470M130 112H470")
++Ln("M100 95H500","w-az thin")+Ln("M100 100H500","w-ne thin")+Ln("M100 105H500","w-ve thin")
++Rc(80,86,16,28,"f-live",2)+Ln("M290 84L310 116M310 84L290 116","w-ro thick")
++Tx(240,48,"Nunca uniones dentro del tubo","sm bd")
++Tx(40,160,"Uniones solo dentro de cajas","sm")+Tx(360,160,"Un ducto: un solo circuito","sm")+Tx(360,178,"Caja de derivación: 25% libre","sm"),"Canalización y cajas")};
+
+FIGS["5.4"]={c:"Sistema de puesta a tierra: electrodo en terreno con cámara de inspección, conductor hasta la barra de tierra del tablero y desde ahí a enchufes y luminarias.",s:SV(230,
+Rc(20,120,320,110,"f-soil",0)+Ln("M20 120H340")+Rc(92,108,56,24,"box",2)+Rc(114,122,12,98,"f-cu",1)
++Tx(135,212,"Barra Copperweld","sm")+Tx(155,148,"Cámara de inspección","sm")
++Ln("M120 112V60H300V45","w-ve")+Tx(130,52,"Conductor de tierra ≥ 4 mm²","sm")
++Rc(280,10,120,60,"box",4)+Tx(340,28,"Tablero","tc sm")+Rc(290,40,90,8,"f-ve",1)
++Ln("M380 44H560V60","w-ve")+Lamp(560,78,16)+Tx(560,112,"Luminaria","tc sm")
++Ln("M360 48V140H470V150","w-ve")+Rc(450,150,40,40,"box",4)+Rc(467,162,6,14,"f-ink",1)+Tx(470,212,"Enchufe: borne central","tc sm"),"Puesta a tierra")};
+
+/* Clase 6 */
+FIGS["6.1"]={c:"Conexión de un interruptor simple 9/12: la fase pasa por el interruptor y vuelve como retorno a la luz; el neutro y la tierra van directo a la luminaria.",s:SV(200,
+Tx(20,54,"Fase","sm")+Ln("M60 50H200","ph")+Bx(200,30,80,40,"9/12")+Ln("M280 50H470V83","ph")+Tx(330,42,"Retorno","sm")
++Lamp(470,105,22)+Tx(505,100,"Luz","sm")
++Tx(20,164,"Neutro","sm")+Ln("M70 160H470V127","nu")+Tx(20,189,"Tierra","sm")+Ln("M70 185H530V112H492","w-ve")
++Tx(200,100,"El interruptor corta la fase","sm bd"),"Interruptor simple")};
+
+FIGS["6.3"]={c:"Enchufe doble tipo L con tierra al centro. Fase y neutro van a los bornes laterales y la tierra al central.",s:SV(195,
+Rc(30,40,270,120,"box",14)+`<ellipse class="s" cx="100" cy="100" rx="52" ry="32"/><ellipse class="s" cx="230" cy="100" rx="52" ry="32"/>`
++[75,100,125,205,230,255].map(x=>Ci(x,100,6,"f-ink")).join("")
++Ln("M75 108V168M100 108V168M125 108V168","ax")+Tx(75,184,"F","tc bd")+Tx(100,184,"T","tc bd")+Tx(125,184,"N","tc bd")
++Rc(330,52,14,14,"f-az",2)+Tx(352,63,"Fase: borne lateral","sm")+Rc(330,82,14,14,"f-ve",2)+Tx(352,93,"Tierra: borne central","sm")
++Rc(330,112,14,14,"f-bl",2)+Tx(352,123,"Neutro: borne lateral","sm")+Tx(330,160,"Enchufe doble 10/16 A con tierra","sm mt"),"Enchufe tipo L")};
+
+FIGS["6.4"]={c:"Capacidad de un circuito de 16 A. Se suman las potencias de cálculo hasta el 90%: caben 12 enchufes de 250 W.",s:SV(165,
+Tx(30,25,"Circuito de 16 A: 220 × 16 = 3520 W","sm bd")+Rc(30,45,500,40,"s",2)
++Array.from({length:12},(_,i)=>Rc(31+i*35.5,46,34,38,"f-acc",1)).join("")
++Ln("M480 36V96","w-ro")+Tx(480,112,"90% = 3168 W","tc sm bd")+Tx(30,112,"12 × 250 W = 3000 W","sm")
++Tx(30,150,"Regla: sumar potencias hasta el 90% de la capacidad","sm mt"),"Capacidad de un circuito")};
+
+FIGS["6.5"]={c:"Volúmenes de un baño con tina, en elevación (no a escala). Mientras más cerca del agua, más restricciones.",s:SV(230,
+Rc(260,50,300,150,"f-ok",0)+Rc(200,50,60,150,"f-live",0)+Rc(40,50,160,150,"f-bad",0)+Rc(40,160,160,40,"f-bad2",0)
++Ln("M40 160V200H200V160","s thick")+Ln("M20 200H580")
++Tx(120,186,"0","tc big")+Tx(120,110,"Volumen 1","tc bd")+Tx(230,110,"2","tc big")+Tx(410,110,"Volumen 3","tc bd")
++Tx(230,42,"0,6 m","tc sm")+Tx(410,42,"2,4 m","tc sm")+Tx(40,42,"Hasta 2,25 m de altura","sm")+Tx(120,220,"Tina","tc sm"),"Volúmenes del baño")};
+
+/* Clase 7 */
+FIGS["7.1"]={c:"Composición típica de una lámina de proyecto eléctrico domiciliario.",s:SV(200,
+Rc(20,10,560,180,"box",2)+Rc(30,20,320,160,"s thin",0)+Ln("M30 100H200M200 20V180M200 120H350M120 100V180","thin")
++Lamp(110,60,10)+Lamp(275,65,10)+Lamp(160,140,10)+Lamp(275,150,10)+Tx(38,36,"Planta 1:50","sm bd")
++Rc(360,20,210,60,"s thin",0)+Tx(370,36,"Unilineal","sm bd")+Ln("M380 55H560M420 55V70M470 55V70M520 55V70","thin")
++Rc(360,88,210,50,"s thin",0)+Tx(370,104,"Cuadro de cargas","sm bd")+Ln("M360 112H570M360 125H570M420 112V138M480 112V138","thin")
++Rc(360,146,210,34,"f-acc",0)+Tx(370,167,"Viñeta y firma","sm bd"),"Lámina de proyecto")};
+
+FIGS["7.2"]={c:"Símbolos de uso habitual en planos domiciliarios. Confirma con el evaluador la simbología oficial que usará.",s:SV(150,
+[["Centro","de luz"],["Aplique","de muro"],["Interruptor","9/12"],["Interruptor","9/15"],["Conmutador","9/24"],["Enchufe",""],["Tablero",""]].map(([a,b],i)=>{const x=45+i*85,y=65;let g="";
+if(i===0)g=Lamp(x,y,14);
+if(i===1)g=Ln(`M${x-16} ${y-22}V${y+22}`,"s thick")+Ln(`M${x-16} ${y-14}A14 14 0 0 1 ${x-16} ${y+14}`)+Ln(`M${x-14} ${y-8}L${x-4} ${y+8}M${x-4} ${y-8}L${x-14} ${y+8}`);
+if(i===2)g=Ci(x,y+8,6)+Ln(`M${x+4} ${y+3}L${x+16} ${y-14}`);
+if(i===3)g=Ci(x,y+8,6)+Ln(`M${x+4} ${y+3}L${x+16} ${y-14}M${x+10} ${y-5}l7 4`);
+if(i===4)g=Ci(x,y,6)+Ln(`M${x+4} ${y-4}L${x+16} ${y-18}M${x-4} ${y+4}L${x-16} ${y+18}`);
+if(i===5)g=Ci(x,y,13)+Ln(`M${x-4} ${y-7}V${y+7}M${x+4} ${y-7}V${y+7}`);
+if(i===6)g=Rc(x-20,y-10,40,20,"s",0)+Ln(`M${x-20} ${y+10}L${x} ${y-10}M${x-6} ${y+10}L${x+14} ${y-10}M${x+8} ${y+10}L${x+20} ${y-2}`);
+return g+Tx(x,y+48,a,"tc sm")+Tx(x,y+62,b,"tc sm")}).join(""),"Simbología eléctrica")};
+
+FIGS["7.4"]={c:"La demanda máxima es menor que la potencia instalada porque no todo funciona a la vez. Ambas quedan bajo la capacidad del empalme de 25 A.",s:SV(170,
+Tx(40,32,"Potencia instalada: 5400 W","sm bd")+Rc(40,40,450,28,"f-acc",2)
++Tx(40,96,"Demanda máxima: 3840 W (17,5 A)","sm bd")+Rc(40,104,320,28,"f-acc2",2)
++Ln("M498 22V140","w-ro")+Tx(498,160,"Empalme 25 A ≈ 5500 W","tc sm"),"Potencia instalada y demanda")};
+
+/* Clase 8 */
+FIGS["8.1"]={c:"De la potencia a la corriente de diseño en una instalación monofásica.",s:SV(140,
+Bx(20,30,110,50,"Potencia|(W)")+Ar(130,55,163,55)+Bx(165,30,90,50,"÷ 220 V")+Ar(255,55,288,55)+Bx(290,30,110,50,"Corriente|(A)")+Ar(400,55,433,55)+Bx(435,30,145,50,"× 1,1|Corriente diseño")
++Tx(20,120,"Ej.: horno 3000 W → 13,6 A → 15,0 A → automático 16 A","sm bd"),"Cálculo de corriente")};
+
+FIGS["8.2"]={c:"Secuencia para dimensionar un circuito. Si la caída de tensión no cumple, se vuelve a elegir el conductor con más sección.",s:SV(210,
+Bx(20,20,160,44,"1 Sumar|potencias")+Ar(180,42,218,42)+Bx(220,20,160,44,"2 I = P / 220")+Ar(380,42,418,42)+Bx(420,20,160,44,"3 Agregar 10%")
++Ln("M500 64V87H100V108","s")+`<path d="M100 100L100 110" class="s" marker-end="url(#ar)"/>`
++Bx(20,110,160,44,"4 Automático|inmediato superior")+Ar(180,132,218,132)+Bx(220,110,160,44,"5 Conductor|con capacidad ≥ In")+Ar(380,132,418,132)+Bx(420,110,160,44,"6 Caída de|tensión")
++Ln("M500 154V185H300V158","w-live")+`<path d="M300 165L300 156" class="w-live" marker-end="url(#ar)"/>`+Tx(310,200,"No cumple: subir sección","sm bd"),"Pasos para dimensionar")};
+
+FIGS["8.3"]={c:"La tensión baja a lo largo del cable. En el ejemplo del horno llega con 216,5 V, dentro de los límites del RIC N°03.",s:SV(205,
+Bx(20,15,90,40,"Tablero|220 V")+Ln("M110 35H460","w-az thick")+Tx(160,27,"18 m · 2,5 mm² · 13,6 A","sm")+Bx(460,15,120,40,"Horno|216,5 V")
++Ln("M60 78V192","ax")+Ln("M60 90L560 118","w-az")+Tx(66,85,"220 V","sm")+Tx(560,112,"216,5 V (1,6%)","end sm bd")
++Ln("M60 143H560","w-live dash")+Tx(66,138,"Alimentador: hasta 3% (213,4 V)","sm mt")
++Ln("M60 178H560","w-ro dash")+Tx(66,173,"Total: hasta 5% (209 V)","sm"),"Caída de tensión")};
+
+FIGS["8.4"]={c:"Recorrido de una declaración TE1 hasta la conexión del empalme.",s:SV(130,
+Bx(20,25,120,60,"Instalador|licencia|vigente")+Ar(140,55,164,55)+Bx(166,25,120,60,"Plataforma|SEC con|ClaveÚnica")+Ar(286,55,310,55)+Bx(312,25,120,60,"Declaración|registrada")+Ar(432,55,456,55)+Bx(458,25,120,60,"Distribuidora|conecta")
++Tx(20,115,"Se adjuntan planos, unilineal y cuadro de cargas (RIC N°18)","sm"),"Trámite TE1")};
+
+/* Clase 9 */
+FIGS["9.1"]={c:"Tablero armado: barras arriba, protecciones en el riel con rótulo por circuito, reserva libre y cables rectos y ordenados.",s:SV(235,
+Rc(150,10,300,215,"box",6)+Rc(170,40,110,8,"f-bl",1)+Rc(320,40,110,8,"f-ve",1)+Tx(225,32,"Neutros","tc sm")+Tx(375,32,"Tierras","tc sm")
++Rc(160,138,280,8,"f-mt",1)
++[[165,40],[212,40],[259,20],[283,20],[310,40],[357,20]].map(([x,w])=>Rc(x,112,w,58,"box2",2)+Rc(x+4,134,w-8,10,"tog",2)).join("")
++[384,408].map(x=>Rc(x,112,20,58,"s dash",2)).join("")
++[["C1",269],["C2",293],["C3",367]].map(([t,x])=>Rc(x-11,174,22,13,"f-acc",1)+Tx(x,184,t,"tc xs bd")).join("")
++[185,269,293,367].map(x=>Ln(`M${x} 188V225`,"w-az")).join("")
++Ln("M432 116H470","ax")+Tx(475,120,"Reserva 25%","sm")+Ln("M380 181H470","ax")+Tx(475,185,"Rótulos","sm")
++Tx(20,210,"Cables rectos","sm")+Ln("M100 206H180","ax"),"Tablero armado")};
+
+FIGS["9.2"]={c:"Conexión al borne: el cobre debe quedar completo dentro del borne y el cable flexible siempre lleva terminal.",s:SV(165,
+[[20,0,"Bien: cobre","dentro del borne"],[220,1,"Mal: cobre","expuesto"],[420,2,"Flexible:","con terminal"]].map(([x,k,a,b])=>{let g="";
+if(k===0)g=Rc(x,60,52,14,"f-az",3)+Rc(x+52,64,40,6,"f-cu",0);
+if(k===1)g=Rc(x,60,22,14,"f-az",3)+Rc(x+22,64,70,6,"f-cu",0);
+if(k===2)g=Rc(x,60,40,14,"f-az",3)+Rc(x+40,58,12,18,"f-live",2)+Rc(x+52,62,40,10,"f-mt",1);
+return Rc(x+52,40,60,50,"box2",3)+Ci(x+82,50,6)+g+Rc(x+52,40,60,50,"s",3)+Tx(x+80,118,a,"tc sm bd")+Tx(x+80,134,b,"tc sm")}).join(""),"Conexión correcta al borne")};
+
+FIGS["9.3"]={c:"Orden de los ensayos del RIC N°19. Los primeros cuatro se hacen sin energizar la instalación.",s:SV(150,
+Ln("M34 30H366","w-ok")+Tx(200,22,"Sin energizar","tc sm bd")+Tx(550,22,"Energizado","tc sm bd")+Ln("M50 60H550")
++[["Inspección","visual"],["Continuidad","de tierra"],["Aislación","500 V CC"],["Polaridad",""],["Puesta","a tierra"],["Prueba","diferencial"]].map(([a,b],i)=>{const x=50+i*100;return Ci(x,60,16,"f-acc")+Tx(x,65,String(i+1),"tc bd")+Tx(x,102,a,"tc sm")+Tx(x,117,b,"tc sm")}).join(""),"Secuencia de ensayos")};
+
+FIGS["9.4"]={c:"Búsqueda de una falla por mitades: mide al medio del circuito, descarta la mitad que funciona y repite.",s:SV(165,
+Bx(20,50,60,50,"TAB")+Ln("M80 75H570","ph")
++[140,220,300,380,460,540].map((x,i)=>Rc(x-12,63,24,24,"box2",3)+Tx(x,108,String(i+1),"tc sm")).join("")
++Ln("M300 48V60","ax")+Tx(300,42,"1ª medición: hay tensión","tc sm")+Ln("M460 48V60","ax")+Tx(460,42,"2ª medición: no hay","tc sm")
++Ln("M412 67L428 83M428 67L412 83","w-ro thick")+Tx(420,132,"Falla entre 4 y 5","tc bd")
++Tx(20,158,"Mide al medio, descarta la mitad sana y repite","sm mt"),"Búsqueda de fallas")};
+
+/* Clase 10 */
+FIGS["10.1"]={c:"Camino desde la preparación hasta la licencia SEC clase D.",s:SV(190,
+Bx(15,70,110,50,"Preparación|10 clases")+Ar(125,95,153,95)+Rc(155,20,200,155,"s dash",6)+Tx(255,38,"Evaluación ChileValora","tc sm bd")
++Bx(170,50,170,30,"Prueba teórica","box2")+Bx(170,88,170,30,"Observación práctica","box2")+Bx(170,126,170,30,"Evidencias","box2")
++Ar(355,95,383,95)+Bx(385,70,100,50,"Certificado|competencia")+Ar(485,95,498,95)+Bx(500,70,90,50,"Licencia|SEC D","f-acc")
++Tx(590,140,"Renueva cada 5 años","end sm"),"Ruta de certificación")};
+
+FIGS["10.2"]={c:"Las cuatro áreas que observa el evaluador. Úsalas como pauta en tu simulacro.",s:SV(175,
+["Seguridad","Ejecución","Verificación","Cierre"].map((t,i)=>{const x=10+i*148;return Rc(x,10,138,155,"box",4)+Rc(x,10,138,28,"f-acc",4)+Tx(x+69,29,t,"tc bd")
++[0,1,2].map(j=>{const y=56+j*36;return Rc(x+12,y,16,16,"box2",2)+(j<2?Ln(`M${x+15} ${y+8}l4 4l7-9`,"w-ok"):"")+Rc(x+36,y+5,88,6,"f-mt",3)}).join("")}).join(""),"Pauta de cotejo")};
+
+FIGS["10.3"]={c:"Qué llevar el día de la evaluación.",s:SV(150,
+[["Cédula y","ClaveÚnica"],["Lentes",""],["Guantes","dieléctricos"],["Zapatos","dieléctricos"],["Multímetro","CAT III"],["Herramientas","aisladas"],["Calculadora",""]].map(([a,b],i)=>{const x=45+i*85,y=60;let g="";
+if(i===0)g=Rc(x-24,y-16,48,32,"s",4)+Ci(x-11,y,6)+Ln(`M${x+2} ${y-5}H${x+16}M${x+2} ${y+4}H${x+16}`);
+if(i===1)g=Ci(x-12,y,10)+Ci(x+12,y,10)+Ln(`M${x-2} ${y-2}q2-4 4 0`);
+if(i===2)g=Rc(x-12,y-12,24,32,"s",8)+Ln(`M${x-8} ${y-12}V${y-22}M${x-2} ${y-12}V${y-25}M${x+4} ${y-12}V${y-24}M${x+10} ${y-10}V${y-20}`);
+if(i===3)g=Ln(`M${x-26} ${y+16}H${x+26}V${y+8}q0-8-12-10L${x-2} ${y-10}H${x-26}Z`);
+if(i===4)g=Rc(x-15,y-22,30,44,"s",4)+Rc(x-10,y-17,20,11,"f-acc",2)+Ci(x,y+8,6);
+if(i===5)g=Ln(`M${x-16} ${y+22}L${x+6} ${y-14}M${x+16} ${y+22}L${x-6} ${y-14}`,"s thick")+Ci(x,y,3,"ink");
+if(i===6)g=Rc(x-15,y-22,30,44,"s",3)+Rc(x-10,y-17,20,9,"f-acc",1)+[0,1,2].map(r=>[0,1,2].map(c=>Rc(x-10+c*7.5,y-3+r*8,5,5,"f-mt",1)).join("")).join("");
+return g+Tx(x,y+50,a,"tc sm")+Tx(x,y+64,b,"tc sm")}).join(""),"Elementos para la evaluación")};
+
+/* ---------- Fotos referenciales (Canva IA) y enlaces reales ---------- */
+const PHOTOS={
+"1.1":["MAHZEqCRM4M","Conductor de cobre sólido con aislación de PVC."],
+"1.2":["MAHZEunRWCk","Medición de tensión en un enchufe con multímetro."],
+"1.3":["MAHZEohLMkg","Pinza amperimétrica abrazando un conductor dentro de un tablero."],
+"1.4":["MAHZEiadGDU","Conductores de distintas secciones. Ojo: los colores de esta imagen no siguen el código chileno."],
+"3.1":["MAHZEpiwAkM","Circuito simple en tablero de práctica: protección, interruptor y portalámparas."],
+"3.2":["MAHZEktTj6o","Las mismas ampolletas en serie (izquierda, brillan poco) y en paralelo (derecha, brillan completo)."],
+"5.1":["MAHZEjT04hU","Rotulación impresa en la aislación: sección, tensión y tipo. Este conductor verde/amarillo es solo para tierra."],
+"2.2":["MAHZEhwXGnA","Etiqueta de características de un hervidor: tensión, frecuencia y potencia."],
+"2.3":["MAHZEt5Ad6c","Medidor de energía. Es un modelo extranjero; en Chile el medidor se instala en la caja del empalme."],
+"2.5":["MAHZEtMNUt0","Bloqueo con candado y tarjeta de advertencia en el interruptor de un tablero."],
+"3.3":["MAHZEg6nr70","Varios equipos de alto consumo en una misma zapatilla: sus corrientes se suman."],
+"3.4":["MAHZEqwU_xY","Multímetro digital con las puntas en COM y VΩ."],
+"4.2":["MAHZEhHSrQE","Tablero domiciliario con general, diferenciales y automáticos."],
+"4.3":["MAHZEut74wQ","Automático termomagnético C16 para riel DIN."],
+"4.4":["MAHZEvjUQd8","Diferencial bipolar 25 A, 30 mA, con su botón de prueba."],
+"5.2":["MAHZEgyibR4","Conductores en los colores del RIC N°04: azul, negro, rojo, blanco y verde/amarillo."],
+"5.3":["MAHZEk5oncc","Canalizaciones llegando a cajas en un muro en obra."],
+"5.4":["MAHZEk_BxXA","Barra de tierra en su cámara de inspección, con conductor verde y abrazadera."],
+"6.1":["MAHZEoqd_ow","Interruptor en su caja, con la placa retirada."],
+"6.2":["MAHZEmRSQcw","Escalera con luz de cielo: con dos conmutadores 9/24 se controla desde abajo y desde arriba."],
+"6.3":["MAHZEs7Q1ts","Enchufe doble tipo L con la tierra al centro."],
+"6.5":["MAHZEnYGAgc","Baño con tina: el enchufe queda lejos de la tina, junto a la puerta."],
+"7.1":["MAHZElcL-kY","Lámina de proyecto con planta, unilineal y cuadro de cargas."],
+"9.1":["MAHZEnETeUk","Armado de tablero con el cableado ordenado."],
+"9.2":["MAHZEqW-yE4","Terminales (punteras) en cable flexible y alicate de terminales."],
+"9.3":["MAHZEgkUpp8","Medición de aislación con megóhmetro en un tablero."],
+"9.4":["MAHZEs0y0b8","Búsqueda de fallas midiendo en un enchufe."],
+"10.2":["MAHZElDrGoM","Evaluación práctica observada por un instructor en el taller."],
+"10.3":["MAHZEpR5TpI","Elementos de protección personal y herramientas aisladas."]
+};
+const L={
+ric04pdf:["SEC: Pliego RIC N°04 (PDF oficial)","https://www.sec.cl/sitio-web/wp-content/uploads/2021/01/RIC-N04-Conductores-y-Canalizaciones.pdf"],
+ricIdx:["Índice de los 19 pliegos RIC","https://modulor.cl/especialidades/electricidad/"],
+ric02:["Texto del RIC N°02 Tableros","https://modulor.cl/especialidades/electricidad/ric-02-tableros-electricos/"],
+ric03:["Texto del RIC N°03 Alimentadores y demanda","https://modulor.cl/especialidades/electricidad/ric-03-alimentadores-demanda/"],
+ric04:["Texto del RIC N°04 Conductores y canalizaciones","https://modulor.cl/especialidades/electricidad/ric-04-conductores-canalizaciones/"],
+ric05:["Texto del RIC N°05 Protección contra tensiones peligrosas","https://modulor.cl/especialidades/electricidad/ric-05-proteccion-tensiones-peligrosas/"],
+ric06:["Texto del RIC N°06 Puesta a tierra","https://modulor.cl/especialidades/electricidad/ric-06-puesta-a-tierra/"],
+ric10:["Texto del RIC N°10 Uso general","https://modulor.cl/especialidades/electricidad/ric-10-uso-general-alumbrado-enchufes/"],
+ric11:["Texto del RIC N°11 (sección 6: baños)","https://modulor.cl/especialidades/electricidad/ric-11-edificios-locales-reunion/"],
+ric18:["Texto del RIC N°18 Proyectos y TE1","https://modulor.cl/especialidades/electricidad/ric-18-presentacion-proyectos-te-1/"],
+ric19:["Texto del RIC N°19 Puesta en servicio","https://modulor.cl/especialidades/electricidad/ric-19-puesta-en-servicio/"],
+lic:["ChileAtiende: licencia de instalador eléctrico","https://www.chileatiende.gob.cl/fichas/2662-licencia-de-instalador-electrico"],
+edecl:["ChileAtiende: declaración por E-Declarador (TE1)","https://www.chileatiende.gob.cl/fichas/2656-declaracion-de-instalaciones-a-traves-de-e-declarador"],
+cval:["Min. Energía: certificación ChileValora clase D","https://www.energia.gob.cl/noticias/valparaiso/capital-humano-para-energia-41-nuevos-instaladores-electricos-clase-d-reciben-certificacion"],
+f117:["Fluke 117: multímetro para electricistas","https://www.fluke.com/es-cl/producto/comprobacion-electrica/multimetros-digitales/fluke-117"],
+f323:["Fluke 323: pinza amperimétrica","https://fluke.com/es-cl/producto/comprobacion-electrica/pinzas-amperimetricas/fluke-323"],
+f1507:["Fluke 1507: medidor de aislamiento","https://www.fluke.com/es-co/producto/comprobacion-electrica/comprobadores-de-aislamiento/fluke-1507"],
+e912:["Easy: interruptor simple 9/12","https://www.easy.cl/interruptor-912-16-a-250-v-gris-bticino-480171/p"],
+e915:["Easy: interruptor doble 9/15","https://www.easy.cl/interruptor-doble-915-con-casquete-modus-plus-bticino-174186/p"],
+e924:["Easy: conmutador 9/24","https://www.easy.cl/interruptor-conmutador-924-con-casquete-modus-plus-bticino-174187/p"],
+eaut:["Easy: automático termomagnético 16 A","https://www.easy.cl/interruptor-automatico-16-a-termomagnetico-bticino-174277/p"],
+edif:["Easy: diferencial 2x25 A 30 mA","https://www.easy.cl/interruptor-2-x-25-a-30-ma-diferencial-bticino-174271/p"],
+ench:["Easy: enchufe doble 10 A","https://www.easy.cl/toma-corriente-doble-10-a-modus-blanco-bticino-450014/p"],
+ebar:["Easy: barra de tierra 5/8","https://www.easy.cl/barra-tomatierra-35-micras-58-rhona-175214/p"]
+};
+const LINKS={
+"1.1":["ric04pdf"],"1.2":["f117","ric05"],"1.3":["f323"],"1.4":["ric04pdf"],
+"2.4":["ric05"],"3.4":["f117"],
+"4.1":["lic","ricIdx"],"4.2":["ric02"],"4.3":["eaut"],"4.4":["edif","ric05"],
+"5.1":["ric04pdf","ric03"],"5.2":["ric04pdf"],"5.3":["ric04"],"5.4":["ebar","ric06"],
+"6.1":["e912","e915","ric10"],"6.2":["e924"],"6.3":["ench"],"6.4":["ric10"],"6.5":["ric11"],
+"7.1":["ric18"],"7.4":["ric03"],"8.3":["ric03"],"8.4":["edecl","ric18"],
+"9.3":["f1507","ric19"],"10.1":["cval","lic"]
+};
+function realHTML(k){
+  const p=PHOTOS[k],ls=(LINKS[k]||[]).map(x=>L[x]);
+  if(!p&&!ls.length)return "";
+  const cv=p?"https://www.canva.com/M/"+p[0]:"";
+  return `<div class="real">`+
+   (p?`<figure class="photo"><a href="${cv}" target="_blank" rel="noopener"><img src="img/${k.replace(".","-")}.png" alt="${esc(p[1])}" width="200" height="150" loading="lazy"></a>
+     <figcaption>${esc(p[1])}<span class="ai">Imagen generada con IA en Canva, referencial. <a href="${cv}" target="_blank" rel="noopener">Ver en tamaño completo</a></span></figcaption></figure>`:"")+
+   (ls.length?`<div class="links"><div class="eyebrow">Ver en la realidad</div><ul>${ls.map(([t,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${esc(t)} ↗</a></li>`).join("")}</ul></div>`:"")+
+  `</div>`;
+}
+
+/* ---------- Contenido ---------- */
+const clases=[
+{n:1,w:1,d:"Lun 26 oct",t:"Qué es la electricidad",k:"Red Chile: 220 V · 50 Hz",
+pts:[
+{t:"Átomo, electrón y corriente",h:`
+<p>Todo lo que existe está hecho de <b>átomos</b>. Cada átomo tiene un núcleo con <b>protones</b> (carga positiva) y neutrones, y a su alrededor giran <b>electrones</b> (carga negativa).</p>
+<p>En los metales, como el cobre, los electrones de la capa más externa están poco amarrados a su átomo. Se llaman <b>electrones libres</b> y pueden saltar de un átomo al vecino.</p>
+<div class="idea"><b>Idea clave:</b> la corriente eléctrica es el movimiento ordenado de electrones libres a través de un material, cuando algo los empuja.</div>
+<h4>Conductores y aislantes</h4>
+<div class="tw"><table><tr><th>Conductores (dejan pasar corriente)</th><th>Aislantes (la frenan casi por completo)</th></tr>
+<tr><td>Cobre, aluminio, plata, acero</td><td>PVC, goma, vidrio, porcelana</td></tr>
+<tr><td>Agua con sales (llave, lluvia, sudor)</td><td>Aire seco, madera seca</td></tr>
+<tr><td>El cuerpo humano</td><td>Plásticos de las cajas y tableros</td></tr></table></div>
+<p>Por eso un cable tiene cobre por dentro (para conducir) y una cubierta plástica por fuera (para aislar y protegerte). Cuando esa aislación se daña, aparece el riesgo de contacto y de cortocircuito.</p>
+<div class="warn">El cuerpo humano conduce. Mientras más húmeda la piel, más fácil pasa la corriente. Esto explica las exigencias especiales en baños y zonas húmedas que verás en la clase 6.</div>`},
+{t:"Tensión: la presión que empuja (V)",h:`
+<p>La <b>tensión</b> (también llamada voltaje o diferencia de potencial) es la fuerza que empuja a los electrones a moverse entre dos puntos. Se mide en <b>volt (V)</b>.</p>
+<p>La analogía clásica es una red de agua: la tensión equivale a la <b>presión</b>. Sin presión el agua no se mueve; sin tensión no hay corriente.</p>
+<h4>Valores que debes conocer</h4>
+<div class="tw"><table><tr><th>Fuente</th><th class="n">Tensión</th></tr>
+<tr><td>Pila AA</td><td class="n">1,5 V CC</td></tr><tr><td>Batería de auto</td><td class="n">12 V CC</td></tr>
+<tr><td>Red domiciliaria monofásica (fase y neutro)</td><td class="n">220 V CA</td></tr>
+<tr><td>Red trifásica (entre dos fases)</td><td class="n">380 V CA</td></tr>
+<tr><td>Tensión de seguridad en lugar seco</td><td class="n">50 V CA</td></tr>
+<tr><td>Tensión de seguridad en lugar húmedo o mojado</td><td class="n">24 V CA</td></tr></table></div>
+<p class="norm">Tensiones de seguridad: RIC N°05, punto 5.8.</p>
+<h4>Cómo se mide</h4>
+<p>Con un <b>voltímetro</b> (el multímetro en modo V). Las puntas se apoyan en los dos puntos entre los que quieres conocer la tensión: se mide <b>en paralelo</b>, sin cortar el circuito.</p>
+<h4>Las tres líneas de un enchufe</h4>
+<ul><li><b>Fase:</b> el conductor con tensión. Entre fase y neutro hay 220 V.</li>
+<li><b>Neutro:</b> el conductor de retorno. Está conectado a tierra en el origen de la instalación, por eso respecto de tierra marca casi 0 V.</li>
+<li><b>Tierra de protección:</b> no lleva corriente en uso normal. Solo conduce si hay una falla, para que actúe la protección.</li></ul>`},
+{t:"Corriente: el caudal de electrones (A)",h:`
+<p>La <b>corriente</b> es la cantidad de carga eléctrica que pasa por un punto en cada segundo. Se mide en <b>ampere (A)</b>. En la analogía del agua es el <b>caudal</b>.</p>
+<h4>Continua y alterna</h4>
+<ul><li><b>Corriente continua (CC o DC):</b> circula siempre en el mismo sentido. Pilas, baterías, paneles solares, cargadores.</li>
+<li><b>Corriente alterna (CA o AC):</b> cambia de sentido muchas veces por segundo. En Chile la red es de <b>50 Hz</b>: 50 ciclos completos por segundo. Es la que llega a las casas.</li></ul>
+<h4>Cómo se mide</h4>
+<p>Con un <b>amperímetro</b>, que se conecta <b>en serie</b> (el circuito se abre y la corriente pasa por el instrumento), o con una <b>pinza amperimétrica</b>, que abraza un solo conductor sin cortarlo. En terreno se usa casi siempre la pinza.</p>
+<div class="warn">Si la pinza abraza fase y neutro juntos, marca casi cero: las dos corrientes van en sentido opuesto y se anulan. Abraza un solo conductor.</div>
+<h4>Corrientes típicas a 220 V</h4>
+<div class="tw"><table><tr><th>Equipo</th><th class="n">Potencia</th><th class="n">Corriente aprox.</th></tr>
+<tr><td>Ampolleta LED</td><td class="n">9 W</td><td class="n">0,04 A</td></tr>
+<tr><td>Refrigerador</td><td class="n">150 W</td><td class="n">0,7 A</td></tr>
+<tr><td>Estufa eléctrica</td><td class="n">1500 W</td><td class="n">6,8 A</td></tr>
+<tr><td>Hervidor</td><td class="n">2000 W</td><td class="n">9,1 A</td></tr>
+<tr><td>Horno eléctrico</td><td class="n">3000 W</td><td class="n">13,6 A</td></tr></table></div>
+<div class="idea">Lo que hace daño al cuerpo y calienta los cables es la <b>corriente</b>. La tensión es lo que la empuja.</div>`},
+{t:"Resistencia: lo que frena (Ω)",h:`
+<p>La <b>resistencia</b> es la oposición que presenta un material al paso de la corriente. Se mide en <b>ohm (Ω)</b>. En la analogía es una cañería angosta o con roce.</p>
+<h4>De qué depende la resistencia de un cable</h4>
+<ul><li><b>Material:</b> cada uno tiene su resistividad (ρ). Cobre ≈ 0,018 Ω·mm²/m.</li>
+<li><b>Largo (L):</b> más largo, más resistencia.</li>
+<li><b>Sección (S):</b> más grueso, menos resistencia.</li>
+<li><b>Temperatura:</b> en el cobre, a mayor temperatura, más resistencia.</li></ul>
+<code class="f">R = ρ · L / S</code>
+<h4>Ejemplo resuelto</h4>
+<p>Un circuito de enchufes está a 20 m del tablero, con cable de 2,5 mm². La corriente va por la fase y vuelve por el neutro, así que el recorrido es 40 m.</p>
+<code class="f">R = 0,018 × 40 / 2,5 = 0,288 Ω</code>
+<p>Si ese tramo fuera de 1,5 mm²: R = 0,018 × 40 / 1,5 = 0,48 Ω. Más resistencia significa más calor y más caída de tensión.</p>
+<h4>Resistencia y calor</h4>
+<p>Toda corriente que pasa por una resistencia produce calor (<b>efecto Joule</b>). Es útil en una estufa o un hervidor, pero peligroso en un cable: un conductor demasiado delgado para la corriente que lleva se calienta, se daña la aislación y puede iniciar un incendio. Por eso cada conductor tiene su protección, que verás en la clase 4.</p>
+<div class="warn">La resistencia se mide con el óhmetro <b>siempre sin tensión</b>. Medir ohms en un circuito energizado daña el instrumento y es peligroso.</div>`}],
+taller:`<h3>Práctica: tensión, corriente y resistencia</h3><div class="idea">Estas actividades no necesitan materiales del taller: usan simuladores gratuitos, observación de instalaciones sin intervenirlas y ejercicios en papel.</div>
+<h4>1. Simulador (30 min)</h4>
+<p>Abre <a href="https://phet.colorado.edu/es/simulations/circuit-construction-kit-dc" target="_blank" rel="noopener">PhET: kit de construcción de circuitos CC ↗</a>, elige "Laboratorio" y arma una pila, un interruptor y una ampolleta.</p>
+<ol><li>Mide la tensión de la pila con el voltímetro virtual (puntas en paralelo).</li>
+<li>Mide la corriente con el amperímetro virtual (en serie).</li>
+<li>Cambia la resistencia de la ampolleta y anota qué pasa con la corriente.</li>
+<li>Aumenta la tensión de la pila y anota otra vez la corriente.</li></ol>
+<h4>2. Placas de tu casa (20 min)</h4>
+<p>Busca la placa de 5 equipos (hervidor, microondas, plancha, refrigerador, cargador) y completa una tabla: tensión, frecuencia y potencia. Sin desenchufar ni abrir nada.</p>
+<h4>3. Pregunta de cierre</h4>
+<p>Con tus datos del simulador, responde la pregunta de la Clase 1: si sube la tensión y la resistencia no cambia, ¿qué pasa con la corriente?</p>`,
+quiz:[
+{q:"Si aumentas la tensión y la resistencia se mantiene igual, ¿qué pasa con la corriente?",o:["Disminuye","Aumenta","No cambia"],a:1,e:"Más presión con la misma cañería significa más caudal. Es la Ley de Ohm: I = V / R."},
+{q:"¿En qué unidad se mide la corriente?",o:["Volt","Ohm","Ampere","Watt"],a:2,e:"La corriente se mide en ampere (A)."},
+{q:"Dos cables de cobre del mismo largo, uno de 1,5 mm² y otro de 4 mm². ¿Cuál tiene menos resistencia?",o:["El de 1,5 mm²","El de 4 mm²","Tienen la misma"],a:1,e:"A mayor sección, menor resistencia: R = ρ·L/S."},
+{q:"¿Cuál es la frecuencia de la red eléctrica en Chile?",o:["60 Hz","50 Hz","220 Hz"],a:1,e:"En Chile la red es de 220 V y 50 Hz."},
+{q:"¿Cómo se conecta un voltímetro?",o:["En serie, abriendo el circuito","En paralelo, entre los dos puntos","Abrazando un conductor"],a:1,e:"La tensión se mide en paralelo. En serie se mide corriente; abrazando un conductor trabaja la pinza amperimétrica."}]},
+
+{n:2,w:1,d:"Mar 27 oct",t:"Ley de Ohm, potencia y seguridad",k:"V = I·R   P = V·I",
+pts:[
+{t:"Ley de Ohm",h:`
+<p>La Ley de Ohm relaciona las tres magnitudes de la clase 1. Es la fórmula más usada por un instalador.</p>
+<code class="f">V = I · R        I = V / R        R = V / I</code>
+<p>Para recordarla, dibuja un triángulo con V arriba e I y R abajo. Tapa la que buscas: lo que queda indica la operación.</p>
+<h4>Ejemplos resueltos</h4>
+<ol><li><b>Estufa:</b> su resistencia mide 32 Ω y se conecta a 220 V. I = 220 / 32 = <b>6,9 A</b>.</li>
+<li><b>Resistencia de un equipo:</b> por un hervidor pasan 9,1 A a 220 V. R = 220 / 9,1 = <b>24,2 Ω</b>.</li>
+<li><b>Cuerpo humano:</b> una persona con manos húmedas puede tener cerca de 1000 Ω entre mano y pie. Si toca una fase: I = 220 / 1000 = 0,22 A = <b>220 mA</b>. Como verás en el punto 4, eso puede ser mortal.</li></ol>
+<div class="idea">Respuesta a la pregunta de la clase 1: con la resistencia fija, si la tensión sube, la corriente sube en la misma proporción. Al doble de tensión, el doble de corriente.</div>`},
+{t:"Potencia: Ley de Watt (W)",h:`
+<p>La <b>potencia</b> es la rapidez con que un equipo transforma la energía eléctrica en luz, calor o movimiento. Se mide en <b>watt (W)</b>; 1 kW = 1000 W.</p>
+<code class="f">P = V · I        I = P / V        P = I² · R        P = V² / R</code>
+<p>La potencia aparece en la placa de cada equipo. Con ella calculas la corriente, que es lo que necesitas para elegir cable y protección.</p>
+<h4>Ejemplos resueltos</h4>
+<ol><li>Hervidor de 2000 W a 220 V: I = 2000 / 220 = <b>9,1 A</b>.</li>
+<li>¿Cuánta potencia aguanta un circuito protegido con 10 A? P = 220 × 10 = <b>2200 W</b>.</li>
+<li>¿Y uno de 16 A? P = 220 × 16 = <b>3520 W</b>.</li>
+<li>Un hervidor (2000 W) y una estufa (1500 W) en el mismo circuito: 3500 W, I = 15,9 A. En un circuito de 10 A, el automático va a cortar.</li></ol>
+<div class="warn">Las fórmulas P = V·I se aplican tal cual a cargas resistivas (estufas, hervidores, ampolletas incandescentes). En motores y equipos electrónicos aparece el factor de potencia (cos φ): P = V·I·cos φ. Para la vivienda, la aproximación P = V·I es la que usarás.</div>`},
+{t:"Energía, kWh y la boleta",h:`
+<p>La <b>energía</b> es potencia por tiempo. Lo que cobra la distribuidora es energía, en <b>kilowatt-hora (kWh)</b>.</p>
+<code class="f">E (kWh) = P (kW) × t (h)</code>
+<h4>Ejemplos resueltos</h4>
+<ol><li>Estufa de 1500 W encendida 4 horas: 1,5 × 4 = <b>6 kWh</b>.</li>
+<li>Hervidor de 2000 W, 15 minutos al día, durante 30 días: 2 × 0,25 × 30 = <b>15 kWh</b> al mes.</li>
+<li>Ampolleta LED de 9 W, 5 horas al día, 30 días: 0,009 × 5 × 30 = <b>1,35 kWh</b> al mes.</li></ol>
+<h4>Cómo leer la boleta</h4>
+<ul><li><b>Lectura anterior y lectura actual</b> del medidor: la diferencia es el consumo del período en kWh.</li>
+<li><b>Tarifa:</b> las viviendas normalmente tienen tarifa BT1 (baja tensión, simple).</li>
+<li><b>Cargos:</b> energía consumida (kWh × precio), cargo fijo, transporte y otros.</li></ul>
+<p>Para calcular el costo de un equipo multiplicas sus kWh por el precio del kWh de tu boleta. El precio cambia según la distribuidora y la fecha, así que usa siempre el de una boleta real.</p>`},
+{t:"Efectos de la corriente en el cuerpo",h:`
+<p>El daño depende principalmente de la <b>intensidad</b> de la corriente, del <b>tiempo</b> que dura el paso y del <b>trayecto</b> por el cuerpo (mano a mano o mano a pie, cruzando el corazón, es el más peligroso).</p>
+<div class="tw"><table><tr><th class="n">Corriente aproximada (CA 50 Hz)</th><th>Efecto</th></tr>
+<tr><td class="n">0,5 mA</td><td>Umbral de percepción: se siente un cosquilleo</td></tr>
+<tr><td class="n">10 mA</td><td>Contracción muscular: la persona puede no ser capaz de soltar</td></tr>
+<tr><td class="n">30 mA</td><td>Dificultad respiratoria; por eso los diferenciales para personas son de 30 mA</td></tr>
+<tr><td class="n">50 a 100 mA</td><td>Riesgo de fibrilación ventricular: el corazón deja de bombear</td></tr>
+<tr><td class="n">Sobre 1 A</td><td>Quemaduras graves internas y externas</td></tr></table></div>
+<p class="norm">Valores de referencia aproximados; varían según la persona y el tiempo de exposición.</p>
+<h4>Contacto directo e indirecto</h4>
+<ul><li><b>Contacto directo:</b> tocar una parte que normalmente tiene tensión, como un cable pelado o un borne.</li>
+<li><b>Contacto indirecto:</b> tocar una parte metálica que normalmente no tiene tensión, pero que quedó energizada por una falla, como la carcasa de una lavadora.</li></ul>
+<p class="norm">Definiciones: RIC N°05, puntos 5.2.1 y 5.2.2.</p>
+<div class="idea">Contra el contacto directo protegen la aislación, las barreras y envolventes y, como complemento, el diferencial. Contra el indirecto protegen la puesta a tierra junto con el corte automático.</div>`},
+{t:"Las 5 reglas de oro",h:`
+<p>Son el procedimiento para dejar una instalación <b>sin tensión</b> antes de trabajar. Se hacen en este orden, todas, siempre.</p>
+<ol><li><b>Cortar todas las fuentes de tensión.</b> Abrir el interruptor general o la protección del circuito, con corte visible o efectivo. Ojo con instalaciones que tienen más de una alimentación, como generadores o paneles solares.</li>
+<li><b>Bloquear y señalizar el corte.</b> Candado o bloqueo en el interruptor y un letrero que diga que se está trabajando, para que nadie lo reponga.</li>
+<li><b>Verificar la ausencia de tensión.</b> Con un instrumento probado antes y después en una fuente con tensión. Se verifica en todos los conductores.</li>
+<li><b>Poner a tierra y en cortocircuito.</b> Unir los conductores entre sí y a tierra, para que cualquier reposición accidental haga actuar la protección. En viviendas se aplica sobre todo en trabajos en líneas y tableros mayores.</li>
+<li><b>Delimitar y señalizar la zona de trabajo.</b> Marcar el área y separar las partes con tensión cercanas.</li></ol>
+<div class="warn">La regla que más accidentes evita es la 3. Nunca confíes en que "ya bajé el automático": mide.</div>
+<h4>Elementos de protección personal mínimos</h4>
+<ul><li>Zapatos de seguridad dieléctricos y ropa de algodón (no sintética).</li>
+<li>Guantes dieléctricos de la clase adecuada a la tensión, más lentes de seguridad.</li>
+<li>Herramientas aisladas (destornilladores y alicates con aislación certificada).</li></ul>`}],
+taller:`<h3>Práctica: guía de ejercicios</h3><div class="idea">Estas actividades no necesitan materiales del taller: usan simuladores gratuitos, observación de instalaciones sin intervenirlas y ejercicios en papel.</div>
+<p>Resuelve cada ejercicio en tu cuaderno y luego despliega la solución.</p>
+<details><summary>1. Una ampolleta de 100 W a 220 V. ¿Qué corriente consume?</summary>I = 100 / 220 = 0,45 A</details>
+<details><summary>2. ¿Cuál es la resistencia de esa ampolleta encendida?</summary>R = V² / P = 220² / 100 = 484 Ω</details>
+<details><summary>3. Un calefactor tiene 22 Ω. ¿Qué corriente y qué potencia tiene a 220 V?</summary>I = 220 / 22 = 10 A. P = 220 × 10 = 2200 W</details>
+<details><summary>4. Un horno consume 13 A. ¿Qué potencia tiene?</summary>P = 220 × 13 = 2860 W</details>
+<details><summary>5. ¿Cuántas estufas de 1000 W soporta un circuito de 16 A?</summary>Capacidad: 220 × 16 = 3520 W. Caben 3 estufas (3000 W). Una cuarta lo sobrecarga.</details>
+<details><summary>6. Una lavadora de 2000 W funciona 1,5 h por lavado y se usa 12 veces al mes. ¿Cuántos kWh consume?</summary>2 × 1,5 × 12 = 36 kWh al mes</details>
+<details><summary>7. Con tu última boleta de luz: ¿cuántos kWh consumiste y cuánto cuesta el kWh?</summary>Consumo = lectura actual − lectura anterior. Precio = cargo por energía / kWh consumidos.</details>
+<details><summary>8. Una persona de 2000 Ω toca 220 V. ¿Qué corriente pasa? ¿Es peligrosa?</summary>I = 220 / 2000 = 0,11 A = 110 mA. Sí: está en el rango de fibrilación ventricular.</details>
+<details><summary>9. ¿Qué tensión hay en una resistencia de 5 Ω por la que pasan 4 A?</summary>V = 4 × 5 = 20 V</details>
+<details><summary>10. Un cable de 40 m de recorrido total y 1,5 mm² lleva 10 A. ¿Cuántos watts se pierden en calor?</summary>R = 0,018 × 40 / 1,5 = 0,48 Ω. P = I² × R = 100 × 0,48 = 48 W.</details>
+<p>Después escribe de memoria las 5 reglas de oro y compáralas con la pestaña correspondiente.</p>`,
+quiz:[
+{q:"Un equipo de 2200 W a 220 V consume:",o:["1 A","10 A","22 A"],a:1,e:"I = P / V = 2200 / 220 = 10 A."},
+{q:"¿A partir de qué corriente aproximada una persona puede no ser capaz de soltar el conductor?",o:["0,5 mA","10 mA","1 A"],a:1,e:"Cerca de 10 mA se produce contracción muscular (tetanización)."},
+{q:"¿Cuál es la tercera regla de oro?",o:["Señalizar la zona","Verificar ausencia de tensión","Cortar las fuentes"],a:1,e:"Orden: cortar, bloquear y señalizar el corte, verificar ausencia de tensión, poner a tierra y en cortocircuito, delimitar la zona."},
+{q:"Tocar la carcasa de una lavadora que quedó energizada por una falla es un contacto:",o:["Directo","Indirecto"],a:1,e:"Indirecto: la carcasa normalmente no tiene tensión, pero quedó energizada por una falla."},
+{q:"Una estufa de 1500 W usada 2 horas consume:",o:["0,75 kWh","3 kWh","3000 kWh"],a:1,e:"E = 1,5 kW × 2 h = 3 kWh."}]},
+
+{n:3,w:1,d:"Mié 28 oct",t:"Circuitos serie y paralelo",k:"Serie: Req = R1 + R2",
+pts:[
+{t:"Partes de un circuito y sus estados",h:`
+<p>Un circuito eléctrico es un camino cerrado por donde circula la corriente. Tiene cinco partes:</p>
+<ol><li><b>Fuente:</b> entrega la tensión (la red, una batería).</li>
+<li><b>Conductores:</b> llevan la corriente de ida (fase) y de vuelta (neutro).</li>
+<li><b>Carga o receptor:</b> el equipo que usa la energía (ampolleta, estufa, motor).</li>
+<li><b>Elemento de control:</b> abre o cierra el paso (interruptor).</li>
+<li><b>Protección:</b> corta si algo anda mal (automático, diferencial).</li></ol>
+<h4>Estados de un circuito</h4>
+<div class="tw"><table><tr><th>Estado</th><th>Qué pasa</th></tr>
+<tr><td>Abierto</td><td>El camino está interrumpido: no hay corriente. Ej.: interruptor apagado o cable cortado.</td></tr>
+<tr><td>Cerrado</td><td>La corriente circula por la carga: funcionamiento normal.</td></tr>
+<tr><td>Cortocircuito</td><td>Fase y neutro (o fase y tierra) se tocan sin carga entre medio. La resistencia es casi cero y la corriente se dispara a cientos o miles de ampere. Debe cortar la parte magnética del automático en milisegundos.</td></tr>
+<tr><td>Sobrecarga</td><td>Se conectan más equipos de lo que el circuito soporta. La corriente supera lo admisible de forma moderada y el cable se calienta lentamente. Debe cortar la parte térmica del automático.</td></tr></table></div>`},
+{t:"Circuito en serie",h:`
+${FIG_SERIE}
+<p>En un circuito <b>serie</b> las cargas están una a continuación de la otra: hay <b>un solo camino</b>.</p>
+<ul><li>La <b>corriente es la misma</b> en todas las cargas.</li>
+<li>La <b>tensión se reparte</b> entre ellas.</li>
+<li>La resistencia total es la <b>suma</b>.</li>
+<li>Si una carga se corta, se apagan todas.</li></ul>
+<code class="f">Req = R1 + R2 + R3 ...</code>
+<h4>Ejemplo resuelto</h4>
+<p>Dos ampolletas incandescentes de 100 W (484 Ω cada una) en serie a 220 V:</p>
+<code class="f">Req = 484 + 484 = 968 Ω
+I = 220 / 968 = 0,227 A
+Tensión en cada una = 0,227 × 484 = 110 V
+Potencia de cada una = 110 × 0,227 = 25 W</code>
+<p>Cada ampolleta recibe solo la mitad de la tensión y brilla muy poco. Por eso <b>las cargas de una casa no se conectan en serie</b>.</p>
+<div class="idea">Donde sí usas serie: el interruptor va en serie con la ampolleta, y la protección va en serie con el circuito que protege.</div>`},
+{t:"Circuito en paralelo",h:`
+<p>En un circuito <b>paralelo</b> cada carga tiene su propio camino entre fase y neutro.</p>
+<ul><li>La <b>tensión es la misma</b> en todas: 220 V.</li>
+<li>Las <b>corrientes se suman</b> en el tramo común.</li>
+<li>Si una carga se desconecta, las demás siguen funcionando.</li>
+<li>La resistencia total es menor que la menor de ellas.</li></ul>
+<code class="f">1/Req = 1/R1 + 1/R2 + ...      (dos iguales: Req = R/2)
+I total = I1 + I2 + I3 ...</code>
+<h4>Ejemplo resuelto</h4>
+<p>Las mismas dos ampolletas de 484 Ω, ahora en paralelo: Req = 242 Ω, I total = 220 / 242 = 0,91 A. Cada una recibe 220 V y entrega sus 100 W.</p>
+<h4>Por qué esto importa al instalador</h4>
+<p>Todos los enchufes y luces de un circuito están en paralelo, así que sus corrientes se suman en el conductor que sale del tablero. Ejemplo en un circuito de 16 A:</p>
+<code class="f">Hervidor 9,1 A + estufa 6,8 A + secador 5,5 A = 21,4 A  →  supera 16 A</code>
+<p>El automático corta por sobrecarga. Esa suma de corrientes es la base del cálculo de circuitos de la clase 8.</p>`},
+{t:"El multímetro y la pinza",h:`
+<h4>Partes</h4>
+<ul><li><b>Selector:</b> elige la magnitud y el rango.</li>
+<li><b>Bornes:</b> COM (negro, siempre), VΩ (rojo, para tensión, resistencia y continuidad) y 10 A o A (rojo, solo para medir corriente en serie).</li>
+<li><b>Categoría:</b> para tableros y enchufes domiciliarios usa CAT III 600 V o superior.</li></ul>
+<h4>Cómo medir cada cosa</h4>
+<div class="tw"><table><tr><th>Medición</th><th>Selector</th><th>Cómo</th><th>Con tensión</th></tr>
+<tr><td>Tensión alterna</td><td>V~</td><td>Puntas en paralelo entre los dos puntos</td><td>Sí</td></tr>
+<tr><td>Resistencia</td><td>Ω</td><td>Puntas en los extremos del elemento, desconectado</td><td>Nunca</td></tr>
+<tr><td>Continuidad</td><td>Símbolo de sonido</td><td>Suena si hay camino de baja resistencia. Sirve para probar cables, fusibles e identificar conductores</td><td>Nunca</td></tr>
+<tr><td>Corriente</td><td>A con la pinza</td><td>Abrazar un solo conductor</td><td>Sí</td></tr></table></div>
+<div class="warn"><b>Error clásico:</b> dejar la punta roja en el borne de corriente (A) y medir tensión en un enchufe. Eso es un cortocircuito a través del instrumento. Antes de medir tensión revisa siempre bornes y selector.</div>
+<h4>Probador de tensión</h4>
+<p>El destornillador buscapolos sirve para orientarse, pero no para verificar ausencia de tensión en la regla 3. Para eso usa un multímetro o un detector de tensión bipolar.</p>`}],
+taller:`<h3>Práctica: serie y paralelo en simulador</h3><div class="idea">Estas actividades no necesitan materiales del taller: usan simuladores gratuitos, observación de instalaciones sin intervenirlas y ejercicios en papel.</div>
+<p>Abre <a href="https://phet.colorado.edu/es/simulations/circuit-construction-kit-dc" target="_blank" rel="noopener">PhET: kit de construcción de circuitos CC ↗</a> en modo "Laboratorio".</p>
+<ol><li><b>Serie:</b> conecta dos ampolletas iguales en serie a una pila. Mide con el voltímetro la tensión en cada una y con el amperímetro la corriente. Observa el brillo.</li>
+<li><b>Paralelo:</b> conecta las mismas dos ampolletas en paralelo. Mide tensiones y corrientes. Compara el brillo.</li>
+<li>Saca una ampolleta en cada montaje. ¿Qué pasa con la otra?</li>
+<li><b>Continuidad virtual:</b> usa el óhmetro del simulador sobre un cable y sobre un cable cortado.</li>
+<li><b>Suma de corrientes:</b> agrega una tercera ampolleta en paralelo y comprueba que la corriente total es la suma.</li></ol>
+<p>Anota todos los valores en una tabla y compáralos con el cálculo de la Clase 3.</p>`,
+quiz:[
+{q:"En un circuito en paralelo, ¿qué es igual para todas las cargas?",o:["La corriente","La tensión","La potencia"],a:1,e:"En paralelo todas las cargas reciben la misma tensión."},
+{q:"Tres resistencias de 10, 20 y 30 Ω en serie suman:",o:["5,5 Ω","30 Ω","60 Ω"],a:2,e:"En serie se suman: 10 + 20 + 30 = 60 Ω."},
+{q:"¿Qué protege contra el cortocircuito?",o:["La parte térmica del automático","La parte magnética del automático","El diferencial"],a:1,e:"La parte magnética actúa instantáneamente ante corrientes muy altas."},
+{q:"Para medir resistencia el circuito debe estar:",o:["Energizado","Sin tensión"],a:1,e:"Siempre sin tensión."},
+{q:"¿Por qué las cargas de una vivienda van en paralelo?",o:["Para que cada una reciba 220 V y funcione de forma independiente","Para que la corriente sea la misma","Para gastar menos cable"],a:0,e:"En paralelo cada carga recibe la tensión completa y si una falla las demás siguen."}]},
+
+{n:4,w:1,d:"Jue 29 oct",t:"Pliegos RIC y el tablero",k:"Diferencial: 30 mA",
+pts:[
+{t:"La normativa: SEC y pliegos RIC",h:`
+<p>La <b>Superintendencia de Electricidad y Combustibles (SEC)</b> fiscaliza las instalaciones eléctricas y otorga las licencias de instalador.</p>
+<p>Las exigencias técnicas de las instalaciones de consumo están en los <b>Pliegos Técnicos Normativos RIC</b>, dictados por la SEC mediante la Resolución Exenta N°33.877 de 2020, publicada en enero de 2021. Reemplazaron a la antigua <b>NCh Elec. 4/2003</b>: si un apunte o video usa esa norma, está desactualizado.</p>
+<div class="tw"><table><tr><th>Pliego</th><th>Tema</th><th>Para la clase D</th></tr>
+<tr><td>RIC N°01</td><td>Empalmes</td><td>Conocer</td></tr>
+<tr><td>RIC N°02</td><td>Tableros eléctricos</td><td>Dominar</td></tr>
+<tr><td>RIC N°03</td><td>Alimentadores y demanda</td><td>Conocer</td></tr>
+<tr><td>RIC N°04</td><td>Conductores y canalizaciones</td><td>Dominar</td></tr>
+<tr><td>RIC N°05</td><td>Protección contra tensiones peligrosas</td><td>Dominar</td></tr>
+<tr><td>RIC N°06</td><td>Puesta a tierra y equipotencialidad</td><td>Dominar</td></tr>
+<tr><td>RIC N°10</td><td>Instalaciones de uso general (viviendas)</td><td>Dominar</td></tr>
+<tr><td>RIC N°11</td><td>Instalaciones especiales (incluye baños)</td><td>Conocer sección 6</td></tr>
+<tr><td>RIC N°18 y N°19</td><td>Presentación de proyectos (TE1) y puesta en servicio</td><td>Conocer</td></tr></table></div>
+<p>Descárgalos gratis desde <a href="https://www.sec.cl" target="_blank" rel="noopener">sec.cl</a>.</p>
+<h4>Qué puede hacer un instalador clase D</h4>
+<p>Instalaciones de baja tensión con una potencia instalada total de hasta <b>10 kW</b>. Es la licencia típica para viviendas y locales pequeños. Las clases C (hasta 100 kW), B (hasta 500 kW) y A (sin límite) cubren instalaciones mayores.</p>
+<div class="warn">El Ministerio de Energía tiene en consulta un nuevo reglamento de instaladores que podría cambiar las clases. Confirma con el organismo evaluador qué rige al momento de tu evaluación.</div>`},
+{t:"El tablero y sus partes",h:`
+<p>El recorrido de la energía en una vivienda es:</p>
+<code class="f">Red → Empalme → Medidor → Protección del empalme → Alimentador → Tablero → Circuitos</code>
+<h4>Componentes de un tablero domiciliario</h4>
+<ol><li><b>Interruptor general</b> (automático general): corta toda la instalación. Debe ser de corte omnipolar (fase y neutro).</li>
+<li><b>Diferenciales:</b> protegen a las personas. Cada uno cubre a lo más 3 circuitos.</li>
+<li><b>Automáticos</b> (termomagnéticos) de cada circuito: protegen los conductores.</li>
+<li><b>Barra o regleta de neutros</b> y <b>barra de tierra</b>.</li>
+<li><b>Riel DIN</b> donde se montan las protecciones.</li>
+<li><b>Rótulos y cuadro de circuitos:</b> número y función de cada circuito.</li></ol>
+<h4>Exigencias del RIC N°02 que debes saber</h4>
+<ul><li>No se acepta tablero abierto. Grado de protección mínimo <b>IP 41</b> en interior, IP 44 en exterior bajo techo e IP 54 a la intemperie.</li>
+<li>Dispositivos de accionamiento entre <b>0,45 m y 2,0 m</b> sobre el piso terminado.</li>
+<li>Prever <b>25% de reserva</b> de espacio para ampliaciones en instalaciones nuevas.</li>
+<li>Cuadro que identifique cada circuito con su número y función, y <b>diagrama unilineal</b> actualizado.</li>
+<li>Cada protección rotulada con su número de circuito.</li>
+<li>Barras desnudas con barrera contra contacto directo.</li>
+<li>Ubicado en lugar seguro y de fácil acceso.</li></ul>
+<p class="norm">RIC N°02: 6.1.21, 6.1.22, 6.1.16.3, 5.3.6, 5.3.7, 6.2.3, 5.2. RIC N°10: 5.1.3.7.</p>`},
+{t:"El automático termomagnético",h:`
+<p>El automático protege al <b>conductor</b> contra dos problemas distintos, con dos mecanismos dentro del mismo aparato:</p>
+<div class="tw"><table><tr><th>Parte</th><th>Funciona con</th><th>Protege contra</th><th>Velocidad</th></tr>
+<tr><td>Térmica</td><td>Una lámina bimetálica que se curva al calentarse</td><td>Sobrecarga</td><td>Lenta: segundos a minutos según el exceso</td></tr>
+<tr><td>Magnética</td><td>Una bobina que atrae un núcleo ante corrientes muy altas</td><td>Cortocircuito</td><td>Instantánea: milisegundos</td></tr></table></div>
+<h4>Datos de la placa</h4>
+<ul><li><b>Corriente nominal (In):</b> 6, 10, 16, 20, 25, 32 A...</li>
+<li><b>Curva:</b> letra antes del número, por ejemplo C16.</li>
+<li><b>Poder de corte:</b> la máxima corriente de cortocircuito que puede cortar sin dañarse, en kA (por ejemplo 6 kA).</li>
+<li><b>Polos:</b> 1P, 2P (fase y neutro), 3P o 4P.</li></ul>
+<h4>Curvas de disparo magnético</h4>
+<div class="tw"><table><tr><th>Curva</th><th>Dispara instantáneo entre</th><th>Uso típico</th></tr>
+<tr><td>B</td><td>3 y 5 veces In</td><td>Cargas resistivas, circuitos largos</td></tr>
+<tr><td>C</td><td>5 y 10 veces In</td><td>Uso general en viviendas: alumbrado, enchufes, pequeños motores</td></tr>
+<tr><td>D</td><td>10 y 20 veces In</td><td>Motores grandes, transformadores (alto arranque)</td></tr></table></div>
+<div class="idea"><b>Regla de oro de la protección:</b> la corriente nominal del automático nunca puede ser mayor que la capacidad del conductor. Un cable de 1,5 mm² con un automático de 25 A es un incendio esperando a ocurrir.</div>`},
+{t:"El protector diferencial",h:`
+<p>El diferencial protege a las <b>personas</b>. Compara la corriente que sale por la fase con la que vuelve por el neutro.</p>
+<ul><li>En condiciones normales son iguales.</li>
+<li>Si una parte de la corriente se va a tierra (por una carcasa con falla o por el cuerpo de una persona), vuelve menos por el neutro.</li>
+<li>Cuando esa diferencia llega a la sensibilidad del aparato (<b>IΔn</b>), corta en milisegundos.</li></ul>
+<h4>Datos de la placa</h4>
+<ul><li><b>Sensibilidad IΔn:</b> 30 mA para protección de personas; 300 mA para protección contra incendio.</li>
+<li><b>Corriente nominal:</b> 25, 40, 63 A. Es lo que aguanta pasar, no una protección contra sobrecarga.</li>
+<li><b>Tipo:</b> AC, A o B. El RIC N°05 indica tipo A para corrientes no senoidales (equipos electrónicos) y tipo B cuando puede haber corriente continua de falla.</li>
+<li><b>Botón de prueba (T):</b> se presiona periódicamente para comprobar que dispara.</li></ul>
+<h4>Exigencias</h4>
+<ul><li>Todos los circuitos de iluminación y enchufes con diferencial de <b>30 mA o menos</b>.</li>
+<li>Máximo <b>3 circuitos</b> por diferencial.</li>
+<li>El diferencial va coordinado con un termomagnético (5.1.3.6): su corriente nominal no debe quedar por debajo de la del automático que lo protege, o de la suma de los automáticos que tiene aguas abajo.</li></ul>
+<p class="norm">RIC N°10: 5.1.3.5, 5.1.3.6, 5.1.3.7. RIC N°05: 7.8.</p>
+<div class="warn">El diferencial <b>no</b> protege contra sobrecarga ni cortocircuito entre fase y neutro. Por eso siempre va junto con automáticos.</div>`}],
+taller:`<h3>Práctica: leer un tablero sin abrirlo</h3><div class="idea">Estas actividades no necesitan materiales del taller: usan simuladores gratuitos, observación de instalaciones sin intervenirlas y ejercicios en papel.</div>
+<p>Usa el tablero de tu casa o del colegio, <b>sin quitar la tapa</b>. Solo observa y anota lo que está a la vista en el frente de los aparatos:</p>
+<ol><li>Interruptor general: corriente nominal, curva y número de polos.</li>
+<li>Cada diferencial: sensibilidad (mA), corriente nominal y cuántos circuitos cubre.</li>
+<li>Cada automático: corriente nominal y curva (por ejemplo C16).</li>
+<li>¿Existen rótulos y cuadro de circuitos? ¿Están al día?</li>
+<li>¿La caja está cerrada, sin partes con tensión a la vista?</li></ol>
+<p>Con autorización del dueño de casa, puedes presionar el botón T del diferencial y comprobar que corta. Es una prueba que el reglamento espera que el usuario haga.</p>
+<h4>Ejercicio</h4>
+<p>Con lo que anotaste, dibuja el unilineal de ese tablero e indica si cumple: diferencial de 30 mA en alumbrado y enchufes, y máximo 3 circuitos por diferencial.</p>`,
+quiz:[
+{q:"¿Qué protege el automático termomagnético?",o:["A las personas","Al conductor","Al medidor"],a:1,e:"El automático protege el conductor contra sobrecarga y cortocircuito."},
+{q:"¿Qué sensibilidad debe tener el diferencial de los circuitos de alumbrado y enchufes?",o:["300 mA","30 mA o menos","10 A"],a:1,e:"RIC N°10: diferencial de 30 mA o menos."},
+{q:"¿Cuántos circuitos como máximo puede proteger un diferencial?",o:["2","3","6"],a:1,e:"RIC N°10, 5.1.3.7: máximo 3 circuitos por diferencial."},
+{q:"¿Qué curva se usa normalmente en enchufes y alumbrado de vivienda?",o:["B","C","D"],a:1,e:"La curva C es la de uso general en viviendas."},
+{q:"¿Qué grado IP mínimo exige el RIC N°02 para un tablero interior?",o:["IP 20","IP 41","IP 67"],a:1,e:"IP 41 en interior; IP 44 exterior bajo techo; IP 54 a la intemperie."},
+{q:"¿Hasta qué potencia instalada puede trabajar un instalador clase D?",o:["10 kW","100 kW","500 kW"],a:0,e:"Clase D: baja tensión hasta 10 kW."}]},
+
+{n:5,w:1,d:"Vie 30 oct",t:"Conductores, canalización y tierra",k:"Fase azul · neutro blanco · tierra verde",
+pts:[
+{t:"Conductores y secciones",h:`
+<p>Un conductor de instalación es un alambre o cable de <b>cobre</b> con aislación. La aislación indica la temperatura máxima que soporta: 70 °C (tipo H07V-U, THWN) o 90 °C (THHN, RV, RZ1).</p>
+<p>Los <b>conductores libres de halógenos</b> (por ejemplo H07Z1-K o RZ1) emiten poco humo y gases no tóxicos al quemarse. Se exigen en recintos donde se reúnen personas; revisa el RIC N°04 para cada caso.</p>
+<h4>Secciones mínimas</h4>
+<div class="tw"><table><tr><th>Uso</th><th class="n">Sección mínima</th><th>Norma</th></tr>
+<tr><td>Circuitos de iluminación</td><td class="n">1,5 mm²</td><td>RIC N°04, 5.4</td></tr>
+<tr><td>Circuitos de enchufes</td><td class="n">2,5 mm²</td><td>RIC N°04, 5.4</td></tr>
+<tr><td>Subalimentadores</td><td class="n">2,5 mm²</td><td>RIC N°03, 5.1.2</td></tr>
+<tr><td>Alimentador (desde el empalme)</td><td class="n">4 mm²</td><td>RIC N°03 y N°10</td></tr></table></div>
+<h4>Capacidad de transporte (corriente máxima)</h4>
+<p>Valores del RIC N°04, tabla 4.4, para ductos embutidos en muro (método A1) a 30 °C:</p>
+<div class="tw"><table><tr><th class="n">Sección</th><th class="n">Aislación 70 °C</th><th class="n">Aislación 90 °C</th><th>Automático habitual</th></tr>
+<tr><td class="n">1,5 mm²</td><td class="n">14 A</td><td class="n">17 A</td><td>10 A</td></tr>
+<tr><td class="n">2,5 mm²</td><td class="n">18 A</td><td class="n">23 A</td><td>16 A</td></tr>
+<tr><td class="n">4 mm²</td><td class="n">24 A</td><td class="n">31 A</td><td>20 A</td></tr>
+<tr><td class="n">6 mm²</td><td class="n">31 A</td><td class="n">40 A</td><td>25 A</td></tr></table></div>
+<p>Si los cables van agrupados o a mayor temperatura, esa capacidad se reduce con factores de corrección (tablas 4.6 y 4.7). Por ejemplo, con 4 a 6 conductores activos juntos se multiplica por 0,8.</p>
+<p>El <b>neutro</b> tiene la misma sección que la fase en circuitos monofásicos (RIC N°10, 5.1.5.3).</p>`},
+{t:"Código de colores",h:`
+<p>El RIC N°04, punto 5.32, fija los colores de la aislación:</p>
+<div class="tw"><table><tr><th>Conductor</th><th>Color</th></tr>
+<tr><td>Fase 1 (R)</td><td>Azul</td></tr><tr><td>Fase 2 (S)</td><td>Negro</td></tr><tr><td>Fase 3 (T)</td><td>Rojo</td></tr>
+<tr><td>Neutro</td><td>Blanco</td></tr><tr><td>Conductor de protección (tierra)</td><td>Verde o verde/amarillo</td></tr></table></div>
+<p>En una vivienda monofásica lo habitual es: <b>fase azul, neutro blanco, tierra verde</b> (o verde/amarillo).</p>
+<div class="warn"><b>Cuidado con material extranjero:</b> en Europa el azul es neutro. En Chile el azul es fase. Muchos videos y cables importados usan la norma europea; en tu evaluación aplica la chilena.</div>
+<ul><li>En conductores de más de 21 mm² con aislación de un solo color, se marca el color en los extremos y cada 5 m (RIC N°04, 5.33).</li>
+<li>El verde o verde/amarillo se usa <b>solo</b> para tierra. Nunca como fase ni neutro.</li>
+<li>En un circuito de escalera los viajeros son fases: usa colores de fase.</li></ul>`},
+{t:"Canalizaciones y cajas",h:`
+<p>La <b>canalización</b> protege los conductores de daños mecánicos, humedad y contacto. Tipos más comunes en vivienda:</p>
+<ul><li><b>Tubo PVC conduit</b> embutido en muros o losas.</li>
+<li><b>Tubo metálico EMT</b> sobrepuesto, en recintos que lo necesiten.</li>
+<li><b>Tubo flexible</b> (corrugado) en tabiquería.</li>
+<li><b>Canaletas</b> plásticas sobrepuestas en remodelaciones.</li></ul>
+<h4>Reglas del RIC N°04 que se evalúan</h4>
+<ul><li>Un ducto lleva solo conductores de <b>un mismo circuito</b> (5.27).</li>
+<li>Las uniones y derivaciones se hacen <b>solo dentro de cajas</b>, nunca dentro del tubo.</li>
+<li>En las cajas no se ocupa más del 50% de las entradas (5.12.3), y en cajas de derivación debe quedar libre un 25% del volumen (5.23).</li>
+<li>Las canalizaciones no pueden ser de color rojo, amarillo o azul (5.30), para no confundirlas con otras redes.</li></ul>
+<h4>Buenas prácticas de ejecución</h4>
+<ul><li>Dejar guía (alambre) en los tubos para pasar después los conductores.</li>
+<li>No exceder curvas que impidan pasar los cables; usar cajas de paso en tramos largos.</li>
+<li>Dejar unos 15 a 20 cm de conductor en cada caja para conectar con comodidad.</li>
+<li>Uniones con conectores o regletas adecuadas, bien aisladas. No dejar empalmes "torcidos con huincha" en el tablero.</li></ul>`},
+{t:"Puesta a tierra",h:`
+<p>Hay dos tierras con funciones distintas:</p>
+<div class="tw"><table><tr><th>Tierra</th><th>Qué conecta</th><th>Para qué</th></tr>
+<tr><td>De servicio</td><td>El neutro de la instalación</td><td>Fijar el neutro a un potencial cercano a 0 V</td></tr>
+<tr><td>De protección</td><td>Las partes metálicas (masas) de equipos y la clavija central de los enchufes</td><td>Que una falla de aislación produzca corriente a tierra y actúe la protección, en vez de dejar la carcasa con tensión</td></tr></table></div>
+<p>En viviendas se usa el esquema <b>TN-S</b>: neutro y tierra de protección van como conductores separados desde el origen (RIC N°10, 5.2.1 f).</p>
+<h4>Cómo se ejecuta</h4>
+<ul><li><b>Electrodo:</b> barra de acero con envolvente de cobre (tipo Copperweld) enterrada verticalmente, habitualmente de 5/8" (unos 16 mm). Se deja una cámara de inspección para medir.</li>
+<li><b>Conductor de puesta a tierra:</b> une el electrodo con la barra de tierra del tablero. Mínimo 4 mm² hasta el tablero (RIC N°06, 7.11).</li>
+<li><b>Conductor de protección</b> de cada circuito: igual sección que la fase si esta es de 25 mm² o menos.</li>
+<li>Todo centro de iluminación lleva conductor de protección (RIC N°10, 5.1.2.13).</li>
+<li>Las bañeras y duchas metálicas se unen con conexión equipotencial local (RIC N°11).</li></ul>
+<h4>Valores</h4>
+<ul><li>Tierra de servicio: <b>20 Ω máximo</b> (RIC N°06, 6.1).</li>
+<li>Tierra de protección: se calcula con R = Vs / I0, donde Vs es la tensión de seguridad (50 V seco) e I0 la corriente que hace operar la protección. Con un diferencial de 30 mA: 50 / 0,03 ≈ 1.667 Ω. Por eso el diferencial hace tan eficaz la protección en viviendas.</li></ul>
+<p>La resistencia de tierra se mide con un <b>telurómetro</b>.</p>`}],
+taller:`<h3>Práctica: conductores y tierra en papel</h3><div class="idea">Estas actividades no necesitan materiales del taller: usan simuladores gratuitos, observación de instalaciones sin intervenirlas y ejercicios en papel.</div>
+<ol><li>Entra a una ferretería en línea o física y busca cables de 1,5, 2,5 y 4 mm². Anota lo impreso en la aislación: sección, tipo y temperatura.</li>
+<li>Completa la tabla: para cada sección, capacidad en ducto embutido (RIC N°04) y automático que le corresponde.</li>
+<li>Responde: un circuito de enchufes en 1,5 mm² con automático de 16 A, ¿cumple? ¿Por qué?</li>
+<li>Observa un enchufe de tu casa sin abrirlo: identifica fase, neutro y tierra según su posición.</li>
+<li>Dibuja una puesta a tierra completa: electrodo, cámara, conductor, barra del tablero y llegada a un enchufe.</li></ol>
+<p>Después rinde la autoevaluación de esta clase como cierre de la semana 1.</p>`,
+quiz:[
+{q:"En Chile, ¿de qué color es el neutro?",o:["Azul","Blanco","Negro"],a:1,e:"RIC N°04, 5.32: neutro blanco. El azul es fase."},
+{q:"¿Qué sección mínima tiene un circuito de enchufes?",o:["1,5 mm²","2,5 mm²","4 mm²"],a:1,e:"RIC N°04, 5.4: 2,5 mm² para enchufes y 1,5 mm² para iluminación."},
+{q:"Un cable de 1,5 mm² (70 °C, embutido) admite 14 A. ¿Qué automático le corresponde?",o:["10 A","16 A","20 A"],a:0,e:"El automático no puede superar la capacidad del conductor: 10 A."},
+{q:"¿Qué esquema de tierra se usa en viviendas según el RIC N°10?",o:["TT","TN-S","IT"],a:1,e:"RIC N°10, 5.2.1 f: esquema TN-S."},
+{q:"¿Dónde se hacen las uniones de conductores?",o:["Dentro del tubo","Solo dentro de cajas","Donde sea, con huincha"],a:1,e:"Las uniones y derivaciones van solo en cajas."},
+{q:"Resistencia máxima de la tierra de servicio:",o:["5 Ω","20 Ω","80 Ω"],a:1,e:"RIC N°06, 6.1: 20 Ω máximo."},
+{q:"El conductor verde/amarillo puede usarse como:",o:["Neutro","Fase","Solo tierra de protección"],a:2,e:"Verde o verde/amarillo es exclusivo del conductor de protección."}]},
+
+{n:6,w:2,d:"Lun 2 nov",t:"Circuitos de alumbrado y enchufes",k:"9/12 simple · 9/15 doble · 9/24 escalera",
+pts:[
+{t:"Interruptores y circuitos de alumbrado",h:`
+<p>Nomenclatura comercial chilena de los interruptores:</p>
+<div class="tw"><table><tr><th>Código</th><th>Nombre</th><th>Uso</th></tr>
+<tr><td>9/12</td><td>Interruptor simple</td><td>Una luz o grupo, desde un punto</td></tr>
+<tr><td>9/15</td><td>Interruptor doble (dos efectos)</td><td>Dos luces o grupos distintos, desde un mismo punto</td></tr>
+<tr><td>9/24</td><td>Conmutador (escalera)</td><td>Una luz desde dos puntos. Se usan dos 9/24</td></tr>
+<tr><td>Interruptor de cruce</td><td>Inversor</td><td>Se intercala entre dos 9/24 para tres o más puntos</td></tr></table></div>
+<h4>Reglas de conexión</h4>
+<ul><li>El interruptor corta siempre la <b>fase</b>, nunca el neutro. Así, con la luz apagada, el portalámparas queda sin tensión.</li>
+<li>El neutro va directo a la luminaria.</li>
+<li>El conductor que va del interruptor a la luz se llama <b>retorno</b>; es una fase interrumpida.</li></ul>
+<h4>Exigencias del RIC N°10</h4>
+<ul><li>Interruptores a una altura entre <b>0,80 m y 1,40 m</b>, medida desde su punto más bajo al piso terminado (5.1.2.4).</li>
+<li>Al menos <b>un centro de iluminación</b> en recintos de hasta 10 m² y <b>dos</b> en recintos mayores; cada centro con su interruptor y nunca alimentado desde un enchufe (5.2.2 a).</li>
+<li>Todo centro lleva conductor de protección (5.1.2.13).</li>
+<li>Si no se conoce la potencia de la luminaria, se calcula con <b>100 W</b> por centro (5.1.4.5).</li></ul>`},
+{t:"Circuito de escalera (9/24)",h:`
+${FIG_ESCALERA}
+<p>Permite encender y apagar una luz desde dos lugares, por ejemplo al pie y al final de una escalera, o en ambos extremos de un pasillo.</p>
+<h4>Cómo se conecta</h4>
+<ol><li>La <b>fase</b> llega al borne <b>común</b> del conmutador A.</li>
+<li>Los dos bornes de salida del conmutador A se unen con los dos bornes de salida del conmutador B mediante dos conductores llamados <b>viajeros</b>.</li>
+<li>El borne común del conmutador B sale como <b>retorno</b> hacia la luz.</li>
+<li>El <b>neutro</b> va directo a la luz. La tierra va a la luminaria.</li></ol>
+<h4>Por qué funciona</h4>
+<p>Cada conmutador conecta su común a uno u otro viajero. La luz enciende cuando ambos eligen el mismo viajero y se apaga cuando eligen distintos. Al mover cualquiera de los dos, cambia el estado.</p>
+<div class="idea">Entre los dos conmutadores van <b>3 conductores más tierra</b> si la fase pasa por ahí, o 2 viajeros si la fase y el retorno se resuelven en la caja. Dibuja siempre el esquema antes de cablear.</div>
+<div class="warn">Error típico: conectar un viajero en el común. El circuito funciona "a medias": solo enciende en ciertas posiciones. Identifica bien el común: suele estar marcado o tener un tornillo de otro color.</div>`},
+{t:"Enchufes",h:`
+<p>En Chile se usan enchufes con <b>tierra al centro</b> (tipo L, de 10 y 16 A) y también se encuentran tipo C sin tierra en equipos antiguos. En instalaciones nuevas, todos los enchufes llevan tierra.</p>
+<h4>Conexión</h4>
+<ul><li>Fase y neutro a los bornes laterales.</li><li>Tierra (verde) al borne central.</li>
+<li>La capacidad del enchufe no puede ser menor que la protección del circuito (RIC N°10, 5.1.2.9): un enchufe de 10 A no va en un circuito de 16 A.</li></ul>
+<h4>Cantidad mínima por recinto (RIC N°10, 5.2.2)</h4>
+<div class="tw"><table><tr><th>Recinto</th><th>Mínimo</th></tr>
+<tr><td>Dormitorios, living, comedor, sala de estar</td><td>1 enchufe doble o triple por cada 8 m de perímetro o fracción</td></tr>
+<tr><td>Cocina</td><td>3 enchufes dobles o triples de 10/16 A</td></tr>
+<tr><td>Lavadero</td><td>1 enchufe doble o triple de 10/16 A</td></tr>
+<tr><td>Horno o cocina eléctrica</td><td>1 enchufe adicional de 16 A como mínimo, o conexión fija</td></tr></table></div>
+<h4>Ejemplo</h4>
+<p>Un dormitorio de 3 × 3,5 m tiene un perímetro de 13 m. 13 / 8 = 1,6, se aproxima hacia arriba: <b>2 enchufes dobles</b> como mínimo.</p>
+<p>Para el cálculo, cada enchufe se considera de <b>250 W</b> si no se conoce la carga (5.1.4.6). La altura de los enchufes se define según el uso (5.1.2.7).</p>`},
+{t:"Circuitos mínimos de una vivienda",h:`
+<h4>Exigencias del RIC N°10, 5.2.1</h4>
+<ul><li>Viviendas de menos de 30 m²: mínimo <b>2 circuitos</b>. De 30 m² o más: mínimo <b>3 circuitos</b>.</li>
+<li>Circuito <b>exclusivo para cocina y/o lavadero</b> de al menos <b>16 A</b>.</li>
+<li>Circuito adicional para horno y/o cocina eléctrica de al menos 16 A.</li>
+<li>Protección del empalme de al menos <b>25 A</b> y alimentador de al menos <b>4 mm²</b>.</li>
+<li>Protección general con corte omnipolar.</li>
+<li>Diferencial de 30 mA en todos los circuitos de iluminación y enchufes.</li></ul>
+<h4>Cuántos puntos caben en un circuito</h4>
+<p>El RIC N°10 no fija un máximo de puntos. Se suman las potencias de cálculo (100 W por centro de luz, 250 W por enchufe) hasta como máximo el <b>90%</b> de la capacidad del circuito (5.1.4.4).</p>
+<code class="f">Circuito de 10 A:  220 × 10 = 2200 W  →  90% = 1980 W
+Circuito de 16 A:  220 × 16 = 3520 W  →  90% = 3168 W</code>
+<h4>Ejemplo</h4>
+<p>Circuito de enchufes de 16 A: 3168 / 250 = 12,7. Caben hasta <b>12 enchufes</b>.</p>
+<p>Circuito de alumbrado de 10 A con 8 centros (800 W) está muy holgado. Puedes agregar más centros, pero conviene repartir la casa en varios circuitos para que una falla no deje todo a oscuras.</p>`},
+{t:"Baños y zonas húmedas",h:`
+<p>El agua reduce mucho la resistencia del cuerpo. Por eso los baños se dividen en <b>volúmenes</b> con exigencias crecientes a medida que te acercas a la ducha o tina (RIC N°11, sección 6).</p>
+<div class="tw"><table><tr><th>Volumen</th><th>Dónde</th><th>Interruptores y enchufes</th><th>IP mínimo</th></tr>
+<tr><td>0</td><td>Interior de la tina o ducha</td><td>No permitidos</td><td>IPX7</td></tr>
+<tr><td>1</td><td>Sobre el volumen 0 hasta 2,25 m de altura</td><td>No permitidos, salvo muy baja tensión (12 V CA) con fuente fuera de los volúmenes 0, 1 y 2</td><td>IPX4</td></tr>
+<tr><td>2</td><td>Franja de 0,6 m alrededor del volumen 1</td><td>No permitidos, salvo muy baja tensión o bloques para afeitadora normalizados</td><td>IPX4</td></tr>
+<tr><td>3</td><td>Franja de 2,4 m alrededor del volumen 2</td><td>Permitidos con diferencial de 30 mA, muy baja tensión o transformador de aislamiento</td><td>Según uso</td></tr></table></div>
+<ul><li>Las mamparas y los cielos falsos no cuentan como barrera entre volúmenes.</li>
+<li>Las tinas y duchas metálicas requieren conexión equipotencial local.</li>
+<li>Los tableros en recintos húmedos deben tener al menos IPX4 (RIC N°02, 6.1.21.5).</li>
+<li>En la cocina, todos los enchufes van en circuito con diferencial de 30 mA. Evita ubicarlos donde les caiga agua del lavaplatos.</li></ul>
+<div class="idea">Para la evaluación práctica: si te piden un enchufe en un baño, ubícalo fuera de los volúmenes 0, 1 y 2, en un circuito con diferencial de 30 mA.</div>`}],
+taller:`<h3>Práctica: circuitos de alumbrado en simulador</h3><div class="idea">Estas actividades no necesitan materiales del taller: usan simuladores gratuitos, observación de instalaciones sin intervenirlas y ejercicios en papel.</div>
+<p>Abre el <a href="https://falstad.com/circuit/" target="_blank" rel="noopener">Simulador Falstad ↗</a>. Tiene interruptores de dos posiciones (como el 9/24).</p>
+<ol><li><b>Simple:</b> arma una fuente, un interruptor y una ampolleta. Comprueba que el interruptor corta la fase.</li>
+<li><b>Escalera:</b> arma dos conmutadores con sus viajeros y una ampolleta. Verifica que enciende y apaga desde ambos.</li>
+<li><b>Error típico:</b> conecta un viajero en el común y observa qué pasa.</li></ol>
+<h4>En papel</h4>
+<ul><li>Dibuja los esquemas de conexión del 9/12, del 9/15 y del 9/24 con colores de conductor.</li>
+<li>Recorre tu casa: identifica qué luces son de escalera y cuenta los enchufes de cada recinto. ¿Cumplen 1 doble por cada 8 m de perímetro?</li></ul>`,
+quiz:[
+{q:"¿Qué interruptor se usa para encender una luz desde dos puntos?",o:["9/12","9/15","9/24"],a:2,e:"El 9/24 es el conmutador de escalera; se usan dos."},
+{q:"El interruptor debe cortar:",o:["El neutro","La fase","La tierra"],a:1,e:"Siempre la fase, para que la luminaria apagada quede sin tensión."},
+{q:"¿A qué altura se instalan los interruptores según el RIC N°10?",o:["Entre 0,30 y 0,60 m","Entre 0,80 y 1,40 m","Sobre 1,60 m"],a:1,e:"RIC N°10, 5.1.2.4: entre 0,80 y 1,40 m."},
+{q:"Un living de 5 × 4 m. ¿Cuántos enchufes dobles mínimos?",o:["2","3","4"],a:1,e:"Perímetro 18 m. 18 / 8 = 2,25, se aproxima a 3."},
+{q:"¿Qué capacidad mínima tiene el circuito exclusivo de cocina?",o:["10 A","16 A","25 A"],a:1,e:"RIC N°10, 5.2.1 d: mínimo 16 A."},
+{q:"¿Se puede instalar un enchufe común en el volumen 2 del baño?",o:["Sí, con diferencial","No"],a:1,e:"En los volúmenes 1 y 2 no se permiten mecanismos comunes, salvo muy baja tensión o bloques para afeitadora normalizados."}]},
+
+{n:7,w:2,d:"Mar 3 nov",t:"Planos eléctricos",k:"Planta + unilineal + cuadro de cargas",
+pts:[
+{t:"Qué contiene un proyecto eléctrico",h:`
+<p>Un proyecto eléctrico domiciliario, que acompaña a la declaración TE1, se compone de:</p>
+<ol><li><b>Planta de instalación:</b> la planta de arquitectura con la ubicación de tablero, centros de luz, interruptores, enchufes y canalizaciones, con el número de circuito de cada punto.</li>
+<li><b>Diagrama unilineal:</b> el esquema del tablero y sus circuitos.</li>
+<li><b>Cuadro de cargas:</b> la tabla de potencias, corrientes, protecciones y conductores.</li>
+<li><b>Especificaciones técnicas y memoria</b> cuando corresponde.</li></ol>
+<p>La forma de presentarlo está regulada por el <b>RIC N°18</b>. En viviendas la planta se dibuja habitualmente a escala 1:50.</p>
+<div class="idea">Tu experiencia dibujando planos sanitarios en AutoCAD se traslada directo: misma base de arquitectura, capas por especialidad, simbología normalizada y viñeta.</div>
+<h4>Buenas prácticas de dibujo</h4>
+<ul><li>Una capa por elemento: luminarias, enchufes, interruptores, canalización por circuito, textos.</li>
+<li>Rotular cada punto con su número de circuito.</li>
+<li>Indicar la altura de montaje de enchufes y tableros cuando no sea la habitual.</li>
+<li>Viñeta con nombre del instalador, clase de licencia, dirección, escala y fecha.</li></ul>`},
+{t:"Simbología en planta",h:`
+<p>Los símbolos más usados en un plano domiciliario son:</p>
+<div class="tw"><table><tr><th>Elemento</th><th>Cómo se representa habitualmente</th></tr>
+<tr><td>Centro de iluminación en cielo</td><td>Círculo con una X</td></tr>
+<tr><td>Aplique o luz en muro</td><td>Medio círculo con X adosado al muro</td></tr>
+<tr><td>Interruptor 9/12</td><td>Círculo pequeño con un trazo</td></tr>
+<tr><td>Interruptor 9/15</td><td>Círculo pequeño con dos trazos</td></tr>
+<tr><td>Conmutador 9/24</td><td>Círculo pequeño con trazo en forma de S o doble sentido</td></tr>
+<tr><td>Enchufe</td><td>Círculo o medio círculo con dos líneas paralelas; con tierra se agrega una marca</td></tr>
+<tr><td>Tablero</td><td>Rectángulo relleno o achurado con su nombre (TDA, TG)</td></tr>
+<tr><td>Empalme y medidor</td><td>Rectángulo con la letra M o símbolo de medidor</td></tr>
+<tr><td>Canalización</td><td>Línea entre los puntos, con trazos indicando el número de conductores</td></tr></table></div>
+<div class="warn">Hay variaciones entre oficinas y libros. Pide al organismo evaluador la simbología que van a usar y apréndela tal cual; en tu plano incluye siempre una <b>leyenda</b> con cada símbolo.</div>`},
+{t:"Diagrama unilineal",h:`
+${FIG_UNI}
+<p>El unilineal representa toda la instalación con <b>una sola línea por circuito</b>, aunque físicamente lleve fase, neutro y tierra.</p>
+<h4>Qué debe mostrar</h4>
+<ul><li>Empalme y medidor.</li>
+<li>Alimentador con su sección (aquí 4 mm²).</li>
+<li>Protección general: polos y corriente (2x25 A).</li>
+<li>Cada diferencial: polos, corriente y sensibilidad (2x25 A, 30 mA), con los circuitos que cubre (máximo 3).</li>
+<li>Cada automático: corriente y curva, sección del conductor, tipo de canalización y destino del circuito con su potencia.</li></ul>
+<p>El ejemplo corresponde a una vivienda de unos 50 m² con tres circuitos: alumbrado, enchufes y cocina con lavadero. La cocina va en un diferencial aparte para que una fuga en la lavadora no deje sin luz la casa.</p>`},
+{t:"Cuadro de cargas",h:`
+<p>El cuadro de cargas resume cada circuito. Ejemplo para la vivienda de 50 m² del unilineal:</p>
+<div class="tw"><table><tr><th>Circuito</th><th class="n">Luces</th><th class="n">Enchufes</th><th class="n">Potencia</th><th class="n">Corriente</th><th class="n">Protección</th><th class="n">Conductor</th></tr>
+<tr><td>C1 Alumbrado</td><td class="n">9</td><td class="n">0</td><td class="n">900 W</td><td class="n">4,1 A</td><td class="n">C10 A</td><td class="n">1,5 mm²</td></tr>
+<tr><td>C2 Enchufes</td><td class="n">0</td><td class="n">8</td><td class="n">2000 W</td><td class="n">9,1 A</td><td class="n">C16 A</td><td class="n">2,5 mm²</td></tr>
+<tr><td>C3 Cocina y lavadero</td><td class="n">0</td><td class="n">4</td><td class="n">2500 W</td><td class="n">11,4 A</td><td class="n">C16 A</td><td class="n">2,5 mm²</td></tr>
+<tr><th>Total instalado</th><th></th><th></th><th class="n">5400 W</th><th></th><th></th><th></th></tr></table></div>
+<p>En C3 se usó la potencia conocida de los equipos (lavadora, hervidor, microondas) en vez de 250 W por enchufe, como permite el RIC N°10.</p>
+<h4>Demanda máxima y alimentador</h4>
+<p>No todo se usa al mismo tiempo. El RIC N°03 (tabla 3.1, casa habitación) aplica factores de demanda al alimentador:</p>
+<code class="f">Primeros 3000 W × 1     = 3000 W
+Resto 2400 W × 0,35     =  840 W
+Demanda máxima          = 3840 W  →  I = 3840 / 220 = 17,5 A</code>
+<p>Con 17,5 A, el empalme de 25 A y el alimentador de 4 mm² son suficientes. La potencia instalada de 5,4 kW está dentro del límite de 10 kW de la clase D.</p>`}],
+taller:`<h3>Práctica: proyecto de una vivienda de 50 m²</h3>
+<div class="idea">Esta práctica se hace en papel o en AutoCAD; no necesita materiales.</div>
+<ol><li>Toma una planta de vivienda de unos 50 m² (puede ser tu casa o una planta tipo).</li>
+<li>Ubica el tablero en un lugar accesible, fuera del baño.</li>
+<li>Ubica los centros de luz (1 por recinto hasta 10 m², 2 si es mayor) y sus interruptores.</li>
+<li>Calcula los enchufes de cada recinto con la regla de 1 por cada 8 m de perímetro; cocina 3, lavadero 1.</li>
+<li>Agrupa en circuitos y numera cada punto.</li>
+<li>Dibuja el unilineal y completa el cuadro de cargas con potencia, corriente, protección y sección.</li>
+<li>Calcula la demanda máxima con los factores del RIC N°03.</li></ol>
+<p>Si quieres, me envías el plano y te lo reviso con criterio de evaluador.</p>`,
+quiz:[
+{q:"¿Qué representa el diagrama unilineal?",o:["La ubicación de cada enchufe","El tablero y sus circuitos con una línea por circuito","El recorrido de la red de distribución"],a:1,e:"Es el esquema del tablero: protecciones, conductores y circuitos."},
+{q:"Potencia instalada de alumbrado de 5000 W en una casa. ¿Cuál es la demanda máxima?",o:["5000 W","3700 W","1750 W"],a:1,e:"3000 × 1 + 2000 × 0,35 = 3000 + 700 = 3700 W."},
+{q:"¿Qué pliego regula la presentación de proyectos?",o:["RIC N°02","RIC N°10","RIC N°18"],a:2,e:"RIC N°18: presentación de proyectos y trámite TE1."},
+{q:"¿Por qué se pone la cocina en un diferencial aparte?",o:["Porque la norma lo prohíbe junto al alumbrado","Para que una fuga en un equipo de cocina no deje sin luz la casa","Porque consume en trifásico"],a:1,e:"Es una buena práctica de selectividad y continuidad del servicio."}]},
+
+{n:8,w:2,d:"Mié 4 nov",t:"Cálculo y declaración TE1",k:"I = P / V   ΔV ≤ 3% y 5%",
+pts:[
+{t:"Calcular la corriente",h:`
+<p>El cálculo siempre parte de la potencia de las cargas.</p>
+<code class="f">Monofásico:  I = P / V
+Trifásico:   I = P / (√3 × V × cos φ)</code>
+<p>En viviendas casi todo es monofásico a 220 V.</p>
+<h4>Ejemplos</h4>
+<ol><li>Circuito con 6 enchufes de 250 W: P = 1500 W, I = 1500 / 220 = <b>6,8 A</b>.</li>
+<li>Horno eléctrico de 3000 W: I = 3000 / 220 = <b>13,6 A</b>.</li>
+<li>Termo eléctrico de 1500 W: I = <b>6,8 A</b>.</li></ol>`},
+{t:"Elegir automático y conductor",h:`
+<p>Procedimiento paso a paso, siguiendo el RIC N°10 (5.1.4.1) y el RIC N°04 (tabla 4.4):</p>
+<ol><li>Suma la <b>potencia</b> de las cargas del circuito.</li>
+<li>Calcula la <b>corriente</b>: I = P / 220.</li>
+<li>Agrega el <b>10%</b> que exige el RIC N°10: I × 1,1.</li>
+<li>Elige el automático con la <b>corriente nominal inmediatamente superior</b> disponible: 6, 10, 16, 20, 25, 32 A.</li>
+<li>Elige el <b>conductor</b> cuya capacidad sea igual o mayor que la corriente del automático, respetando la sección mínima (1,5 mm² luz, 2,5 mm² enchufes).</li>
+<li>Verifica la <b>caída de tensión</b> (siguiente pestaña). Si no cumple, sube la sección.</li></ol>
+<h4>Ejemplo resuelto: circuito para un horno de 3000 W a 18 m del tablero</h4>
+<code class="f">1. P = 3000 W
+2. I = 3000 / 220 = 13,6 A
+3. 13,6 × 1,1 = 15,0 A
+4. Automático: 16 A curva C
+5. Conductor: 2,5 mm² (18 A en ducto embutido, 70 °C)  →  18 ≥ 16, cumple</code>
+<div class="warn">Nunca elijas el automático "para que no salte". Si salta, el circuito está sobrecargado o tiene una falla. Subir el automático sin subir el cable es el error más peligroso del oficio.</div>`},
+{t:"Caída de tensión",h:`
+<p>Todo conductor tiene resistencia, así que parte de la tensión se pierde en el camino. Si la caída es grande, los equipos reciben menos de 220 V, funcionan mal y el cable se calienta.</p>
+<h4>Límites del RIC N°03 (5.1.3)</h4>
+<ul><li>Alimentadores y subalimentadores: hasta <b>3%</b> de la tensión nominal, es decir 6,6 V a 220 V.</li>
+<li>Total hasta el punto más desfavorable: hasta <b>5%</b>, es decir 11 V a 220 V.</li></ul>
+<h4>Fórmula monofásica</h4>
+<code class="f">ΔV = 2 × ρ × L × I / S
+ΔV% = ΔV / 220 × 100
+
+ρ cobre = 0,018 Ω·mm²/m   L = largo en m (un sentido)   S = sección en mm²</code>
+<p>El 2 está porque la corriente va por la fase y vuelve por el neutro.</p>
+<h4>Ejemplo resuelto</h4>
+<p>El circuito del horno: 18 m, 13,6 A, 2,5 mm².</p>
+<code class="f">ΔV  = 2 × 0,018 × 18 × 13,6 / 2,5 = 3,5 V
+ΔV% = 3,5 / 220 × 100 = 1,6 %   →  cumple</code>
+<h4>Si no cumple: despejar la sección</h4>
+<code class="f">S = 2 × ρ × L × I / ΔV</code>
+<p>Ejemplo: 40 m, 16 A, máximo 2% (4,4 V). S = 2 × 0,018 × 40 × 16 / 4,4 = 5,2 mm². Se elige la sección comercial superior: <b>6 mm²</b>.</p>`},
+{t:"La declaración TE1",h:`
+<p>El <b>TE1</b> es la declaración de una instalación eléctrica interior ante la SEC. Con ella el instalador informa que la instalación fue ejecutada según la normativa y se hace responsable.</p>
+<h4>Cuándo se necesita</h4>
+<ul><li>Instalaciones nuevas, para que la distribuidora conecte el empalme.</li>
+<li>Ampliaciones o modificaciones importantes y aumentos de potencia.</li></ul>
+<h4>Cómo se hace</h4>
+<ol><li>El instalador ingresa a la plataforma de declaraciones de la SEC con su ClaveÚnica y su licencia vigente.</li>
+<li>Completa los datos de la propiedad, el propietario y la instalación.</li>
+<li>Adjunta el proyecto: planos, unilineal, cuadro de cargas y lo que pida el RIC N°18.</li>
+<li>La SEC registra la declaración y la distribuidora puede conectar.</li></ol>
+<h4>Responsabilidad</h4>
+<p>Con su firma, el instalador declara que la instalación cumple. Una declaración falsa o una instalación defectuosa puede traer sanciones de la SEC, incluida la cancelación de la licencia.</p>
+<div class="idea">Un instalador clase D declara instalaciones de baja tensión de hasta 10 kW. Si una vivienda supera esa potencia instalada, la declara un instalador de clase superior.</div>`}],
+taller:`<h3>Práctica: dimensionar tres circuitos</h3>
+<div class="idea">Esta práctica es de cálculo; no necesita materiales.</div>
+<p>Para cada caso calcula corriente, corriente + 10%, automático, conductor y caída de tensión. Luego despliega la solución.</p>
+<details><summary>1. Circuito de alumbrado: 12 centros de 100 W a 22 m.</summary>P = 1200 W. I = 5,5 A. × 1,1 = 6 A. Automático 10 A. Conductor 1,5 mm². ΔV = 2 × 0,018 × 22 × 5,5 / 1,5 = 2,9 V = 1,3%. Cumple.</details>
+<details><summary>2. Circuito de enchufes: 10 enchufes de 250 W a 25 m.</summary>P = 2500 W. I = 11,4 A. × 1,1 = 12,5 A. Automático 16 A. Conductor 2,5 mm². ΔV = 2 × 0,018 × 25 × 11,4 / 2,5 = 4,1 V = 1,9%. Cumple.</details>
+<details><summary>3. Termo de 2500 W a 35 m.</summary>I = 11,4 A. × 1,1 = 12,5 A. Automático 16 A. Conductor 2,5 mm². ΔV = 2 × 0,018 × 35 × 11,4 / 2,5 = 5,7 V = 2,6%. Cumple el 5% total, pero si el alimentador ya tiene 3% de caída no alcanza; en ese caso conviene 4 mm² (ΔV = 1,6%).</details>`,
+quiz:[
+{q:"Una estufa de 2000 W. Corriente con el 10% del RIC N°10:",o:["9,1 A","10 A","20 A"],a:1,e:"I = 2000 / 220 = 9,1 A; × 1,1 = 10 A."},
+{q:"¿Cuál es la caída de tensión máxima total permitida?",o:["3%","5%","10%"],a:1,e:"RIC N°03: 3% en alimentadores y 5% total al punto más desfavorable."},
+{q:"¿Qué se hace si la caída de tensión no cumple?",o:["Subir el automático","Subir la sección del conductor","Bajar la tensión"],a:1,e:"Mayor sección, menor resistencia, menor caída."},
+{q:"¿Qué es el TE1?",o:["Un tipo de enchufe","La declaración de instalación interior ante la SEC","Una tarifa eléctrica"],a:1,e:"Es la declaración de la instalación ante la SEC."},
+{q:"Corriente de 16 A, 20 m, 2,5 mm². La caída de tensión es aprox.:",o:["2,3 V","4,6 V","9,2 V"],a:1,e:"2 × 0,018 × 20 × 16 / 2,5 = 4,6 V (2,1%)."}]},
+
+{n:9,w:2,d:"Jue 5 nov",t:"Montaje completo y mediciones",k:"Aislación: 500 V CC · ≥ 0,5 MΩ",
+pts:[
+{t:"Armado del tablero",h:`
+<p>Secuencia recomendada para un tablero domiciliario:</p>
+<ol><li>Fijar la caja nivelada, a la altura correcta (dispositivos entre 0,45 y 2,0 m).</li>
+<li>Montar el riel DIN y distribuir los equipos dejando el <b>25% de reserva</b>.</li>
+<li>Instalar en orden: interruptor general, diferenciales, automáticos.</li>
+<li>Instalar la barra o regleta de tierra y la de neutros.</li>
+<li>Ingresar el alimentador y los circuitos por la parte inferior o superior según la caja, con prensaestopas o pasacables.</li>
+<li>Peinar el cableado: recto, ordenado, sin cruces innecesarios, con amarras.</li>
+<li>Conectar, apretar y rotular.</li>
+<li>Instalar la tapa y el <b>cuadro de circuitos</b> con el unilineal.</li></ol>
+<div class="idea">El evaluador mira el orden del tablero. Un tablero limpio y rotulado demuestra competencia antes de que midas nada.</div>`},
+{t:"Conexionado correcto",h:`
+<ul><li><b>Sentido de alimentación:</b> la fase entra por arriba a cada protección y sale por abajo hacia el circuito, salvo que el equipo indique otra cosa.</li>
+<li><b>Colores:</b> fase azul (o negro/rojo), neutro blanco, tierra verde. Sin excepciones.</li>
+<li><b>Neutros:</b> el neutro de cada circuito debe pasar por el <b>mismo diferencial</b> que su fase. Si el neutro de un circuito vuelve por otro diferencial, ambos van a saltar.</li>
+<li><b>Pelado:</b> solo lo necesario para que el cobre entre completo al borne. Nada de cobre a la vista fuera del borne.</li>
+<li><b>Cable flexible:</b> siempre con <b>terminal</b> (puntera) apretado con alicate de terminales.</li>
+<li><b>Apriete:</b> firme. Un borne suelto se calienta y es una causa frecuente de incendios.</li>
+<li><b>Puentes</b> entre protecciones con conductor de la sección adecuada o peine de conexión.</li>
+<li><b>Rotulado</b> de cada protección con número y función del circuito.</li></ul>`},
+{t:"Mediciones antes de energizar",h:`
+<p>El RIC N°19 establece las pruebas antes de la puesta en servicio, en este orden:</p>
+<ol><li><b>Inspección visual</b> (6.1): coincide con el proyecto, identificación de conductores, rótulos, uniones y accesibilidad. Se hace sin energizar.</li>
+<li><b>Continuidad de los conductores de protección</b> (7.2): con fuente de 4 a 24 V y corriente mínima de 0,2 A. Desde cada enchufe y luminaria hasta la barra de tierra.</li>
+<li><b>Resistencia de aislación</b> (7.3): con megóhmetro, equipos desconectados, durante 1 minuto, entre fase y neutro, fase y tierra, y neutro y tierra.</li>
+<li><b>Polaridad</b> (7.8): los interruptores y protecciones unipolares cortan la fase.</li>
+<li><b>Resistencia de puesta a tierra</b> (7.6.5): con telurómetro.</li>
+<li><b>Prueba de diferenciales</b> (7.6.7): con instrumento normalizado, y con su botón de prueba.</li></ol>
+<div class="tw"><table><tr><th>Circuito</th><th class="n">Tensión de ensayo</th><th class="n">Aislación mínima</th></tr>
+<tr><td>Muy baja tensión (MBTS/MBTP)</td><td class="n">250 V CC</td><td class="n">0,25 MΩ</td></tr>
+<tr><td>Hasta 500 V (viviendas)</td><td class="n">500 V CC</td><td class="n">0,5 MΩ</td></tr>
+<tr><td>Sobre 500 V</td><td class="n">1000 V CC</td><td class="n">1,0 MΩ</td></tr></table></div>
+<p class="norm">RIC N°19, tabla 19.1. Si un ensayo falla, se corrige y se repite junto con los anteriores afectados (7.1.6).</p>`},
+{t:"Detección de fallas",h:`
+<div class="tw"><table><tr><th>Síntoma</th><th>Causas probables</th><th>Cómo encontrarla</th></tr>
+<tr><td>El diferencial salta apenas lo subes</td><td>Neutro de un circuito cruzado a otro diferencial; neutro y tierra unidos; fuga en un equipo</td><td>Desconecta todos los circuitos aguas abajo y súbelos uno a uno. Mide aislación neutro-tierra</td></tr>
+<tr><td>El diferencial salta al usar un equipo</td><td>Fuga a tierra en ese equipo (resistencia de lavadora o termo, humedad)</td><td>Prueba el equipo en otro enchufe; mide aislación del equipo</td></tr>
+<tr><td>El automático salta después de un rato</td><td>Sobrecarga</td><td>Mide con pinza la corriente del circuito y suma las cargas</td></tr>
+<tr><td>El automático salta al instante</td><td>Cortocircuito</td><td>Sin tensión, mide continuidad entre fase y neutro del circuito y sepáralo por tramos</td></tr>
+<tr><td>Una luz no enciende</td><td>Ampolleta, retorno cortado, interruptor dañado, conexión suelta</td><td>Mide tensión en el portalámparas con el interruptor encendido</td></tr>
+<tr><td>Enchufe sin tensión</td><td>Conexión suelta en una caja anterior</td><td>Mide en los enchufes anteriores del mismo circuito</td></tr>
+<tr><td>Tensión entre neutro y tierra alta</td><td>Neutro cortado o mal conectado</td><td>Revisa la continuidad del neutro hasta el tablero</td></tr></table></div>
+<div class="idea"><b>Método:</b> divide el circuito en mitades y mide. En pocos pasos llegas al tramo con falla.</div>`}],
+taller:`<h3>Práctica: montaje y fallas en papel</h3><div class="idea">Estas actividades no necesitan materiales del taller: usan simuladores gratuitos, observación de instalaciones sin intervenirlas y ejercicios en papel.</div>
+<h4>1. Montaje en papel</h4>
+<p>Dibuja la vista frontal de un tablero con general 2x25 A, dos diferenciales de 30 mA y tres circuitos (C10 alumbrado, C16 enchufes, C16 cocina). Indica la reserva del 25%, los rótulos y el recorrido ordenado de los cables. Escribe la secuencia de armado paso a paso.</p>
+<h4>2. Protocolo de mediciones</h4>
+<p>Arma una planilla para registrar: inspección visual, continuidad de tierra por punto, aislación (F-N, F-T, N-T), polaridad, resistencia de tierra y prueba de diferenciales, con la columna "valor exigido".</p>
+<h4>3. Casos de fallas</h4>
+<details><summary>Caso 1: el diferencial del alumbrado salta apenas se sube, aunque no hay nada enchufado.</summary>Probable neutro de un circuito conectado a otro diferencial, o neutro unido a tierra. Se desconectan los circuitos aguas abajo y se suben uno a uno; se mide aislación neutro-tierra.</details>
+<details><summary>Caso 2: el automático de enchufes salta después de 20 minutos de usar estufa y hervidor.</summary>Sobrecarga: actuó la parte térmica. Se miden y suman las cargas; se separan en otro circuito.</details>
+<details><summary>Caso 3: una luz de escalera solo funciona desde un lado.</summary>Probable viajero conectado en el común o viajero cortado. Se revisa la conexión de los conmutadores.</details>
+<details><summary>Caso 4: el diferencial salta solo cuando se usa la lavadora.</summary>Fuga a tierra en la lavadora. Se prueba en otro enchufe y se mide su aislación.</details>`,
+quiz:[
+{q:"¿Con qué tensión se mide la aislación de una instalación de vivienda?",o:["220 V CA","500 V CC","1000 V CA"],a:1,e:"RIC N°19: 500 V CC para circuitos hasta 500 V."},
+{q:"¿Qué valor mínimo de aislación se exige a esos circuitos?",o:["0,5 MΩ","5 Ω","20 Ω"],a:0,e:"Tabla 19.1: 0,5 MΩ como mínimo."},
+{q:"Un diferencial salta apenas se sube, con todo desconectado aguas abajo menos dos circuitos. Causa probable:",o:["Sobrecarga","Neutro cruzado entre diferenciales o neutro unido a tierra","Tensión alta de la red"],a:1,e:"El diferencial detecta desequilibrio entre fase y neutro; un neutro mal ruteado lo provoca."},
+{q:"¿Qué se mide primero según el RIC N°19?",o:["Aislación","Continuidad de conductores de protección","Puesta a tierra"],a:1,e:"Orden: inspección visual, continuidad, aislación y luego los demás ensayos."},
+{q:"El cable flexible se conecta al borne:",o:["Estañado con soldadura","Con terminal (puntera) apretado","Doblado en gancho"],a:1,e:"Con terminal adecuado y bien apretado."}]},
+
+{n:10,w:2,d:"Vie 6 nov",t:"Simulacro de evaluación",k:"Meta: 70% o más",
+pts:[
+{t:"Cómo es la evaluación",h:`
+<p>La certificación de competencias laborales se hace con un <b>centro evaluador acreditado por ChileValora</b>, según el perfil <b>Instalador Eléctrico Clase D</b>.</p>
+<h4>Instrumentos habituales</h4>
+<ul><li><b>Prueba de conocimientos:</b> preguntas sobre normativa, cálculo, protecciones, tierra, simbología y seguridad.</li>
+<li><b>Observación en terreno o taller:</b> un evaluador te observa ejecutar una tarea real, con una pauta de cotejo.</li>
+<li><b>Evidencias:</b> antecedentes de experiencia, trabajos previos, referencias.</li></ul>
+<h4>Resultado</h4>
+<p>"Competente" o "aún no competente" por cada unidad de competencia. Con el certificado de competencia, solicitas la licencia en sec.cl con tu ClaveÚnica. La licencia obtenida por esta vía se renueva cada 5 años.</p>
+<div class="warn">En algunos programas tienes una sola oportunidad de rendir. Pide antes la pauta del perfil al centro evaluador y revisa punto por punto qué te van a pedir.</div>`},
+{t:"Pauta de cotejo práctica",h:`
+<p>Usa esta pauta en el simulacro. Pide a un colega que te observe y marque.</p>
+<h4>Seguridad</h4>
+<ul><li>Usa EPP completo y herramientas aisladas.</li><li>Aplica las 5 reglas de oro antes de intervenir.</li><li>Verifica ausencia de tensión con instrumento probado.</li></ul>
+<h4>Ejecución</h4>
+<ul><li>Interpreta el plano y el unilineal entregados.</li>
+<li>Elige protecciones y conductores correctos para cada circuito.</li>
+<li>Respeta el código de colores.</li>
+<li>Monta el tablero ordenado, con reserva y rotulado.</li>
+<li>Cablea un circuito de alumbrado (simple y escalera) y uno de enchufes con tierra.</li>
+<li>Bornes apretados, terminales en cable flexible, sin cobre expuesto.</li></ul>
+<h4>Verificación</h4>
+<ul><li>Hace inspección visual antes de energizar.</li><li>Mide continuidad de tierra y aislación.</li>
+<li>Energiza en forma controlada y prueba el funcionamiento.</li><li>Prueba los diferenciales.</li></ul>
+<h4>Cierre</h4>
+<ul><li>Deja el área limpia y ordenada.</li><li>Explica al evaluador lo que hizo y por qué.</li></ul>`},
+{t:"El día de la evaluación",h:`
+<ul><li>Lleva tu cédula y verifica que tu <b>ClaveÚnica</b> esté activa (la necesitas para pedir la licencia).</li>
+<li>EPP: zapatos dieléctricos, lentes, guantes, ropa de algodón.</li>
+<li>Herramientas propias si lo permiten: alicates aislados, destornilladores aislados, pelacables, alicate de terminales, multímetro CAT III.</li>
+<li>Calculadora y lápiz.</li>
+<li>Una ficha con fórmulas para repasar antes de entrar (no para usar en la prueba, salvo que lo permitan).</li>
+<li>Lee las instrucciones completas antes de empezar. Si algo no está claro, pregunta.</li>
+<li>Trabaja con calma: el orden y la seguridad pesan tanto como que funcione.</li></ul>
+<h4>Ficha de fórmulas</h4>
+<code class="f">V = I·R        P = V·I        E = P·t (kWh)
+I diseño = (P / 220) × 1,1
+ΔV = 2·ρ·L·I / S     ρ = 0,018     ΔV ≤ 3% y 5%
+Demanda: 3000 W × 1 + resto × 0,35
+1,5 mm² → 10 A   2,5 mm² → 16 A   4 mm² → 20 A</code>`}],
+taller:`<h3>Simulacro sin taller</h3><div class="idea">Estas actividades no necesitan materiales del taller: usan simuladores gratuitos, observación de instalaciones sin intervenirlas y ejercicios en papel.</div>
+<ol><li><b>Simulacro "en seco":</b> pide a un colega un plano simple (tablero con 2 diferenciales, 3 circuitos, una escalera y 2 enchufes). Explícale en voz alta, en 20 minutos, cómo lo ejecutarías: materiales, secciones, protecciones, orden de montaje y mediciones. Que marque la pauta de cotejo.</li>
+<li><b>Simulador:</b> arma en el <a href="https://falstad.com/circuit/" target="_blank" rel="noopener">Simulador Falstad ↗</a> el circuito de escalera y un enchufe, sin mirar apuntes.</li>
+<li>Rinde el simulacro teórico de la pestaña siguiente. Meta: 70% o más.</li></ol>
+<div class="warn">La evaluación práctica de ChileValora sí exige ejecutar un montaje real. Pregunta al organismo evaluador o a la OTEC si ofrecen horas de práctica con materiales antes de la evaluación, o si el colegio puede conseguir un kit básico: tablero, diferencial, 3 automáticos, interruptores, enchufe, cable y multímetro.</div>`,
+quiz:[
+{q:"Un hervidor de 2000 W y una estufa de 1500 W en un circuito de 10 A:",o:["Funciona normal","El automático corta por sobrecarga","Salta el diferencial"],a:1,e:"I = 3500 / 220 = 15,9 A, mayor que 10 A."},
+{q:"¿Qué protección es la que cuida a las personas de una fuga a tierra?",o:["Automático","Diferencial 30 mA","Fusible del medidor"],a:1,e:"El diferencial detecta la fuga y corta."},
+{q:"Color de la fase en una vivienda monofásica según RIC N°04:",o:["Azul","Blanco","Verde"],a:0,e:"Fase 1 azul. Neutro blanco. Tierra verde o verde/amarillo."},
+{q:"Sección mínima del alimentador de una vivienda:",o:["2,5 mm²","4 mm²","6 mm²"],a:1,e:"RIC N°03 y N°10: 4 mm²."},
+{q:"Con qué interruptor manejas dos luces desde un mismo punto:",o:["9/12","9/15","9/24"],a:1,e:"El 9/15 es doble."},
+{q:"Vivienda de 45 m². Circuitos mínimos:",o:["2","3","5"],a:1,e:"30 m² o más: mínimo 3 circuitos."},
+{q:"¿Qué regla de oro va después de cortar las fuentes?",o:["Verificar ausencia de tensión","Bloquear y señalizar el corte","Poner a tierra"],a:1,e:"Cortar, bloquear y señalizar, verificar, poner a tierra y en cortocircuito, delimitar."},
+{q:"Caída de tensión máxima en alimentadores:",o:["3%","5%","8%"],a:0,e:"RIC N°03, 5.1.3: 3% en alimentadores; 5% total."},
+{q:"¿Qué instrumento mide la resistencia de puesta a tierra?",o:["Megóhmetro","Telurómetro","Pinza amperimétrica"],a:1,e:"El telurómetro."},
+{q:"Enchufes mínimos en una cocina:",o:["1 doble","3 dobles o triples","6 simples"],a:1,e:"RIC N°10, 5.2.2 c: al menos 3 dobles o triples de 10/16 A."},
+{q:"¿Puede ir un interruptor común en el volumen 1 del baño?",o:["Sí","No, salvo muy baja tensión con fuente fuera de los volúmenes 0, 1 y 2"],a:1,e:"RIC N°11, sección 6."},
+{q:"Un dormitorio con 14 m de perímetro necesita como mínimo:",o:["1 enchufe doble","2 enchufes dobles","3 enchufes dobles"],a:1,e:"14 / 8 = 1,75, se aproxima a 2."},
+{q:"¿Qué curva de automático se usa para motores de gran arranque?",o:["B","C","D"],a:2,e:"La curva D tolera arranques de 10 a 20 veces In."},
+{q:"El neutro de un circuito debe pasar por:",o:["Cualquier diferencial","El mismo diferencial que su fase","Ningún diferencial"],a:1,e:"Si no, el diferencial ve desequilibrio y corta."},
+{q:"Licencia por competencias laborales se renueva cada:",o:["2 años","5 años","Es indefinida"],a:1,e:"Las licencias obtenidas por competencias laborales se renuevan cada cinco años."}]}
+];
+
+/* ---------- Estado ---------- */
+const KEY="pizarra-sec-d-v1";
+let done=new Set();
+try{const s=JSON.parse(localStorage.getItem(KEY)||"[]");if(Array.isArray(s))done=new Set(s)}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify([...done]))}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+const $=id=>document.getElementById(id);
+
+function tabsOf(c){return [...c.pts.map((p,i)=>{const fg=FIGS[c.n+"."+(i+1)];const k=c.n+"."+(i+1);return {key:"Tema "+(i+1),t:p.t,html:`<h3>${esc(p.t)}</h3>`+(fg?`<figure class="ref">${fg.s}<figcaption>${fg.c}</figcaption></figure>`:"")+realHTML(k)+`<div class="prose">${p.h}</div>`}}),
+  {key:"Sin materiales",t:"Práctica",extra:true,html:`<div class="prose">${c.taller}</div>`},
+  {key:"Prueba",t:"Autoevaluación",extra:true,quiz:true}]}
+
+/* ---------- Pizarra ---------- */
+function renderBoard(){
+  document.querySelectorAll(".card").forEach(e=>e.remove());
+  const nxt=clases.find(c=>!done.has(c.n));
+  clases.forEach(c=>{
+    const el=document.createElement("article");
+    el.className="card"+(done.has(c.n)?" done":"")+(nxt&&nxt.n===c.n?" now":"");
+    el.innerHTML=`<div class="tag"><span class="n">${c.n}</span><span class="d">${esc(c.d)}</span></div>
+      <div class="cbody">
+        <div class="top"><div><span class="now-badge">En curso</span>
+          <button class="title-btn" data-open="${c.n}" data-tab="0"><h3>${esc(c.t)}</h3></button></div>
+          <label class="chk" for="c${c.n}"><input type="checkbox" id="c${c.n}" ${done.has(c.n)?"checked":""}>Lista</label></div>
+        <ul class="points">${c.pts.map((p,i)=>`<li><button class="pt" data-open="${c.n}" data-tab="${i}"><span class="k">${c.n}.${i+1}</span><span class="t">${esc(p.t)}</span><span class="go" aria-hidden="true">›</span></button></li>`).join("")}</ul>
+        <div class="foot"><span class="chip key">${esc(c.k)}</span>
+          <button class="chip act" data-open="${c.n}" data-tab="${c.pts.length}">Práctica</button>
+          <button class="chip act" data-open="${c.n}" data-tab="${c.pts.length+1}">Autoevaluación</button></div>
+      </div>`;
+    el.querySelector("input").addEventListener("change",ev=>{ev.target.checked?done.add(c.n):done.delete(c.n);save();renderBoard()});
+    $("w"+c.w).appendChild(el);
+  });
+  $("count").textContent=done.size+"/10";
+  $("fill").style.width=(done.size*10)+"%";document.documentElement.style.setProperty("--prog",done.size/10);
+  $("next").innerHTML=nxt?`Siguiente: <b>Clase ${nxt.n}</b> · ${esc(nxt.t)}`:"<b>Las 10 clases listas.</b> A rendir la evaluación.";
+}
+
+/* ---------- Clase ---------- */
+let cur=null,curTab=0;
+function openLesson(n,tab){
+  const c=clases.find(x=>x.n===n);if(!c)return;
+  cur=c;curTab=Math.max(0,Math.min(tab||0,c.pts.length+1));
+  $("board").hidden=true;$("hdr").hidden=true;$("lesson").hidden=false;
+  const tabs=tabsOf(c);
+  $("lesson").innerHTML=`<button class="back" id="back">‹ Volver a la pizarra</button>
+    <div class="lhead"><div><div class="eyebrow">Clase ${c.n} · ${esc(c.d)} · ${c.w===1?"Semana 1":"Semana 2"}</div><h2>${esc(c.t)}</h2></div>
+      <label class="chk" for="lc"><input type="checkbox" id="lc" ${done.has(c.n)?"checked":""}>Marcar clase como lista</label></div>
+    <div class="tabs" role="tablist">${tabs.map((t,i)=>`<button class="tab${t.extra?" extra":""}" role="tab" id="tab${i}" aria-selected="${i===curTab}" data-i="${i}"><span class="k">${t.key}</span>${esc(t.t)}</button>`).join("")}</div>
+    <section class="panel" role="tabpanel" id="panel"></section>`;
+  $("back").onclick=closeLesson;
+  $("lc").onchange=e=>{e.target.checked?done.add(c.n):done.delete(c.n);save()};
+  document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>showTab(+b.dataset.i));
+  showTab(curTab);
+  window.scrollTo(0,0);
+}
+function showTab(i){
+  const c=cur,tabs=tabsOf(c);curTab=i;
+  document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",+b.dataset.i===i));
+  const t=tabs[i];
+  const prev=i>0?tabs[i-1]:null,next=i<tabs.length-1?tabs[i+1]:null;
+  const nextClass=clases.find(x=>x.n===c.n+1);
+  $("panel").innerHTML=(t.quiz?quizHTML(c):t.html)+`<div class="pnav">
+    <button id="pv" ${prev?"":"disabled"}>‹ ${prev?esc(prev.t):"Inicio"}</button>
+    ${next?`<button id="nx">${esc(next.t)} ›</button>`:(nextClass?`<button id="nc">Clase ${nextClass.n}: ${esc(nextClass.t)} ›</button>`:`<button id="bk">Volver a la pizarra ›</button>`)}</div>`;
+  if(prev)$("pv").onclick=()=>showTab(i-1);
+  if(next)$("nx").onclick=()=>showTab(i+1);
+  if($("nc"))$("nc").onclick=()=>openLesson(nextClass.n,0);
+  if($("bk"))$("bk").onclick=closeLesson;
+  if(t.quiz)wireQuiz(c);
+  const tb=$("tab"+i);if(tb)tb.scrollIntoView({block:"nearest",inline:"nearest"});
+}
+function quizHTML(c){
+  return `<h3>Autoevaluación clase ${c.n}</h3><p class="score" id="score">0 de ${c.quiz.length} respondidas</p>`+
+  c.quiz.map((q,qi)=>`<div class="q" data-q="${qi}"><p class="qt">${qi+1}. ${esc(q.q)}</p><div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-o="${oi}">${esc(o)}</button>`).join("")}</div><div class="exp" hidden></div></div>`).join("")+
+  `<button class="back" id="rq">Reiniciar autoevaluación</button>`;
+}
+function wireQuiz(c){
+  let answered=0,right=0;
+  document.querySelectorAll(".q").forEach(div=>{
+    const q=c.quiz[+div.dataset.q];
+    div.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+      if(div.dataset.done)return;div.dataset.done=1;answered++;
+      const oi=+b.dataset.o,ok=oi===q.a;if(ok)right++;
+      div.querySelectorAll(".opt").forEach(x=>{const k=+x.dataset.o;if(k===q.a)x.classList.add("right");else if(k===oi)x.classList.add("wrong")});
+      const ex=div.querySelector(".exp");ex.hidden=false;ex.innerHTML=(ok?"<b>Correcto.</b> ":"<b>No es correcta.</b> ")+esc(q.e);
+      const pct=Math.round(right/c.quiz.length*100);
+      $("score").textContent=answered<c.quiz.length?`${answered} de ${c.quiz.length} respondidas · ${right} correctas`:`Resultado: ${right} de ${c.quiz.length} (${pct}%) ${pct>=70?"· Aprobado":"· Repasa los temas fallados"}`;
+    });
+  });
+  $("rq").onclick=()=>showTab(curTab);
+}
+function closeLesson(){
+  $("lesson").hidden=true;$("board").hidden=false;$("hdr").hidden=false;cur=null;renderBoard();
+  try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-open]");if(!b)return;
+  openLesson(+b.dataset.open,+b.dataset.tab);
+});
+renderBoard();
+const m=(location.hash||"").match(/^#c(\d+)(?:-(\d+))?$/);
+if(m)openLesson(+m[1],m[2]?+m[2]-1:0);
+</script>
+
+</body>
+</html>
