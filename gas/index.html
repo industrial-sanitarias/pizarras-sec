@@ -256,6 +256,31 @@ body.proj .pnav button{font-size:18px;padding:10px 16px}
 .more>.eyebrow{color:var(--accent);font-weight:500;display:block;margin-bottom:4px}
 .more h4:first-of-type{margin-top:6px}
 body.proj .more{max-width:1180px}
+
+/* Explicado fácil, glosario y guía */
+.facil{border:2px solid var(--ok);background:var(--ok-soft);border-radius:10px;padding:14px 18px;margin:0 0 18px;max-width:900px}
+.facil-tag{display:inline-block;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;background:var(--ok);color:#fff;border-radius:999px;padding:3px 10px;margin-bottom:8px}
+.facil p{margin:0 0 4px;font-size:1.04em;line-height:1.6}
+.words{margin-top:12px;border-top:1px dashed color-mix(in srgb,var(--ok) 50%,transparent);padding-top:10px}
+.words .eyebrow{display:block;margin-bottom:6px;color:var(--ok)}
+.words dl,.glos dl{margin:0;display:grid;gap:6px}
+.words dl>div,.glos dl>div{display:grid;grid-template-columns:minmax(120px,190px) 1fr;gap:10px}
+@media (max-width:560px){.words dl>div,.glos dl>div{grid-template-columns:1fr;gap:0}}
+.words dt,.glos dt{font-weight:600}
+.words dd,.glos dd{margin:0}
+.glosbtn{background:var(--ok);color:#fff;border:0;border-radius:6px;padding:8px 14px;cursor:pointer;font-size:14px;font-weight:500}
+.glosbtn:hover{filter:brightness(1.08)}
+.hero-acts{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.glos{position:fixed;inset:0;z-index:50;background:rgba(15,25,30,.45);display:flex;align-items:flex-start;justify-content:center;padding:max(24px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px));overflow:auto}
+.glos-box{background:var(--paper);border-radius:12px;max-width:720px;width:100%;padding:20px 22px;box-shadow:0 20px 50px -20px rgba(0,0,0,.5)}
+.glos-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.glos-top h3{font-family:var(--f-display);font-size:28px;margin:0}
+#glosq{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:6px;margin-bottom:14px;box-sizing:border-box}
+.glos dl>div{border-bottom:1px solid var(--line);padding:6px 0}
+.start{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--ok);border-radius:10px;padding:16px 22px;margin-bottom:22px}
+.start h2{font-family:var(--f-display);font-weight:600;font-size:24px;margin:0 0 8px}
+.start ol{margin:0;padding-left:22px;display:grid;gap:4px}
+body.proj .facil{max-width:1180px}
 @media (prefers-reduced-motion: reduce){.bar span{transition:none}}
 </style>
 
@@ -274,6 +299,7 @@ body.proj .more{max-width:1180px}
       <h1><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><defs><linearGradient id="mk" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff6a2b"/><stop offset="1" stop-color="#ffc53d"/></linearGradient></defs><path d="M12 2c1.2 4 6.5 6.4 6.5 11.5a6.5 6.5 0 0 1-13 0c0-3.2 2-5.4 3.3-7.2.2 2 1.2 3.2 2.4 3.4C11 6.8 10.6 4.3 12 2z" fill="url(#mk)"/><path d="M12 12.5c1 1.6 2.4 2.6 2.4 4.3a2.4 2.4 0 0 1-4.8 0c0-1.5 1.4-2.6 2.4-4.3z" fill="#3d8bff"/></svg></span><span>Pizarra Instalador de Gas Clase 3</span></h1>
       <p class="sub">10 clases en 2 semanas para instalaciones interiores de gas en baja presión hasta 60 kW. Toca cualquier tema para abrir su materia, esquemas, fotos referenciales, taller y autoevaluación.</p>
       <div class="specs"><span>Baja presión &lt; 5 kPa</span><span>Hasta 60 kW</span><span>DS 66</span><span>DS 191</span></div>
+      <div class="hero-acts"><button class="glosbtn" id="glosbtn" type="button">Abrir glosario</button><span class="kbd-hint">¿Una palabra que no entiendes? Búscala aquí.</span></div>
     </div>
     <div class="progress" aria-live="polite">
       <svg class="gauge" viewBox="0 0 200 118" aria-hidden="true"><defs><linearGradient id="ga" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3d8bff"/><stop offset="1" stop-color="#ff8a3d"/></linearGradient></defs>
@@ -289,6 +315,17 @@ body.proj .more{max-width:1180px}
   </header>
 
   <main id="board">
+    <section class="start" aria-label="Cómo usar esta pizarra">
+      <h2>¿Partes desde cero? Así se usa esta pizarra</h2>
+      <ol>
+        <li><b>Avanza en orden.</b> Cada clase usa lo que aprendiste en la anterior. Empieza por la Clase 1.</li>
+        <li><b>Lee primero el recuadro "Explicado fácil".</b> Te da la idea con palabras simples antes de la parte técnica.</li>
+        <li><b>Mira el esquema y la foto.</b> Ver cómo se instala algo ayuda más que leerlo.</li>
+        <li><b>Relaciónalo con agua potable.</b> Redes, tramos, caudales y pruebas funcionan con la misma lógica.</li>
+        <li><b>Usa el glosario</b> cada vez que aparezca una palabra nueva.</li>
+        <li><b>Cierra cada clase con la autoevaluación.</b> Si sacas menos de 70%, vuelve a leer los temas que fallaste.</li>
+      </ol>
+    </section>
     <div class="lanes">
       <section class="lane" id="w1"><h2>Semana 1 <small>Gases, normativa, tuberías y cilindros</small></h2></section>
       <section class="lane" id="w2"><h2>Semana 2 <small>Artefactos, ventilación, cálculo y pruebas</small></h2></section>
@@ -468,7 +505,7 @@ Ln("M120 160L260 190L460 150L320 120Z","s")+Ln("M120 60L260 90L460 50L320 20Z","
 FIGS["7.3"]={c:"Ubicación de las aberturas de ventilación en el muro (DS 66, cap. IX).",s:SV(220,
 Rc(40,10,520,200,"s",0)+Ln("M40 200H560","s thick")+Rc(90,178,90,20,"f-mt",2)+Tx(135,172,"Inferior","tc sm bd")+Ln("M190 178V200","w-live")+Tx(196,194,"GLP: borde superior a no más de 15 cm del piso","sm bd")
 +Rc(380,30,90,22,"f-mt",2)+Tx(425,24,"Superior","tc sm bd")+Bx(250,90,70,90,"Artefacto")
-+Tx(60,120,"Malla ≥ 6 mm o celosía","sm")+Tx(60,138,"El rebaje de la puerta no cuenta","sm")
++Tx(60,50,"Malla ≥ 6 mm o celosía","sm")+Tx(60,68,"El rebaje de la puerta no cuenta","sm")
 +Tx(340,90,"≥ 40 cm de salidas tipo B o C","sm")+Tx(340,106,"≥ 60 cm del sombrerete B natural","sm")
 ,"Ubicación de rejillas")};
 
@@ -593,6 +630,87 @@ function realHTML(k){
    (ls.length?`<div class="links"><div class="eyebrow">Ver en la realidad</div><ul>${ls.map(([t,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${esc(t)} ↗</a></li>`).join("")}</ul></div>`:"")+
   `</div>`;
 }
+
+/* ---------- Explicado fácil y glosario ---------- */
+const FACIL={
+"1.1":{f:"En las casas se usan dos gases para cocinar, calentar agua y calefaccionar. El gas natural llega por cañerías desde la calle, como el agua potable. El gas licuado viene en cilindros, como los de 15 o 45 kilos. Cada cocina, calefont o estufa está hecha para uno de los dos gases, y no se pueden intercambiar sin adaptarla.",w:[["Gas natural (GN)","Gas que llega por red desde la calle; es principalmente metano."],["Gas licuado (GLP)","Gas que viene en cilindros o estanques; es propano y butano."],["Artefacto","Equipo que funciona a gas: cocina, calefont, estufa."],["Conversión","Adaptar un artefacto para que funcione con otro gas."]]},
+"1.2":{f:"El gas natural es más liviano que el aire: si se escapa, sube hacia el techo. El gas licuado es más pesado: si se escapa, baja y se junta en el piso, como el agua derramada. Ninguno de los dos tiene olor propio; se les pone un olor fuerte a propósito para que podamos darnos cuenta de una fuga.",w:[["Densidad","Qué tan pesado es un gas comparado con el aire."],["Odorizante","Sustancia que se agrega al gas para que tenga olor."],["Poder calorífico","Cuánto calor entrega un metro cúbico de gas al quemarse."],["Fuga","Escape de gas por una unión o cañería dañada."]]},
+"1.3":{f:"Para que el gas se queme bien necesita suficiente aire. Si hay aire de sobra, la llama es azul y limpia. Si falta aire, la llama se pone amarilla, deja hollín negro y produce un gas tóxico llamado monóxido de carbono. Por eso los recintos con artefactos a gas necesitan ventilación.",w:[["Combustión","Proceso de quemar el gas con el oxígeno del aire."],["Combustión incompleta","Quema con poco aire; produce hollín y monóxido de carbono."],["Hollín","Mancha negra que deja una mala combustión."]]},
+"1.4":{f:"El monóxido de carbono es un gas que no se ve ni se huele, y es muy peligroso. Aparece cuando el gas se quema con poco aire o cuando los gases del calefont no salen al exterior. Primero da dolor de cabeza y mareo, y en cantidades mayores puede matar. Por eso el calefont siempre necesita un tubo hacia afuera.",w:[["Monóxido de carbono (CO)","Gas tóxico, sin color ni olor, de una mala combustión."],["Intoxicación","Daño al cuerpo por respirar un gas tóxico."],["Detector de CO","Aparato que suena si hay monóxido de carbono en el aire."]]},
+"2.1":{f:"La presión es la fuerza con que el gas empuja dentro de la cañería. Los artefactos de una casa funcionan con muy poca presión. Por eso se usa un regulador, que recibe el gas con más fuerza desde la red o el cilindro y lo entrega suave y parejo. La licencia clase 3 trabaja solo con esta presión baja.",w:[["Presión","Fuerza con que empuja el gas. Se mide en kPa."],["kPa (kilopascal)","Unidad de presión."],["Regulador","Aparato que baja y estabiliza la presión del gas."],["Baja presión","Menos de 5 kPa; la de los artefactos de una casa."]]},
+"2.2":{f:"La potencia dice cuánto gas usa un artefacto. Un calefont usa mucho más gas que una estufa chica. Con la potencia se calcula cuántos metros cúbicos de gas pasan por hora por la cañería. Además, la suma de todas las potencias de la casa dice si un instalador clase 3 la puede hacer: hasta 60 kW.",w:[["Potencia","Cuánta energía usa un artefacto. Se mide en kW."],["kcal/h","Otra forma de medir potencia: 1 kW = 860 kcal/h."],["m³/h","Metros cúbicos de gas por hora: el caudal."]]},
+"2.3":{f:"El manómetro es el instrumento que mide la presión del gas. El más simple es un tubo transparente con agua en forma de U: el gas empuja el agua de un lado y la diferencia de altura indica la presión. Se usa mucho para comprobar que una cañería no tenga fugas.",w:[["Manómetro","Instrumento que mide la presión."],["Columna de agua","Forma de medir presión según cuánto sube el agua en un tubo."]]},
+"2.4":{f:"Si hay olor a gas, lo más importante es no hacer ninguna chispa: no prender ni apagar luces ni aparatos. Hay que abrir puertas y ventanas, cerrar la llave del gas y salir. Las fugas se buscan con agua con jabón: donde hay fuga, aparecen burbujas. Nunca con un fósforo.",w:[["Llave de paso","Válvula que abre o cierra el gas."],["Agua jabonosa","Mezcla de agua y jabón para encontrar fugas por burbujas."],["Chispa","Pequeña descarga que puede encender el gas."]]},
+"3.1":{f:"Igual que la electricidad, el gas tiene reglas obligatorias. Las instalaciones dentro de las casas se rigen por el DS 66. Los instaladores y lo que cada uno puede hacer se rigen por el DS 191. La SEC fiscaliza que se cumplan y entrega las licencias.",w:[["DS 66","Reglamento de instalaciones interiores y medidores de gas."],["DS 191","Reglamento de instaladores de gas."],["SEC","Superintendencia de Electricidad y Combustibles."]]},
+"3.2":{f:"Hay tres clases de licencia de gas. La clase 3, la que buscas, permite hacer instalaciones dentro de casas y locales pequeños, con baja presión y hasta 60 kW en total. Las instalaciones más grandes o con más presión las hacen instaladores clase 1 o 2.",w:[["Licencia clase 3","Autorización para instalaciones tipo 3."],["Instalación tipo 3","Interior, en baja presión y de hasta 60 kW."]]},
+"3.3":{f:"Una instalación de gas sigue siempre el mismo camino: se diseña, se construye, se prueba que no tenga fugas, se declara a la SEC con un documento llamado TC6, la empresa de gas la revisa y recién entonces se da el gas. Después, cada dos años, se revisa de nuevo.",w:[["TC6","Declaración de una instalación de gas ante la SEC."],["Puesta en servicio","Momento en que se da el gas por primera vez."],["Inspección periódica","Revisión obligatoria cada dos años."]]},
+"3.4":{f:"Una instalación de gas se parece mucho a una de agua potable: empieza en el medidor o en los cilindros, sigue con un regulador y una llave general, y luego las cañerías llevan el gas a cada artefacto, que tiene su propia llave. Además, los recintos necesitan ventilación y el calefont un tubo de salida.",w:[["Red interior","Cañerías que llevan el gas dentro de la propiedad."],["Arranque","Salida de la cañería donde se conecta un artefacto."]]},
+"4.1":{f:"Las cañerías de gas se hacen principalmente de cobre. No sirve cualquier cobre: se usa el tipo L, que es más grueso que el que se usa a veces en agua. También hay cañerías de acero, de plástico (solo enterradas y fuera de la casa) y, desde 2026, multicapa. Nunca se reutilizan cañerías viejas.",w:[["Cobre tipo L","Tubo de cobre de pared adecuada para gas."],["Multicapa","Tubo de plástico con una capa de aluminio al medio."],["Polietileno (PE)","Plástico usado en cañerías enterradas."]]},
+"4.2":{f:"Las uniones de cobre para gas se sueldan con soldadura fuerte, que usa más calor y un material más resistente que la soldadura de estaño del agua potable. El tubo se corta derecho, se limpia, se mete en la pieza, se calienta y el material de aporte entra solo por la unión.",w:[["Soldadura fuerte","Unión con aleación que se funde a alta temperatura."],["Escariar","Quitar la rebaba del borde de un tubo cortado."],["Fundente","Pasta que ayuda a que la soldadura se adhiera."]]},
+"4.3":{f:"Las cañerías de gas no pueden pasar por cualquier lugar: no por ductos de ventilación, ni por el cielo de los dormitorios, y el gas licuado no puede ir por el entretecho. Cuando van enterradas, se ponen sobre arena, a 60 cm de profundidad, con una cinta amarilla que dice GAS para avisar a quien excave después.",w:[["Zanja","Excavación donde se entierra la cañería."],["Cinta señalizadora","Cinta que avisa que hay una cañería de gas abajo."],["Entretecho","Espacio entre el cielo y el techo."]]},
+"4.4":{f:"El gas y la electricidad deben estar separados, porque una chispa puede encender una fuga. Por eso hay distancias mínimas entre cañerías de gas y cables, enchufes o tableros. Además, cada artefacto debe tener su propia llave de paso, a la vista y fácil de cerrar.",w:[["Distancia de seguridad","Separación mínima entre el gas y otros servicios."],["Válvula de corte","Llave que corta el paso del gas."]]},
+"5.1":{f:"Cuando el gas llega por red, pasa primero por un medidor, que cuenta cuántos metros cúbicos se usan, y por un regulador, que baja la presión. Antes del medidor hay una llave para cortar todo. El medidor va en un nicho, una caja con rejillas para que no se acumule gas.",w:[["Medidor de gas","Aparato que cuenta el gas consumido en m³."],["Nicho","Caja donde va el medidor, con ventilación."]]},
+"5.2":{f:"Cuando no hay red de gas natural, se usan cilindros de gas licuado de 45 kilos. Deben estar al aire libre, sobre un piso firme, lejos de desagües, ventanas y fuentes de calor. Se instalan entre 2 y 12 cilindros, la mitad en uso y la otra de reserva.",w:[["Cilindro de 45 kg","Envase grande de gas licuado."],["Colector","Pieza que une varios cilindros."],["Gabinete","Caseta que protege los cilindros."]]},
+"5.3":{f:"La cantidad de cilindros depende de cuánto gas se usa y del frío. El gas licuado dentro del cilindro tiene que \"hervir\" para salir como gas, y con frío hierve más lento. Por eso en zonas frías se necesitan más cilindros. El resultado se duplica para tener cilindros de reserva.",w:[["Vaporización","Paso del gas licuado de líquido a gas dentro del cilindro."],["Reposición","Cilindros de reserva para cambiar los vacíos."]]},
+"5.4":{f:"El gas natural y el licuado no se comportan igual. El licuado es más pesado, así que no se puede instalar bajo el nivel del suelo porque se acumularía. Un artefacto hecho para un gas debe adaptarse (convertirse) antes de usarlo con el otro.",w:[["Bajo cota cero","Bajo el nivel del terreno: subterráneos, sótanos."],["Inyector","Pieza pequeña por donde sale el gas al quemador."]]},
+"6.1":{f:"Los artefactos a gas se clasifican según de dónde toman el aire y adónde botan el humo. Tipo A: toman aire de la pieza y el humo queda en ella (cocinas, estufas). Tipo B: toman aire de la pieza pero botan el humo afuera por un tubo (calefont común). Tipo C: toman aire de afuera y botan el humo afuera; son los más seguros.",w:[["Tipo A","Artefacto sin tubo de salida."],["Tipo B","Artefacto con tubo de salida que usa el aire de la pieza."],["Tipo C","Artefacto cerrado que usa aire de afuera."]]},
+"6.2":{f:"El calefont calienta el agua al momento en que abres la llave. Quema bastante gas, por eso siempre necesita un tubo que saque los gases hacia afuera. Tiene sistemas de seguridad: no se enciende si no pasa agua, corta el gas si se apaga la llama y se apaga si los gases no salen bien.",w:[["Calefont","Calentador de agua instantáneo a gas."],["Cortatiro","Parte superior del calefont que conecta con el tubo de salida."],["Sensor de tiro","Seguridad que apaga el calefont si los gases se devuelven."]]},
+"6.3":{f:"La cocina se conecta a la cañería con una manguera especial, de máximo un metro, y una llave de paso que debe quedar a la vista, cerca y fácil de cerrar. La manguera no puede atravesar paredes ni pisos. Antes de agregar un artefacto, hay que revisar que la cañería alcance para todos.",w:[["Flexible","Manguera especial para conectar artefactos a gas."],["Sensor de atmósfera","Seguridad de las estufas que corta si baja el oxígeno."]]},
+"6.4":{f:"En los dormitorios y en los baños no se pueden poner artefactos tipo A ni tipo B, porque consumen el aire de la pieza y pueden llenarla de monóxido de carbono, por ejemplo mientras alguien duerme o se ducha con la puerta cerrada. Ahí solo se aceptan artefactos tipo C.",w:[["Recinto","Pieza o espacio cerrado de una casa."]]},
+"7.1":{f:"Un artefacto a gas necesita aire para quemar el gas, igual que una vela se apaga si la tapas con un vaso. Por eso los recintos con artefactos tienen rejillas permanentes: una abajo para que entre aire fresco y otra arriba para que salga el aire viciado. Nunca se deben tapar.",w:[["Ventilación permanente","Abertura que siempre está abierta, como una rejilla."],["Rejilla","Abertura con lamas o malla en la pared."]]},
+"7.2":{f:"Una pieza chica tiene poco aire. Por eso la norma pide un tamaño mínimo (volumen) para los recintos con artefactos que toman aire de ahí. El volumen se calcula como largo por ancho por alto, pero el alto se cuenta como máximo 2,4 metros aunque el cielo sea más alto.",w:[["Volumen","Espacio de una pieza: largo × ancho × alto, en m³."],["m³","Metro cúbico."]]},
+"7.3":{f:"La rejilla de abajo deja entrar aire fresco. Con gas licuado, que es más pesado que el aire, esa rejilla debe ir casi pegada al piso, a no más de 15 cm, para que si hay una fuga el gas pueda salir. La rejilla de arriba deja salir el aire usado. Las dos llevan un letrero que pide no taparlas.",w:[["Rejilla inferior","Abertura cerca del piso."],["Rejilla superior","Abertura en la parte alta de la pared."]]},
+"7.4":{f:"Las campanas y extractores de cocina sacan aire de la pieza. Si la pieza no tiene suficiente ventilación, pueden \"chupar\" los gases del calefont hacia adentro en vez de dejarlos salir por el tubo. Por eso hay medidas mínimas para estas aberturas y hay que revisar el calefont con el extractor encendido.",w:[["Campana","Equipo sobre la cocina que extrae humo y olores."],["Revoco","Cuando los gases del calefont se devuelven a la pieza."]]},
+"8.1":{f:"Los gases calientes del calefont suben solos por el tubo, como el humo de una chimenea. Para que suban bien, el tubo debe empezar con un tramo recto hacia arriba, ir siempre subiendo y tener pocas curvas. Si el tubo está mal hecho, los gases se devuelven a la pieza.",w:[["Conducto de evacuación","Tubo que lleva los gases del calefont al exterior."],["Tiro natural","Subida de los gases calientes por sí solos."]]},
+"8.2":{f:"El tubo de salida del calefont se calienta mucho, por eso debe ser de un material que no se queme ni se oxide fácilmente, como acero inoxidable o acero galvanizado del espesor correcto. Debe quedar separado de la madera y otros materiales que puedan arder.",w:[["Material combustible","Material que puede quemarse, como la madera."],["Punto de muestreo","Agujero pequeño en el tubo para medir los gases."]]},
+"8.3":{f:"El tubo termina afuera con un sombrerete, una especie de gorro metálico que evita que entre la lluvia o el viento y ayuda a que los gases se dispersen. Si sale por una pared, debe quedar alto, sobre 2,20 metros, para que los gases no le lleguen a las personas.",w:[["Sombrerete","Remate del tubo que lo protege del viento y la lluvia."],["Fachada","Pared exterior de la casa."]]},
+"8.4":{f:"Para saber si el calefont bota bien sus gases, se hace una prueba simple: con el calefont funcionando, se acerca humo o una llama pequeña a la parte de arriba. Si el humo es aspirado hacia el tubo, está bien. Si sale hacia la pieza, hay revoco y el calefont no se puede usar.",w:[["Prueba de tiro","Revisión de que los gases salgan por el tubo."]]},
+"9.1":{f:"Para saber qué grosor deben tener las cañerías, primero se calcula cuánto gas necesita cada artefacto. La cañería que sale del medidor lleva el gas de todos, y las ramas finales solo el de un artefacto. Es igual al cálculo de agua potable, pero con metros cúbicos de gas por hora.",w:[["Caudal","Cantidad de gas que pasa por hora."],["Tramo","Parte de la red entre dos puntos."]]},
+"9.2":{f:"Cada codo, te o llave frena un poco el gas, como si la cañería fuera más larga. Por eso al largo real se le suma un largo extra por cada pieza, llamado longitud equivalente. El resultado es la longitud de cálculo.",w:[["Longitud equivalente","Largo extra que representa la pérdida de un accesorio."],["Accesorio","Codo, te, llave u otra pieza de la red."]]},
+"9.3":{f:"Con el caudal y la longitud de cálculo de cada tramo, se busca en las tablas del reglamento qué diámetro de cañería sirve. Si la cañería es muy delgada, el gas llega con poca fuerza y los artefactos funcionan mal.",w:[["Diámetro","Grosor interior de la cañería, en pulgadas."],["Pérdida de carga","Presión que se pierde a lo largo de la cañería."]]},
+"9.4":{f:"El plano de gas muestra por dónde van las cañerías, dónde están las llaves, los artefactos, las rejillas y los tubos de salida. Además se dibuja un isométrico, un dibujo en tres dimensiones de la red, igual al que se usa en agua potable.",w:[["Isométrico","Dibujo de la red en perspectiva, en 3D."],["Planta","Dibujo de la casa vista desde arriba."]]},
+"10.1":{f:"Antes de dar el gas se comprueba que la cañería no tenga fugas. Se tapan las salidas, se llena con aire a cierta presión y se deja un tiempo con un manómetro conectado. Si la presión no baja, no hay fugas. Si baja, se busca la fuga con agua jabonosa y se repite.",w:[["Prueba de hermeticidad","Prueba para comprobar que no hay fugas."],["Te de prueba","Pieza donde se conecta el manómetro."]]},
+"10.2":{f:"Terminada y probada la instalación, el instalador la declara a la SEC con el TC6. Luego la empresa de gas revisa que no haya fugas, que haya ventilación y que el calefont tenga su tubo. Si todo está bien, abre el gas.",w:[["Distribuidora","Empresa que entrega el gas."],["Inspección reducida","Revisión que hace la distribuidora antes de dar el gas."]]},
+"10.3":{f:"Cada dos años, una empresa autorizada revisa la instalación de gas de la casa y le pone un sello. Verde: está todo bien. Amarillo: hay problemas que se deben arreglar en un plazo. Rojo: hay problemas graves y se corta el gas hasta arreglarlos. El instalador es quien hace esos arreglos.",w:[["Sello verde","La instalación cumple."],["Sello amarillo","Hay defectos que se deben corregir."],["Sello rojo","Defectos graves; se corta el gas."]]},
+"10.4":{f:"Para la licencia por esta vía te evalúan lo que sabes y cómo trabajas. Lo más importante es trabajar seguro: cerrar la llave, ventilar, no tener nada que haga chispa cerca y probar que no haya fugas antes de dar el gas.",w:[["ChileValora","Sistema que certifica competencias laborales."],["Evidencias","Fotos, documentos y referencias de tu experiencia."]]}
+};
+const GLOS=[
+["Arranque","Salida de la cañería donde se conecta un artefacto."],["Artefacto","Equipo que funciona a gas."],["Baja presión","Menos de 5 kPa; la de los artefactos domésticos."],
+["Calefont","Calentador de agua instantáneo a gas."],["Caudal","Cantidad de gas por hora, en m³/h."],["Cilindro","Envase de gas licuado (5, 11, 15 o 45 kg)."],
+["CO (monóxido de carbono)","Gas tóxico sin color ni olor de una mala combustión."],["Combustión","Quema del gas con el oxígeno del aire."],["Conducto de evacuación","Tubo que lleva los gases del calefont al exterior."],
+["Conversión","Adaptar un artefacto para otro tipo de gas."],["Cortatiro","Parte superior del calefont que conecta con el conducto."],["Densidad","Qué tan pesado es un gas respecto del aire."],
+["Diámetro","Grosor interior de una cañería."],["Distribuidora","Empresa que suministra el gas."],["DS 191","Reglamento de instaladores de gas."],["DS 66","Reglamento de instalaciones interiores y medidores de gas."],
+["Flexible","Manguera especial para conectar artefactos."],["Fuga","Escape de gas."],["Gas licuado (GLP)","Propano y butano, en cilindros o estanques. Más pesado que el aire."],
+["Gas natural (GN)","Principalmente metano, por red. Más liviano que el aire."],["Hermeticidad","Condición de no tener fugas."],["Inyector","Pieza por donde sale el gas hacia el quemador."],
+["Isométrico","Dibujo en perspectiva de la red de cañerías."],["kPa","Kilopascal, unidad de presión."],["kW","Kilowatt, unidad de potencia. 1 kW = 860 kcal/h."],
+["Llave de paso","Válvula que abre o cierra el gas a un artefacto."],["Longitud equivalente","Largo extra que representa la pérdida de un accesorio."],["Manómetro","Instrumento que mide presión."],
+["Medidor","Aparato que cuenta el gas consumido."],["Odorizante","Sustancia que da olor al gas para detectar fugas."],["Pérdida de carga","Presión que se pierde en la cañería."],
+["Poder calorífico","Calor que entrega un m³ de gas al quemarse."],["Potencia","Energía que usa un artefacto, en kW."],["Regulador","Aparato que baja y estabiliza la presión."],
+["Rejilla","Abertura permanente de ventilación."],["Revoco","Gases del calefont que se devuelven a la pieza."],["SEC","Superintendencia de Electricidad y Combustibles."],
+["Sello verde, amarillo, rojo","Resultado de la inspección periódica de gas."],["Soldadura fuerte","Unión de cobre con aleación a alta temperatura."],["Sombrerete","Remate del conducto que lo protege del viento y la lluvia."],
+["TC6","Declaración de una instalación de gas ante la SEC."],["Tipo A, B, C","Clasificación de artefactos según aire y evacuación."],["Tiro","Subida de los gases por el conducto."],
+["Tramo","Parte de la red entre dos puntos."],["Ventilación","Entrada de aire nuevo y salida de aire usado."],["Volumen","Largo × ancho × alto de un recinto, en m³."]
+];
+function facilHTML(k){
+  const x=FACIL[k]; if(!x) return "";
+  return `<section class="facil"><div class="facil-h"><span class="facil-tag">Explicado fácil</span></div><p>${esc(x.f)}</p>${x.w&&x.w.length?`<div class="words"><span class="eyebrow">Palabras nuevas de este tema</span><dl>${x.w.map(([t,d])=>`<div><dt>${esc(t)}</dt><dd>${esc(d)}</dd></div>`).join("")}</dl></div>`:""}</section>`;
+}
+function openGlos(){
+  let d=document.getElementById("glos");
+  if(!d){
+    d=document.createElement("div");d.id="glos";d.className="glos";d.setAttribute("role","dialog");d.setAttribute("aria-label","Glosario");
+    d.innerHTML=`<div class="glos-box"><div class="glos-top"><h3>Glosario</h3><button class="back" id="glosx">Cerrar</button></div>
+      <input id="glosq" type="search" placeholder="Busca una palabra, por ejemplo: fase" aria-label="Buscar en el glosario">
+      <dl id="glosl"></dl></div>`;
+    document.body.appendChild(d);
+    const render=q=>{q=(q||"").toLowerCase();$("glosl").innerHTML=GLOS.filter(([t,x])=>!q||t.toLowerCase().includes(q)||x.toLowerCase().includes(q)).map(([t,x])=>`<div><dt>${esc(t)}</dt><dd>${esc(x)}</dd></div>`).join("")||"<p>No hay resultados.</p>"};
+    $("glosq").oninput=e=>render(e.target.value);$("glosx").onclick=()=>{d.hidden=true};
+    d.addEventListener("click",e=>{if(e.target===d)d.hidden=true});
+    render("");
+  }
+  d.hidden=false;setTimeout(()=>{try{$("glosq").focus()}catch(e){}},50);
+}
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){const d=document.getElementById("glos");if(d&&!d.hidden){d.hidden=true;e.stopImmediatePropagation()}}},true);
 
 /* ---------- Profundiza ---------- */
 const MORE={
@@ -1558,7 +1676,7 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify([...done]))}catch(e)
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 const $=id=>document.getElementById(id);
 
-function tabsOf(c){return [...c.pts.map((p,i)=>{const fg=FIGS[c.n+"."+(i+1)];const k=c.n+"."+(i+1);return {key:"Tema "+(i+1),t:p.t,html:`<h3>${esc(p.t)}</h3>`+(fg?`<figure class="ref">${fg.s}<figcaption>${fg.c}</figcaption></figure>`:"")+realHTML(k)+`<div class="prose">${p.h}</div>`+(MORE[k]?`<section class="more prose"><span class="eyebrow">Profundiza</span>${MORE[k]}</section>`:"")+expHTML(k)}}),
+function tabsOf(c){return [...c.pts.map((p,i)=>{const fg=FIGS[c.n+"."+(i+1)];const k=c.n+"."+(i+1);return {key:"Tema "+(i+1),t:p.t,html:`<h3>${esc(p.t)}</h3>`+facilHTML(k)+(fg?`<figure class="ref">${fg.s}<figcaption>${fg.c}</figcaption></figure>`:"")+realHTML(k)+`<div class="prose">${p.h}</div>`+(MORE[k]?`<section class="more prose"><span class="eyebrow">Profundiza</span>${MORE[k]}</section>`:"")+expHTML(k)}}),
   {key:"Práctica",t:"Taller",extra:true,html:`<div class="prose">${c.taller}</div>`},
   {key:"Prueba",t:"Autoevaluación",extra:true,quiz:true}]}
 
@@ -1596,10 +1714,10 @@ function openLesson(n,tab){
   const tabs=tabsOf(c);
   $("lesson").innerHTML=`<button class="back" id="back">‹ Volver a la pizarra</button>
     <div class="lhead"><div><div class="eyebrow">Clase ${c.n} · ${esc(c.d)} · ${c.w===1?"Semana 1":"Semana 2"}</div><h2>${esc(c.t)}</h2></div>
-      <div class="lacts"><button class="projbtn" id="projbtn" aria-pressed="${document.body.classList.contains("proj")}">Modo proyector</button><label class="chk" for="lc"><input type="checkbox" id="lc" ${done.has(c.n)?"checked":""}>Marcar clase como lista</label></div></div><div class="kbd-hint">Usa las flechas ← → del teclado para pasar de pestaña.</div>
+      <div class="lacts"><button class="glosbtn" id="glosbtn2" type="button">Glosario</button><button class="projbtn" id="projbtn" aria-pressed="${document.body.classList.contains("proj")}">Modo proyector</button><label class="chk" for="lc"><input type="checkbox" id="lc" ${done.has(c.n)?"checked":""}>Marcar clase como lista</label></div></div><div class="kbd-hint">Usa las flechas ← → del teclado para pasar de pestaña.</div>
     <div class="tabs" role="tablist">${tabs.map((t,i)=>`<button class="tab${t.extra?" extra":""}" role="tab" id="tab${i}" aria-selected="${i===curTab}" data-i="${i}"><span class="k">${t.key}</span>${esc(t.t)}</button>`).join("")}</div>
     <section class="panel" role="tabpanel" id="panel"></section>`;
-  $("back").onclick=closeLesson;$("projbtn").onclick=()=>{const on=document.body.classList.toggle("proj");$("projbtn").setAttribute("aria-pressed",on);try{localStorage.setItem(KEY+"-proj",on?"1":"")}catch(e){}};
+  $("back").onclick=closeLesson;$("glosbtn2").onclick=openGlos;$("projbtn").onclick=()=>{const on=document.body.classList.toggle("proj");$("projbtn").setAttribute("aria-pressed",on);try{localStorage.setItem(KEY+"-proj",on?"1":"")}catch(e){}};
   $("lc").onchange=e=>{e.target.checked?done.add(c.n):done.delete(c.n);save()};
   document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>showTab(+b.dataset.i));
   showTab(curTab);
@@ -1651,6 +1769,7 @@ document.addEventListener("click",e=>{
 });
 try{if(localStorage.getItem(KEY+"-proj"))document.body.classList.add("proj")}catch(e){}
 document.addEventListener("keydown",e=>{if(!cur||e.target.closest("input,textarea,select"))return;const n=tabsOf(cur).length;if(e.key==="ArrowRight"&&curTab<n-1){showTab(curTab+1);e.preventDefault()}else if(e.key==="ArrowLeft"&&curTab>0){showTab(curTab-1);e.preventDefault()}else if(e.key==="Escape"&&document.body.classList.contains("proj")){document.body.classList.remove("proj");const b=$("projbtn");if(b)b.setAttribute("aria-pressed",false);try{localStorage.setItem(KEY+"-proj","")}catch(x){}}});
+try{$("glosbtn").onclick=openGlos}catch(e){}
 renderBoard();
 const m=(location.hash||"").match(/^#c(\d+)(?:-(\d+))?$/);
 if(m)openLesson(+m[1],m[2]?+m[2]-1:0);
