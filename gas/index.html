@@ -395,7 +395,7 @@ const NoX=(x,y,r=10)=>Ln(`M${x-r} ${y-r}L${x+r} ${y+r}M${x+r} ${y-r}L${x-r} ${y+
 
 /* ---------- Ilustraciones por tema ---------- */
 const FIGS={};
-FIGS["1.1"]={c:"El gas natural es más liviano que el aire y sube; el gas licuado es más pesado y se acumula a ras de piso. Esto define dónde van las rejillas y qué recintos están prohibidos.",s:SV(210,
+FIGS["1.1"]={c:"El gas natural es más liviano que el aire y sube; el gas licuado es más pesado y se acumula a ras de piso. Esto define dónde van las celosías y qué recintos están prohibidos.",s:SV(210,
 Rc(20,20,560,170,"s",4)+Ln("M20 190H580","s thick")+Tx(30,40,"Recinto","sm mt")
 +Bx(80,110,120,44,"Gas natural|densidad ≈ 0,6")+Ar(140,104,140,40,"w-az")+Tx(150,60,"sube","sm bd")
 +Bx(380,60,140,44,"Gas licuado|densidad ≈ 1,5 a 2")+Ar(450,110,450,180,"w-ro")+Tx(460,160,"baja al piso","sm bd")
@@ -462,7 +462,7 @@ FIGS["3.4"]={c:"Partes de una instalación interior típica de una vivienda.",s:
 Bx(15,90,80,50,"Medidor o|cilindros")+Ln("M95 115H125","w-cu")+Bx(125,95,70,40,"Regulador")+Ln("M195 115H230","w-cu")+Valve(240,115)+Tx(240,145,"Llave","tc sm")+Tx(240,158,"general","tc sm")
 +Ln("M250 115H560M330 115V60M480 115V170","w-cu")+Valve(330,80)+Valve(480,150)
 +Bx(295,20,70,30,"Calefont")+Ln("M330 20V8","s thick")+Bx(440,170,80,34,"Cocina")
-+Rc(540,80,40,12,"f-mt",1)+Tx(560,74,"Rejilla","tc sm")+Tx(300,213,"Red de cobre, llave de paso por artefacto, ventilación y evacuación","tc sm mt"),"Partes de la instalación interior")};
++Rc(540,80,40,12,"f-mt",1)+Tx(560,74,"Celosía","tc sm")+Tx(300,213,"Red de cobre, llave de paso por artefacto, ventilación y evacuación","tc sm mt"),"Partes de la instalación interior")};
 
 FIGS["4.1"]={c:"Materiales permitidos y sus límites según el DS 66, art. 45. Hierro fundido y plomo están prohibidos.",s:SV(215,
 [["Cobre tipo L","hasta 140 kPa","f-cu"],["Cobre tipo K","sobre 140 kPa","f-cu"],["Acero Sch 40","cambios de dirección con codos","f-mt"],["Polietileno (PE)","solo fuera del edificio y enterrado","f-am"],["Multicapa","no como conexión a artefactos","f-acc"]].map(([n,t,c],i)=>{const y=14+i*40;return Rc(20,y,200,22,c,11)+Tx(240,y+16,n,"bd")+Tx(380,y+16,t,"sm")}).join(""),"Materiales de tuberías")};
@@ -524,10 +524,10 @@ Rc(220,40,160,160,"box",8)+Rc(240,60,120,40,"f-mt",2)+Tx(300,85,"Intercambiador"
 +Tx(400,60,"Conducto al exterior","sm")+Tx(400,76,"siempre obligatorio","sm bd"),"Partes del calefont")};
 
 FIGS["6.3"]={c:"Conexión de artefactos: válvula de paso visible en el mismo recinto y conexión de largo limitado (DS 66, cap. IX).",s:SV(200,
-Ln("M20 40H200V110","w-cu")+Valve(200,110)+Tx(215,108,"Válvula de paso","sm bd")+Tx(215,124,"visible, ≤ 1,6 m del piso","sm")
-+Ln("M200 120C200 170 300 170 330 150","w-ne dash")+Tx(220,190,"Flexible: ≤ 1 m cocina, ≤ 2 m otros","sm")
+Ln("M20 40H200V110","w-cu")+Valve(200,110)+Tx(215,108,"Válvula de paso","sm bd")+Tx(215,124,"a la vista","sm")
++Ln("M200 120C200 170 300 170 330 150","w-ne dash")+Tx(20,182,"Conexión ≤ 1 m, a la vista","sm")
 +Rc(330,120,140,60,"box",4)+Tx(400,155,"Cocina","tc")+Ln("M20 190H580","s thick")
-+Ln("M120 110V190","ax")+Tx(60,160,"1,6 m","sm"),"Conexión de artefactos")};
+,"Conexión de artefactos")};
 
 FIGS["6.4"]={c:"Dónde no pueden ir artefactos de tipo A y B: dormitorios, baños y recintos a los que solo se accede por ellos. Ahí solo se aceptan artefactos tipo C.",s:SV(210,
 Rc(20,20,560,170,"s thick",0)+Ln("M200 20V190M380 20V190")+Tx(110,45,"Dormitorio","tc bd")+Tx(290,45,"Baño","tc bd")+Tx(480,45,"Cocina / logia","tc bd")
@@ -547,9 +547,9 @@ Ln("M120 160L260 190L460 150L320 120Z","s")+Ln("M120 60L260 90L460 50L320 20Z","
 FIGS["7.3"]={c:"Ubicación de las aberturas de ventilación en el muro (DS 66, cap. IX).",s:SV(220,
 Rc(40,10,520,200,"s",0)+Ln("M40 200H560","s thick")+Rc(90,178,90,20,"f-mt",2)+Tx(135,172,"Inferior","tc sm bd")+Ln("M190 178V200","w-live")+Tx(196,194,"GLP: borde superior a no más de 15 cm del piso","sm bd")
 +Rc(380,30,90,22,"f-mt",2)+Tx(425,24,"Superior","tc sm bd")+Bx(250,90,70,90,"Artefacto")
-+Tx(60,50,"Malla ≥ 6 mm o celosía","sm")+Tx(60,68,"El rebaje de la puerta no cuenta","sm")
++Tx(60,50,"Celosía con malla ≥ 6 mm","sm")+Tx(60,68,"El rebaje de la puerta no cuenta","sm")
 +Tx(340,90,"≥ 40 cm de salidas tipo B o C","sm")+Tx(340,106,"≥ 60 cm del sombrerete B natural","sm")
-,"Ubicación de rejillas")};
+,"Ubicación de celosías")};
 
 FIGS["7.4"]={c:"Otras exigencias de ventilación del DS 66, cap. IX.",s:SV(150,
 Bx(10,20,135,70,"Campana|≥ 100 cm²")+Bx(158,20,135,70,"Extractor|≥ 80 cm²")+Bx(306,20,135,70,"Patio < 3 m²|≥ 300 cm²")+Bx(454,20,136,70,"Conducto > 3 m|+50 % sección")
@@ -625,7 +625,7 @@ const PHOTOS={
 "6.1":["MAHZEkw4kJY","Estufa a gas con sensor de atmósfera. El rótulo en inglés lo agregó la IA."],
 "6.2":["MAHZEhMGQoA","Calefont mural con su conducto de evacuación y llave de paso."],
 "6.3":["MAHZEiuF2kA","Conexión flexible de una cocina a su llave de paso en el muro."],
-"7.3":["MAHZEm-l7-E","Rejilla de ventilación inferior a ras de piso en una cocina."],
+"7.3":["MAHZEm-l7-E","Celosía de ventilación inferior a ras de piso en una cocina."],
 "8.3":["MAHZEhF1qsg","Sombrerete de evacuación sobre una techumbre metálica."],
 "10.1":["MAHZEvZ0fdg","Prueba de hermeticidad con manómetro conectado a la red de cobre."]
 };
@@ -691,7 +691,7 @@ const FACIL={
 "4.2":{f:"Las uniones de cobre para gas se sueldan con soldadura fuerte, que usa más calor y un material más resistente que la soldadura de estaño del agua potable. El tubo se corta derecho, se limpia, se mete en la pieza, se calienta y el material de aporte entra solo por la unión.",w:[["Soldadura fuerte","Unión con aleación que se funde a alta temperatura."],["Escariar","Quitar la rebaba del borde de un tubo cortado."],["Fundente","Pasta que ayuda a que la soldadura se adhiera."]]},
 "4.3":{f:"Las cañerías de gas no pueden pasar por cualquier lugar: no por ductos de ventilación, ni por el cielo de los dormitorios, y el gas licuado no puede ir por el entretecho. Cuando van enterradas, se ponen sobre arena, a 60 cm de profundidad, con una cinta amarilla que dice GAS para avisar a quien excave después.",w:[["Zanja","Excavación donde se entierra la cañería."],["Cinta señalizadora","Cinta que avisa que hay una cañería de gas abajo."],["Entretecho","Espacio entre el cielo y el techo."]]},
 "4.4":{f:"El gas y la electricidad deben estar separados, porque una chispa puede encender una fuga. Por eso hay distancias mínimas entre cañerías de gas y cables, enchufes o tableros. Además, cada artefacto debe tener su propia llave de paso, a la vista y fácil de cerrar.",w:[["Distancia de seguridad","Separación mínima entre el gas y otros servicios."],["Válvula de corte","Llave que corta el paso del gas."]]},
-"5.1":{f:"Cuando el gas llega por red, pasa primero por un medidor, que cuenta cuántos metros cúbicos se usan, y por un regulador, que baja la presión. Antes del medidor hay una llave para cortar todo. El medidor va en un nicho, una caja con rejillas para que no se acumule gas.",w:[["Medidor de gas","Aparato que cuenta el gas consumido en m³."],["Nicho","Caja donde va el medidor, con ventilación."]]},
+"5.1":{f:"Cuando el gas llega por red, pasa primero por un medidor, que cuenta cuántos metros cúbicos se usan, y por un regulador, que baja la presión. Antes del medidor hay una llave para cortar todo. El medidor va en un nicho, una caja con celosías para que no se acumule gas.",w:[["Medidor de gas","Aparato que cuenta el gas consumido en m³."],["Nicho","Caja donde va el medidor, con ventilación."]]},
 "5.2":{f:"Cuando no hay red de gas natural, se usan cilindros de gas licuado de 45 kilos. Deben estar al aire libre, sobre un piso firme, lejos de desagües, ventanas y fuentes de calor. Se instalan entre 2 y 12 cilindros, la mitad en uso y la otra de reserva.",w:[["Cilindro de 45 kg","Envase grande de gas licuado."],["Colector","Pieza que une varios cilindros."],["Gabinete","Caseta que protege los cilindros."]]},
 "5.3":{f:"La cantidad de cilindros depende de cuánto gas se usa y del frío. El gas licuado dentro del cilindro tiene que \"hervir\" para salir como gas, y con frío hierve más lento. Por eso en zonas frías se necesitan más cilindros. El resultado se duplica para tener cilindros de reserva.",w:[["Vaporización","Paso del gas licuado de líquido a gas dentro del cilindro."],["Reposición","Cilindros de reserva para cambiar los vacíos."]]},
 "5.4":{f:"El gas natural y el licuado no se comportan igual. El licuado es más pesado, así que no se puede instalar bajo el nivel del suelo porque se acumularía. Un artefacto hecho para un gas debe adaptarse (convertirse) antes de usarlo con el otro.",w:[["Bajo cota cero","Bajo el nivel del terreno: subterráneos, sótanos."],["Inyector","Pieza pequeña por donde sale el gas al quemador."]]},
@@ -699,9 +699,9 @@ const FACIL={
 "6.2":{f:"El calefont calienta el agua al momento en que abres la llave. Quema bastante gas, por eso siempre necesita un tubo que saque los gases hacia afuera. Tiene sistemas de seguridad: no se enciende si no pasa agua, corta el gas si se apaga la llama y se apaga si los gases no salen bien.",w:[["Calefont","Calentador de agua instantáneo a gas."],["Cortatiro","Parte superior del calefont que conecta con el tubo de salida."],["Sensor de tiro","Seguridad que apaga el calefont si los gases se devuelven."]]},
 "6.3":{f:"La cocina se conecta a la cañería con una manguera especial, de máximo un metro, y una llave de paso que debe quedar a la vista, cerca y fácil de cerrar. La manguera no puede atravesar paredes ni pisos. Antes de agregar un artefacto, hay que revisar que la cañería alcance para todos.",w:[["Flexible","Manguera especial para conectar artefactos a gas."],["Sensor de atmósfera","Seguridad de las estufas que corta si baja el oxígeno."]]},
 "6.4":{f:"En los dormitorios y en los baños no se pueden poner artefactos tipo A ni tipo B, porque consumen el aire de la pieza y pueden llenarla de monóxido de carbono, por ejemplo mientras alguien duerme o se ducha con la puerta cerrada. Ahí solo se aceptan artefactos tipo C.",w:[["Recinto","Pieza o espacio cerrado de una casa."]]},
-"7.1":{f:"Un artefacto a gas necesita aire para quemar el gas, igual que una vela se apaga si la tapas con un vaso. Por eso los recintos con artefactos tienen rejillas permanentes: una abajo para que entre aire fresco y otra arriba para que salga el aire viciado. Nunca se deben tapar.",w:[["Ventilación permanente","Abertura que siempre está abierta, como una rejilla."],["Rejilla","Abertura con lamas o malla en la pared."]]},
+"7.1":{f:"Un artefacto a gas necesita aire para quemar el gas, igual que una vela se apaga si la tapas con un vaso. Por eso los recintos con artefactos tienen celosías permanentes: una abajo para que entre aire fresco y otra arriba para que salga el aire viciado. Nunca se deben tapar.",w:[["Ventilación permanente","Abertura que siempre está abierta, como una celosía."],["Celosía","Abertura con lamas o malla en la pared."]]},
 "7.2":{f:"Una pieza chica tiene poco aire. Por eso la norma pide un tamaño mínimo (volumen) para los recintos con artefactos que toman aire de ahí. El volumen se calcula como largo por ancho por alto, pero el alto se cuenta como máximo 2,4 metros aunque el cielo sea más alto.",w:[["Volumen","Espacio de una pieza: largo × ancho × alto, en m³."],["m³","Metro cúbico."]]},
-"7.3":{f:"La rejilla de abajo deja entrar aire fresco. Con gas licuado, que es más pesado que el aire, esa rejilla debe ir casi pegada al piso, a no más de 15 cm, para que si hay una fuga el gas pueda salir. La rejilla de arriba deja salir el aire usado. Las dos llevan un letrero que pide no taparlas.",w:[["Rejilla inferior","Abertura cerca del piso."],["Rejilla superior","Abertura en la parte alta de la pared."]]},
+"7.3":{f:"La celosía de abajo deja entrar aire fresco. Con gas licuado, que es más pesado que el aire, esa celosía debe ir casi pegada al piso, a no más de 15 cm, para que si hay una fuga el gas pueda salir. La celosía de arriba deja salir el aire usado. Las dos llevan un letrero que pide no taparlas.",w:[["Celosía inferior","Abertura cerca del piso."],["Celosía superior","Abertura en la parte alta de la pared."]]},
 "7.4":{f:"Las campanas y extractores de cocina sacan aire de la pieza. Si la pieza no tiene suficiente ventilación, pueden \"chupar\" los gases del calefont hacia adentro en vez de dejarlos salir por el tubo. Por eso hay medidas mínimas para estas aberturas y hay que revisar el calefont con el extractor encendido.",w:[["Campana","Equipo sobre la cocina que extrae humo y olores."],["Revoco","Cuando los gases del calefont se devuelven a la pieza."]]},
 "8.1":{f:"Los gases calientes del calefont suben solos por el tubo, como el humo de una chimenea. Para que suban bien, el tubo debe empezar con un tramo recto hacia arriba, ir siempre subiendo y tener pocas curvas. Si el tubo está mal hecho, los gases se devuelven a la pieza.",w:[["Conducto de evacuación","Tubo que lleva los gases del calefont al exterior."],["Tiro natural","Subida de los gases calientes por sí solos."]]},
 "8.2":{f:"El tubo de salida del calefont se calienta mucho, por eso debe ser de un material que no se queme ni se oxide fácilmente, como acero inoxidable o acero galvanizado del espesor correcto. Debe quedar separado de la madera y otros materiales que puedan arder.",w:[["Material combustible","Material que puede quemarse, como la madera."],["Punto de muestreo","Agujero pequeño en el tubo para medir los gases."]]},
@@ -710,7 +710,7 @@ const FACIL={
 "9.1":{f:"Para saber qué grosor deben tener las cañerías, primero se calcula cuánto gas necesita cada artefacto. La cañería que sale del medidor lleva el gas de todos, y las ramas finales solo el de un artefacto. Es igual al cálculo de agua potable, pero con metros cúbicos de gas por hora.",w:[["Caudal","Cantidad de gas que pasa por hora."],["Tramo","Parte de la red entre dos puntos."]]},
 "9.2":{f:"Cada codo, te o llave frena un poco el gas, como si la cañería fuera más larga. Por eso al largo real se le suma un largo extra por cada pieza, llamado longitud equivalente. El resultado es la longitud de cálculo.",w:[["Longitud equivalente","Largo extra que representa la pérdida de un accesorio."],["Accesorio","Codo, te, llave u otra pieza de la red."]]},
 "9.3":{f:"Con el caudal y la longitud de cálculo de cada tramo, se busca en las tablas del reglamento qué diámetro de cañería sirve. Si la cañería es muy delgada, el gas llega con poca fuerza y los artefactos funcionan mal.",w:[["Diámetro","Grosor interior de la cañería, en pulgadas."],["Pérdida de carga","Presión que se pierde a lo largo de la cañería."]]},
-"9.4":{f:"El plano de gas muestra por dónde van las cañerías, dónde están las llaves, los artefactos, las rejillas y los tubos de salida. Además se dibuja un isométrico, un dibujo en tres dimensiones de la red, igual al que se usa en agua potable.",w:[["Isométrico","Dibujo de la red en perspectiva, en 3D."],["Planta","Dibujo de la casa vista desde arriba."]]},
+"9.4":{f:"El plano de gas muestra por dónde van las cañerías, dónde están las llaves, los artefactos, las celosías y los tubos de salida. Además se dibuja un isométrico, un dibujo en tres dimensiones de la red, igual al que se usa en agua potable.",w:[["Isométrico","Dibujo de la red en perspectiva, en 3D."],["Planta","Dibujo de la casa vista desde arriba."]]},
 "10.1":{f:"Antes de dar el gas se comprueba que la cañería no tenga fugas. Se tapan las salidas, se llena con aire a cierta presión y se deja un tiempo con un manómetro conectado. Si la presión no baja, no hay fugas. Si baja, se busca la fuga con agua jabonosa y se repite.",w:[["Prueba de hermeticidad","Prueba para comprobar que no hay fugas."],["Te de prueba","Pieza donde se conecta el manómetro."]]},
 "10.2":{f:"Terminada y probada la instalación, el instalador la declara a la SEC con el TC6. Luego la empresa de gas revisa que no haya fugas, que haya ventilación y que el calefont tenga su tubo. Si todo está bien, abre el gas.",w:[["Distribuidora","Empresa que entrega el gas."],["Inspección reducida","Revisión que hace la distribuidora antes de dar el gas."]]},
 "10.3":{f:"Cada dos años, una empresa autorizada revisa la instalación de gas de la casa y le pone un sello. Verde: está todo bien. Amarillo: hay problemas que se deben arreglar en un plazo. Rojo: hay problemas graves y se corta el gas hasta arreglarlos. El instalador es quien hace esos arreglos.",w:[["Sello verde","La instalación cumple."],["Sello amarillo","Hay defectos que se deben corregir."],["Sello rojo","Defectos graves; se corta el gas."]]},
@@ -728,7 +728,7 @@ const GLOS=[
 ["Llave de paso","Válvula que abre o cierra el gas a un artefacto."],["Longitud equivalente","Largo extra que representa la pérdida de un accesorio."],["Manómetro","Instrumento que mide presión."],
 ["Medidor","Aparato que cuenta el gas consumido."],["Odorizante","Sustancia que da olor al gas para detectar fugas."],["Pérdida de carga","Presión que se pierde en la cañería."],
 ["Poder calorífico","Calor que entrega un m³ de gas al quemarse."],["Potencia","Energía que usa un artefacto, en kW."],["Regulador","Aparato que baja y estabiliza la presión."],
-["Rejilla","Abertura permanente de ventilación."],["Revoco","Gases del calefont que se devuelven a la pieza."],["SEC","Superintendencia de Electricidad y Combustibles."],
+["Celosía","Abertura permanente de ventilación."],["Revoco","Gases del calefont que se devuelven a la pieza."],["SEC","Superintendencia de Electricidad y Combustibles."],
 ["Sello verde, amarillo, rojo","Resultado de la inspección periódica de gas."],["Soldadura fuerte","Unión de cobre con aleación a alta temperatura."],["Sombrerete","Remate del conducto que lo protege del viento y la lluvia."],
 ["TC6","Declaración de una instalación de gas ante la SEC."],["Tipo A, B, C","Clasificación de artefactos según aire y evacuación."],["Tiro","Subida de los gases por el conducto."],
 ["Tramo","Parte de la red entre dos puntos."],["Ventilación","Entrada de aire nuevo y salida de aire usado."],["Volumen","Largo × ancho × alto de un recinto, en m³."]
@@ -915,7 +915,7 @@ Con rendimiento 85%: nominal = 17,4 / 0,85 ≈ 20,5 kW</code>
 <ul><li><b>Llave de bola de cuarto de vuelta:</b> la más común. Abierta con la manilla paralela a la tubería; cerrada, perpendicular.</li>
 <li>Deben ser aptas para gas y estar certificadas.</li></ul>
 <h4>Accesibilidad</h4>
-<p>Las llaves deben poder cerrarse rápido en una emergencia: visibles, sin muebles delante y a una altura cómoda (la del artefacto, a no más de 1,6 m del piso).</p>
+<p>Las llaves deben poder cerrarse rápido en una emergencia: visibles, sin muebles delante y que se puedan operar sin abrir cerraduras ni usar escaleras (accesibilidad grado 1, DS 66 art. 53.2).</p>
 <h4>Otras separaciones habituales</h4>
 <ul><li>Con otros servicios enterrados: 50 cm en cruces.</li>
 <li>Venteo del regulador: 1 m de aberturas bajo la descarga y 1,5 m de fuentes de ignición.</li></ul>
@@ -1017,12 +1017,12 @@ V = 3,2 × 2,8 × 2,4 = 21,5 m³</code>
 <h4>Qué hacer si no alcanza</h4>
 <ul><li>Cambiar un artefacto tipo A por uno de menor potencia.</li><li>Trasladar artefactos a otro recinto.</li>
 <li>Usar artefactos tipo C, que no dependen del volumen del recinto.</li></ul>`,
-"7.3":`<h4>Altura de las rejillas según el gas</h4>
+"7.3":`<h4>Altura de las celosías según el gas</h4>
 <div class="tw"><table><tr><th>Abertura</th><th>Gas licuado</th><th>Gas natural</th></tr>
 <tr><td>Inferior</td><td>Borde superior a no más de 15 cm del piso</td><td>Baja, para la entrada de aire</td></tr>
 <tr><td>Superior</td><td>En la parte alta del recinto</td><td>En la parte alta; además ayuda a evacuar una fuga</td></tr></table></div>
 <h4>Superficie útil</h4>
-<p>La superficie exigida es la <b>libre</b>, es decir, el área real por donde pasa el aire, descontando las lamas y la malla. Una rejilla de 20 × 10 cm no ofrece 200 cm² libres.</p>
+<p>La superficie exigida es la <b>libre</b>, es decir, el área real por donde pasa el aire, descontando las lamas y la malla. Una celosía de 20 × 10 cm no ofrece 200 cm² libres.</p>
 <h4>Ubicación respecto de otros elementos</h4>
 <ul><li>No detrás de muebles ni cortinas.</li><li>No hacia recintos cerrados como closets.</li>
 <li>Separada de salidas de evacuación de gases, según las distancias del DS 66.</li></ul>`,
@@ -1093,7 +1093,7 @@ L cálculo = 6 + 2 × 0,5 + 0,3 = 7,3 m</code>
 <p>Suma las pérdidas de los tramos hasta el artefacto más lejano y compárala con la admisible. Si se pasa, aumenta el diámetro del tramo con mayor pérdida.</p>`,
 "9.4":`<h4>Contenido mínimo del plano de gas</h4>
 <ul><li>Planta con recorrido de tuberías, diámetros y llaves.</li><li>Ubicación de medidor o cilindros y regulador.</li>
-<li>Artefactos con su potencia.</li><li>Rejillas de ventilación y conductos de evacuación.</li>
+<li>Artefactos con su potencia.</li><li>Celosías de ventilación y conductos de evacuación.</li>
 <li>Isométrico con tramos, longitudes y diámetros.</li><li>Cuadro de cálculo y viñeta.</li></ul>
 <h4>En AutoCAD</h4>
 <ul><li>Una capa para tuberías, otra para artefactos, otra para ventilaciones y otra para textos.</li>
@@ -1115,9 +1115,9 @@ L cálculo = 6 + 2 × 0,5 + 0,3 = 7,3 m</code>
 <h4>Durante la inspección de la distribuidora</h4>
 <p>Acompaña al inspector si puedes: si encuentra observaciones, las corriges en el momento o coordinas una nueva visita.</p>
 <h4>Entrega al usuario</h4>
-<p>Explica dónde están las llaves, cómo cerrarlas, por qué no debe tapar las rejillas y qué hacer ante olor a gas. Una buena entrega previene accidentes.</p>`,
+<p>Explica dónde están las llaves, cómo cerrarlas, por qué no debe tapar las celosías y qué hacer ante olor a gas. Una buena entrega previene accidentes.</p>`,
 "10.3":`<h4>Defectos frecuentes en inspecciones</h4>
-<ul><li>Rejillas tapadas o insuficientes.</li><li>Calefont sin conducto, con conducto desconectado o en el baño.</li>
+<ul><li>Celosías tapadas o insuficientes.</li><li>Calefont sin conducto, con conducto desconectado o en el baño.</li>
 <li>Flexibles vencidos o demasiado largos.</li><li>Llaves de paso inaccesibles.</li><li>Fugas en uniones.</li><li>Estufas en dormitorios.</li></ul>
 <h4>El rol del instalador</h4>
 <p>El organismo de certificación inspecciona; el instalador con licencia corrige. Luego se puede pedir una nueva inspección para obtener el sello verde.</p>
@@ -1125,7 +1125,7 @@ L cálculo = 6 + 2 × 0,5 + 0,3 = 7,3 m</code>
 <p>El usuario pide la inspección en línea; un organismo autorizado lo contacta para coordinar la visita.</p>`,
 "10.4":`<h4>Repaso final sugerido (30 minutos)</h4>
 <ol><li>Clases de licencia y tipos de instalación.</li><li>Materiales, uniones y distancias.</li>
-<li>Tipos de artefactos y dónde no se pueden instalar.</li><li>Ventilación: volumen y rejillas (GLP a no más de 15 cm del piso).</li>
+<li>Tipos de artefactos y dónde no se pueden instalar.</li><li>Ventilación: volumen y celosías (GLP a no más de 15 cm del piso).</li>
 <li>Conducto: 2 diámetros, pendiente ascendente, sombrerete.</li><li>Hermeticidad, TC6 y sellos.</li></ol>
 <h4>Portafolio de evidencias</h4>
 <p>Fotos de instalaciones ejecutadas, planos, certificados de cursos y referencias de clientes o empleadores.</p>
@@ -1138,7 +1138,7 @@ const EXP={
 "1.1":{r:["En viviendas se usan gas natural (metano) y gas licuado (propano y butano).","El gas natural llega por red; el licuado, en cilindros o estanques.","Cada artefacto está fabricado para un tipo de gas."],a:"Un artefacto a gas es como un motor diseñado para un combustible: si le pones otro, funciona mal y contamina.",v:"Al cambiarse de una casa con cilindros a una con gas natural, la cocina debe convertirse (cambio de inyectores) antes de usarse.",e:["Conectar un artefacto de GLP a gas natural sin conversión.","Creer que todos los gases son iguales."],q:"¿Qué revisas antes de conectar un artefacto nuevo?",ans:"En su placa, para qué gas está fabricado."},
 "1.2":{r:["Gas natural más liviano que el aire: sube. Gas licuado más pesado: baja.","Se agrega odorizante para detectar fugas.","Ambos gases arden con pocos puntos porcentuales en el aire."],a:"El gas natural se comporta como el humo de un incendio, que sube; el licuado, como el agua derramada, que corre hacia lo más bajo.",v:"Una fuga de gas licuado en una casa con subterráneo puede acumularse abajo sin que nadie la huela arriba.",e:["Buscar una fuga de GLP solo en la parte alta.","Pensar que sin olor no hay gas."],q:"¿Por qué se prohíbe el gas licuado en subterráneos?",ans:"Porque es más pesado que el aire y se acumularía en el fondo."},
 "1.3":{r:["Combustión = combustible + oxígeno + calor.","Completa: llama azul, sin hollín, produce CO₂ y agua.","Incompleta: falta aire, llama amarilla y aparece CO."],a:"Una fogata con poco aire humea y tizna; con buen tiraje arde limpia. Con el gas pasa lo mismo.",v:"Un cielo ennegrecido sobre la cocina es señal de combustión incompleta repetida.",e:["Tapar la entrada de aire del quemador para bajar la llama.","Pensar que la llama amarilla calienta más."],q:"¿Qué color debe tener una buena llama?",ans:"Azul y estable."},
-"1.4":{r:["El monóxido de carbono no tiene color ni olor.","Bloquea el transporte de oxígeno en la sangre.","Causas típicas: calefont sin evacuación, rejillas tapadas, artefactos en baños o dormitorios."],a:"El CO es un ladrón silencioso: ocupa el lugar del oxígeno en la sangre sin que te des cuenta.",v:"Las intoxicaciones aumentan en invierno, cuando se cierran ventanas y se tapan rejillas para no perder calor.",e:["Tapar la rejilla de ventilación por frío.","Instalar el calefont dentro del baño."],q:"¿Cuáles son los primeros síntomas de intoxicación por CO?",ans:"Dolor de cabeza, mareo, náuseas y somnolencia."},
+"1.4":{r:["El monóxido de carbono no tiene color ni olor.","Bloquea el transporte de oxígeno en la sangre.","Causas típicas: calefont sin evacuación, celosías tapadas, artefactos en baños o dormitorios."],a:"El CO es un ladrón silencioso: ocupa el lugar del oxígeno en la sangre sin que te des cuenta.",v:"Las intoxicaciones aumentan en invierno, cuando se cierran ventanas y se tapan celosías para no perder calor.",e:["Tapar la celosía de ventilación por frío.","Instalar el calefont dentro del baño."],q:"¿Cuáles son los primeros síntomas de intoxicación por CO?",ans:"Dolor de cabeza, mareo, náuseas y somnolencia."},
 "2.1":{r:["Unidades: 1 kPa = 10 mbar ≈ 102 mm c.a.","Baja presión: menos de 5 kPa. Es la de los artefactos domésticos.","El regulador baja y estabiliza la presión."],a:"El regulador es como la válvula reductora de agua de un edificio: recibe presión alta y entrega una presión fija y segura.",v:"Un cilindro de 45 kg tiene presión alta adentro; sin regulador, la cocina recibiría mucho más gas del que puede quemar.",e:["Confundir kPa con bar.","Conectar un artefacto sin regulador."],q:"¿Qué presión maneja un instalador clase 3?",ans:"Baja presión, menos de 5 kPa."},
 "2.2":{r:["1 kW = 860 kcal/h.","Consumo (m³/h) = kW × 860 / poder calorífico.","La suma de potencias define si la instalación es tipo 3 (≤ 60 kW)."],a:"La potencia del artefacto es cuánta leña quema por hora; el poder calorífico, cuánto calienta cada leño.",v:"Un calefont de 20 kW consume cerca de 1,85 m³/h de gas natural: es el artefacto que más pide en una casa.",e:["Usar el poder calorífico del gas equivocado.","Olvidar sumar el horno o artefactos futuros."],q:"Una casa con 64 kW instalados, ¿la puede ejecutar un clase 3?",ans:"No: supera 60 kW y es tipo 2."},
 "2.3":{r:["El manómetro mide la presión del gas.","En U: la diferencia de altura de agua indica la presión.","El rango debe ser acorde: uno muy grande no muestra caídas pequeñas."],a:"El manómetro en U es una balanza: el gas empuja el agua de un lado y la diferencia de altura dice con cuánta fuerza.",v:"En la prueba de hermeticidad, una caída de unos pocos milímetros de columna puede delatar una fuga.",e:["Usar un manómetro de rango muy alto para baja presión.","Leer la altura de una sola rama."],q:"Si la diferencia en el manómetro en U es 200 mm, ¿cuántos kPa son?",ans:"Aproximadamente 2 kPa."},
@@ -1157,11 +1157,11 @@ const EXP={
 "5.4":{r:["GN liviano; GLP pesado.","GLP prohibido bajo el nivel del terreno y por entretechos.","Cambiar de gas requiere conversión del artefacto."],a:"Son como dos idiomas distintos: el artefacto debe \"hablar\" el del gas que recibe.",v:"Los cilindros de 45 kg son la solución donde no llega la red de gas natural.",e:["Pensar que un artefacto sirve para ambos gases.","Llevar GLP por el entretecho."],q:"¿Qué se cambia en una conversión?",ans:"Los inyectores y la regulación del artefacto."},
 "6.1":{r:["Tipo A: sin conducto (cocinas, estufas).","Tipo B: con conducto, toma aire del recinto (calefont tiro natural).","Tipo C: estanco, aire y gases por el exterior."],a:"El tipo A respira y exhala en la pieza; el B respira en la pieza y exhala por una chimenea; el C respira y exhala por afuera.",v:"Un calefont estanco (tipo C) es la solución cuando no queda otra que ponerlo en un recinto delicado.",e:["Creer que el calefont tipo B no necesita ventilación.","Clasificar la estufa como tipo C."],q:"¿Qué tipo de artefacto puede ir en un baño?",ans:"Solo tipo C."},
 "6.2":{r:["El calefont siempre lleva conducto al exterior.","Seguridades: válvula de agua, detector de llama y sensor de tiro.","No sobre otros artefactos ni sobre artefactos sanitarios."],a:"El cortatiro es el pulmón del calefont: si los gases no salen, el sensor lo apaga.",v:"Un calefont que se apaga solo puede estar indicando un conducto obstruido; no hay que puentear el sensor.",e:["Desconectar el sensor de tiro.","Instalarlo en el baño."],q:"¿Qué hace el sensor de tiro (Bs)?",ans:"Apaga el calefont si los gases se devuelven al recinto."},
-"6.3":{r:["Válvula de paso visible, accesible, a no más de 1,6 m.","Flexible: máximo 1 m en cocinas, 2 m en otros casos.","El flexible no atraviesa muros, pisos ni cielos."],a:"La llave de paso es el freno de emergencia del artefacto: debe estar a la vista y a la mano.",v:"Una llave detrás de la cocina obliga a moverla para cerrar el gas, justo cuando hay apuro.",e:["Usar flexibles muy largos.","Pasar el flexible a través de un muro."],q:"¿Cuál es el largo máximo del flexible de una cocina?",ans:"1 m."},
+"6.3":{r:["Una válvula de paso por artefacto, a la vista y con accesibilidad grado 1 (art. 53).","Conexión red-artefacto: máximo 1 m (art. 49.1.2).","La conexión se ve en todo su largo: no pasa por dentro de muros ni detrás de muebles."],a:"La llave de paso es el freno de emergencia del artefacto: debe estar a la vista y a la mano.",v:"Una llave detrás de la cocina obliga a moverla para cerrar el gas, justo cuando hay apuro.",e:["Usar flexibles muy largos.","Pasar el flexible a través de un muro."],q:"¿Cuál es el largo máximo del flexible de una cocina?",ans:"1 m."},
 "6.4":{r:["En dormitorios y baños: prohibidos los tipo A y B.","Solo tipo C en esos recintos.","Recintos a los que se accede solo por dormitorio o baño: sin tiro natural."],a:"Donde duermes o te duchas no puede haber un artefacto que consuma tu aire.",v:"La estufa a gas en el dormitorio con la puerta cerrada es una causa clásica de intoxicación nocturna.",e:["Instalar estufa tipo A en un dormitorio.","Calefont tipo B en el baño."],q:"¿Puede ir una estufa tipo A en un dormitorio?",ans:"No."},
-"7.1":{r:["La ventilación da aire para la combustión.","También diluye y saca los productos de combustión.","Se hace con aberturas permanentes inferior y superior."],a:"Una pieza con artefactos es como una pecera: necesita entrada de agua limpia y salida de agua usada.",v:"Las rejillas tapadas con cinta o diarios en invierno son una de las causas más comunes de sello rojo.",e:["Considerar la ventana como ventilación permanente.","Tapar rejillas por frío."],q:"¿Por qué la ventilación debe ser permanente?",ans:"Porque el artefacto puede funcionar con todo cerrado y necesita aire siempre."},
+"7.1":{r:["La ventilación da aire para la combustión.","También diluye y saca los productos de combustión.","Se hace con aberturas permanentes inferior y superior."],a:"Una pieza con artefactos es como una pecera: necesita entrada de agua limpia y salida de agua usada.",v:"Las celosías tapadas con cinta o diarios en invierno son una de las causas más comunes de sello rojo.",e:["Considerar la ventana como ventilación permanente.","Tapar celosías por frío."],q:"¿Por qué la ventilación debe ser permanente?",ans:"Porque el artefacto puede funcionar con todo cerrado y necesita aire siempre."},
 "7.2":{r:["Volumen mínimo según potencia (tabla XX del DS 66).","Altura máxima de cálculo: 2,4 m.","Estufas tipo A: mínimo 15 m³."],a:"El volumen es el \"pulmón\" del recinto: mientras más grande, más aire disponible para quemar.",v:"Una cocina chica de 5 m² con calefont, cocina y horno puede no tener volumen suficiente.",e:["Usar la altura real del cielo si es mayor a 2,4 m.","Olvidar descontar recintos que no se comunican."],q:"Recinto de 3 × 2 m con cielo de 3 m: ¿volumen de cálculo?",ans:"3 × 2 × 2,4 = 14,4 m³."},
-"7.3":{r:["Inferior a ras de piso; con GLP, borde superior a no más de 15 cm del piso.","Superior en la parte alta, bajo el sombrerete de artefactos tipo B natural.","Malla de al menos 6 mm; letrero \"no tapar\"."],a:"Abajo entra el aire fresco; arriba sale el viciado. Con GLP, la de abajo también deja salir el gas fugado.",v:"Una rejilla de GLP a 40 cm del piso deja una capa de gas atrapada bajo ella, invisible y peligrosa.",e:["Contar el rebaje de la puerta como ventilación.","Poner la rejilla inferior de GLP a media altura."],q:"Con gas licuado, ¿por qué la rejilla inferior va casi a ras de piso?",ans:"Porque el GLP es más pesado que el aire y se acumula abajo."},
+"7.3":{r:["Inferior a ras de piso; con GLP, borde superior a no más de 15 cm del piso.","Superior en la parte alta, bajo el sombrerete de artefactos tipo B natural.","Celosía con malla de al menos 6 mm; letrero \"no tapar\"."],a:"Abajo entra el aire fresco; arriba sale el viciado. Con GLP, la de abajo también deja salir el gas fugado.",v:"Una celosía de GLP a 40 cm del piso deja una capa de gas atrapada bajo ella, invisible y peligrosa.",e:["Contar el rebaje de la puerta como ventilación.","Poner la celosía inferior de GLP a media altura."],q:"Con gas licuado, ¿por qué la celosía inferior va casi a ras de piso?",ans:"Porque el GLP es más pesado que el aire y se acumula abajo."},
 "7.4":{r:["Campana: 100 cm²; extractor: 80 cm².","Patio menor de 3 m²: abertura de 300 cm².","No conectar extractores a conductos colectivos con artefactos a gas."],a:"Un extractor potente es como una aspiradora en la pieza: puede chupar los gases del calefont hacia adentro.",v:"Cocinas modernas cerradas con campana potente y calefont tipo B son un caso típico de revoco.",e:["Ignorar el efecto del extractor sobre el tiro.","Conectar el extractor al conducto del calefont."],q:"¿Por qué un extractor puede ser peligroso con un calefont tipo B?",ans:"Puede invertir el tiro y devolver los gases al recinto."},
 "8.1":{r:["Tramo vertical inicial de al menos 2 diámetros.","Pendiente ascendente; un solo cambio de dirección.","Solo artefactos con cortatiro y sensor antirretorno."],a:"Los gases calientes son como un globo: suben solos si les das un camino recto hacia arriba.",v:"Un conducto con varias curvas y tramos horizontales largos hace que el calefont se ahogue.",e:["Poner una curva justo a la salida del calefont.","Tramos horizontales descendentes."],q:"Conducto de 10 cm, ¿cuánto tramo vertical mínimo?",ans:"20 cm."},
 "8.2":{r:["Material no combustible, liso y resistente a 300 °C.","15 cm de separación a combustibles (2 cm con aislante).","Punto de muestreo de 9 mm."],a:"El conducto es una chimenea en miniatura: debe aguantar calor y no incendiar lo que lo rodea.",v:"Un conducto pegado a un mueble de madera puede quemarlo con los años.",e:["Usar ductos plásticos o de aluminio delgado.","Dejarlo pegado a la madera."],q:"¿Para qué sirve el punto de muestreo?",ans:"Para medir los gases de combustión con un analizador."},
@@ -1170,10 +1170,10 @@ const EXP={
 "9.1":{r:["Caudal = kW × 860 / poder calorífico.","Cada tramo lleva el caudal de los artefactos que alimenta.","En edificios se aplican factores de simultaneidad."],a:"Es igual que en agua potable: el primer tramo lleva el caudal de toda la casa; los últimos, solo el de un artefacto.",v:"El calefont define casi siempre el diámetro del tramo principal.",e:["Calcular todos los tramos con el caudal total.","Olvidar artefactos proyectados."],q:"Calefont 20 kW y cocina 8 kW con GN (9.300 kcal/m³): ¿caudal total?",ans:"28 × 860 / 9.300 ≈ 2,59 m³/h."},
 "9.2":{r:["L cálculo = L real + longitudes equivalentes.","Cada accesorio suma pérdida como si fuera tubería extra.","Valores en el Anexo 2 del DS 66."],a:"Cada codo es una curva en la carretera: el auto pierde velocidad igual que si recorriera más distancia.",v:"Una red con muchos codos puede requerir un diámetro mayor que una recta del mismo largo.",e:["Olvidar los accesorios.","Contar dos veces el mismo tramo."],q:"¿Qué es la longitud equivalente?",ans:"La longitud de tubería recta que produce la misma pérdida que un accesorio."},
 "9.3":{r:["Caudal y longitud de cálculo por tramo.","Tabla del Anexo 1: diámetro con caudal máximo suficiente.","Verificar la pérdida de carga admisible."],a:"Elegir diámetro es elegir el ancho de la calle para el tránsito que va a tener.",v:"Un diámetro chico hace que el calefont no alcance su potencia y el agua salga tibia.",e:["Elegir por costumbre (\"siempre 1/2\").","No verificar la pérdida de carga."],q:"Si la pérdida supera la admisible, ¿qué haces?",ans:"Subir al diámetro siguiente."},
-"9.4":{r:["Planta con recorrido, llaves, artefactos, rejillas y conductos.","Isométrico con tramos, diámetros y longitudes.","Cuadro de cálculo por tramo."],a:"El isométrico es la radiografía de la red: muestra en 3D lo que la planta aplana.",v:"Tu trabajo en CONTACT con isométricos de agua potable aplica casi igual.",e:["Omitir las rejillas en el plano.","No identificar los tramos."],q:"¿Qué dibujo muestra mejor los diámetros de cada tramo?",ans:"El isométrico."},
+"9.4":{r:["Planta con recorrido, llaves, artefactos, celosías y conductos.","Isométrico con tramos, diámetros y longitudes.","Cuadro de cálculo por tramo."],a:"El isométrico es la radiografía de la red: muestra en 3D lo que la planta aplana.",v:"Tu trabajo en CONTACT con isométricos de agua potable aplica casi igual.",e:["Omitir las celosías en el plano.","No identificar los tramos."],q:"¿Qué dibujo muestra mejor los diámetros de cada tramo?",ans:"El isométrico."},
 "10.1":{r:["Artefactos desconectados y arranques tapados.","Presurizar, estabilizar, esperar el tiempo exigido.","La presión no debe bajar."],a:"Es inflar un neumático y esperar: si al rato tiene menos presión, hay una pinchadura.",v:"Una unión mal soldada puede no oler a gas al principio, pero la prueba la detecta.",e:["Probar con artefactos conectados.","No esperar la estabilización."],q:"¿Qué haces si la presión baja?",ans:"Buscar la fuga con agua jabonosa, corregir y repetir la prueba."},
 "10.2":{r:["El TC6 se inscribe antes de la puesta en servicio.","La distribuidora hace la inspección reducida.","Las válvulas de artefactos pendientes quedan selladas."],a:"El TC6 es el certificado de nacimiento de la instalación.",v:"Sin TC6 inscrito, la distribuidora no da suministro definitivo.",e:["Dar gas antes de inscribir.","Dejar arranques sin tapar."],q:"¿Qué revisa la distribuidora en la inspección reducida?",ans:"Fugas, arranques sellados, conductos, conexión de artefactos y ventilación."},
-"10.3":{r:["Inspección periódica cada 2 años.","Verde cumple; amarillo con defectos a corregir; rojo con defectos graves.","El instalador corrige los defectos encontrados."],a:"Es la revisión técnica de la instalación de gas.",v:"Muchos trabajos de un clase 3 son corregir sellos amarillos o rojos: rejillas, conductos, conexiones.",e:["Ignorar un sello amarillo.","Reconectar el gas con sello rojo sin corregir."],q:"¿Qué significa un sello rojo?",ans:"Defectos graves; se suspende el suministro hasta corregir."},
+"10.3":{r:["Inspección periódica cada 2 años.","Verde cumple; amarillo con defectos a corregir; rojo con defectos graves.","El instalador corrige los defectos encontrados."],a:"Es la revisión técnica de la instalación de gas.",v:"Muchos trabajos de un clase 3 son corregir sellos amarillos o rojos: celosías, conductos, conexiones.",e:["Ignorar un sello amarillo.","Reconectar el gas con sello rojo sin corregir."],q:"¿Qué significa un sello rojo?",ans:"Defectos graves; se suspende el suministro hasta corregir."},
 "10.4":{r:["Prueba teórica, observación práctica y evidencias.","La seguridad se observa desde el inicio.","Licencia por competencias: se renueva cada 5 años."],a:"El evaluador quiere ver a un instalador que trabaja seguro, no a alguien que recita el decreto.",v:"Cerrar la llave y verificar antes de intervenir suma tanto como una buena soldadura.",e:["No preguntar la presión y el tiempo de prueba exigidos.","Llegar sin EPP."],q:"¿Qué debes preguntar al evaluador antes de la prueba de hermeticidad?",ans:"La presión de prueba y el tiempo exigido por el procedimiento vigente."}
 };
 
@@ -1208,7 +1208,7 @@ pts:[
 <p>Compara el peso del gas con el del aire (aire = 1).</p>
 <ul><li><b>Gas natural:</b> cerca de 0,6. Es más liviano que el aire: si hay fuga, <b>sube</b> y se acumula en la parte alta.</li>
 <li><b>Gas licuado:</b> entre 1,5 y 2. Es más pesado: si hay fuga, <b>baja</b> y se acumula a ras de piso, en fosos y subterráneos.</li></ul>
-<p>Por eso el DS 66 prohíbe instalar GLP bajo el nivel del terreno, y la ubicación de rejillas se piensa según el gas.</p>
+<p>Por eso el DS 66 prohíbe instalar GLP bajo el nivel del terreno, y la ubicación de celosías se piensa según el gas.</p>
 <h4>Poder calorífico</h4>
 <p>Es la energía que entrega un metro cúbico (o un kilo) de gas al quemarse. Valores aproximados:</p>
 <div class="tw"><table><tr><th>Gas</th><th class="n">Poder calorífico aproximado</th></tr>
@@ -1235,14 +1235,14 @@ pts:[
 <li>Síntomas: dolor de cabeza, mareo, náuseas, somnolencia, confusión. En concentraciones altas, pérdida de conciencia y muerte.</li></ul>
 <h4>Causas típicas en viviendas</h4>
 <ul><li>Calefont sin conducto de evacuación, o con el conducto tapado, desconectado o mal instalado.</li>
-<li>Rejillas de ventilación tapadas para "no perder calor".</li>
+<li>Celosías de ventilación tapadas para "no perder calor".</li>
 <li>Artefactos tipo A o B instalados en baños o dormitorios.</li>
 <li>Artefactos sin mantención o mal convertidos.</li></ul>
 <div class="warn">Ante síntomas: apagar el artefacto, ventilar, salir del recinto y buscar atención médica. Un detector de CO es una buena protección adicional, pero no reemplaza una instalación correcta.</div>`}],
 taller:`<h3>Taller: reconocer gases y llamas</h3>
 <ol><li>Revisa la placa de tres artefactos (cocina, calefont, estufa) y anota para qué gas están fabricados y su potencia en kW.</li>
 <li>Observa la llama de una cocina en buen estado: debe ser azul y estable. Anota cómo cambia si se tapa parcialmente la entrada de aire del quemador (solo con supervisión).</li>
-<li>Busca en tu casa o en el taller el conducto del calefont y la rejilla de ventilación. Anota si están despejados.</li>
+<li>Busca en tu casa o en el taller el conducto del calefont y la celosía de ventilación. Anota si están despejados.</li>
 <li>Escribe con tus palabras por qué el GLP no puede instalarse en un subterráneo.</li></ol>`,
 quiz:[
 {q:"Si hay una fuga de gas licuado, ¿dónde se acumula?",o:["En la parte alta del recinto","A ras de piso","Se dispersa igual en todo el recinto"],a:1,e:"El GLP es más pesado que el aire (densidad 1,5 a 2)."},
@@ -1491,8 +1491,8 @@ pts:[
 <li>Distancia a paredes combustibles en armarios: 20 cm (5 cm si son no combustibles).</li>
 <li>Unión del conducto sellada con silicona de alta temperatura o equivalente.</li></ul>`},
 {t:"Conexión de cocinas y estufas",h:`
-<ul><li><b>Válvula de paso</b> en el mismo recinto, visible, de fácil acceso y a no más de 1,6 m del piso.</li>
-<li>Tubo metálico rígido: máximo 1 m.</li><li>Manguera flexible con cubierta metálica (tipo C): máximo <b>1 m para cocinas</b> y 2 m en otros casos. No puede atravesar muros, pisos ni cielos.</li>
+<ul><li><b>Válvula de paso</b> dedicada para cada artefacto, a la vista y con accesibilidad grado 1: se opera sin abrir cerraduras ni usar escaleras (art. 53.1 y 53.2).</li>
+<li>La conexión entre la red y el artefacto (tubo de acero o cobre, o flexible certificado) mide <b>como máximo 1 m</b>, para cualquier artefacto (art. 49.1.2).</li><li>Debe verse en todo su largo (accesibilidad grado 1), firmemente sujeta en ambos extremos y lejos de la llama y de partes calientes (art. 49.1.3). Por eso no pasa por dentro de muros ni detrás de muebles.</li>
 <li>Las tuberías multicapa no se usan como conexión a artefactos.</li>
 <li>Antes de agregar un artefacto, se recalcula la capacidad de la red.</li></ul>
 <h4>Estufas</h4>
@@ -1513,7 +1513,7 @@ taller:`<h3>Taller: identificar artefactos</h3>
 quiz:[
 {q:"Un calefont de tiro natural es tipo:",o:["A","B","C"],a:1,e:"Toma aire del recinto y evacúa por conducto."},
 {q:"En un baño solo se puede instalar un artefacto tipo:",o:["A","B","C"],a:2,e:"Circuito estanco."},
-{q:"Largo máximo de la manguera flexible de una cocina:",o:["1 m","2 m","3 m"],a:0,e:"1 m para cocinas, 2 m en otros casos."},
+{q:"Largo máximo de la conexión entre la red y una cocina:",o:["1 m","2 m","3 m"],a:0,e:"1 m para cualquier artefacto (DS 66, art. 49.1.2)."},
 {q:"¿Qué hace la válvula de agua del calefont?",o:["Regula la presión del gas","Impide que encienda sin circulación de agua","Evacúa los gases"],a:1,e:"Sin flujo de agua no abre el gas al quemador."},
 {q:"Volumen mínimo de un recinto con estufa tipo A:",o:["8 m³","15 m³","30 m³"],a:1,e:"Mínimo 15 m³."}]},
 
@@ -1524,7 +1524,7 @@ pts:[
 <ol><li><b>Entregar aire para la combustión.</b> Sin aire suficiente, la combustión es incompleta y aparece CO.</li>
 <li><b>Diluir y sacar los productos de combustión</b> de los artefactos tipo A, que quedan en el recinto.</li></ol>
 <p>Se logra con <b>aberturas permanentes</b>: una inferior, por donde entra aire, y una superior, por donde sale el aire viciado.</p>
-<div class="idea">Los usuarios tienden a tapar las rejillas en invierno. Por eso el reglamento exige un letrero junto a ellas.</div>`},
+<div class="idea">Los usuarios tienden a tapar las celosías en invierno. Por eso el reglamento exige un letrero junto a ellas.</div>`},
 {t:"Volumen mínimo del recinto",h:`
 <p>Un recinto con artefactos tipo A necesita un volumen mínimo según la potencia instalada (tabla XX del DS 66).</p>
 <ul><li>Para <b>estufas tipo A</b>, el volumen mínimo es el que da la fórmula f.8, con un mínimo de <b>15 m³</b>.</li>
@@ -1534,15 +1534,15 @@ pts:[
 Altura de cálculo: 2,4 m
 V = 3 × 2,5 × 2,4 = 18 m³</code>
 <p>Ese volumen se compara con el que exige la tabla para la potencia de los artefactos del recinto. Si no alcanza, se debe cambiar de recinto, de artefacto o resolver con comunicación a otro recinto según el reglamento.</p>`},
-{t:"Rejillas: ubicación y exigencias",h:`
+{t:"Celosías: ubicación y exigencias",h:`
 <p>Las superficies libres mínimas de las aberturas están en las tablas XXI y XXII del DS 66, según la potencia y el tipo de artefacto.</p>
 <h4>Ubicación</h4>
 <ul><li>Inferior: a ras de piso. <b>Con gas licuado, su borde superior debe quedar a no más de 15 cm del piso</b>, para que el gas fugado, que es más pesado que el aire, pueda salir.</li>
 <li>Inferior: además, a al menos 40 cm de cualquier punto del sombrerete de artefactos tipo B forzado o C. Esta es una distancia horizontal al sombrerete, no una altura.</li>
 <li>Superior: en la parte alta, a al menos 40 cm de salidas tipo B o C y a 60 cm del sombrerete de un B de tiro natural.</li>
-<li>Con gas licuado, la abertura inferior es clave: el gas fugado se acumula abajo. Una rejilla a 40 cm del piso dejaría una capa de gas atrapada bajo ella.</li></ul>
+<li>Con gas licuado, la abertura inferior es clave: el gas fugado se acumula abajo. Una celosía a 40 cm del piso dejaría una capa de gas atrapada bajo ella.</li></ul>
 <h4>Exigencias</h4>
-<ul><li>Malla de al menos 6 mm o celosía.</li><li>El rebaje de la puerta <b>no</b> cuenta como abertura.</li>
+<ul><li>Protegida con celosía de malla de trama de al menos 6 mm (art. 70.2.2).</li><li>El rebaje de la puerta <b>no</b> cuenta como abertura.</li>
 <li>Conductos de ventilación de más de 3 m: sección 50% mayor.</li>
 <li>Letrero obligatorio: <b>"Por su protección no tapar esta ventilación"</b>.</li></ul>`},
 {t:"Casos especiales",h:`
@@ -1554,14 +1554,14 @@ V = 3 × 2,5 × 2,4 = 18 m³</code>
 taller:`<h3>Taller: ventilación de una cocina</h3>
 <ol><li>Mide una cocina real: largo, ancho y alto. Calcula el volumen con altura máxima de 2,4 m.</li>
 <li>Suma la potencia de sus artefactos a gas.</li>
-<li>Ubica las rejillas existentes, mide su tamaño útil y verifica la malla y el letrero.</li>
+<li>Ubica las celosías existentes, mide su tamaño útil y verifica la malla y el letrero.</li>
 <li>Indica si hay campana o extractor y si podría afectar el tiro del calefont.</li></ol>`,
 quiz:[
 {q:"Una cocina de 4 × 3 m con cielo a 2,7 m tiene un volumen de cálculo de:",o:["32,4 m³","28,8 m³","12 m³"],a:1,e:"4 × 3 × 2,4 = 28,8 m³."},
 {q:"¿El rebaje de la puerta cuenta como ventilación?",o:["Sí","No"],a:1,e:"No se considera abertura."},
 {q:"Con gas licuado, la abertura más importante para una fuga es la:",o:["Superior","Inferior"],a:1,e:"El GLP se acumula abajo."},
 {q:"Con gas licuado, ¿a qué altura debe quedar la ventilación inferior?",o:["Su borde superior a no más de 15 cm del piso","A 40 cm del piso","A cualquier altura"],a:0,e:"Debe quedar a ras de piso para evacuar el gas, que es más pesado que el aire."},
-{q:"Malla mínima de una rejilla:",o:["1 mm","6 mm","20 mm"],a:1,e:"Al menos 6 mm o celosía."},
+{q:"La malla de la celosía de ventilación debe tener una trama de al menos:",o:["1 mm","6 mm","20 mm"],a:1,e:"6 mm (DS 66, art. 70.2.2), para que no se obstruya."},
 {q:"Un conducto de ventilación de 4 m debe tener:",o:["La misma sección","Sección 50% mayor"],a:1,e:"Sobre 3 m, 50% más."}]},
 
 {n:8,w:2,d:"Día 8",t:"Evacuación de gases",k:"Tramo vertical ≥ 2 diámetros",
@@ -1629,7 +1629,7 @@ pts:[
 <p>Como el gas licuado tiene mayor poder calorífico, para la misma potencia circula menos caudal y los diámetros suelen ser menores.</p>`},
 {t:"Planos de gas",h:`
 <p>El proyecto de una instalación de gas incluye:</p>
-<ul><li><b>Planta</b> con recorrido de tuberías, ubicación de medidor o cilindros, llaves, artefactos, rejillas y conductos.</li>
+<ul><li><b>Planta</b> con recorrido de tuberías, ubicación de medidor o cilindros, llaves, artefactos, celosías y conductos.</li>
 <li><b>Isométrico</b> con tramos identificados, diámetros y longitudes.</li>
 <li><b>Cuadro de artefactos y cálculo:</b> potencia, caudal, tramo, diámetro y pérdida.</li>
 <li>Detalles de ventilación y evacuación.</li></ul>
@@ -1669,7 +1669,7 @@ pts:[
 {t:"Sellos e instalaciones en uso",h:`
 <p>Las instalaciones interiores de gas tienen una <b>inspección periódica cada dos años</b>, hecha por un organismo de certificación autorizado por la SEC. El resultado es un sello:</p>
 <ul><li><b>Verde:</b> la instalación cumple.</li><li><b>Amarillo:</b> tiene defectos que deben corregirse en un plazo.</li><li><b>Rojo:</b> tiene defectos graves; se suspende el suministro hasta corregir.</li></ul>
-<p>Como instalador clase 3, muchas veces te llamarán para <b>corregir los defectos</b> de una instalación con sello amarillo o rojo: rejillas tapadas, calefont sin conducto o en el baño, conexiones vencidas.</p>`},
+<p>Como instalador clase 3, muchas veces te llamarán para <b>corregir los defectos</b> de una instalación con sello amarillo o rojo: celosías tapadas, calefont sin conducto o en el baño, conexiones vencidas.</p>`},
 {t:"Simulacro y día de la evaluación",h:`
 <h4>Pauta práctica</h4>
 <ul><li><b>Seguridad:</b> cierre y bloqueo de llave, ventilación, sin fuentes de ignición.</li>
@@ -1682,7 +1682,7 @@ pts:[
 Cobre L ≤ 140 kPa          Uniones: soldadura fuerte
 Enterrada 60 cm (80 calle)  Cinta GAS a 25 cm
 Cilindros: 2 a 12           Patio ≥ 6 m² para 2
-Flexible cocina ≤ 1 m       Válvula ≤ 1,6 m, visible
+Conexión ≤ 1 m             Válvula a la vista, grado 1
 Altura cálculo ≤ 2,4 m      Estufa A: ≥ 15 m³
 Tramo vertical ≥ 2 D        Salida fachada ≥ 2,2 m
 Sello: cada 2 años</code>
@@ -1697,7 +1697,7 @@ quiz:[
 {q:"¿Cada cuánto es la inspección periódica de gas?",o:["Cada año","Cada 2 años","Cada 5 años"],a:1,e:"Cada dos años."},
 {q:"Un sello rojo significa:",o:["Cumple","Defectos graves y suspensión del suministro"],a:1,e:"Hay que corregir antes de volver a dar gas."},
 {q:"El TC6 se presenta:",o:["Antes de la puesta en servicio","Un año después"],a:0,e:"Art. 86."},
-{q:"Un calefont tipo B en el baño:",o:["Cumple si hay rejilla","No cumple"],a:1,e:"En baños solo tipo C."},
+{q:"Un calefont tipo B en el baño:",o:["Cumple si hay celosía","No cumple"],a:1,e:"En baños solo tipo C."},
 {q:"¿Qué soldadura se usa en cobre para gas?",o:["Blanda","Fuerte"],a:1,e:"Art. 45.2.6."},
 {q:"Volumen de cálculo de una cocina de 3 × 3 m con cielo a 2,5 m:",o:["22,5 m³","21,6 m³"],a:1,e:"3 × 3 × 2,4 = 21,6 m³."},
 {q:"Clase 3 puede ejecutar una vivienda de:",o:["55 kW en baja presión","70 kW en baja presión","Cualquier potencia en media presión"],a:0,e:"Tipo 3: baja presión hasta 60 kW."},
@@ -1707,7 +1707,7 @@ quiz:[
 {q:"¿Qué detecta el sensor Bs del calefont?",o:["Falta de agua","Revoco de gases","Sobrepresión"],a:1,e:"Apaga si los gases se devuelven."},
 {q:"La licencia clase 3 por competencias se renueva cada:",o:["2 años","5 años","Es indefinida"],a:1,e:"Cada cinco años."},
 {q:"Con olor a gas en una casa, lo primero es:",o:["Encender la luz para ver","No accionar nada eléctrico, ventilar y cerrar la llave"],a:1,e:"Evitar chispas."},
-{q:"Una rejilla debe llevar el letrero:",o:["Peligro gas","Por su protección no tapar esta ventilación"],a:1,e:"Exigencia del DS 66."}]}
+{q:"Una celosía debe llevar el letrero:",o:["Peligro gas","Por su protección no tapar esta ventilación"],a:1,e:"Exigencia del DS 66."}]}
 ];
 
 /* ---------- Herramientas de gas ---------- */
@@ -1766,18 +1766,18 @@ html:`<div class="cf"><label>Artefacto<select id="ua"><option value="coc">Cocina
 <label>Recinto<select id="ur"><option value="coc">Cocina ventilada</option><option value="log">Logia</option><option value="liv">Living</option><option value="bano">Baño</option><option value="dorm">Dormitorio</option><option value="sub">Subterráneo</option></select></label>
 <label>Gas<select id="ug"><option value="gn">Gas natural</option><option value="glp">Gas licuado</option></select></label></div><div class="simverdict" id="uv"></div>`,
 init(){const f=()=>{const [ok,why]=RULES($("ua").value,$("ur").value,$("ug").value);$("uv").className="simverdict "+(ok?"ok":"no");$("uv").innerHTML=`<div class="big2">${ok?"Permitido":"No permitido"}</div><p>${esc(why)}</p>`};["ua","ur","ug"].forEach(i=>$(i).oninput=f);f()}},
-{id:"rejilla",t:"Rejilla inferior y fuga de gas",d:"Mueve la altura de la rejilla inferior y cambia el gas. Observa si la fuga puede salir del recinto.",
-html:`<div class="cf"><label>Gas<select id="rg"><option value="glp">Gas licuado</option><option value="gn">Gas natural</option></select></label><label>Altura del borde superior de la rejilla inferior: <b id="rhv">10</b> cm<input id="rh" type="range" min="5" max="50" value="10"></label></div>
-<div class="simbox"><svg id="rsvg" viewBox="0 0 600 260" role="img" aria-label="Simulador de rejilla"></svg></div><p class="simmsg" id="rmsg"></p>`,
+{id:"rejilla",t:"Celosía inferior y fuga de gas",d:"Mueve la altura de la celosía inferior y cambia el gas. Observa si la fuga puede salir del recinto.",
+html:`<div class="cf"><label>Gas<select id="rg"><option value="glp">Gas licuado</option><option value="gn">Gas natural</option></select></label><label>Altura del borde superior de la celosía inferior: <b id="rhv">10</b> cm<input id="rh" type="range" min="5" max="50" value="10"></label></div>
+<div class="simbox"><svg id="rsvg" viewBox="0 0 600 260" role="img" aria-label="Simulador de celosía"></svg></div><p class="simmsg" id="rmsg"></p>`,
 init(){const f=()=>{const g=$("rg").value,h=+$("rh").value;$("rhv").textContent=h;const sc=3,floor=230,top=floor-h*sc,gl=g==="glp";const ok=gl?h<=15:true;
 const layer=gl?`<rect x="60" y="${floor-60}" width="480" height="60" fill="var(--c-am)" opacity=".35"/>`:`<rect x="60" y="20" width="480" height="60" fill="var(--c-az)" opacity=".25"/>`;
-const trapped=gl&&h>15?`<rect x="60" y="${top}" width="480" height="${floor-top}" fill="var(--bad)" opacity=".25"/><text x="300" y="${floor-12}" text-anchor="middle" class="smt">Gas atrapado bajo la rejilla</text>`:"";
+const trapped=gl&&h>15?`<rect x="60" y="${top}" width="480" height="${floor-top}" fill="var(--bad)" opacity=".25"/><text x="300" y="${floor-12}" text-anchor="middle" class="smt">Gas atrapado bajo la celosía</text>`:"";
 $("rsvg").innerHTML=`<rect x="60" y="20" width="480" height="210" fill="none" stroke="var(--ink)" stroke-width="3"/>${layer}${trapped}
 <rect x="532" y="${top}" width="16" height="${Math.min(40,floor-top)}" fill="var(--paper)" stroke="var(--ink)"/><rect x="532" y="30" width="16" height="30" fill="var(--paper)" stroke="var(--ink)"/>
 <path d="M548 ${top+10}h40" stroke="${gl&&ok?"var(--ok)":"var(--muted)"}" stroke-width="3" marker-end="url(#ra)"/><path d="M548 45h40" stroke="${!gl?"var(--ok)":"var(--muted)"}" stroke-width="3" marker-end="url(#ra)"/>
 <defs><marker id="ra" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink)"/></marker></defs>
 <text x="70" y="${gl?Math.min(floor-66,top-8):96}" class="smt">${gl?"Fuga de GLP: se acumula abajo":"Fuga de GN: sube al techo"}</text><line x1="40" y1="${top}" x2="60" y2="${top}" stroke="var(--ink)"/><text x="12" y="${top+4}" class="smt">${h}</text>`;
-$("rmsg").innerHTML=gl?(ok?"<b>Correcto.</b> Con el borde a no más de 15 cm del piso, el gas licuado fugado puede salir.":"<b>Problema.</b> Con la rejilla tan alta, queda una capa de gas licuado atrapada bajo ella: riesgo de explosión."):"<b>Gas natural:</b> sube; la abertura superior es la que ayuda a evacuar una fuga. La inferior sirve para la entrada de aire."};
+$("rmsg").innerHTML=gl?(ok?"<b>Correcto.</b> Con el borde a no más de 15 cm del piso, el gas licuado fugado puede salir.":"<b>Problema.</b> Con la celosía tan alta, queda una capa de gas licuado atrapada bajo ella: riesgo de explosión."):"<b>Gas natural:</b> sube; la abertura superior es la que ayuda a evacuar una fuga. La inferior sirve para la entrada de aire."};
 ["rg","rh"].forEach(i=>$(i).oninput=f);f()}},
 {id:"herm",t:"Prueba de hermeticidad",d:"Inicia la prueba, observa el manómetro durante el tiempo de prueba simulado y decide si la instalación aprueba.",
 html:`<div class="simctl"><button class="cta" id="hgo">Iniciar prueba</button></div><div class="simbox"><svg id="hsvg" viewBox="0 0 600 240" role="img" aria-label="Gráfico de presión de la prueba"></svg></div>
@@ -1816,9 +1816,9 @@ const EXTRA_Q=[
 [6,"Un calefont estanco es tipo:",["A","B","C"],2,"Circuito estanco."],
 [6,"Una cocina doméstica es tipo:",["A","B","C"],0,"Sin conducto."],
 [6,"Las tuberías multicapa, ¿se pueden usar como conexión al artefacto?",["Sí","No"],1,"Lo prohíbe la modificación de 2026."],
-[6,"La válvula de paso del artefacto debe estar a no más de:",["1,0 m","1,6 m","2,2 m"],1,"1,6 m del piso."],
+[6,"La válvula de paso de cada artefacto debe estar:",["Detrás del artefacto, para que no se vea","A la vista, sin cerraduras ni escaleras para operarla","Dentro de un mueble con llave"],1,"Art. 53.2: a la vista y con accesibilidad grado 1."],
 [7,"Altura máxima de cálculo para el volumen de un recinto:",["2,2 m","2,4 m","3,0 m"],1,"2,4 m."],
-[7,"La rejilla de ventilación debe tener malla de al menos:",["1 mm","6 mm"],1,"6 mm o celosía."],
+[7,"La malla de la celosía de ventilación debe tener una trama de al menos:",["1 mm","6 mm"],1,"6 mm (art. 70.2.2), para que no se obstruya."],
 [7,"Sección mínima para la campana de cocina:",["50 cm²","100 cm²","300 cm²"],1,"100 cm²."],
 [7,"Un patio de ventilación menor de 3 m² exige una abertura de al menos:",["100 cm²","300 cm²"],1,"300 cm²."],
 [8,"El conducto de evacuación debe resistir hasta:",["100 °C","300 °C"],1,"300 °C."],
