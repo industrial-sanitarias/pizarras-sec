@@ -1859,15 +1859,15 @@ function toolHead(T){return `<button class="back" id="tback">‹ Volver a la piz
 function closeTool(){stopExamTimer();$("tools").hidden=true;$("board").hidden=false;$("hdr").hidden=false;renderBoard()}
 /* Examen */
 let EX=null,exTimer=null;
-function examBank(){const b=[];clases.forEach(c=>c.quiz.forEach(q=>b.push({c:c.n,q:q.q,o:q.o,a:q.a,e:q.e})));(EXTRA_Q||[]).forEach(([c,q,o,a,e])=>b.push({c,q,o,a,e}));return b}
+function examBank(){const b=[];clases.forEach(c=>c.quiz.forEach((q,i)=>b.push({id:"c"+c.n+"-"+i,c:c.n,q:q.q,o:q.o,a:q.a,e:q.e})));(EXTRA_Q||[]).forEach(([c,q,o,a,e],i)=>b.push({id:"x"+i,c,q,o,a,e}));return b}
 function examStartHTML(){const n=examBank().length;return `<h3>Examen tipo certificación</h3>
-  <p>El banco tiene <b>${n} preguntas</b> de las 10 clases. Cada intento saca preguntas al azar, así que puedes repetirlo muchas veces.</p>
+  <p>El banco tiene <b>${n} preguntas</b> de las 10 clases. Cada intento saca preguntas al azar, evita repetir las del intento anterior y cambia el orden de las alternativas, así que puedes repetirlo muchas veces.</p>
   <div class="exopts"><label for="exn">Cantidad de preguntas</label><select id="exn"><option value="20">20 preguntas · 30 min</option><option value="30" selected>30 preguntas · 45 min</option><option value="45">45 preguntas · 65 min</option></select></div>
   <ul><li>Responde todas y presiona <b>Entregar</b>. Si se acaba el tiempo, se entrega solo.</li><li>Al final verás tu nota, las respuestas correctas y qué clases repasar.</li><li>Meta: <b>70% o más</b>.</li></ul>
   <button class="cta" id="exgo">Comenzar examen</button>`}
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function startExam(){
-  const n=+$("exn").value;const qs=shuffle(examBank()).slice(0,n).map(q=>{const idx=shuffle(q.o.map((_,i)=>i));return {...q,ord:idx}});
+  const n=+$("exn").value,lk=KEY+"-exlast";let last=[];try{last=JSON.parse(localStorage.getItem(lk)||"[]")||[]}catch(e){last=[]}const bank=examBank(),fresh=shuffle(bank.filter(q=>!last.includes(q.id))),pick=fresh.slice(0,n);if(pick.length<n)pick.push(...shuffle(bank.filter(q=>!pick.includes(q))).slice(0,n-pick.length));try{localStorage.setItem(lk,JSON.stringify(pick.map(q=>q.id)))}catch(e){}const qs=shuffle(pick).map(q=>{const idx=shuffle(q.o.map((_,i)=>i));return {...q,ord:idx}});
   EX={qs,ans:new Array(qs.length).fill(-1),end:Date.now()+n*90*1000,done:false};
   $("toolpanel").innerHTML=`<div class="extop"><div><b id="excount">0</b> de ${qs.length} respondidas</div><div class="extime" id="extime"></div></div>`+
    qs.map((q,i)=>`<div class="q" data-x="${i}"><p class="qt">${i+1}. ${esc(q.q)} <span class="qc">Clase ${q.c}</span></p><div class="opts">${q.ord.map(oi=>`<button class="opt" data-o="${oi}">${esc(q.o[oi])}</button>`).join("")}</div><div class="exp" hidden></div></div>`).join("")+
@@ -1982,25 +1982,37 @@ function showTab(i){
   if(t.quiz)wireQuiz(c);
   const tb=$("tab"+i);if(tb)tb.scrollIntoView({block:"nearest",inline:"nearest"});
 }
+function quizPool(c){const p=c.quiz.map((q,i)=>({id:"q"+i,q:q.q,o:q.o,a:q.a,e:q.e}));(typeof EXTRA_Q!=="undefined"?EXTRA_Q:[]).forEach(([n,q,o,a,e],i)=>{if(n===c.n)p.push({id:"x"+i,q,o,a,e})});return p}
+let QZ=null;
+function buildQuiz(c){
+  const pool=quizPool(c),n=Math.min(c.quiz.length,12,pool.length),lk=KEY+"-qlast-"+c.n;
+  let last=[];try{last=JSON.parse(localStorage.getItem(lk)||"[]")||[]}catch(e){last=[]}
+  const fresh=shuffle(pool.filter(q=>!last.includes(q.id))),k=Math.min(fresh.length,Math.ceil(n*0.6));
+  const first=fresh.slice(0,k),rest=shuffle(pool.filter(q=>!first.includes(q)));
+  const qs=shuffle(first.concat(rest.slice(0,n-k))).map(q=>({...q,ord:shuffle(q.o.map((_,i)=>i))}));
+  try{localStorage.setItem(lk,JSON.stringify(qs.map(q=>q.id)))}catch(e){}
+  QZ={c:c.n,qs,pool:pool.length};return qs;
+}
 function quizHTML(c){
-  return `<h3>Autoevaluación clase ${c.n}</h3><p class="score" id="score">0 de ${c.quiz.length} respondidas</p>`+
-  c.quiz.map((q,qi)=>`<div class="q" data-q="${qi}"><p class="qt">${qi+1}. ${esc(q.q)}</p><div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-o="${oi}">${esc(o)}</button>`).join("")}</div><div class="exp" hidden></div></div>`).join("")+
-  `<button class="back" id="rq">Reiniciar autoevaluación</button>`;
+  const qs=buildQuiz(c);
+  return `<h3>Autoevaluación clase ${c.n}</h3><p class="norm" style="margin:-4px 0 6px">${qs.length} preguntas al azar de un banco de ${QZ.pool}. Cada vez que la abres cambian el orden, las alternativas y parte de las preguntas.</p><p class="score" id="score">0 de ${qs.length} respondidas</p>`+
+  qs.map((q,qi)=>`<div class="q" data-q="${qi}"><p class="qt">${qi+1}. ${esc(q.q)}</p><div class="opts">${q.ord.map(oi=>`<button class="opt" data-o="${oi}">${esc(q.o[oi])}</button>`).join("")}</div><div class="exp" hidden></div></div>`).join("")+
+  `<button class="back" id="rq">Nueva autoevaluación (otras preguntas)</button>`;
 }
 function wireQuiz(c){
-  let answered=0,right=0;
+  let answered=0,right=0;const qs=QZ.qs,N=qs.length;
   document.querySelectorAll(".q").forEach(div=>{
-    const q=c.quiz[+div.dataset.q];
+    const q=qs[+div.dataset.q];
     div.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
       if(div.dataset.done)return;div.dataset.done=1;answered++;
       const oi=+b.dataset.o,ok=oi===q.a;if(ok)right++;
       div.querySelectorAll(".opt").forEach(x=>{const k=+x.dataset.o;if(k===q.a)x.classList.add("right");else if(k===oi)x.classList.add("wrong")});
       const ex=div.querySelector(".exp");ex.hidden=false;ex.innerHTML=(ok?"<b>Correcto.</b> ":"<b>No es correcta.</b> ")+esc(q.e);
-      const pct=Math.round(right/c.quiz.length*100);
-      $("score").textContent=answered<c.quiz.length?`${answered} de ${c.quiz.length} respondidas · ${right} correctas`:`Resultado: ${right} de ${c.quiz.length} (${pct}%) ${pct>=70?"· Aprobado":"· Repasa los temas fallados"}`;
+      const pct=Math.round(right/N*100);
+      $("score").textContent=answered<N?`${answered} de ${N} respondidas · ${right} correctas`:`Resultado: ${right} de ${N} (${pct}%) ${pct>=70?"· Aprobado":"· Repasa los temas fallados"}`;
     });
   });
-  $("rq").onclick=()=>showTab(curTab);
+  $("rq").onclick=()=>{showTab(curTab);window.scrollTo(0,0)};
 }
 function closeLesson(){
   $("lesson").hidden=true;$("board").hidden=false;$("hdr").hidden=false;cur=null;renderBoard();
