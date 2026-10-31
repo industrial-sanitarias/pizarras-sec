@@ -1573,6 +1573,16 @@ pts:[
 <li>¿Cuánta potencia aguanta un circuito protegido con 10 A? P = 220 × 10 = <b>2200 W</b>.</li>
 <li>¿Y uno de 16 A? P = 220 × 16 = <b>3520 W</b>.</li>
 <li>Un hervidor (2000 W) y una estufa (1500 W) en el mismo circuito: 3500 W, I = 15,9 A. En un circuito de 10 A, el automático va a cortar.</li></ol>
+<h4>De dónde salen P = I² · R y P = V² / R (Ley de Joule)</h4>
+<p>No son fórmulas nuevas: salen de juntar la Ley de Watt (P = V · I) con la Ley de Ohm (V = I · R).</p>
+<code class="f">P = V · I   y   V = I · R
+P = (I · R) · I   →   P = I² · R
+P = V · (V / R)   →   P = V² / R</code>
+<p><b>P = I² · R</b> se llama <b>Ley de Joule</b>: dice cuánto calor produce una corriente al pasar por una resistencia. Se usa cuando conoces la corriente y la resistencia, pero no la tensión sobre esa resistencia.</p>
+<ol><li>Una estufa de 22 Ω por la que pasan 10 A: P = 10² × 22 = 100 × 22 = <b>2200 W</b>. Es lo mismo que 220 V × 10 A.</li>
+<li>Una ampolleta incandescente de 484 Ω a 220 V: P = 220² / 484 = <b>100 W</b>.</li></ol>
+<div class="idea">La corriente va <b>al cuadrado</b>: si se duplica la corriente, el calor se multiplica por cuatro. Por eso un cable sobrecargado se calienta tan rápido.</div>
+<p class="norm">En la hoja de fórmulas de la prueba, P = V · I aparece con el nombre "Ley de Joule". Es la misma relación de potencia; no te confundas por el nombre.</p>
 <div class="warn">Las fórmulas P = V·I se aplican tal cual a cargas resistivas (estufas, hervidores, ampolletas incandescentes). En motores y equipos electrónicos aparece el factor de potencia (cos φ): P = V·I·cos φ. Para la vivienda, la aproximación P = V·I es la que usarás.</div>`},
 {t:"Energía, kWh y la boleta",h:`
 <p>La <b>energía</b> es potencia por tiempo. Lo que cobra la distribuidora es energía, en <b>kilowatt-hora (kWh)</b>.</p>
@@ -1623,7 +1633,7 @@ taller:`<h3>Práctica: guía de ejercicios</h3><div class="idea">Estas actividad
 <details><summary>7. Con tu última boleta de luz: ¿cuántos kWh consumiste y cuánto cuesta el kWh?</summary>Consumo = lectura actual − lectura anterior. Precio = cargo por energía / kWh consumidos.</details>
 <details><summary>8. Una persona de 2000 Ω toca 220 V. ¿Qué corriente pasa? ¿Es peligrosa?</summary>I = 220 / 2000 = 0,11 A = 110 mA. Sí: está en el rango de fibrilación ventricular.</details>
 <details><summary>9. ¿Qué tensión hay en una resistencia de 5 Ω por la que pasan 4 A?</summary>V = 4 × 5 = 20 V</details>
-<details><summary>10. Un cable de 40 m de recorrido total y 1,5 mm² lleva 10 A. ¿Cuántos watts se pierden en calor?</summary>R = 0,018 × 40 / 1,5 = 0,48 Ω. P = I² × R = 100 × 0,48 = 48 W.</details>
+<details><summary>10. Por una resistencia de 22 Ω pasan 10 A. ¿Qué potencia transforma en calor?</summary>Ley de Joule: P = I² × R = 10² × 22 = 100 × 22 = 2200 W.</details>
 <p>Después escribe de memoria las 5 reglas de oro y compáralas con la pestaña correspondiente.</p>`,
 quiz:[
 {q:"Un equipo de 2200 W a 220 V consume:",o:["1 A","10 A","22 A"],a:1,e:"I = P / V = 2200 / 220 = 10 A."},
@@ -2291,7 +2301,13 @@ taller:`<h3>Práctica: dimensionar tres circuitos</h3>
 <p>Para cada caso calcula corriente, corriente + 10%, automático, conductor y caída de tensión. Luego despliega la solución.</p>
 <details><summary>1. Circuito de alumbrado: 12 centros de 100 W a 22 m.</summary>P = 1200 W. I = 5,5 A. × 1,1 = 6 A. Automático 10 A. Conductor 1,5 mm². ΔV = 2 × 0,018 × 22 × 5,5 / 1,5 = 2,9 V = 1,3%. Cumple.</details>
 <details><summary>2. Circuito de enchufes: 10 enchufes de 250 W a 25 m.</summary>P = 2500 W. I = 11,4 A. × 1,1 = 12,5 A. Automático 16 A. Conductor 2,5 mm². ΔV = 2 × 0,018 × 25 × 11,4 / 2,5 = 4,1 V = 1,9%. Cumple.</details>
-<details><summary>3. Termo de 2500 W a 35 m.</summary>I = 11,4 A. × 1,1 = 12,5 A. Automático 16 A. Conductor 2,5 mm². ΔV = 2 × 0,018 × 35 × 11,4 / 2,5 = 5,7 V = 2,6%. Cumple el 5% total, pero si el alimentador ya tiene 3% de caída no alcanza; en ese caso conviene 4 mm² (ΔV = 1,6%).</details>`,
+<details><summary>3. Termo de 2500 W a 35 m.</summary>I = 11,4 A. × 1,1 = 12,5 A. Automático 16 A. Conductor 2,5 mm². ΔV = 2 × 0,018 × 35 × 11,4 / 2,5 = 5,7 V = 2,6%. Cumple el 5% total, pero si el alimentador ya tiene 3% de caída no alcanza; en ese caso conviene 4 mm² (ΔV = 1,6%).</details>
+<details><summary>4. Un circuito está a 20 m del tablero, con cable de 1,5 mm², y lleva 10 A. ¿Cuántos watts se pierden en calor en el cable y cuánta tensión cae?</summary>
+<ol><li><b>Recorrido:</b> la corriente va por la fase y vuelve por el neutro: 2 × 20 = 40 m.</li>
+<li><b>Resistencia del cable</b> (clase 1): R = 0,018 × 40 / 1,5 = 0,48 Ω.</li>
+<li><b>Calor en el cable</b> (Ley de Joule, clase 2): P = I² × R = 10² × 0,48 = 48 W. De los 2200 W que lleva el circuito (220 V × 10 A), se pierde un 2,2 %.</li>
+<li><b>Caída de tensión</b> (Ley de Ohm): ΔV = I × R = 10 × 0,48 = 4,8 V, un 2,2 % de 220 V. Es el mismo resultado que da la fórmula ΔV = 2 × ρ × L × I / S.</li></ol>
+Conclusión: cumple el 3 %, pero con 20 A la pérdida subiría a 192 W (cuatro veces más).</details>`,
 quiz:[
 {q:"Una estufa de 2000 W. Corriente con el 10% del RIC N°10:",o:["9,1 A","10 A","20 A"],a:1,e:"I = 2000 / 220 = 9,1 A; × 1,1 = 10 A."},
 {q:"¿Cuál es la caída de tensión máxima total permitida?",o:["3%","5%","10%"],a:1,e:"RIC N°03: 3% en alimentadores y 5% total al punto más desfavorable."},
