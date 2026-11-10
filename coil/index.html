@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Proyecto COIL PROCIN 2026 · Encuentro de cierre Chile – Brasil · Uso y cuidado del agua / Uso e cuidado da água">
+<meta property="og:title" content="COIL PROCIN 2026 · Cierre Chile – Brasil">
+<meta property="og:description" content="Uso y Cuidado del Agua: Del Diagnóstico a la Acción · Uso e Cuidado da Água: Do Diagnóstico à Ação">
+<title>COIL PROCIN 2026 · Cierre del proyecto Chile–Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1c2533;--pt:#1f4f8f;--teal:#2bb3a6;--blue:#2a74c4;--coral:#d9643a;--orange:#eaa25d;--red:#d64541;--glass:rgba(255,255,255,.88)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0f1b2b;overflow:hidden;font-family:'Inter',system-ui,sans-serif;color:var(--ink)}
+#viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{width:1600px;height:900px;position:relative;flex:none;transform-origin:center}
+.slide{position:absolute;inset:0;overflow:hidden;opacity:0;pointer-events:none;transition:opacity .5s}
+.slide.active{opacity:1;pointer-events:auto}
+/* fondos degradados tipo COIL */
+.slide::before{content:"";position:absolute;inset:0;z-index:0;background:var(--bg)}
+.slide::after{content:"";position:absolute;inset:0;z-index:0;opacity:.35;mix-blend-mode:soft-light;
+  background-image:radial-gradient(rgba(255,255,255,.5) 1px,transparent 1.2px);background-size:5px 5px}
+.slide>*{position:relative;z-index:1}
+.g1{--bg:linear-gradient(115deg,#c8553a 0%,#e59a5a 28%,#b9c8b2 52%,#3aa6c9 75%,#1d5fae 100%)}
+.g2{--bg:radial-gradient(ellipse at 15% 20%,#e7a46a 0%,transparent 55%),radial-gradient(ellipse at 90% 85%,#1f68b5 0%,transparent 60%),linear-gradient(135deg,#d06a45,#9fcfc4 55%,#2f8ccc)}
+.g3{--bg:radial-gradient(ellipse at 85% 15%,#e9b27a 0%,transparent 50%),radial-gradient(ellipse at 10% 90%,#c45535 0%,transparent 55%),linear-gradient(160deg,#e3995b,#7cc3bf 55%,#2a78c0)}
+.g4{--bg:linear-gradient(100deg,#f1d2b3 0%,#eab184 22%,#a6d1c8 55%,#3b9fcf 80%,#1c5aa6 100%)}
+.g5{--bg:radial-gradient(ellipse at 50% 120%,#1f62b0 0%,transparent 60%),linear-gradient(120deg,#cf5e3c,#e6a361 35%,#6fbcbd 70%,#2470bf)}
+.abs{position:absolute}
+.glass{background:var(--glass);border-radius:30px;box-shadow:0 22px 50px rgba(18,35,70,.28);border:1.5px solid rgba(255,255,255,.95);backdrop-filter:blur(8px)}
+.pill{background:#fff;border-radius:14px;box-shadow:0 8px 20px rgba(18,35,70,.18);padding:12px 18px}
+.pt{color:var(--pt)}
+h2.t{position:absolute;left:70px;top:44px;right:70px;font-weight:300;font-size:50px;line-height:1.12;letter-spacing:-.5px;color:#1c2533}
+h2.t b{font-weight:700}
+h2.t .pt{display:block;font-weight:700;color:var(--pt)}
+h2.t.c{text-align:center}
+h2.t.w{color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.25)}
+.ic{width:100px;height:100px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0%,#eef4f8 60%,#d5e3ee 100%);box-shadow:0 10px 24px rgba(18,35,70,.3),inset 0 -4px 10px rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;flex:none}
+.ic svg{width:58%;height:58%}
+.flag svg{width:100%;height:100%;display:block}
+.flag{display:inline-block;width:42px;height:28px;vertical-align:-3px;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.3);overflow:hidden}
+/* animación de entrada */
+.a{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;transition-delay:calc(var(--d,0)*120ms)}
+.slide.active .a{opacity:1;transform:none}
+/* burbujas */
+.bub{position:absolute;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(255,255,255,.15) 60%,transparent);animation:rise linear infinite;z-index:0}
+@keyframes rise{from{transform:translateY(0);opacity:0}10%{opacity:.8}to{transform:translateY(-1000px);opacity:0}}
+
+/* UI */
+#ui{position:fixed;right:16px;bottom:14px;display:flex;gap:8px;z-index:50;align-items:center}
+#ui button{font-family:Inter;font-weight:600;font-size:14px;background:rgba(255,255,255,.9);border:none;color:#1c2533;border-radius:10px;padding:7px 12px;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+#counter{color:#fff;font-size:14px;font-weight:600;min-width:58px;text-align:center;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+#progress{position:fixed;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--coral),var(--teal),var(--blue));z-index:49;transition:width .4s}
+#notes{position:fixed;left:16px;bottom:60px;max-width:560px;background:rgba(12,20,32,.94);color:#eef3f8;font-size:15px;line-height:1.5;padding:16px 18px;border-radius:12px;border-left:6px solid var(--teal);z-index:60;display:none}
+#notes.show{display:block}#notes b{color:#ffc98a}
+#lightbox{position:fixed;inset:0;background:rgba(8,14,24,.92);display:none;align-items:center;justify-content:center;z-index:100;cursor:zoom-out}
+#lightbox.show{display:flex}
+#lightbox img{max-width:92vw;max-height:86vh;border-radius:14px;box-shadow:0 20px 60px #000}
+#lightbox p{position:absolute;bottom:3vh;color:#fff;font-size:20px}
+.zoom{cursor:zoom-in}
+
+/* S1 */
+#s1 .cover{left:290px;top:110px;width:1020px;padding:44px 60px 40px;text-align:center}
+#s1 .k{font-size:17px;letter-spacing:.5px;color:#4a5566;font-weight:500}
+#s1 h1{font-size:47px;font-weight:700;line-height:1.12;margin:20px 0 14px;letter-spacing:-.5px}
+#s1 h1.pt{font-weight:400;margin-top:0;font-size:43px}
+#s1 .ac{font-style:italic;font-size:25px;margin-top:18px}
+#s1 .who{font-size:18px;color:#4a5566;margin-top:16px;line-height:1.5}
+#s1 .logos{left:50%;top:700px;transform:translateX(-50%);background:#fff;border-radius:60px;padding:12px 30px;box-shadow:0 14px 30px rgba(0,0,0,.25)}
+#s1 .logos img{height:96px;display:block}
+#s1 .eigrc{right:70px;top:60px;width:92px;filter:drop-shadow(0 8px 14px rgba(0,0,0,.35))}
+#s1 .tag{left:290px;top:58px;background:var(--red);color:#fff;font-weight:700;letter-spacing:1px;font-size:15px;padding:8px 16px;border-radius:30px;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+
+/* S2 */
+#s2 .obj{top:110px;width:640px;height:440px;padding:46px 50px}
+#s2 .obj h3{font-size:42px;font-weight:700;display:flex;gap:14px;align-items:center;margin-bottom:26px}
+#s2 .obj p{font-size:33px;font-weight:300;line-height:1.3}
+#s2 .verbs{left:0;right:0;top:610px;display:flex;justify-content:center;gap:70px}
+#s2 .verb{display:flex;align-items:center;gap:18px}
+#s2 .verb .pill{padding:14px 22px;font-size:26px;font-weight:700}
+#s2 .verb .pill span{display:block;font-size:19px;font-weight:600}
+#s2 .q{left:0;right:0;top:790px;text-align:center;color:#fff;font-size:26px;font-weight:500;text-shadow:0 2px 10px rgba(0,0,0,.3)}
+
+/* S3 */
+#s3 .col{top:190px;width:520px}
+#s3 .col h3{font-size:30px;font-weight:700;display:flex;gap:12px;align-items:center;margin-bottom:6px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.25)}
+#s3 .col .sub{font-size:20px;color:#fff;margin-bottom:16px;opacity:.95}
+#s3 .col .pill{margin-bottom:14px;font-size:20px;font-weight:500}
+#s3 .col .pill .pt{display:block;font-size:16px;font-weight:600}
+#s3 .team{top:560px;width:520px;padding:20px 26px;font-size:18px;line-height:1.4}
+#s3 .team b{font-size:21px}
+#s3 .big{font-size:46px;font-weight:800;color:var(--blue);float:right;line-height:1;margin-left:14px}
+#s3 .mid{left:668px;top:300px;width:264px;text-align:center}
+#s3 .vs{width:200px;height:200px;margin:0 auto;border-radius:50%;background:#fff;box-shadow:0 18px 40px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center}
+#s3 .mid p{color:#fff;font-weight:700;font-size:26px;margin-top:22px;line-height:1.2;text-shadow:0 2px 8px rgba(0,0,0,.3)}
+#s3 .mid p span{display:block;font-weight:500;font-size:21px}
+
+/* S4 río */
+#s4 svg.river{position:absolute;left:0;top:0;z-index:0}
+#s4 .node{position:absolute;display:flex;align-items:center;cursor:pointer;z-index:2}
+#s4 .node .ic{width:96px;height:96px;transition:transform .2s}
+#s4 .node:hover .ic{transform:scale(1.08)}
+#s4 .node .card{background:#fff;border-radius:16px;box-shadow:0 10px 24px rgba(18,35,70,.22);padding:10px 16px 10px 22px;margin-left:-14px;width:250px}
+#s4 .node .d{font-size:14px;font-weight:700;color:var(--coral)}
+#s4 .node .es{font-size:18px;font-weight:700;line-height:1.15}
+#s4 .node .p{font-size:15px;font-weight:600;color:var(--pt);line-height:1.15}
+#s4 .node.on .card{outline:3px solid var(--teal)}
+#s4 .det{left:470px;top:800px;width:660px;padding:14px 22px;font-size:17px;line-height:1.35;border-radius:18px;text-align:center}
+
+/* S5 calendario */
+#s5 .cal{left:70px;top:222px;width:1460px;padding:24px 30px;border-radius:24px}
+#s5 table{width:100%;border-collapse:separate;border-spacing:0}
+#s5 th{font-size:17px;font-weight:700;padding:8px 0;text-align:center;color:#3b4656;border-bottom:2px solid #d8e1ea}
+#s5 th span{display:block;color:var(--pt);font-size:14px}
+#s5 td{height:62px;border-bottom:1px solid #e3e9ef;position:relative}
+#s5 td.lab{width:300px;font-size:17px;font-weight:600;line-height:1.15;padding-right:10px}
+#s5 td.lab span{display:block;color:var(--pt);font-size:14px;font-weight:600}
+#s5 td.m{border-left:1px dashed #dbe3eb}
+#s5 .mk{position:absolute;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;z-index:2}
+#s5 .plan{border:3px solid #e58aa0;background:#fff}
+#s5 .exe{background:var(--teal);box-shadow:0 3px 8px rgba(0,0,0,.25)}
+#s5 .now{background:var(--red);animation:pulse 1.4s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 10px rgba(214,69,65,.2)}}
+#s5 .lnk{position:absolute;top:50%;height:4px;margin-top:-2px;background:repeating-linear-gradient(90deg,#e58aa0 0 6px,transparent 6px 10px);z-index:1}
+#s5 .lk{position:absolute;font-size:12px;font-weight:700;color:#7a8696;top:6px;white-space:nowrap;transform:translateX(-50%)}
+#s5 .leg{right:70px;top:176px;display:flex;gap:30px;color:#fff;font-weight:600;font-size:18px;text-shadow:0 1px 6px rgba(0,0,0,.35);align-items:center}
+#s5 .leg i{display:inline-block;width:20px;height:20px;border-radius:50%;vertical-align:-4px;margin-right:8px}
+
+/* S6 auditoría */
+#s6 .clip{left:70px;top:205px;display:flex;align-items:flex-start;gap:0}
+#s6 .clip .big{width:200px;height:220px;border-radius:30px;background:#fff;box-shadow:0 16px 36px rgba(18,35,70,.3);display:flex;align-items:center;justify-content:center;flex:none}
+#s6 .zones{display:flex;flex-direction:column;gap:14px;margin-left:-12px;margin-top:10px}
+#s6 .zone{background:#fff;border-radius:14px;padding:12px 18px;box-shadow:0 8px 18px rgba(18,35,70,.2);width:290px;cursor:pointer;transition:all .2s;border-left:8px solid transparent}
+#s6 .zone b{font-size:19px;display:block}#s6 .zone span{font-size:15px;color:var(--pt);font-weight:600}
+#s6 .zone.on{border-left-color:var(--teal);transform:translateX(12px)}
+#s6 .viewer{left:600px;top:190px;width:930px;height:640px;padding:18px;border-radius:30px}
+#s6 .main{width:100%;height:470px;border-radius:20px;overflow:hidden;background:#dfe7ee}
+#s6 .main img{width:100%;height:100%;object-fit:cover;display:block}
+#s6 .thumbs{display:flex;gap:14px;margin-top:16px}
+#s6 .thumbs img{width:120px;height:110px;object-fit:cover;border-radius:14px;cursor:pointer;opacity:.6;transition:all .2s;border:3px solid transparent}
+#s6 .thumbs img.on{opacity:1;border-color:var(--teal)}
+#s6 .zl{font-size:22px;font-weight:700;margin-left:auto;align-self:center;text-align:right}
+#s6 .zl span{display:block;font-size:17px;color:var(--pt)}
+#s6 .note{left:70px;top:690px;width:480px;font-size:19px;line-height:1.35;padding:18px 22px}
+#s6 .note .pt{display:block;font-size:16px;font-weight:600;margin-top:4px}
+
+/* S7 planos */
+#s7 .pl{top:190px;width:430px;height:620px;padding:16px;border-radius:26px;background:#fff;box-shadow:0 20px 44px rgba(18,35,70,.3)}
+#s7 .pl img{width:100%;height:540px;object-fit:contain}
+#s7 .pl p{text-align:center;font-weight:700;font-size:20px;margin-top:8px}
+#s7 .pl p span{color:var(--pt)}
+#s7 .side{left:1020px;top:210px;width:510px}
+#s7 .row{display:flex;align-items:center;margin-bottom:26px}
+#s7 .row .pill{margin-left:-16px;padding:14px 18px 14px 28px;font-size:19px;line-height:1.3;width:400px}
+#s7 .row .pill .pt{display:block;font-size:16px;font-weight:600}
+
+/* S8 infiltración */
+.phone{position:absolute;width:330px;height:680px;border-radius:52px;background:#111;padding:14px;box-shadow:0 30px 60px rgba(0,0,0,.4),inset 0 0 0 2px #444}
+.phone .scr{width:100%;height:100%;border-radius:40px;overflow:hidden;background:#fff;position:relative}
+.phone .notch{position:absolute;left:50%;top:10px;width:110px;height:30px;margin-left:-55px;background:#111;border-radius:20px;z-index:3}
+#s8 .phone{left:110px;top:150px}
+#s8 video{width:100%;height:100%;object-fit:cover;display:block;background:#000}
+#s8 .steps{left:560px;top:205px;width:600px}
+#s8 .st{display:flex;align-items:center;margin-bottom:18px}
+#s8 .st .ic{width:84px;height:84px}
+#s8 .st .pill{margin-left:-12px;padding:12px 18px 12px 26px;width:470px}
+#s8 .st b{font-size:20px}#s8 .st .pt{display:block;font-size:16px;font-weight:600}
+#s8 .warn{left:1200px;top:300px;width:330px;padding:26px;text-align:center;border-radius:26px;background:#fff;box-shadow:0 18px 40px rgba(0,0,0,.25);border:4px solid var(--red)}
+#s8 .warn .x{font-size:60px;font-weight:800;color:var(--red);line-height:1}
+#s8 .warn p{font-size:21px;font-weight:700;margin-top:10px;line-height:1.25}
+#s8 .warn p span{display:block;color:var(--pt);font-size:17px;margin-top:6px}
+
+/* S9 filtro */
+#s9 svg.bottle{position:absolute;left:470px;top:150px}
+#s9 .lab{position:absolute;left:880px;display:flex;align-items:center;cursor:pointer}
+#s9 .lab .ln{width:110px;height:2px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);position:relative}
+#s9 .lab .ln::before{content:"";position:absolute;left:-6px;top:-5px;width:12px;height:12px;border-radius:50%;background:#fff}
+#s9 .lab .pill{font-size:20px;font-weight:600;padding:10px 18px;transition:all .2s}
+#s9 .lab .pill span{color:var(--pt)}
+#s9 .lab.on .pill{background:#1f4f8f;color:#fff;transform:scale(1.06)}
+#s9 .lab.on .pill span{color:#bfe3ff}
+#s9 .info{left:70px;top:230px;width:380px;padding:28px;font-size:20px;line-height:1.4;border-radius:26px}
+#s9 .info h3{font-size:28px;line-height:1.15;margin-bottom:12px}
+#s9 .info h3 span{display:block;color:var(--pt);font-size:22px}
+#s9 .info .pt{display:block;font-size:17px;margin-top:10px;font-weight:600}
+#s9 .order{left:70px;top:640px;width:380px;padding:18px 22px;font-size:17px;line-height:1.35;border-radius:20px}
+#s9 .lay{cursor:pointer;transition:filter .2s}#s9 .lay:hover{filter:brightness(1.15)}
+#s9 .drip{animation:drip 1.8s infinite ease-in}
+@keyframes drip{0%{transform:translateY(0);opacity:0}20%{opacity:1}100%{transform:translateY(70px);opacity:0}}
+
+/* S10 caudal */
+#s10 svg.gauge{position:absolute;left:830px;top:150px}
+#s10 .ctrl{left:70px;top:220px;width:620px;padding:30px 34px;border-radius:28px}
+#s10 .ctrl h3{font-size:26px;margin-bottom:6px}
+#s10 .ctrl h3 span{color:var(--pt);font-size:20px;display:block}
+#s10 label{display:block;font-size:20px;font-weight:600;margin-top:22px}
+#s10 label .pt{font-size:16px}
+#s10 input[type=range]{width:100%;accent-color:var(--teal);height:28px}
+#s10 .val{float:right;font-weight:800;color:var(--blue);font-size:24px}
+#s10 .f{margin-top:22px;font-size:30px;font-weight:300;text-align:center;background:#f1f6fa;border-radius:16px;padding:14px}
+#s10 .f b{font-weight:800}
+#s10 .reg{left:70px;top:690px;width:620px;display:flex;gap:12px;flex-wrap:wrap}
+#s10 .reg .pill{font-size:16px;font-weight:600;padding:10px 14px}
+#s10 .reg .pill span{color:var(--pt)}
+#s10 .ex{left:870px;top:770px;width:640px;text-align:center;color:#fff;font-size:16px;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+
+/* S11 módulo */
+#s11 .plan{left:70px;top:190px;width:900px;height:520px;padding:16px;border-radius:26px;background:#fff;box-shadow:0 20px 44px rgba(18,35,70,.3)}
+#s11 .plan img{width:100%;height:100%;object-fit:contain}
+#s11 .side{left:1010px;top:200px;width:520px}
+#s11 .side .pill{font-size:19px;line-height:1.35;padding:18px 22px;margin-bottom:18px}
+#s11 .side .pill .pt{display:block;font-size:16px;font-weight:600;margin-top:4px}
+#s11 .side .warn{border:3px solid var(--red)}
+#s11 .flow{left:70px;top:735px;width:1460px;display:flex;align-items:center;justify-content:space-between}
+#s11 .fs{display:flex;align-items:center}
+#s11 .fs .ic{width:78px;height:78px}
+#s11 .fs .pill{margin-left:-12px;padding:8px 14px 8px 22px;font-size:16px;font-weight:700;line-height:1.15;width:190px}
+#s11 .fs .pill span{display:block;color:var(--pt);font-size:13px;font-weight:600}
+#s11 .arw{color:#fff;font-size:30px;font-weight:800;text-shadow:0 2px 6px rgba(0,0,0,.3)}
+
+/* S12 cifras */
+#s12 .kpis{left:70px;top:200px;width:1460px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+#s12 .kpi{padding:26px 30px;border-radius:26px;display:flex;align-items:center;gap:24px;height:200px}
+#s12 .kpi .n{font-size:84px;font-weight:800;line-height:1;background:linear-gradient(135deg,var(--coral),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;min-width:120px;text-align:center}
+#s12 .kpi b{font-size:24px;display:block;line-height:1.15}
+#s12 .kpi span{font-size:18px;color:var(--pt);font-weight:600;display:block;margin-top:4px}
+#s12 .comp{left:70px;top:680px;width:1460px;display:flex;gap:28px}
+#s12 .comp .pill{flex:1;display:flex;gap:16px;align-items:center;padding:16px 20px;border-radius:20px}
+#s12 .comp .ic{width:70px;height:70px}
+#s12 .comp b{font-size:20px;display:block}
+#s12 .comp p{font-size:15px;line-height:1.3;color:#3d4757}
+
+/* S13 desafíos */
+#s13 .grid{left:70px;top:205px;width:1460px;display:grid;grid-template-columns:1fr 1fr;gap:30px 40px}
+#s13 .flip{height:280px;perspective:1400px;cursor:pointer}
+#s13 .inner{position:relative;width:100%;height:100%;transition:transform .7s;transform-style:preserve-3d}
+#s13 .flip.on .inner{transform:rotateY(180deg)}
+#s13 .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:26px;padding:26px 32px;display:flex;gap:24px;align-items:center;box-shadow:0 18px 40px rgba(18,35,70,.28)}
+#s13 .front{background:rgba(255,255,255,.92)}
+#s13 .back{background:linear-gradient(135deg,#2bb3a6,#2a74c4);color:#fff;transform:rotateY(180deg)}
+#s13 .face .lb{font-size:14px;font-weight:800;letter-spacing:1.5px;color:var(--red)}
+#s13 .back .lb{color:#d9fff8}
+#s13 .face p{font-size:24px;font-weight:600;line-height:1.25;margin-top:6px}
+#s13 .face p span{display:block;font-size:18px;font-weight:500;color:var(--pt);margin-top:8px}
+#s13 .back p span{color:#e2f2ff}
+#s13 .hint{right:70px;top:150px;color:#fff;font-size:16px;font-weight:600;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+
+/* S14 cierre */
+#s14 .next{left:70px;top:200px;width:620px}
+#s14 .nx{display:flex;align-items:center;margin-bottom:22px}
+#s14 .nx .ic{width:84px;height:84px}
+#s14 .nx .pill{margin-left:-12px;padding:14px 18px 14px 26px;width:500px;font-size:20px;font-weight:700;line-height:1.2}
+#s14 .nx .pill span{display:block;font-size:16px;color:var(--pt);font-weight:600}
+#s14 .thanks{left:70px;top:610px;color:#fff;font-size:86px;font-weight:800;line-height:1;text-shadow:0 4px 18px rgba(0,0,0,.25)}
+#s14 .thanks span{display:block;font-weight:300;font-size:70px;margin-left:60px}
+#s14 .phone{left:800px;top:185px;width:350px;height:670px}
+#s14 .chat{position:absolute;inset:50px 14px 70px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:10px}
+#s14 .msg{max-width:85%;padding:10px 14px;border-radius:18px;font-size:16px;line-height:1.3;box-shadow:0 2px 4px rgba(0,0,0,.08)}
+#s14 .msg.cl{align-self:flex-start;background:#eef2f7;border-bottom-left-radius:4px}
+#s14 .msg.br{align-self:flex-end;background:#2bb3a6;color:#fff;border-bottom-right-radius:4px}
+#s14 .ph{position:absolute;left:0;right:0;top:44px;text-align:center;font-size:14px;font-weight:700;padding:0 20px;color:#333}
+#s14 .ph span{display:block;color:var(--pt);font-weight:600;font-size:13px}
+#s14 .inp{position:absolute;left:12px;right:12px;bottom:14px;display:flex;gap:6px}
+#s14 .inp input{flex:1;border:1px solid #cfd8e2;border-radius:20px;padding:9px 12px;font-family:Inter;font-size:14px;min-width:0}
+#s14 .inp button{border:none;border-radius:50%;width:38px;height:38px;cursor:pointer;font-size:15px;flex:none}
+#s14 .inp .b1{background:#d52b1e;color:#fff}#s14 .inp .b2{background:#009c3b;color:#fff}
+#s14 .qr{left:1200px;top:250px;width:330px;padding:26px;text-align:center;border-radius:26px}
+#s14 .qr p{font-size:24px;font-weight:800;line-height:1.2}
+#s14 .qr p span{display:block;color:var(--pt);font-size:20px;font-weight:700;margin-top:6px}
+#s14 .qr small{display:block;margin-top:14px;font-size:14px;color:#556}
+#s14 .clr{font-size:13px;color:#556;background:none;border:none;text-decoration:underline;cursor:pointer;margin-top:10px}
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage">
+
+<!-- 1 -->
+<section class="slide g1 active" id="s1" data-notes="<b>Apertura (1 min).</b> Saludar en ambos idiomas. Hoy cerramos el proyecto: mostramos lo que hicimos desde mayo, lo que logramos y lo que aprendimos.">
+  <div class="abs tag a">ENCUENTRO DE CIERRE · ENCONTRO DE ENCERRAMENTO</div>
+  <img class="abs eigrc a" src="assets/logo-eigrc.png" alt="EI GRC" style="--d:2">
+  <div class="abs glass cover a" style="--d:1">
+    <div class="k">PROYECTO COIL PROCIN 2026 / PROJETO COIL PROCIN 2026</div>
+    <h1>Uso y Cuidado del Agua: Del Diagnóstico a la Acción <span class="flag" data-f="cl"></span></h1>
+    <h1 class="pt">Uso e Cuidado da Água: Do Diagnóstico à Ação <span class="flag" data-f="br"></span></h1>
+    <div class="ac">Intercambio Académico Chile – Brasil</div>
+    <div class="who">Prof. Cristóbal Zamora Durán · Escuela Industrial GRC, San Felipe &nbsp;|&nbsp; Prof. Adilson Rodrigues Camacho · Etec 154</div>
+  </div>
+  <div class="abs logos a" style="--d:3"><img src="assets/logos-coil.png" alt="SNA Educa, ARInter, CPS, São Paulo"></div>
+</section>
+
+<!-- 2 -->
+<section class="slide g2" id="s2" data-notes="<b>Punto de partida (2 min).</b> Recordar el objetivo central que presentamos en mayo. La idea fuerza: no solo leer sobre la crisis, sino medir, auditar y rediseñar nuestra propia escuela.">
+  <div class="abs glass obj a" style="left:120px;--d:0"><h3>Objetivo Central <span class="flag" data-f="cl"></span></h3><p>Concientizar sobre el uso del agua en establecimientos educacionales, transformando el entorno escolar en un laboratorio vivo de sustentabilidad.</p></div>
+  <div class="abs glass obj a" style="left:840px;--d:1"><h3 class="pt">Objetivo Central <span class="flag" data-f="br"></span></h3><p>Conscientizar sobre o uso da água em estabelecimentos de ensino, transformando o ambiente escolar em um laboratório vivo de sustentabilidade.</p></div>
+  <div class="abs verbs">
+    <div class="verb a" style="--d:2"><div class="ic" data-i="gauge"></div><div class="pill">Medir<span class="pt">Medir</span></div></div>
+    <div class="verb a" style="--d:3"><div class="ic" data-i="clip"></div><div class="pill">Auditar<span class="pt">Auditar</span></div></div>
+    <div class="verb a" style="--d:4"><div class="ic" data-i="tool"></div><div class="pill">Rediseñar<span class="pt">Redesenhar</span></div></div>
+  </div>
+  <div class="abs q a" style="--d:5">Los estudiantes no solo leen sobre la crisis: miden, auditan y rediseñan su propia escuela.</div>
+</section>
+
+<!-- 3 -->
+<section class="slide g3" id="s3" data-notes="<b>Dos realidades, dos equipos (2 min).</b> Chile: sequía y escasez. Brasil: grandes reservas, pero problemas de distribución y contaminación. Presentar a cada equipo.">
+  <h2 class="t c w a">Dos Realidades, <b>Un Mismo Desafío</b><span class="pt" style="color:#fff">Duas Realidades, Um Mesmo Desafio</span></h2>
+  <div class="abs col a" style="left:70px;--d:1">
+    <h3><span class="flag" data-f="cl"></span> Chile · La Escasez</h3>
+    <div class="pill">Mega sequía histórica<span class="pt">Megasseca histórica</span></div>
+    <div class="pill">Retroceso acelerado de glaciares<span class="pt">Recuo acelerado das geleiras</span></div>
+    <div class="pill">Necesidad de optimizar el recurso en escuelas<span class="pt">Necessidade de otimizar o recurso nas escolas</span></div>
+  </div>
+  <div class="abs glass team a" style="left:70px;--d:2"><span class="big">43</span><b>Escuela Industrial GRC, San Felipe</b><br>2° Medio E · estudiantes en rotación por especialidades · taller de Instalaciones Sanitarias</div>
+  <div class="abs mid a" style="--d:3"><div class="vs"><svg width="130" height="130" viewBox="0 0 100 100"><defs><linearGradient id="dg" x1="0" x2="1"><stop offset=".5" stop-color="#d9643a"/><stop offset=".5" stop-color="#2a74c4"/></linearGradient></defs><path d="M50 8C50 8 20 46 20 64a30 30 0 0060 0C80 46 50 8 50 8z" fill="url(#dg)"/><path d="M38 66a12 12 0 0010 12" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".8"/></svg></div><p>Un mismo recurso<span>Um mesmo recurso</span></p></div>
+  <div class="abs col a" style="left:1010px;--d:1">
+    <h3><span class="flag" data-f="br"></span> Brasil · Abundância Desafiada</h3>
+    <div class="pill">Grandes reservas (Amazonia, Acuífero Guaraní)<span class="pt">Grandes reservas (Amazônia, Aquífero Guarani)</span></div>
+    <div class="pill">Severos desafíos de distribución<span class="pt">Severos desafios de distribuição</span></div>
+    <div class="pill">Contaminación de cuerpos de agua urbanos<span class="pt">Contaminação de corpos d'água urbanos</span></div>
+  </div>
+  <div class="abs glass team a" style="left:1010px;--d:2"><b>Etec 154 · Centro Paula Souza</b><br>1ª série, Turma A · Ensino Médio com itinerário de Ciências Humanas e Sociais Aplicadas</div>
+</section>
+
+<!-- 4 -->
+<section class="slide g4" id="s4" data-notes="<b>Arquitectura de la experiencia (3 min).</b> Recorrer el río de izquierda a derecha y luego de vuelta. Hacer clic en cada hito para ver el detalle abajo. Destacar la 1ª aula conjunta (se reprogramó por conexión) y el taller del filtro.">
+  <h2 class="t a">Arquitectura de la Experiencia: <b>Cómo la Vivimos</b><span class="pt">Como a Vivemos</span></h2>
+  <svg class="river" width="1600" height="900" viewBox="0 0 1600 900"><defs><linearGradient id="rv" x1="0" x2="1"><stop offset="0" stop-color="#c9583a"/><stop offset=".5" stop-color="#e7a15f"/><stop offset="1" stop-color="#2a8fcf"/></linearGradient></defs>
+    <path d="M-20 360 C 200 300, 400 420, 640 360 S 1050 300, 1300 360 S 1640 470, 1420 560 S 1000 700, 760 660 S 300 610, 120 690 S -40 760, -40 800" stroke="url(#rv)" stroke-width="46" fill="none" stroke-linecap="round" opacity=".85"/>
+    <path d="M-20 360 C 200 300, 400 420, 640 360 S 1050 300, 1300 360 S 1640 470, 1420 560 S 1000 700, 760 660 S 300 610, 120 690 S -40 760, -40 800" stroke="rgba(255,255,255,.45)" stroke-width="6" fill="none" stroke-dasharray="14 18"><animate attributeName="stroke-dashoffset" from="64" to="0" dur="1.6s" repeatCount="indefinite"/></path></svg>
+  <div id="nodes"></div>
+  <div class="abs glass det" id="det"></div>
+</section>
+
+<!-- 5 -->
+<section class="slide g2" id="s5" data-notes="<b>Calendario (2 min).</b> Comparar lo planificado (círculo rosado) con lo ejecutado (círculo verde). La mayoría de las actividades se cumplió con pocos días de diferencia; la aula conjunta se movió una semana.">
+  <h2 class="t w a">Calendario de Trabajo: <b>Planificado vs Ejecutado</b><span class="pt" style="color:#fff">Calendário de Trabalho: Planejado vs Executado</span></h2>
+  <div class="abs glass cal a" style="--d:1"><table id="gantt"></table></div>
+  <div class="abs leg a" style="--d:2"><span><i style="background:#fff;border:3px solid #e58aa0"></i>Planificado · Planejado</span><span><i style="background:#2bb3a6"></i>Ejecutado · Executado</span><span><i style="background:#d64541"></i>Cierre · Encerramento</span></div>
+</section>
+
+<!-- 6 -->
+<section class="slide g3" id="s6" data-notes="<b>Auditoría hídrica (3 min).</b> Hacer clic en cada zona y en las miniaturas. Los estudiantes cuantificaron artefactos sanitarios y puntos de consumo de agua en cuatro zonas de la escuela.">
+  <h2 class="t a">Desarrollo Técnico I: <b>Auditoría Hídrica</b><span class="pt">Desenvolvimento Técnico I: Auditoria Hídrica</span></h2>
+  <div class="abs clip a" style="--d:1"><div class="big"><svg width="130" height="150" viewBox="0 0 100 116"><rect x="8" y="12" width="84" height="100" rx="8" fill="#c99a62"/><rect x="16" y="22" width="68" height="84" rx="3" fill="#fff"/><rect x="34" y="4" width="32" height="16" rx="5" fill="#8a96a6"/><g stroke="#2bb3a6" stroke-width="5" fill="none" stroke-linecap="round"><path d="M24 40l5 5 9-10"/><path d="M24 62l5 5 9-10"/><path d="M24 84l5 5 9-10"/></g><g stroke="#b9c3cf" stroke-width="4" stroke-linecap="round"><path d="M46 41h28M46 63h28M46 85h22"/></g></svg></div><div class="zones" id="zones"></div></div>
+  <div class="abs glass viewer a" style="--d:2"><div class="main zoom" id="zmain"><img alt=""></div><div class="thumbs" id="zthumbs"></div></div>
+  <div class="abs pill note a" style="--d:3">Cuantificamos artefactos sanitarios y puntos de consumo de agua en cuatro zonas de la escuela.<span class="pt">Quantificamos aparelhos sanitários e pontos de consumo de água em quatro áreas da escola.</span></div>
+</section>
+
+<!-- 7 -->
+<section class="slide g1" id="s7" data-notes="<b>Levantamiento técnico (2 min).</b> Con lo medido en terreno se dibujaron planos del emplazamiento y la ubicación de los artefactos. Hacer clic para ampliar.">
+  <h2 class="t w a">Levantamiento Técnico: <b>Del Terreno al Plano</b><span class="pt" style="color:#fff">Levantamento Técnico: Do Campo à Planta</span></h2>
+  <div class="abs pl zoom a" style="left:90px;transform:rotate(-1.5deg);--d:1" data-cap="Plano baño · Planta do banheiro"><img src="assets/plano-bano.jpg" alt="Plano baño"><p>Baño de alumnos · <span>Banheiro</span></p></div>
+  <div class="abs pl zoom a" style="left:550px;transform:rotate(1.5deg);--d:2" data-cap="Plano cocina · Planta da cozinha"><img src="assets/plano-cocina.jpg" alt="Plano cocina"><p>Cocina · <span>Cozinha</span></p></div>
+  <div class="abs side">
+    <div class="row a" style="--d:3"><div class="ic" data-i="ruler"></div><div class="pill"><b>Medición en terreno</b><span class="pt">Medição em campo</span></div></div>
+    <div class="row a" style="--d:4"><div class="ic" data-i="plan"></div><div class="pill"><b>Plano de emplazamiento</b> y ubicación de artefactos<span class="pt">Planta de localização dos aparelhos</span></div></div>
+    <div class="row a" style="--d:5"><div class="ic" data-i="search"></div><div class="pill"><b>Identificar dónde intervenir</b> para optimizar el consumo<span class="pt">Identificar onde intervir para otimizar o consumo</span></div></div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="slide g4" id="s8" data-notes="<b>Infiltración (3 min).</b> Reproducir el video en el teléfono (71 s). Luego recorrer los 5 pasos. Remarcar la advertencia: que el agua pase por el suelo no la vuelve potable.">
+  <h2 class="t a" style="left:560px">Desarrollo Técnico II: <b>Infiltración</b><span class="pt">Desenvolvimento Técnico II: Infiltração</span></h2>
+  <div class="phone a" style="--d:1"><div class="scr"><div class="notch"></div><video src="assets/video-infiltracion.mp4" poster="assets/video-poster.jpg" controls playsinline preload="metadata"></video></div></div>
+  <div class="abs steps">
+    <div class="st a" style="--d:2"><div class="ic" data-i="rain"></div><div class="pill"><b>Precipitación</b><span class="pt">Precipitação</span></div></div>
+    <div class="st a" style="--d:3"><div class="ic" data-i="drop"></div><div class="pill"><b>Infiltración:</b> entra por los poros del suelo<span class="pt">Infiltração: entra pelos poros do solo</span></div></div>
+    <div class="st a" style="--d:4"><div class="ic" data-i="down"></div><div class="pill"><b>Percolación:</b> desciende por gravedad<span class="pt">Percolação: desce por gravidade</span></div></div>
+    <div class="st a" style="--d:5"><div class="ic" data-i="layers"></div><div class="pill"><b>Filtración natural:</b> el suelo retiene partículas<span class="pt">Filtração natural: o solo retém partículas</span></div></div>
+    <div class="st a" style="--d:6"><div class="ic" data-i="aquifer"></div><div class="pill"><b>Recarga de la napa subterránea</b><span class="pt">Recarga do lençol freático</span></div></div>
+  </div>
+  <div class="abs warn a" style="--d:7"><div class="x">≠</div><p>Filtración natural no significa agua potable<span>Filtração natural não significa água potável</span></p></div>
+</section>
+
+<!-- 9 -->
+<section class="slide g5" id="s9" data-notes="<b>Filtro de estratos (4 min).</b> Hacer clic en cada etiqueta o capa y preguntar al curso su función antes de leerla. Montaje desde la salida hacia arriba.">
+  <h2 class="t c a">Proyecto Práctico: <b>Filtro de Estratos</b><span class="pt">Projeto Prático: Filtro de Camadas</span></h2>
+  <svg class="bottle a" style="--d:1" width="400" height="720" viewBox="0 0 400 720">
+    <defs>
+      <pattern id="pGG" width="60" height="44" patternUnits="userSpaceOnUse"><rect width="60" height="44" fill="#6c5a49"/><ellipse cx="15" cy="14" rx="14" ry="11" fill="#b4a18c"/><ellipse cx="45" cy="30" rx="15" ry="12" fill="#9c8873"/><ellipse cx="48" cy="8" rx="9" ry="7" fill="#c3b29e"/><ellipse cx="14" cy="38" rx="10" ry="7" fill="#8e7b66"/></pattern>
+      <pattern id="pGF" width="22" height="18" patternUnits="userSpaceOnUse"><rect width="22" height="18" fill="#7d6c5c"/><circle cx="6" cy="6" r="5" fill="#b2a291"/><circle cx="17" cy="13" r="4.5" fill="#9b8a77"/></pattern>
+      <pattern id="pAG" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#c49a62"/><circle cx="3" cy="3" r="2" fill="#dcb987"/><circle cx="8" cy="7" r="1.6" fill="#a87f4a"/></pattern>
+      <pattern id="pAF" width="5" height="5" patternUnits="userSpaceOnUse"><rect width="5" height="5" fill="#dcc08e"/><circle cx="1.5" cy="1.5" r=".9" fill="#f0dcb4"/></pattern>
+      <pattern id="pCA" width="40" height="34" patternUnits="userSpaceOnUse"><rect width="40" height="34" fill="#121212"/><polygon points="4,6 16,2 20,12 8,16" fill="#3a3a3a"/><polygon points="24,16 36,14 38,28 26,30" fill="#2b2b2b"/><polygon points="6,22 16,20 14,32 4,30" fill="#444"/></pattern>
+      <pattern id="pAL" width="36" height="28" patternUnits="userSpaceOnUse"><rect width="36" height="28" fill="#eef1f5"/><path d="M0 14 q9 -12 18 0 t18 0" stroke="#fff" stroke-width="6" fill="none"/><path d="M0 26 q9 -10 18 0 t18 0" stroke="#d9dee6" stroke-width="3" fill="none"/></pattern>
+      <clipPath id="bc"><path d="M80 40 h240 q20 0 20 20 v430 q0 30 -40 60 l-50 40 v40 h-100 v-40 l-50 -40 q-40 -30 -40 -60 v-430 q0 -20 20 -20z"/></clipPath>
+      <linearGradient id="gl" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".2" stop-color="#fff" stop-opacity=".1"/><stop offset=".85" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".35"/></linearGradient>
+    </defs>
+    <g clip-path="url(#bc)">
+      <rect class="lay" data-i="0" x="60" y="40" width="300" height="80" fill="url(#pGG)"/>
+      <rect class="lay" data-i="1" x="60" y="120" width="300" height="70" fill="url(#pGF)"/>
+      <rect class="lay" data-i="2" x="60" y="190" width="300" height="70" fill="url(#pAG)"/>
+      <rect class="lay" data-i="3" x="60" y="260" width="300" height="80" fill="url(#pAF)"/>
+      <rect class="lay" data-i="4" x="60" y="340" width="300" height="100" fill="url(#pCA)"/>
+      <rect class="lay" data-i="5" x="60" y="440" width="300" height="190" fill="url(#pAL)"/>
+      <rect x="60" y="0" width="300" height="680" fill="url(#gl)" pointer-events="none"/>
+    </g>
+    <path d="M80 40 h240 q20 0 20 20 v430 q0 30 -40 60 l-50 40 v40 h-100 v-40 l-50 -40 q-40 -30 -40 -60 v-430 q0 -20 20 -20z" fill="none" stroke="rgba(255,255,255,.95)" stroke-width="5"/>
+    <rect x="146" y="628" width="108" height="26" rx="6" fill="rgba(200,230,255,.8)" stroke="#fff" stroke-width="3"/>
+    <g fill="#7fc4f2"><path class="drip" d="M200 662c0 0-8 10-8 15a8 8 0 0016 0c0-5-8-15-8-15z"/><path class="drip" style="animation-delay:.6s" d="M182 662c0 0-6 8-6 12a6 6 0 0012 0c0-4-6-12-6-12z"/><path class="drip" style="animation-delay:1.2s" d="M218 662c0 0-6 8-6 12a6 6 0 0012 0c0-4-6-12-6-12z"/></g>
+  </svg>
+  <div id="flabs"></div>
+  <div class="abs glass info a" id="finfo" style="--d:2"></div>
+  <div class="abs glass order a" style="--d:3"><b>Montaje:</b> desde la salida hacia arriba.<br><span class="pt" style="font-weight:600">Montagem: da saída para cima.</span><br><b>Prueba:</b> agua de ensayo con tierra limpia, nunca aguas servidas.</div>
+</section>
+
+<!-- 10 -->
+<section class="slide g1" id="s10" data-notes="<b>Caudal (3 min).</b> Mover los deslizadores con los datos que registró cada grupo (volumen recuperado y tiempo) para obtener el caudal. El valor inicial (4 L en 2 min) es un ejemplo, no un resultado.">
+  <h2 class="t w a">Desarrollo Técnico III: <b>Medir el Caudal</b><span class="pt" style="color:#fff">Desenvolvimento Técnico III: Medir a Vazão</span></h2>
+  <div class="abs glass ctrl a" style="--d:1">
+    <h3>Calculadora de caudal<span>Calculadora de vazão</span></h3>
+    <label>Volumen recuperado <span class="pt">· Volume recuperado</span><span class="val" id="vV"></span><input type="range" id="rV" min="0.5" max="10" step="0.5" value="4"></label>
+    <label>Tiempo de filtración <span class="pt">· Tempo de filtração</span><span class="val" id="vT"></span><input type="range" id="rT" min="0.5" max="10" step="0.5" value="2"></label>
+    <div class="f">Q = V / t = <b id="fQ"></b></div>
+  </div>
+  <div class="abs reg a" style="--d:2"><div class="pill">Volumen de entrada · <span>Volume de entrada</span></div><div class="pill">Volumen recuperado · <span>Volume recuperado</span></div><div class="pill">Tiempo · <span>Tempo</span></div><div class="pill">Aspecto del agua · <span>Aspecto da água</span></div></div>
+  <svg class="gauge a" style="--d:2" width="700" height="620" viewBox="0 0 700 620">
+    <defs><linearGradient id="ga" x1="0" x2="1"><stop offset="0" stop-color="#2bb3a6"/><stop offset=".75" stop-color="#2bb3a6"/><stop offset=".76" stop-color="#e5584f"/><stop offset="1" stop-color="#e5584f"/></linearGradient></defs>
+    <path d="M110 420 A240 240 0 1 1 590 420" fill="none" stroke="rgba(255,255,255,.95)" stroke-width="62" stroke-linecap="round"/>
+    <path d="M110 420 A240 240 0 1 1 590 420" fill="none" stroke="url(#ga)" stroke-width="30" stroke-linecap="round"/>
+    <g id="ticks"></g>
+    <g id="needle" style="transition:transform .6s cubic-bezier(.3,1.4,.5,1);transform-origin:350px 330px"><path d="M344 330 L350 140 L356 330z" fill="#1c2533"/></g>
+    <circle cx="350" cy="330" r="26" fill="#fff" stroke="#1c2533" stroke-width="8"/>
+    <text x="350" y="520" text-anchor="middle" font-family="Inter" font-weight="800" font-size="92" fill="#fff" id="gQ">2,0</text>
+    <text x="350" y="575" text-anchor="middle" font-family="Inter" font-weight="700" font-size="34" fill="#fff">L/MIN</text>
+  </svg>
+  <div class="abs ex a" style="--d:3">Ejemplo inicial: 4 L en 2 min (no es un resultado medido) · Exemplo, não é um resultado medido</div>
+</section>
+
+<!-- 11 -->
+<section class="slide g3" id="s11" data-notes="<b>Optimización (3 min).</b> Recorrer el plano y luego la cadena de abajo. Los filtros trabajan por gravedad; la bomba de 0,5 HP con press control solo eleva y presuriza el agua almacenada para el riego. Es un módulo demostrativo.">
+  <h2 class="t a">Desarrollo Técnico IV: <b>Reutilización</b><span class="pt">Desenvolvimento Técnico IV: Reúso da Água</span></h2>
+  <div class="abs plan zoom a" style="--d:1" data-cap="Módulo de filtrado y reutilización · Módulo de filtragem e reúso"><img src="assets/plan-modulo.png" alt="Plano del módulo"></div>
+  <div class="abs side">
+    <div class="pill a" style="--d:2"><b>Diagnóstico:</b> la auditoría mostró dónde se usa el agua en la escuela.<span class="pt">Diagnóstico: a auditoria mostrou onde a água é usada.</span></div>
+    <div class="pill a" style="--d:3"><b>Solución:</b> filtrar por estratos y reutilizar el agua en riego por goteo.<span class="pt">Solução: filtrar por camadas e reutilizar a água na irrigação.</span></div>
+    <div class="pill warn a" style="--d:4"><b style="color:#d64541">Módulo demostrativo:</b> el agua filtrada no es potable.<span class="pt">Módulo demonstrativo: a água filtrada não é potável.</span></div>
+  </div>
+  <div class="abs flow">
+    <div class="fs a" style="--d:4"><div class="ic" data-i="layers"></div><div class="pill">5 filtros por estratos<span>5 filtros por camadas</span></div></div><div class="arw a" style="--d:4">›</div>
+    <div class="fs a" style="--d:5"><div class="ic" data-i="tank"></div><div class="pill">Estanque 50 L<span>Reservatório 50 L</span></div></div><div class="arw a" style="--d:5">›</div>
+    <div class="fs a" style="--d:6"><div class="ic" data-i="pump"></div><div class="pill">Bomba 0,5 HP + press control<span>Bomba + pressostato</span></div></div><div class="arw a" style="--d:6">›</div>
+    <div class="fs a" style="--d:7"><div class="ic" data-i="plant"></div><div class="pill">Riego goteo 16 mm<span>Gotejamento 16 mm</span></div></div>
+  </div>
+</section>
+
+<!-- 12 -->
+<section class="slide g2" id="s12" data-notes="<b>Logros (2 min).</b> Leer las cifras y pedir a un estudiante de cada país que diga qué aprendió.">
+  <h2 class="t w a">Lo que Logramos <b>en Cifras</b><span class="pt" style="color:#fff">O que Conquistamos em Números</span></h2>
+  <div class="abs kpis">
+    <div class="glass kpi a" style="--d:1"><div class="n">2</div><div><b>países trabajando juntos</b><span>países trabalhando juntos</span></div></div>
+    <div class="glass kpi a" style="--d:2"><div class="n">43</div><div><b>estudiantes chilenos de 2° Medio E</b><span>estudantes chilenos</span></div></div>
+    <div class="glass kpi a" style="--d:3"><div class="n">4</div><div><b>zonas de la escuela auditadas</b><span>áreas da escola auditadas</span></div></div>
+    <div class="glass kpi a" style="--d:4"><div class="n">2</div><div><b>planos técnicos levantados</b><span>plantas técnicas</span></div></div>
+    <div class="glass kpi a" style="--d:5"><div class="n">6</div><div><b>capas en nuestro filtro</b><span>camadas no nosso filtro</span></div></div>
+    <div class="glass kpi a" style="--d:6"><div class="n">1</div><div><b>módulo de reutilización diseñado</b><span>módulo de reúso projetado</span></div></div>
+  </div>
+  <div class="abs comp">
+    <div class="pill a" style="--d:7"><div class="ic" data-i="tool"></div><div><b>Técnico</b><p>Auditoría, planos, filtro y caudal</p></div></div>
+    <div class="pill a" style="--d:8"><div class="ic" data-i="globe"></div><div><b>Intercultural</b><p>Aulas conjuntas y dos idiomas</p></div></div>
+    <div class="pill a" style="--d:9"><div class="ic" data-i="laptop"></div><div><b>Digital</b><p>Teams, Padlet y Drive compartido</p></div></div>
+  </div>
+</section>
+
+<!-- 13 -->
+<section class="slide g4" id="s13" data-notes="<b>Desafíos (2 min).</b> Leer el desafío, preguntar cómo lo resolverían y luego voltear la tarjeta.">
+  <h2 class="t a">Desafíos y <b>Cómo los Enfrentamos</b><span class="pt">Desafios e Como os Enfrentamos</span></h2>
+  <div class="abs hint">clic para voltear · clique para virar</div>
+  <div class="abs grid">
+    <div class="flip a" style="--d:1"><div class="inner"><div class="face front"><div class="ic" data-i="wifi"></div><div><div class="lb">DESAFÍO · DESAFIO</div><p>Problemas de conexión en la primera aula conjunta<span>Problemas de conexão na primeira aula conjunta</span></p></div></div>
+      <div class="face back"><div class="ic" data-i="check"></div><div><div class="lb">SOLUCIÓN · SOLUÇÃO</div><p>Reprogramamos (26/08 → 02/09) y reforzamos el trabajo en Padlet y Drive<span>Reagendamos e reforçamos o trabalho no Padlet e no Drive</span></p></div></div></div></div>
+    <div class="flip a" style="--d:2"><div class="inner"><div class="face front"><div class="ic" data-i="cal"></div><div><div class="lb">DESAFÍO · DESAFIO</div><p>Calendarios escolares distintos en Chile y Brasil<span>Calendários escolares diferentes</span></p></div></div>
+      <div class="face back"><div class="ic" data-i="check"></div><div><div class="lb">SOLUCIÓN · SOLUÇÃO</div><p>Reuniones docentes antes de cada aula conjunta para ajustar fechas<span>Reuniões entre professores antes de cada aula conjunta</span></p></div></div></div></div>
+    <div class="flip a" style="--d:3"><div class="inner"><div class="face front"><div class="ic" data-i="lang"></div><div><div class="lb">DESAFÍO · DESAFIO</div><p>Dos idiomas en un mismo proyecto<span>Dois idiomas em um mesmo projeto</span></p></div></div>
+      <div class="face back"><div class="ic" data-i="check"></div><div><div class="lb">SOLUCIÓN · SOLUÇÃO</div><p>Materiales bilingües en todas las presentaciones<span>Materiais bilíngues em todas as apresentações</span></p></div></div></div></div>
+    <div class="flip a" style="--d:4"><div class="inner"><div class="face front"><div class="ic" data-i="people"></div><div><div class="lb">DESAFÍO · DESAFIO</div><p>Fue difícil involucrar a otros funcionarios y colegas<span>Foi difícil envolver outros funcionários e colegas</span></p></div></div>
+      <div class="face back"><div class="ic" data-i="check"></div><div><div class="lb">SOLUCIÓN · SOLUÇÃO</div><p>Apoyarnos en el taller de especialidad y en la coordinación entre ambos docentes<span>Apoio na oficina de especialidade e coordenação entre os professores</span></p></div></div></div></div>
+  </div>
+</section>
+
+<!-- 14 -->
+<section class="slide g1" id="s14" data-notes="<b>Cierre (5 min).</b> Pedir ideas a estudiantes de ambos países y escribirlas en el teléfono (botón rojo = Chile, verde = Brasil). Terminar agradeciendo en ambos idiomas.">
+  <h2 class="t w a">Próximos Pasos <b>y Muro de Ideas</b><span class="pt" style="color:#fff">Próximos Passos e Mural de Ideias</span></h2>
+  <div class="abs next">
+    <div class="nx a" style="--d:1"><div class="ic" data-i="chat"></div><div class="pill">Balance final entre docentes<span>Balanço final entre os professores</span></div></div>
+    <div class="nx a" style="--d:2"><div class="ic" data-i="book"></div><div class="pill">Relato de la experiencia para el E-book PROCIN, Vol. 2<span>Relato da experiência para o E-book PROCIN, Vol. 2</span></div></div>
+    <div class="nx a" style="--d:3"><div class="ic" data-i="drop"></div><div class="pill">Seguir usando la escuela como laboratorio del agua<span>Continuar usando a escola como laboratório da água</span></div></div>
+  </div>
+  <div class="abs thanks a" style="--d:4">¡Gracias!<span>Obrigado!</span></div>
+  <div class="phone a" style="--d:2"><div class="scr"><div class="notch"></div>
+    <div class="ph">¿Qué harías para cuidar el agua en tu escuela?<span>O que você faria para cuidar da água?</span></div>
+    <div class="chat" id="chat"></div>
+    <div class="inp"><input id="ideaIn" maxlength="80" placeholder="Escribe una idea…"><button class="b1" id="bCl" title="Chile">CL</button><button class="b2" id="bBr" title="Brasil">BR</button></div>
+  </div></div>
+  <div class="abs glass qr a" style="--d:3"><div class="ic" data-i="chat" style="margin:0 auto 14px"></div><p>¡Comparte tu idea!<span>Compartilhe sua ideia!</span></p><small>El docente la escribe en el teléfono y elige la bandera del país.</small><button class="clr" id="ideaClr">Limpiar muro</button></div>
+</section>
+
+</div></div>
+
+<div id="notes"></div><div id="progress"></div>
+<div id="ui"><button id="bNotes">Notas</button><button id="bFull">⛶</button><button id="bPrev">◀</button><span id="counter"></span><button id="bNext">▶</button></div>
+<div id="lightbox"><img alt=""><p></p></div>
+
+<script>
+/* íconos */
+const B='#2a74c4',O='#e07a3f',T='#2bb3a6';
+const I={
+ drop:`<svg viewBox="0 0 48 48"><path d="M24 4S9 22 9 31a15 15 0 0030 0C39 22 24 4 24 4z" fill="${B}"/><path d="M17 32a7 7 0 006 7" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`,
+ gauge:`<svg viewBox="0 0 48 48"><path d="M6 34a18 18 0 0136 0" stroke="${T}" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M24 34l10-12" stroke="${O}" stroke-width="4" stroke-linecap="round"/><circle cx="24" cy="34" r="4" fill="#1c2533"/></svg>`,
+ clip:`<svg viewBox="0 0 48 48"><rect x="9" y="8" width="30" height="36" rx="4" fill="${O}"/><rect x="13" y="13" width="22" height="27" rx="2" fill="#fff"/><path d="M16 21l3 3 5-5M16 32l3 3 5-5" stroke="${T}" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="18" y="5" width="12" height="7" rx="2" fill="#7c8796"/></svg>`,
+ tool:`<svg viewBox="0 0 48 48"><path d="M30 6a10 10 0 00-9 13L7 33a4 4 0 006 6l14-14a10 10 0 0013-9l-6 4-5-2-2-5z" fill="${B}"/></svg>`,
+ ruler:`<svg viewBox="0 0 48 48"><rect x="4" y="18" width="40" height="13" rx="2" fill="${O}" transform="rotate(-20 24 24)"/><path d="M12 24v5M18 22v4M24 20v5M30 18v4M36 16v5" stroke="#fff" stroke-width="2" transform="rotate(-20 24 24)"/></svg>`,
+ plan:`<svg viewBox="0 0 48 48"><rect x="5" y="7" width="38" height="34" rx="3" fill="${B}"/><path d="M11 13h26v22H11zM11 24h12v11M23 13v6" stroke="#fff" stroke-width="2.5" fill="none"/></svg>`,
+ search:`<svg viewBox="0 0 48 48"><circle cx="20" cy="20" r="12" stroke="${B}" stroke-width="5" fill="#e6f2fb"/><path d="M29 29l12 12" stroke="${O}" stroke-width="6" stroke-linecap="round"/></svg>`,
+ rain:`<svg viewBox="0 0 48 48"><path d="M14 28a9 9 0 011-18 12 12 0 0122 4 7 7 0 01-1 14z" fill="#8fa8c2"/><path d="M16 34l-3 6M25 34l-3 6M34 34l-3 6" stroke="${B}" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+ down:`<svg viewBox="0 0 48 48"><rect x="6" y="8" width="36" height="10" fill="#b38b5d"/><rect x="6" y="18" width="36" height="10" fill="#d6b47a"/><rect x="6" y="28" width="36" height="12" fill="#8c7764"/><path d="M24 10v26m-6-6l6 7 6-7" stroke="${B}" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`,
+ layers:`<svg viewBox="0 0 48 48"><path d="M24 6l18 9-18 9-18-9z" fill="${B}"/><path d="M6 23l18 9 18-9" stroke="${T}" stroke-width="4" fill="none"/><path d="M6 31l18 9 18-9" stroke="${O}" stroke-width="4" fill="none"/></svg>`,
+ aquifer:`<svg viewBox="0 0 48 48"><path d="M4 12h40v8H4z" fill="#8bb36a"/><path d="M4 20h40v8H4z" fill="#c9a26e"/><path d="M4 28h40v14H4z" fill="${B}"/><path d="M8 35q4-4 8 0t8 0 8 0 8 0" stroke="#fff" stroke-width="2.5" fill="none"/></svg>`,
+ tank:`<svg viewBox="0 0 48 48"><rect x="10" y="8" width="28" height="34" rx="6" fill="#d7e3ee"/><rect x="10" y="22" width="28" height="20" rx="6" fill="${B}"/><path d="M14 27q5-3 10 0t10 0" stroke="#fff" stroke-width="2" fill="none"/></svg>`,
+ pump:`<svg viewBox="0 0 48 48"><rect x="6" y="20" width="22" height="16" rx="3" fill="${O}"/><circle cx="34" cy="28" r="9" fill="${B}"/><path d="M34 19V9h8" stroke="#7c8796" stroke-width="4" fill="none"/><path d="M10 25h14M10 30h14" stroke="#fff" stroke-width="2"/><rect x="4" y="36" width="40" height="4" rx="2" fill="#7c8796"/></svg>`,
+ plant:`<svg viewBox="0 0 48 48"><path d="M24 42V22" stroke="#3f8f3a" stroke-width="4"/><path d="M24 26C14 26 10 18 10 12c8 0 14 4 14 14zM24 22c0-9 6-14 14-14 0 7-4 14-14 14z" fill="#5bb04c"/><path d="M8 6h32" stroke="#7c8796" stroke-width="3"/><circle cx="16" cy="11" r="2" fill="${B}"/><circle cx="32" cy="11" r="2" fill="${B}"/><rect x="14" y="40" width="20" height="6" rx="2" fill="#b07a4a"/></svg>`,
+ globe:`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="${B}"/><path d="M6 24h36M24 6c-8 9-8 27 0 36m0-36c8 9 8 27 0 36" stroke="#fff" stroke-width="2.5" fill="none"/></svg>`,
+ laptop:`<svg viewBox="0 0 48 48"><rect x="9" y="10" width="30" height="20" rx="2" fill="${B}"/><rect x="12" y="13" width="24" height="14" fill="#cfe6f8"/><path d="M4 34h40l-3 4H7z" fill="#7c8796"/></svg>`,
+ wifi:`<svg viewBox="0 0 48 48"><path d="M6 18a26 26 0 0136 0M12 25a17 17 0 0124 0M18 32a8 8 0 0112 0" stroke="${B}" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="24" cy="38" r="3" fill="${B}"/><path d="M8 8l32 32" stroke="#d64541" stroke-width="4.5" stroke-linecap="round"/></svg>`,
+ cal:`<svg viewBox="0 0 48 48"><rect x="7" y="10" width="34" height="32" rx="4" fill="#fff" stroke="${B}" stroke-width="3"/><rect x="7" y="10" width="34" height="9" rx="3" fill="${O}"/><path d="M15 6v8M33 6v8" stroke="#1c2533" stroke-width="3" stroke-linecap="round"/><path d="M14 26h5M22 26h5M30 26h5M14 34h5M22 34h5" stroke="${B}" stroke-width="3"/></svg>`,
+ lang:`<svg viewBox="0 0 48 48"><rect x="4" y="8" width="24" height="18" rx="5" fill="${O}"/><path d="M10 26v6l6-6" fill="${O}"/><rect x="20" y="20" width="24" height="18" rx="5" fill="${B}"/><path d="M38 38v6l-6-6" fill="${B}"/><text x="16" y="21" font-size="10" font-weight="800" fill="#fff" text-anchor="middle" font-family="Inter">ES</text><text x="32" y="33" font-size="10" font-weight="800" fill="#fff" text-anchor="middle" font-family="Inter">PT</text></svg>`,
+ people:`<svg viewBox="0 0 48 48"><circle cx="17" cy="16" r="7" fill="${B}"/><path d="M5 40c0-8 5-13 12-13s12 5 12 13z" fill="${B}"/><circle cx="33" cy="18" r="6" fill="${O}"/><path d="M27 40c0-6 2-11 7-11s9 5 9 11z" fill="${O}"/></svg>`,
+ check:`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" fill="${T}"/><path d="M15 25l6 6 12-13" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/></svg>`,
+ chat:`<svg viewBox="0 0 48 48"><path d="M6 10h28a4 4 0 014 4v14a4 4 0 01-4 4H18l-8 7v-7H6a4 4 0 01-4-4V14a4 4 0 014-4z" fill="${B}"/><circle cx="13" cy="21" r="2.5" fill="#fff"/><circle cx="20" cy="21" r="2.5" fill="#fff"/><circle cx="27" cy="21" r="2.5" fill="#fff"/></svg>`,
+ book:`<svg viewBox="0 0 48 48"><path d="M6 10c7-2 13-1 18 3v28c-5-4-11-5-18-3z" fill="${O}"/><path d="M42 10c-7-2-13-1-18 3v28c5-4 11-5 18-3z" fill="${B}"/></svg>`,
+ video:`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" fill="${B}"/><path d="M20 16l12 8-12 8z" fill="#fff"/></svg>`,
+ pres:`<svg viewBox="0 0 48 48"><rect x="6" y="8" width="36" height="24" rx="2" fill="${B}"/><path d="M24 32v8M16 42h16" stroke="#7c8796" stroke-width="3"/><path d="M12 26l7-8 6 5 8-10" stroke="#fff" stroke-width="3" fill="none"/></svg>`,
+ cloud:`<svg viewBox="0 0 48 48"><path d="M14 36a10 10 0 011-20 13 13 0 0124 5 8 8 0 01-1 15z" fill="${B}"/><path d="M24 22v10m-5-5l5 5 5-5" stroke="#fff" stroke-width="3" fill="none"/></svg>`
+};
+document.querySelectorAll('[data-i]').forEach(e=>{if(e.classList.contains('ic'))e.innerHTML=I[e.dataset.i]||''});
+const F={cl:'<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#d52b1e"/><rect width="30" height="10" fill="#fff"/><rect width="10" height="10" fill="#0039a6"/><polygon points="5,2.3 5.9,4.9 8.6,4.9 6.4,6.5 7.2,9.1 5,7.5 2.8,9.1 3.6,6.5 1.4,4.9 4.1,4.9" fill="#fff"/></svg>',
+ br:'<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#009c3b"/><polygon points="15,2 28,10 15,18 2,10" fill="#ffdf00"/><circle cx="15" cy="10" r="4.6" fill="#002776"/></svg>'};
+document.querySelectorAll('.flag').forEach(e=>e.innerHTML=F[e.dataset.f]);
+
+/* burbujas */
+document.querySelectorAll('.slide').forEach((s,k)=>{for(let i=0;i<7;i++){const b=document.createElement('div');b.className='bub';const z=8+((i*7+k*3)%22);
+ b.style.cssText=`width:${z}px;height:${z}px;left:${(i*233+k*97)%1600}px;top:${900+((i*53)%120)}px;animation-duration:${14+(i*5+k)%12}s;animation-delay:${-((i*3+k)%14)}s`;s.prepend(b)}});
+
+/* navegación */
+const slides=[...document.querySelectorAll('.slide')];let cur=0;const stage=document.getElementById('stage');
+function fit(){stage.style.transform='scale('+Math.min(innerWidth/1600,innerHeight/900)+')'}addEventListener('resize',fit);fit();
+const notes=document.getElementById('notes');
+function show(i){cur=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,k)=>s.classList.toggle('active',k===cur));
+ document.getElementById('counter').textContent=(cur+1)+' / '+slides.length;document.getElementById('progress').style.width=((cur+1)/slides.length*100)+'%';
+ notes.innerHTML=slides[cur].dataset.notes||'';document.querySelectorAll('video').forEach(v=>{if(!slides[cur].contains(v))v.pause()});
+ try{history.replaceState(null,'','#s'+(cur+1))}catch(e){}}
+document.getElementById('bNext').onclick=()=>show(cur+1);document.getElementById('bPrev').onclick=()=>show(cur-1);
+document.getElementById('bNotes').onclick=()=>notes.classList.toggle('show');
+function full(){try{if(!document.fullscreenElement)document.documentElement.requestFullscreen().catch(()=>{});else document.exitFullscreen()}catch(e){}}
+document.getElementById('bFull').onclick=full;
+addEventListener('keydown',e=>{if(e.target.tagName==='INPUT')return;
+ if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(cur+1)}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(cur-1)}
+ else if(/^[nN]$/.test(e.key))notes.classList.toggle('show');else if(/^[fF]$/.test(e.key))full();else if(e.key==='Escape')lb.classList.remove('show')});
+const lb=document.getElementById('lightbox');
+document.addEventListener('click',e=>{const p=e.target.closest('.zoom');if(!p)return;const img=p.querySelector('img');lb.querySelector('img').src=img.src;lb.querySelector('p').textContent=p.dataset.cap||'';lb.classList.add('show')});
+lb.onclick=()=>lb.classList.remove('show');
+
+/* S4 río */
+const N=[
+ ['21/05','Reunión docente','Reunião docente','pres','Adilson y Cristóbal preparan la primera presentación del proyecto ante las coordinadoras y los demás profesores.'],
+ ['27/05','Presentación COIL','Apresentação COIL','globe','Presentamos el proyecto «Medición y optimización del consumo de agua con enfoque territorial y de salud ambiental».'],
+ ['06/08','Drive y Padlet','Drive e Padlet','cloud','Creamos un Google Drive conjunto y un Padlet para que estudiantes y docentes suban evidencias.'],
+ ['02/09','1ª aula conjunta','1ª aula conjunta','video','Primer encuentro entre estudiantes de Chile y Brasil por Teams. Se reprogramó desde el 26/08 por problemas de conexión.'],
+ ['Terreno','Auditoría hídrica','Auditoria hídrica','clip','Cuantificamos artefactos y puntos de consumo en baños, cocina y áreas de riego, y levantamos planos.'],
+ ['09/10','Clase de aguas grises','Aula de águas cinzas','drop','Clase expositiva sobre reutilización e infiltración de aguas grises y preparación de la segunda aula conjunta.'],
+ ['16/10','Taller: filtro','Oficina: filtro','layers','Ejercicio práctico en el taller de Instalaciones Sanitarias: filtro por estratos con carbón activado.'],
+ ['Nov.','Encuentro de cierre','Encerramento','check','Hoy compartimos resultados, aprendizajes y próximos pasos.']
+];
+const P=[[70,250],[440,320],[830,250],[1210,320],[1180,560],[800,620],[430,560],[70,640]];
+const nodes=document.getElementById('nodes'),det=document.getElementById('det');
+N.forEach((n,i)=>{const d=document.createElement('div');d.className='node a';d.style.cssText=`left:${P[i][0]}px;top:${P[i][1]}px;--d:${i+1}`;
+ d.innerHTML=`<div class="ic">${I[n[3]]}</div><div class="card"><div class="d">${n[0]}</div><div class="es">${n[1]}</div><div class="p">${n[2]}</div></div>`;d.onclick=()=>selN(i);nodes.appendChild(d)});
+function selN(i){[...nodes.children].forEach((d,k)=>d.classList.toggle('on',k===i));det.innerHTML='<b>'+N[i][1]+':</b> '+N[i][4]}
+selN(0);
+
+/* S5 gantt */
+const months=[['Mayo','Maio',5],['Jun.','Jun.',6],['Jul.','Jul.',7],['Ago.','Ago.',8],['Sept.','Set.',9],['Oct.','Out.',10],['Nov.','Nov.',11]];
+const G=[
+ ['Reunión docente de preparación','Reunião docente',[5,16],[5,21]],
+ ['Presentación del proyecto','Apresentação do projeto',[5,27],[5,27]],
+ ['Drive conjunto y Padlet','Drive conjunto e Padlet',[8,6],[8,6]],
+ ['Preparación aula conjunta','Preparação da aula conjunta',[8,10],[8,11]],
+ ['1ª aula conjunta Chile – Brasil','1ª aula conjunta',[8,26],[9,2]],
+ ['Clase aguas grises e infiltración','Aula de águas cinzas',[10,5],[10,9]],
+ ['Taller: filtro por estratos','Oficina: filtro por camadas',[10,5],[10,16]],
+ ['Encuentro de cierre','Encerramento',null,[11,10],'now']
+];
+const gt=document.getElementById('gantt');
+gt.innerHTML='<tr><th></th>'+months.map(m=>`<th>${m[0]}<span>${m[1]}</span></th>`).join('')+'</tr>'+G.map(g=>`<tr><td class="lab">${g[0]}<span>${g[1]}</span></td>${months.map(()=>'<td class="m"></td>').join('')}</tr>`).join('');
+requestAnimationFrame(()=>{const rows=[...gt.rows].slice(1);
+ const x=(m,d)=>{const r=rows[0].cells;const c=r[1+m-5];return c.offsetLeft+c.offsetWidth*(d-0.5)/31};
+ rows.forEach((r,k)=>{const g=G[k];const host=r.cells[1];host.style.position='relative';
+  const wrap=document.createElement('div');wrap.style.cssText='position:absolute;left:0;top:0;height:100%;width:0';host.appendChild(wrap);
+  const base=host.offsetLeft;const add=(cls,px,lab)=>{const m=document.createElement('div');m.className='mk '+cls;m.style.left=(px-base)+'px';wrap.appendChild(m);if(lab){const l=document.createElement('div');l.className='lk';l.style.left=(px-base)+'px';l.textContent=lab;wrap.appendChild(l)}};
+  if(g[2]){const p=x(...g[2]),e=x(...g[3]);if(Math.abs(e-p)>4){const ln=document.createElement('div');ln.className='lnk';ln.style.left=(p-base)+'px';ln.style.width=(e-p)+'px';wrap.appendChild(ln);add('plan',p,(e-p)>44?String(g[2][1]).padStart(2,'0')+'/'+String(g[2][0]).padStart(2,'0'):'')}
+   add('exe',e,String(g[3][1]).padStart(2,'0')+'/'+String(g[3][0]).padStart(2,'0'))}
+  else add('now',x(...g[3]),'cierre');
+ })});
+
+/* S6 zonas */
+const Z=[['Baño de alumnos','Banheiro dos alunos',['bano-al-1','bano-al-2','bano-al-3']],['Cocina','Cozinha',['cocina-1','cocina-2','cocina-3']],['Riego áreas verdes','Irrigação áreas verdes',['riego-1','riego-2','riego-3','riego-4']],['Baños varones','Banheiros masculinos',['bano-va-1','bano-va-2','bano-va-3','bano-va-4']]];
+const zs=document.getElementById('zones'),zm=document.getElementById('zmain'),zt=document.getElementById('zthumbs');
+Z.forEach((z,i)=>{const d=document.createElement('div');d.className='zone';d.innerHTML=`<b>${z[0]}</b><span>${z[1]}</span>`;d.onclick=()=>selZ(i);zs.appendChild(d)});
+function selZ(i){[...zs.children].forEach((d,k)=>d.classList.toggle('on',k===i));zt.innerHTML='';
+ Z[i][2].forEach((f,k)=>{const im=document.createElement('img');im.src='assets/'+f+'.jpg';im.onclick=()=>pick(k);zt.appendChild(im)});
+ const l=document.createElement('div');l.className='zl';l.innerHTML=Z[i][0]+'<span>'+Z[i][1]+'</span>';zt.appendChild(l);zm.dataset.cap=Z[i][0]+' · '+Z[i][1];pick(0)}
+function pick(k){[...zt.querySelectorAll('img')].forEach((m,j)=>m.classList.toggle('on',j===k));zm.querySelector('img').src=zt.querySelectorAll('img')[k].src}
+selZ(0);
+
+/* S9 filtro */
+const L=[['Grava gruesa','Cascalho grosso','Distribuye el flujo y retiene los sólidos más grandes.','Distribui o fluxo e retém os sólidos maiores.',80],
+ ['Grava fina','Cascalho fino','Retiene partículas que pasaron la primera capa.','Retém partículas que passaram pela primeira camada.',155],
+ ['Arena gruesa','Areia grossa','Retiene partículas de mayor tamaño que atravesaron la grava.','Retém partículas maiores que atravessaram o cascalho.',225],
+ ['Arena fina','Areia fina','Retiene partículas más pequeñas y reduce la turbiedad.','Retém partículas menores e reduz a turbidez.',300],
+ ['Carbón activado','Carvão ativado','Adsorbe determinadas sustancias disueltas e impurezas.','Adsorve determinadas substâncias dissolvidas e impurezas.',390],
+ ['Algodón / geotextil','Algodão / geotêxtil','Retiene partículas finas y evita que el material filtrante escape.','Retém partículas finas e evita a perda do material filtrante.',520]];
+const fl=document.getElementById('flabs'),fi=document.getElementById('finfo');
+L.forEach((l,i)=>{const d=document.createElement('div');d.className='lab a';d.style.cssText=`top:${150+l[4]-24}px;--d:${i+2}`;d.innerHTML=`<div class="ln"></div><div class="pill">${l[0]} / <span>${l[1]}</span></div>`;d.onclick=()=>selL(i);fl.appendChild(d)});
+document.querySelectorAll('#s9 .lay').forEach(r=>r.addEventListener('click',()=>selL(+r.dataset.i)));
+function selL(i){[...fl.children].forEach((d,k)=>d.classList.toggle('on',k===i));fi.innerHTML=`<div style="font-size:14px;font-weight:700;color:#e07a3f">CAPA ${i+1} DE 6 · CAMADA ${i+1} DE 6</div><h3>${L[i][0]}<span>${L[i][1]}</span></h3>${L[i][2]}<span class="pt">${L[i][3]}</span>`}
+fi.innerHTML='<h3>¿Qué hace cada capa?<span>O que faz cada camada?</span></h3>Haz clic en una capa o en su etiqueta.<span class="pt">Clique em uma camada ou na sua etiqueta.</span>';
+
+/* S10 gauge */
+const tk=document.getElementById('ticks');let th='';
+for(let v=0;v<=5;v+=0.5){const a=(-120+v/5*240)*Math.PI/180;const r1=v%1===0?178:190,r2=205;
+ th+=`<line x1="${350+r1*Math.sin(a)}" y1="${330-r1*Math.cos(a)}" x2="${350+r2*Math.sin(a)}" y2="${330-r2*Math.cos(a)}" stroke="#fff" stroke-width="${v%1===0?5:3}" stroke-linecap="round"/>`;
+ if(v%1===0)th+=`<text x="${350+150*Math.sin(a)}" y="${338-150*Math.cos(a)}" text-anchor="middle" font-family="Inter" font-weight="700" font-size="24" fill="#fff">${v}</text>`}
+tk.innerHTML=th;
+const rV=document.getElementById('rV'),rT=document.getElementById('rT');
+const fmt=n=>n.toLocaleString('es-CL',{maximumFractionDigits:2});
+function calc(){const V=+rV.value,t=+rT.value,Q=V/t;document.getElementById('vV').textContent=fmt(V)+' L';document.getElementById('vT').textContent=fmt(t)+' min';
+ document.getElementById('fQ').textContent=fmt(Q)+' L/min';document.getElementById('gQ').textContent=Q.toLocaleString('es-CL',{minimumFractionDigits:1,maximumFractionDigits:1});
+ document.getElementById('needle').style.transform='rotate('+(-120+Math.min(Q,5.2)/5*240)+'deg)'}
+rV.oninput=rT.oninput=calc;calc();
+
+/* flips */
+document.querySelectorAll('.flip').forEach(f=>f.onclick=()=>f.classList.toggle('on'));
+
+/* S14 muro */
+const chat=document.getElementById('chat'),inp=document.getElementById('ideaIn');let ideas=[];
+try{ideas=JSON.parse(localStorage.getItem('coil-ideas2')||'[]')}catch(e){}
+function draw(){chat.innerHTML=ideas.slice(-9).map(m=>`<div class="msg ${m.c}">${m.c==='cl'?'🇨🇱':'🇧🇷'} ${m.t.replace(/</g,'&lt;')}</div>`).join('')}
+function add(c){const t=inp.value.trim();if(!t)return;ideas.push({t,c});inp.value='';try{localStorage.setItem('coil-ideas2',JSON.stringify(ideas))}catch(e){}draw()}
+document.getElementById('bCl').onclick=()=>add('cl');document.getElementById('bBr').onclick=()=>add('br');inp.addEventListener('keydown',e=>{if(e.key==='Enter')add('cl')});
+document.getElementById('ideaClr').onclick=()=>{ideas=[];try{localStorage.removeItem('coil-ideas2')}catch(e){}draw()};draw();
+
+const h=parseInt((location.hash||'').replace('#s',''));show(isNaN(h)?0:h-1);
+</script>
+</body>
+</html>
