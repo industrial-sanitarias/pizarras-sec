@@ -10,7 +10,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Kalam:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Kalam:wght@400;700&family=Oswald:wght@500;600;700&display=swap">
 <style>
 /* Layout: plano técnico con grilla. Vista pizarra (dos carriles de tarjetas) y vista clase (pestañas por tema, taller y autoevaluación) */
 :root{
@@ -680,6 +680,91 @@ body.sl-open{overflow:hidden}
 .nb-quiz{gap:18px}
 .nb-cc{font-size:30px;padding:16px 22px}.nb-cc b{font-size:38px}.nb-cc span{font-size:42px}
 .nb-close{gap:22px}
+
+/* ===== Formato Escuela Técnica (Cristóbal Zamora) sobre las diapositivas ===== */
+#slides{--et-navy:#13243A;--et-paper:#F3F0E7;--et-ink:#1B2A3D;--et-soft:#3D4A5C;--et-green:#2A8C61;--et-green-l:#DCEFE4;--et-orange:#D9661F;--et-orange-l:#FBE6D6;--et-line:#DCD5C3;--et-card:#FBFAF5}
+#slides .sl-stage{background:var(--et-paper)!important;background-image:none!important;color:var(--et-ink);font-family:"IBM Plex Sans",Arial,sans-serif;isolation:isolate}
+#slides .sl-stage::before,#slides .sl-stage::after{display:none!important}
+#slides .sl-stage[data-dark="1"]{background:var(--et-navy)!important;color:#EEF2F6}
+#slides .et-grid{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+#slides .nb-wave,#slides .nb-doodle,#slides .nb-tape,#slides .nb-bignum,#slides .nb-foot-l,#slides .nb-foot-r,#slides .nb-barcode{display:none!important}
+/* encabezado: eyebrow mono verde + título Oswald */
+#slides .nb-h{display:flex!important;flex-direction:column;align-items:flex-start;gap:6px;font-family:"Oswald",Arial,sans-serif!important;font-weight:600!important;font-size:60px!important;line-height:1.05!important;color:var(--et-ink)!important;letter-spacing:0!important;text-transform:none!important;border:0!important;padding:0!important;background:none!important}
+#slides .nb-h .nb-tag{display:block;background:none!important;color:var(--et-green)!important;font-family:"IBM Plex Mono",monospace!important;font-size:21px!important;font-weight:500;letter-spacing:3px;text-transform:uppercase;padding:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;transform:none!important;min-width:0!important}
+#slides .nb-h .nb-tag.o{color:var(--et-orange)!important}
+#slides .nb-h .nb-hsub{font-family:"IBM Plex Sans",sans-serif;font-size:24px;color:var(--et-soft);font-weight:500}
+#slides [data-dark="1"] .nb-h{color:#F3F0E7!important}#slides [data-dark="1"] .nb-h .nb-tag{color:#6FD3A4!important}
+/* tarjetas */
+#slides .nb-big,#slides .nb-key,#slides .nb-dcard,#slides .nb-qc,#slides .nb-step,#slides .nb-figcard,#slides .nb-figbig,#slides .nb-vc,#slides .nb-cc,#slides .nb-mission,#slides .nb-clip,#slides .nb-ask{background:var(--et-card)!important;border:3px solid var(--et-ink)!important;border-radius:14px!important;box-shadow:8px 8px 0 rgba(19,36,58,.12)!important;transform:none!important}
+#slides .nb-big{border-color:var(--et-green)!important;background:var(--et-green-l)!important;font-family:"IBM Plex Sans",sans-serif!important;font-weight:600!important;color:var(--et-ink)!important}
+#slides .nb-big::before{display:none!important}
+#slides .nb-hl{background:none!important;color:inherit!important}
+#slides .nb-key{border-width:2px!important;box-shadow:5px 5px 0 rgba(19,36,58,.10)!important}
+#slides .nb-key .nb-ico{background:var(--et-green-l)!important;border-radius:10px}
+#slides .nb-sticky{background:var(--et-green-l)!important;border:3px solid var(--et-green)!important;border-radius:14px!important;box-shadow:8px 8px 0 rgba(19,36,58,.12)!important;transform:none!important;font-family:"IBM Plex Sans",sans-serif!important;color:var(--et-ink)!important}
+#slides .nb-sticky::before,#slides .nb-sticky::after{display:none!important}
+#slides .nb-sticky b{font-family:"IBM Plex Mono",monospace!important;color:var(--et-green)!important;text-transform:uppercase;letter-spacing:2px;font-size:.72em!important}
+#slides .nb-err{background:var(--et-orange-l)!important;border:3px solid var(--et-orange)!important;border-radius:14px!important;box-shadow:8px 8px 0 rgba(19,36,58,.12)!important}
+#slides .nb-err b{color:var(--et-orange)!important;font-family:"IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:2px}
+#slides .nb-ask b{font-family:"IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:2px;color:var(--et-ink)}
+#slides .sl-rev{background:var(--et-green)!important;color:#fff!important;border:0!important;border-radius:10px!important}
+#slides .nb-banner{background:var(--et-navy)!important;color:#F3F0E7!important;border-radius:14px!important;border:0!important;box-shadow:8px 8px 0 rgba(19,36,58,.15)!important}
+#slides .nb-banner b{color:#6FD3A4}
+/* fotos: marco de tarjeta sin inclinación */
+#slides .nb-pol{transform:none!important;background:var(--et-card)!important;border:3px solid var(--et-ink)!important;border-radius:14px!important;padding:12px!important;box-shadow:8px 8px 0 rgba(19,36,58,.12)!important}
+#slides .nb-pol img{border-radius:8px}
+#slides .nb-pol figcaption{font-family:"IBM Plex Mono",monospace!important;font-size:18px!important;letter-spacing:1px;color:var(--et-soft)!important;text-align:left!important;padding:10px 4px 2px!important}
+#slides .nb-ai{font-family:"IBM Plex Mono",monospace;color:var(--et-soft)!important}
+/* números y etiquetas */
+#slides .nb-stn,#slides .nb-cc span{font-family:"Oswald",sans-serif!important;color:var(--c,var(--et-green))!important}
+#slides .nb-arrow{color:var(--et-orange)!important}
+#slides .nb-stt,#slides .nb-cc b,#slides .nb-qq{font-family:"IBM Plex Sans",sans-serif!important;color:var(--et-ink)!important}
+#slides .nb-qq b{background:var(--et-green)!important;color:#fff!important;border-radius:8px}
+#slides .sl-opt{border:2px solid var(--et-line)!important;border-radius:10px!important;background:#fff!important;color:var(--et-ink)!important}
+#slides .sl-opt.ok{border-color:var(--et-green)!important;background:var(--et-green-l)!important}#slides .sl-opt.no{border-color:var(--et-orange)!important;background:var(--et-orange-l)!important}
+#slides .nb-vbadge{background:var(--et-orange)!important;font-family:"IBM Plex Mono",monospace!important}
+#slides .nb-vplay{background:var(--et-orange)!important}
+#slides .nb-vhook{background:var(--et-navy)!important;color:#F3F0E7!important;font-family:"IBM Plex Sans",sans-serif!important;transform:none!important}
+/* ticket y cierre */
+#slides .nb-ticket{background:var(--et-card)!important;border:4px dashed var(--et-orange)!important;border-radius:16px!important;box-shadow:none!important;transform:none!important}
+#slides .nb-ticket h2{font-family:"Oswald",sans-serif!important;color:var(--et-orange)!important}
+#slides .nb-ticket li{font-family:"IBM Plex Sans",sans-serif!important}
+#slides .et-dark .nb-cc{background:#1C3150!important;border-color:#6FD3A4!important;box-shadow:none!important}
+#slides .et-dark .nb-cc b{color:#F3F0E7!important}#slides .et-dark .nb-cc p{color:#C9D6E3!important}#slides .et-dark .nb-cc span{color:#6FD3A4!important}
+#slides .et-dark .nb-bend{background:var(--et-orange)!important;color:#fff!important}
+#slides .et-dark .nb-next{background:#1C3150!important;border-color:#6FD3A4!important;color:#F3F0E7!important}
+#slides .et-dark .nb-next b{color:#F3F0E7!important;text-transform:none;letter-spacing:0;font-family:"Oswald",sans-serif!important;font-size:1em!important}
+/* portada */
+#slides .et-cover{display:flex!important;align-items:center;gap:56px;padding:56px 70px 60px!important}
+#slides .et-cvl{flex:1;display:flex;flex-direction:column;gap:22px;min-width:0}
+#slides .et-logos{display:flex;align-items:center;gap:20px;font-family:"IBM Plex Mono",monospace;font-size:17px;letter-spacing:1px;color:#C9D6E3;line-height:1.35}
+#slides .et-logos img{height:76px;width:auto;background:#fff;border-radius:10px;padding:5px}
+#slides .et-eye{font-family:"IBM Plex Mono",monospace;font-size:21px;letter-spacing:3px;text-transform:uppercase;color:#6FD3A4;margin-top:18px}
+#slides .et-ct{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:104px;line-height:.98;color:#F3F0E7;margin:0}
+#slides .et-sub{font-size:30px;line-height:1.35;color:#C9D6E3;margin:0}
+#slides .et-pill{align-self:flex-start;max-width:820px;font-size:26px;font-weight:600;line-height:1.3;color:#FBFAF5;background:var(--et-orange);padding:14px 24px;border-radius:12px}
+#slides .et-cvchips{display:flex;gap:12px;flex-wrap:wrap}
+#slides .et-cvchips span{font-family:"IBM Plex Mono",monospace;font-size:18px;letter-spacing:1px;color:#F3F0E7;border:2px solid #2E4A6B;border-radius:8px;padding:5px 12px}
+#slides .et-cvimg{flex:0 0 560px;display:flex;flex-direction:column;gap:10px}
+#slides .et-cvimg img{width:560px;height:520px;object-fit:cover;border-radius:16px;border:4px solid #F3F0E7;box-shadow:12px 12px 0 rgba(0,0,0,.25)}
+#slides .et-cvimg span{font-family:"IBM Plex Mono",monospace;font-size:17px;color:#C9D6E3;letter-spacing:1px}
+/* pie */
+#slides .et-foot{position:absolute;left:96px;right:96px;bottom:26px;height:40px;display:flex;align-items:center;gap:14px;border-top:2px solid var(--et-line);padding-top:8px;z-index:3}
+#slides .et-foot img{height:30px;width:auto}
+#slides .et-ft{flex:1;font-family:"IBM Plex Mono",monospace;font-size:18px;letter-spacing:2px;color:var(--et-soft);text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#slides .et-pg{font-family:"IBM Plex Mono",monospace;font-size:18px;color:var(--et-soft)}
+#slides [data-dark="1"] .et-foot{border-color:#2E4A6B}#slides [data-dark="1"] .et-ft,#slides [data-dark="1"] .et-pg{color:#C9D6E3}
+/* animación suave al llegar */
+#slides .sl-slide>*{animation:etRise .5s ease-out both}
+#slides .sl-slide>*:nth-child(2){animation-delay:.11s}#slides .sl-slide>*:nth-child(3){animation-delay:.22s}#slides .sl-slide>*:nth-child(4){animation-delay:.33s}
+@keyframes etRise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#slides .sl-slide>*{animation:none}}
+#slides .sl-grid .sl-slide>*{animation:none}
+#slides .sl-slide.et-cover{flex-direction:row!important;justify-content:space-between}
+#slides .et-cover .et-cvimg{position:static!important}
+#slides .nb-qq{display:flex;gap:12px;align-items:flex-start}
+#slides .nb-qq b{flex:0 0 auto;display:inline-flex!important;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0 8px;font-family:"Oswald",sans-serif!important;font-size:28px!important;line-height:1!important;border-radius:10px!important}
+#slides .nb-ticket h2{text-transform:none!important;letter-spacing:0!important}
 
 /* Sanitaria: seis módulos y galería de planos */
 .lanes{grid-template-columns:1fr!important;gap:30px}
@@ -2886,7 +2971,7 @@ const VIDEOS={
 /* ---------- Modo diapositivas (estilo NotebookLM, tema agua potable) ---------- */
 const SLD={c:null,list:[],i:0};
 const fotoL=k=>PHOTOS[k]?`img/fotoL-${k.replace(".","-")}.jpg`:"";
-const NBC=["#1d6fb8","#f2b52f","#2f9a5a","#e0533d","#22a6c4","#7a5cc2"];
+const NBC=["#2A8C61","#D9661F","#13243A","#2A8C61","#D9661F","#3D4A5C"];
 const nbLogos=()=>[...document.querySelectorAll("#hdr .inst img")].map(i=>i.src);
 const tape=(cls)=>`<span class="nb-tape ${cls||""}"></span>`;
 const pol=(src,cap,rot)=>`<figure class="nb-pol" style="--r:${rot||-2}deg">${tape("t1")}<img src="${src}" alt="${esc(cap)}"><figcaption>${esc(cap)}</figcaption></figure>`;
@@ -2929,30 +3014,31 @@ function buildSlides(c){
   const photos=ks.filter(k=>PHOTOS[k]);const L=nbLogos();const vs=VIDEOS[c.n]||[];
   const q1=EXP[ks[0]]?EXP[ks[0]].q:"";
   const S=[];
-  S.push({t:"Portada",cls:"nb-cover",h:`<div class="nb-cvcard">${tape("tl")}${tape("tr")}<div class="nb-eye">${ico("drop","#1d6fb8")} Taller de Instalaciones Sanitarias · Clase ${c.n}</div><h1>${esc(c.t)}</h1><p class="nb-cvsub"><span class="nb-mark">${esc(c.k)}</span></p><div class="nb-chips"><span style="--c:#1d6fb8">${esc(mod)}</span><span style="--c:#2f9a5a">3° Medio</span>${vs.length?`<span style="--c:#e0533d">▶ ${vs.length} video${vs.length>1?"s":""}</span>`:""}</div><div class="nb-cvlogos">${L.map(s=>`<img src="${s}" alt="">`).join("")}<span>Escuela Industrial San Felipe<br>Red SNA Educa</span></div></div>
-   <div class="nb-cvpics">${photos.slice(0,3).map((k,j)=>`<div class="nb-cvp p${j}">${pol(fotoL(k),c.pts[+k.split(".")[1]-1].t,[-4,3,-1][j])}</div>`).join("")}</div>
-   ${q1?`<div class="nb-sticky nb-cvst" style="--r:2deg"><b>Para pensar</b>${esc(q1)}</div>`:""}${doodle("#22a6c4","dd-cover")}`});
-  S.push({t:"Plan de la clase",h:`<h2 class="nb-h">${ico("pin","#e0533d")}Plan de la clase</h2>${OBJ[c.n]?`<div class="nb-mission"><b>Misión:</b> ${esc(OBJ[c.n])}</div>`:""}<div class="nb-steps">${c.pts.map((p,i)=>{const k=ks[i];return `${i?'<span class="nb-arrow">➜</span>':""}<div class="nb-step" style="--c:${NBC[i%6]}"><div class="nb-stn">0${i+1}</div><div class="nb-stimg">${PHOTOS[k]?`<img src="${fotoL(k)}" alt="">`:(FIGS[k]?FIGS[k].s:"")}</div><div class="nb-stt">${esc(p.t)}</div></div>`}).join("")}</div>${vs.length?`<div class="nb-sticky nb-plst" style="--r:-3deg">▶ ${vs.length} video${vs.length>1?"s":""} de obra y un desafío final</div>`:""}`});
+  S.push({t:"Portada",cls:"et-dark et-cover",h:`<div class="et-cvl"><div class="et-logos">${L.map(s=>`<img src="${s}" alt="">`).join("")}<span>Escuela Industrial Guillermo Richards Cuevas<br>San Felipe · Red SNA Educa</span></div>
+   <div class="et-eye">${esc(mod)} · Clase ${c.n}</div><h1 class="et-ct">${esc(c.t)}</h1><p class="et-sub">${esc(c.k)}</p>${q1?`<div class="et-pill">${esc(q1)}</div>`:""}
+   <div class="et-cvchips"><span>3° Medio · Instalaciones sanitarias</span>${vs.length?`<span>▶ ${vs.length} video${vs.length>1?"s":""}</span>`:""}</div></div>
+   ${photos.length?`<div class="et-cvimg"><img src="${fotoL(photos[0])}" alt=""><span>${esc(c.pts[+photos[0].split(".")[1]-1].t)}</span></div>`:""}`});
+  S.push({t:"Plan de la clase",h:`<h2 class="nb-h"><span class="nb-tag">Ruta de la clase ${c.n}</span>Plan de la clase</h2>${OBJ[c.n]?`<div class="nb-mission"><b>Misión:</b> ${esc(OBJ[c.n])}</div>`:""}<div class="nb-steps">${c.pts.map((p,i)=>{const k=ks[i];return `${i?'<span class="nb-arrow">➜</span>':""}<div class="nb-step" style="--c:${NBC[i%6]}"><div class="nb-stn">0${i+1}</div><div class="nb-stimg">${PHOTOS[k]?`<img src="${fotoL(k)}" alt="">`:(FIGS[k]?FIGS[k].s:"")}</div><div class="nb-stt">${esc(p.t)}</div></div>`}).join("")}</div>${vs.length?`<div class="nb-sticky nb-plst" style="--r:-3deg">▶ ${vs.length} video${vs.length>1?"s":""} de obra y un desafío final</div>`:""}`});
   const per=[];
   c.pts.forEach((p,i)=>{const k=ks[i],F=FACIL[k],E=EXP[k],fg=FIGS[k],ph=PHOTOS[k],col=NBC[i%6];
-    const idea={t:`${i+1}. ${p.t}`,h:`<div class="nb-bignum" style="--c:${col}">0${i+1}</div><h2 class="nb-h"><span class="nb-tag" style="--c:${col}">${c.n}.${i+1}</span>${esc(p.t)}</h2>
+    const idea={t:`${i+1}. ${p.t}`,h:`<div class="nb-bignum" style="--c:${col}">0${i+1}</div><h2 class="nb-h"><span class="nb-tag" style="--c:${col}">Tema ${c.n}.${i+1}</span>${esc(p.t)}</h2>
       <div class="nb-idea"><div class="nb-il">${ph?pol(fotoL(k),ph[1],-2):(fg?`<div class="nb-figcard">${fg.s}</div>`:"")}${ph?`<p class="nb-ai">Imagen referencial creada con IA en Canva</p>`:""}</div>
       <div class="nb-ir">${F?`<div class="nb-big" style="--c:${col}"><span class="nb-hl">${esc(F.f)}</span></div>`:""}${E?`<div class="nb-keys">${E.r.map((r,j)=>{const kc=NBC[(i+j+1)%6];return `<div class="nb-key" style="--c:${kc}">${ico(KICO[(i+j)%6],kc)}<span>${esc(r)}</span></div>`}).join("")}</div>`:""}
 </div></div>
       ${E?`<div class="nb-banner">${ico("wrench","#ffd45a")}<span><b>En obra:</b> ${esc(E.v)}</span></div>`:""}${doodle(col,"dd-idea")}`};
-    const det={t:`${i+1}. En detalle`,h:`<h2 class="nb-h"><span class="nb-tag" style="--c:${col}">${c.n}.${i+1}</span>${esc(p.t)} <span class="nb-hsub">en detalle</span></h2>
+    const det={t:`${i+1}. En detalle`,h:`<h2 class="nb-h"><span class="nb-tag" style="--c:${col}">Tema ${c.n}.${i+1} · en detalle</span>${esc(p.t)}</h2>
       <div class="nb-det"><div class="nb-dcard prose" style="--c:${col}">${p.h}</div>
       ${E?`<aside class="nb-dr"><div class="nb-sticky" style="--r:-2deg"><b>${ico("bulb","#7a5a00")} Imagínalo así</b>${esc(E.a)}</div><div class="nb-err"><b>${ico("warn","#e0533d")} Errores típicos</b>${E.e.map(x=>`<p><span>✗</span>${esc(x)}</p>`).join("")}</div><div class="nb-ask"><b>${ico("eye","#1d6fb8")} Pregunta al curso</b><p>${esc(E.q)}</p><button class="sl-rev" type="button">Ver respuesta</button><p class="sl-ans" hidden>${esc(E.ans)}</p></div></aside>`:""}</div>`};
-    const esq=(fg&&ph)?{t:`${i+1}. Esquema`,h:`<h2 class="nb-h"><span class="nb-tag" style="--c:${col}">${c.n}.${i+1}</span>Así funciona</h2><div class="nb-figbig">${tape("tl")}${tape("tr")}${fg.s}</div><div class="nb-sticky nb-figst" style="--r:2deg">${esc(fg.c)}</div>${doodle(col,"dd-fig")}`}:null;
+    const esq=(fg&&ph)?{t:`${i+1}. Esquema`,h:`<h2 class="nb-h"><span class="nb-tag" style="--c:${col}">Tema ${c.n}.${i+1} · esquema</span>Así funciona</h2><div class="nb-figbig">${tape("tl")}${tape("tr")}${fg.s}</div><div class="nb-sticky nb-figst" style="--r:2deg">${esc(fg.c)}</div>${doodle(col,"dd-fig")}`}:null;
     per.push({idea,det,esq});
   });
   const tail=[];
-  if(vs.length)tail.push({t:"Videos de obra",h:`<h2 class="nb-h">${ico("play","#e0533d")}Míralo en obra <span class="nb-hsub">toca un video: se abre en YouTube</span></h2><div class="nb-vgrid n${Math.min(vs.length,4)}">${vs.slice(0,4).map((v,j)=>vidCard(v,"",vcov(c,j))).join("")}</div>`});
-  if((c.quiz||[]).length)tail.push({t:"Desafío rápido",h:`<h2 class="nb-h">${ico("check","#2f9a5a")}Desafío rápido <span class="nb-hsub">toca la alternativa correcta</span></h2><div class="nb-quiz">${c.quiz.map((q,j)=>`<div class="nb-qc" style="--c:${NBC[j%6]}"><p class="nb-qq"><b>${j+1}</b>${esc(q.q)}</p><div class="nb-qo">${q.o.map((o,oi)=>`<button class="sl-opt" type="button" data-ok="${oi===q.a?1:0}">${String.fromCharCode(65+oi)}. ${esc(o)}</button>`).join("")}</div><p class="sl-exp" hidden>${esc(q.e)}</p></div>`).join("")}</div>`});
+  if(vs.length)tail.push({t:"Videos de obra",h:`<h2 class="nb-h"><span class="nb-tag">Videos de obra · se abren en YouTube</span>Míralo en obra</h2><div class="nb-vgrid n${Math.min(vs.length,4)}">${vs.slice(0,4).map((v,j)=>vidCard(v,"",vcov(c,j))).join("")}</div>`});
+  if((c.quiz||[]).length)tail.push({t:"Desafío rápido",h:`<h2 class="nb-h"><span class="nb-tag">Desafío · toca la alternativa correcta</span>Desafío rápido</h2><div class="nb-quiz">${c.quiz.map((q,j)=>`<div class="nb-qc" style="--c:${NBC[j%6]}"><p class="nb-qq"><b>${j+1}</b>${esc(q.q)}</p><div class="nb-qo">${q.o.map((o,oi)=>`<button class="sl-opt" type="button" data-ok="${oi===q.a?1:0}">${String.fromCharCode(65+oi)}. ${esc(o)}</button>`).join("")}</div><p class="sl-exp" hidden>${esc(q.e)}</p></div>`).join("")}</div>`});
   const tq=ks.map(k=>EXP[k]&&EXP[k].q).filter(Boolean).slice(0,3);
-  if(tq.length)tail.push({t:"Ticket de salida",h:`<div class="nb-ticket">${tape("tl")}<h2>Ticket de salida</h2><p class="nb-tsub">Para salir de la clase, responde en tu cuaderno:</p><ol>${tq.map(x=>`<li>${esc(x)}</li>`).join("")}</ol><div class="nb-barcode"></div></div>${doodle("#e0533d","dd-ticket")}`});
+  if(tq.length)tail.push({t:"Ticket de salida",h:`<h2 class="nb-h"><span class="nb-tag o">En tu cuaderno</span>Ticket de salida</h2><div class="nb-ticket"><h2>Responde antes de salir</h2><p class="nb-tsub">Para salir de la clase, responde en tu cuaderno:</p><ol>${tq.map(x=>`<li>${esc(x)}</li>`).join("")}</ol><div class="nb-barcode"></div></div>${doodle("#e0533d","dd-ticket")}`});
   const nx=clases.find(x=>x.n===c.n+1);
-  tail.push({t:"Cierre",h:`<h2 class="nb-h">${ico("check","#2f9a5a")}Lo que aprendimos hoy</h2><div class="nb-close">${ks.map((k,i)=>`<div class="nb-cc" style="--c:${NBC[i%6]}"><span>0${i+1}</span><b>${esc(c.pts[i].t)}</b><p>${esc(EXP[k]?EXP[k].r[0]:"")}</p></div>`).join("")}</div><div class="nb-banner nb-bend">${ico("drop","#7fd0ee")}<span>${esc(c.k)}</span></div>${nx?`<div class="nb-sticky nb-next" style="--r:-3deg">Próxima clase:<br><b>${nx.n}. ${esc(nx.t)}</b></div>`:""}`});
+  tail.push({t:"Cierre",cls:"et-dark",h:`<h2 class="nb-h"><span class="nb-tag">Cierre · Clase ${c.n}</span>Lo que aprendimos hoy</h2><div class="nb-close">${ks.map((k,i)=>`<div class="nb-cc" style="--c:${NBC[i%6]}"><span>0${i+1}</span><b>${esc(c.pts[i].t)}</b><p>${esc(EXP[k]?EXP[k].r[0]:"")}</p></div>`).join("")}</div><div class="nb-banner nb-bend">${ico("drop","#7fd0ee")}<span>${esc(c.k)}</span></div>${nx?`<div class="nb-sticky nb-next" style="--r:-3deg">Próxima clase:<br><b>${nx.n}. ${esc(nx.t)}</b></div>`:""}`});
   /* máximo 16 láminas: esquemas y taller solo si caben */
   const MAX=16;let extra=MAX-(S.length+per.length*2+tail.length);
   const body=[];per.forEach(x=>{body.push(x.idea);if(x.esq&&extra>0){body.push(x.esq);extra--}body.push(x.det)});
@@ -2977,7 +3063,7 @@ function openSlides(n,start){
 const nbWave=`<svg class="nb-wave" viewBox="0 0 1600 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 34C140 14 260 52 400 34S660 14 800 34S1060 54 1200 34S1460 14 1600 34V60H0Z" fill="#d6ecf7"/><path d="M0 44C160 30 280 58 420 44S680 28 820 44S1080 60 1220 44S1470 30 1600 44V60H0Z" fill="#b9dcf0"/></svg>`;
 function goSlide(i){
   if(i<0||i>=SLD.list.length)return;SLD.i=i;const s=SLD.list[i],st=$("slSt");const L=nbLogos();
-  st.innerHTML=`${nbWave}<div class="sl-slide ${s.cls||""}">${s.h}</div><div class="nb-foot-l"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 2.5C9 7 5.5 10.6 5.5 14.6a6.5 6.5 0 0 0 13 0C18.5 10.6 15 7 12 2.5z" fill="#1d6fb8"/></svg>Instalaciones Sanitarias · Clase ${SLD.c.n} · ${i+1}/${SLD.list.length}</div>${i?`<div class="nb-foot-r">${L.map(x=>`<img src="${x}" alt="">`).join("")}</div>`:""}`;
+  st.dataset.dark=/et-dark/.test(s.cls||"")?"1":"";st.innerHTML=`<svg class="et-grid" aria-hidden="true"><defs><pattern id="etg" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="${st.dataset.dark?"#1F3550":"#E3DCCB"}" stroke-width="1.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#etg)"/></svg><div class="sl-slide ${s.cls||""}">${s.h}</div>${i?`<div class="et-foot">${L[0]?`<img src="${L[0]}" alt="">`:""}<span class="et-ft">${esc(SLD.c.t)} · ${esc(typeof MODS!=="undefined"&&MODS[SLD.c.w]||"Instalaciones sanitarias")}</span><span class="et-pg">${i+1} / ${SLD.list.length}</span></div>`:""}`;
   $("slN").textContent=`${i+1} / ${SLD.list.length} · ${s.t}`;$("slBar").style.width=((i+1)/SLD.list.length*100)+"%";
   wirePlayers(st);nbFit(st);nbFitQuiz(st);
   st.querySelectorAll(".sl-rev").forEach(b=>b.onclick=()=>{b.nextElementSibling.hidden=false;b.hidden=true});
